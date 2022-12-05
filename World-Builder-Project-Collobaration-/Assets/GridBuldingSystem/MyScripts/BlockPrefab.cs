@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using System;
 
 public class BlockPrefab : MonoBehaviour
@@ -11,9 +12,11 @@ public class BlockPrefab : MonoBehaviour
     public event Action <int> OnHeightChanged; 
     public bool IsThisBlockWasSelected = false;
 
+
     private void Start()
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y)/100;
+
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {
@@ -32,6 +35,7 @@ public class BlockPrefab : MonoBehaviour
         transform.localScale += new Vector3(0, addedHeight, 0);
         newHeight = Mathf.FloorToInt(transform.localScale.y);
         OnHeightChanged?.Invoke(newHeight);
+
     }
 
     public int GetNewHeight()

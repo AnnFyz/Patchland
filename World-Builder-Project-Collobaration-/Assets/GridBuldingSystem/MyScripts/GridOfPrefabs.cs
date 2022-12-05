@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using CodeMonkey.Utils;
 
 public class GridOfPrefabs : MonoBehaviour
@@ -12,6 +13,9 @@ public class GridOfPrefabs : MonoBehaviour
     //public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
+    public navMeshManager myManager;
+
+
 
     private void Awake()
     {
@@ -30,6 +34,9 @@ public class GridOfPrefabs : MonoBehaviour
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
             }
         }
+
+
+        
     }
 
     private void Update()
@@ -46,6 +53,7 @@ public class GridOfPrefabs : MonoBehaviour
                     // Demolish
                     placedObject.DestroySelf();
                     grid.GetGridObject(mousePosition).ClearPlacedObject();
+                    myManager.ReBakeMesh(); //Ruedi Edit: this is supposed to call a Method from navMeshManager script to rebake the NavMesh after the height of a block has been changed.
 
                 }
             }
