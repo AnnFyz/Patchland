@@ -9,47 +9,55 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabObj;
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
-    //public static GridOfPrefabs Instance { get; private set; }
+    public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
-
     private void Awake()
     {
-        //Instance = this;
+        Instance = this;
 
     }
 
     private void Start()
     {
         grid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
+                blockPrefab.gameObject.transform.parent = gameObject.transform;
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
             }
         }
     }
 
+    public Transform GetCenterObjInGrid()
+    {
+        int halfWidth = Mathf.RoundToInt(width / 2);
+        int halfHeight = Mathf.RoundToInt(height / 2);
+        return grid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(2))
-        {
-            Vector3 mousePosition = GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
-            {
-                // Valid Grid Position
-                BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-                if (placedObject != null)
-                {
-                    // Demolish
-                    placedObject.DestroySelf();
-                    grid.GetGridObject(mousePosition).ClearPlacedObject();
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    Vector3 mousePosition = GetMouseWorldPosition();
+        //    if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
+        //    {
+        //        // Valid Grid Position
+        //        BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
+        //        if (placedObject != null)
+        //        {
+        //            // Demolish
+        //            placedObject.DestroySelf();
+        //            grid.GetGridObject(mousePosition).ClearPlacedObject();
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         if (Input.GetMouseButtonDown(1))
         {
