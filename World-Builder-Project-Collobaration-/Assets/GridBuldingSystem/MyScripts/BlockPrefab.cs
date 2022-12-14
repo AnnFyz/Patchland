@@ -10,10 +10,14 @@ public class BlockPrefab : MonoBehaviour
     private int startScale;
     public event Action <int> OnHeightChanged; 
     public bool IsThisBlockWasSelected = false;
+    Renderer renderer;
+    Color defaultColor = new Color();
 
     private void Start()
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y)/100;
+        renderer = GetComponentInChildren<Renderer>();
+        defaultColor = renderer.material.color;
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {
@@ -42,5 +46,15 @@ public class BlockPrefab : MonoBehaviour
     public int GetStartScale()
     {
         return startScale;
+    }
+
+    public void ChangeColor()
+    {
+        renderer.material.color = GridOfPrefabs.Instance.GetColorOfSelectedBlocks();
+    }
+
+    public void ChangeColorBack()
+    {
+        renderer.material.color = defaultColor;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyRaycast : MonoBehaviour
+public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 {
     public bool IsThisObjWasSelected = false;
     BlockPrefab localPrefabBlock;
@@ -25,6 +25,7 @@ public class MyRaycast : MonoBehaviour
             if (localPrefabBlock == block)
             {
                 localPrefabBlock.IsThisBlockWasSelected = true;
+                localPrefabBlock.ChangeColor();
                 if(BuildingManager.grid != localGrid.grid)
                 {
                     BuildingManager.grid = localGrid.grid;
@@ -35,12 +36,14 @@ public class MyRaycast : MonoBehaviour
             else
             {
                 localPrefabBlock.IsThisBlockWasSelected = false;
+                localPrefabBlock.ChangeColorBack();
             }
         }
 
         else
         {
             localPrefabBlock.IsThisBlockWasSelected = false;
+            localPrefabBlock.ChangeColorBack();
         }
     }
 }

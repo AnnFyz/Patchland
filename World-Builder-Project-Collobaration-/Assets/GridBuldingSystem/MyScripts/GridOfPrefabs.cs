@@ -9,9 +9,11 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabObj;
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
+    [SerializeField] Color colorOfSelectedOblock = new Color();
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +40,11 @@ public class GridOfPrefabs : MonoBehaviour
         int halfWidth = Mathf.RoundToInt(width / 2);
         int halfHeight = Mathf.RoundToInt(height / 2);
         return grid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
+    }
+
+    public Color GetColorOfSelectedBlocks()
+    {
+        return colorOfSelectedOblock;
     }
 
     private void Update()

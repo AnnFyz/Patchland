@@ -1438,6 +1438,7 @@ MonoBehaviour:
     type: 3}
   width: 6
   height: 6
+  colorOfSelectedOblock: {r: 0.5707547, g: 1, b: 0.8883488, a: 0}
 --- !u!1 &2110376074
 GameObject:
   m_ObjectHideFlags: 0
