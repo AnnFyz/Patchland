@@ -93,7 +93,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasSelected) 
+        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted) 
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
@@ -127,7 +127,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound
 
-                //DeselectObjectType();
+                BuildingManager.Instance.DeselectObjectType();
             }
             else
             {

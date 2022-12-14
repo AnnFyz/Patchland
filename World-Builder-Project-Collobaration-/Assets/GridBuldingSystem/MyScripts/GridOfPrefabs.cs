@@ -9,6 +9,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabObj;
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
+    [SerializeField] Color colorOfHighlightedOblock = new Color();
     [SerializeField] Color colorOfSelectedOblock = new Color();
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
@@ -42,6 +43,10 @@ public class GridOfPrefabs : MonoBehaviour
         return grid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
     }
 
+    public Color GetColorOfHighlightedBlocks()
+    {
+        return colorOfHighlightedOblock;
+    }
     public Color GetColorOfSelectedBlocks()
     {
         return colorOfSelectedOblock;
@@ -66,7 +71,7 @@ public class GridOfPrefabs : MonoBehaviour
         //    }
         //}
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
@@ -75,9 +80,19 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
                 if (placedObject != null)
                 {
-                    placedObject.ChangeHeight(3);
+                    //placedObject.ChangeHeight(1); // on arrow up -1 on arrow down
+                    for (int x = 0; x < width; x++)
+                    {
+                        for (int z = 0; z < height; z++)
+                        {
+                            grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
+                            placedObject.ChangeColorBack();
+                        }
+                    }
+                    placedObject.IsThisBlockWasSelected = true;
+                    placedObject.ChangeSelectedColor();
+                    UIManager.Instance.ShowPanels();
                     grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
-
                 }
             }
         }

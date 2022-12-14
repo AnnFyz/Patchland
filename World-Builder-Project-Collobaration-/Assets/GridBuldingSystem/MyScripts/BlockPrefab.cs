@@ -8,7 +8,8 @@ public class BlockPrefab : MonoBehaviour
     public static Vector3 offset = new Vector3(7.5f, -5f, 7.5f);
     private int newHeight;
     private int startScale;
-    public event Action <int> OnHeightChanged; 
+    public event Action <int> OnHeightChanged;
+    public bool IsThisBlockWasHighlighted = false;
     public bool IsThisBlockWasSelected = false;
     Renderer renderer;
     Color defaultColor = new Color();
@@ -48,13 +49,18 @@ public class BlockPrefab : MonoBehaviour
         return startScale;
     }
 
-    public void ChangeColor()
+    public void ChangeHighlightedColor()
     {
-        renderer.material.color = GridOfPrefabs.Instance.GetColorOfSelectedBlocks();
+        renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
     }
 
     public void ChangeColorBack()
     {
         renderer.material.color = defaultColor;
+    }
+
+    public void ChangeSelectedColor()
+    {
+        renderer.material.color = GridOfPrefabs.Instance.GetColorOfSelectedBlocks();
     }
 }

@@ -8,6 +8,11 @@ public class GrabRotation : MonoBehaviour
     public float offsetY;
     public float sensitivityRotation = 1f;
     [SerializeField] Transform rotator;
+
+    private void Start()
+    {
+        rotator.transform.rotation = Quaternion.Euler(-20f, -20f, 0);
+    }
     public void Dragging()
     {
         offsetX = Input.GetAxis("Mouse X");

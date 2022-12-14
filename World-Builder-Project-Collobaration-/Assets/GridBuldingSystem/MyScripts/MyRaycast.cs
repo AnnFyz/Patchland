@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 {
-    public bool IsThisObjWasSelected = false;
+    public bool IsThisObjWasHighlighted = false;
     BlockPrefab localPrefabBlock;
     MyGridBuildingSystem localGrid;
     Ray ray;
@@ -24,26 +24,49 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             block = hit.collider.GetComponentInParent<BlockPrefab>();
             if (localPrefabBlock == block)
             {
-                localPrefabBlock.IsThisBlockWasSelected = true;
-                localPrefabBlock.ChangeColor();
-                if(BuildingManager.grid != localGrid.grid)
+                localPrefabBlock.IsThisBlockWasHighlighted = true;
+                localPrefabBlock.ChangeHighlightedColor();
+                if (!localPrefabBlock.IsThisBlockWasSelected)
                 {
-                    BuildingManager.grid = localGrid.grid;
-                    BuildingManager.blockPrefab = localPrefabBlock;
-                    BuildingManager.Instance.RefreshSelectedObjectType();
+                    BuildingManager.Instance.DeselectObjectType();
+                }
+                if (localPrefabBlock.IsThisBlockWasSelected)
+                {
+                    if (BuildingManager.grid != localGrid.grid)
+                    {
+                        BuildingManager.grid = localGrid.grid;
+                        BuildingManager.blockPrefab = localPrefabBlock;
+                        //BuildingManager.Instance.RefreshSelectedObjectType();
+                    }
                 }
             }
             else
             {
-                localPrefabBlock.IsThisBlockWasSelected = false;
-                localPrefabBlock.ChangeColorBack();
+                localPrefabBlock.IsThisBlockWasHighlighted = false;
+                if (!localPrefabBlock.IsThisBlockWasSelected)
+                {
+                    localPrefabBlock.ChangeColorBack();
+                    //BuildingManager.Instance.DeselectObjectType();
+                }
+                else
+                {
+                    localPrefabBlock.ChangeSelectedColor();
+                }
+                
             }
         }
 
         else
         {
-            localPrefabBlock.IsThisBlockWasSelected = false;
-            localPrefabBlock.ChangeColorBack();
+            localPrefabBlock.IsThisBlockWasHighlighted = false;
+            if (!localPrefabBlock.IsThisBlockWasSelected)
+            {
+                localPrefabBlock.ChangeColorBack();
+            }
+            else
+            {
+                localPrefabBlock.ChangeSelectedColor();
+            }
         }
     }
 }

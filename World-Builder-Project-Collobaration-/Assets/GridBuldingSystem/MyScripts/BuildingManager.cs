@@ -30,7 +30,7 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
     }
 
-    private void DeselectObjectType()
+    public void DeselectObjectType()
     {
         placedObjectTypeSO = null; RefreshSelectedObjectType();
     }
