@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MyBuildingGhost : MonoBehaviour
 {
+    [SerializeField] LayerMask layerMask;
     private Transform visual;
     private PlacedObjectTypeSO placedObjectTypeSO;
 
@@ -63,7 +64,7 @@ public class MyBuildingGhost : MonoBehaviour
                 visual.localPosition = new Vector3(0, newGhostBuldingsPos, 0);
             }
             visual.localEulerAngles = Vector3.zero;
-            SetLayerRecursive(visual.gameObject, 11);
+            SetLayerRecursive(visual.gameObject, layerMask);
         }
     }
 
