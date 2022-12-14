@@ -87,12 +87,15 @@ public class GridOfPrefabs : MonoBehaviour
                         {
                             grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
                             placedObject.ChangeColorBack();
+                            UIManager.Instance.HidePanels();
                         }
                     }
                     placedObject.IsThisBlockWasSelected = true;
                     placedObject.ChangeSelectedColor();
-                    UIManager.Instance.ShowPanels();
                     grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
+                    UIManager.Instance.ShowPanels();
+                    UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();
+                    UIManager.Instance.LocalSetupUIIcons();
                 }
             }
         }

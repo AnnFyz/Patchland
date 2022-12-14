@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 909637586065932141}
   - component: {fileID: -4611271471455439405}
   - component: {fileID: -1446097718899038186}
+  - component: {fileID: 6780022455924304188}
   m_Layer: 0
   m_Name: BlockPrefab
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983df629b18c5b741b4afbaf8a1cb6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newHeight: 0
+  IsThisBlockWasHighlighted: 0
   IsThisBlockWasSelected: 0
 --- !u!114 &-4611271471455439405
 MonoBehaviour:
@@ -61,10 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd6b9865a71d446a1423cf49f5ab6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placedObjectTypeSOList:
-  - {fileID: 11400000, guid: a562fd9707c0ae747b986c402fc117c0, type: 2}
-  - {fileID: 11400000, guid: 6bc0b9502eeff8c49a27d088c95a84b9, type: 2}
-  - {fileID: 11400000, guid: d8cd58525858e6642976c847fcf08959, type: 2}
   gridWidth: 3
   gridHeight: 3
   cellSize: 5
@@ -81,7 +78,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8228bf4414f33544b9a9070af1f42430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsThisObjWasSelected: 0
+  IsThisObjWasHighlighted: 0
+--- !u!114 &6780022455924304188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce388e41e09fbc54e95d5d3800b6e48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLevelState: 0
+  currentLevelState: 0
+  heightToChangeLevel: 0
 --- !u!1001 &8452613873916484050
 PrefabInstance:
   m_ObjectHideFlags: 0

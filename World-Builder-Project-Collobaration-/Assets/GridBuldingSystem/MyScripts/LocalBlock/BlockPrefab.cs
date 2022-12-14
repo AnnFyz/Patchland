@@ -12,7 +12,7 @@ public class BlockPrefab : MonoBehaviour
     public bool IsThisBlockWasHighlighted = false;
     public bool IsThisBlockWasSelected = false;
     Renderer renderer;
-    Color defaultColor = new Color();
+    public Color defaultColor = new Color();
 
     private void Start()
     {
@@ -27,6 +27,7 @@ public class BlockPrefab : MonoBehaviour
         return placedBlockPrefab;
     }
 
+
     public void DestroySelf()
     {
         Destroy(gameObject);
@@ -36,6 +37,7 @@ public class BlockPrefab : MonoBehaviour
     {
         transform.localScale += new Vector3(0, addedHeight, 0);
         newHeight = Mathf.FloorToInt(transform.localScale.y);
+        UIManager.Instance.LocalSetupUIIcons();
         OnHeightChanged?.Invoke(newHeight);
     }
 

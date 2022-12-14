@@ -12,6 +12,7 @@ public class BuildingManager : MonoBehaviour
     public event EventHandler OnSelectedChanged; // for ghost building
     public static MyGridXZ<MyGridBuildingSystem.MyGridObject> grid;
     public static BlockPrefab blockPrefab;
+    public List<Material> levelsMaterials = new List<Material>();
     private void Awake()
     {
         Instance = this;
