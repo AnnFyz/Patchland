@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfbdd16f2f55d948afdfe1e8fc1b7ca, type: 3}
+  m_Name: Moss
+  m_EditorClassIdentifier: 
+  plantname: Moss
+  description: wet, soft, warm moss...
+  plantBody: {fileID: 7896471423177445856, guid: 41f9904ca0abe8a4c9f007700aaa60df, type: 3}
+  Cost: 10
+  onSand: 0
+  onGrass: 1

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfbdd16f2f55d948afdfe1e8fc1b7ca, type: 3}
+  m_Name: BluberryBush
+  m_EditorClassIdentifier: 
+  plantname: BluberryBush
+  description: its a bush, not the us presidemnt
+  plantBody: {fileID: 8970945033972835371, guid: 53673bb43cbd7eb478379e8b3fbfbcac, type: 3}
+  Cost: 12
+  onSand: 0
+  onGrass: 1
