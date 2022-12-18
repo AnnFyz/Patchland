@@ -13,7 +13,7 @@ public class GridOfPrefabs : MonoBehaviour
     //public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
-    public navMeshManager myManager;
+    public navMeshManager myManager;//Ruedi Edit
 
 
 
@@ -34,9 +34,7 @@ public class GridOfPrefabs : MonoBehaviour
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
             }
         }
-
-
-        
+        myManager.ReBakeMesh(); //Ruedi Edit
     }
 
     private void Update()
@@ -53,10 +51,11 @@ public class GridOfPrefabs : MonoBehaviour
                     // Demolish
                     placedObject.DestroySelf();
                     grid.GetGridObject(mousePosition).ClearPlacedObject();
-                    myManager.ReBakeMesh(); //Ruedi Edit: this is supposed to call a Method from navMeshManager script to rebake the NavMesh after the height of a block has been changed.
+                    
 
                 }
             }
+            myManager.ReBakeMesh(); //Ruedi Edit
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -73,7 +72,10 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
             }
+
+            myManager.ReBakeMesh(); //RuediEdit
         }
+
     }
 
     private Vector3 GetMouseWorldPosition()
