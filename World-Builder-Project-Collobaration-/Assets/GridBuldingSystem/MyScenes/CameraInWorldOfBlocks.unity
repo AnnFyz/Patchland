@@ -940,7 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1988,6 +1988,8 @@ MonoBehaviour:
   composer: {fileID: 0}
   sensitivityZooming: 100
   sensitivityRotation: 1
+  minDist: 70
+  maxDist: 450
   newDist: 0
   offsetX: 0
   offsetY: 0
@@ -3615,10 +3617,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefabObj: {fileID: 6254500726256895673, guid: b1ea23813fb17f949bd5b65c68920349,
     type: 3}
-  width: 6
-  height: 6
-  colorOfHighlightedOblock: {r: 0.5849056, g: 0.2477146, b: 0.041384827, a: 0}
-  colorOfSelectedOblock: {r: 0.5707547, g: 1, b: 0.8883488, a: 0}
+  width: 15
+  height: 18
+  colorOfHighlightedOblock: {r: 0.7311321, g: 0.8004031, b: 1, a: 0}
+  colorOfSelectedOblock: {r: 0.86731184, g: 0.109803915, b: 1, a: 0}
 --- !u!1 &2110376074
 GameObject:
   m_ObjectHideFlags: 0

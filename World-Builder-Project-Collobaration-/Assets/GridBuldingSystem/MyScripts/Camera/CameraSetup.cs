@@ -11,7 +11,8 @@ public class CameraSetup : MonoBehaviour
     [SerializeField] CinemachineComposer composer;
     [SerializeField] float sensitivityZooming = 100f;
     [SerializeField] float sensitivityRotation = 1f;
-    float minDist = 70; float maxDist = 210;
+    [SerializeField] float minDist = 70;
+    [SerializeField] float maxDist = 210;
     [SerializeField] float newDist;
     [SerializeField] float offsetX;
     [SerializeField] float offsetY;
