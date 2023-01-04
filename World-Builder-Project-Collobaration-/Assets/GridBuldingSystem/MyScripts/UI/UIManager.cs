@@ -82,6 +82,6 @@ public class UIManager : MonoBehaviour
 
     public void BlockDown(int subtractedV)
     {
-        BuildingManager.blockPrefab.ChangeHeight(subtractedV);
+       BuildingManager.blockPrefab.ChangeHeight(subtractedV);
     }
 }
