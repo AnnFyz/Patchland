@@ -33,21 +33,23 @@ public class BlockPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void ChangeHeight(int addedHeight)   //TO CHANGE ROTATION
+    public void ChangeHeight(int addedHeight) // 
     {
-        if (addedHeight < 0 && transform.localScale.y <= 0)
+        if (addedHeight < 0 && transform.localScale.y == 1)
         {
-            transform.localScale += new Vector3(0, -addedHeight, 0);
             float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
+            transform.localScale += new Vector3(0, -addedHeight, 0);
+            UIManager.Instance.LocalSetupUIIcons();
+            OnHeightChanged?.Invoke(-newHeight);
         }
         else
         {
             transform.localScale += new Vector3(0, addedHeight, 0);
             newHeight = Mathf.FloorToInt(transform.localScale.y);
+            UIManager.Instance.LocalSetupUIIcons();
+            OnHeightChanged?.Invoke(newHeight);
         }
-        UIManager.Instance.LocalSetupUIIcons();
-        OnHeightChanged?.Invoke(newHeight);
     }
 
     public int GetNewHeight()
