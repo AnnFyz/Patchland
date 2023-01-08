@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
+    public event Action OnChangedGrid;
 
     private void Awake()
     {
@@ -78,10 +80,12 @@ public class UIManager : MonoBehaviour
     public void BlockUp(int addedV)
     {
         BuildingManager.blockPrefab.ChangeHeight(addedV);
+        OnChangedGrid?.Invoke();
     }
 
     public void BlockDown(int subtractedV)
     {
        BuildingManager.blockPrefab.ChangeHeight(subtractedV);
+       OnChangedGrid?.Invoke();
     }
 }

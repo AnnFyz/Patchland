@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
+using Unity.AI.Navigation;
 
 public class GridOfPrefabs : MonoBehaviour
 {
@@ -14,11 +15,16 @@ public class GridOfPrefabs : MonoBehaviour
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
+    NavMeshSurface surface;
 
     private void Awake()
     {
         Instance = this;
-
+        surface = GetComponent<NavMeshSurface>();
+    }
+    private void OnEnable()
+    {
+        UIManager.Instance.OnChangedGrid += RebuildNavMesh;
     }
 
     private void Start()
@@ -34,8 +40,14 @@ public class GridOfPrefabs : MonoBehaviour
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
             }
         }
+
+        RebuildNavMesh();
     }
 
+    private void RebuildNavMesh()
+    {
+        surface.BuildNavMesh();
+    }
     public Transform GetCenterObjInGrid()
     {
         int halfWidth = Mathf.RoundToInt(width / 2);
