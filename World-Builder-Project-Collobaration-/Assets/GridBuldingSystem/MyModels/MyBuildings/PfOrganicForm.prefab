@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2608708882569115102}
   - component: {fileID: 2608708882569115103}
   - component: {fileID: 2608708882569115096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PfOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,6 +94,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 39bb95f18be4abd4795b45c5126b0804, type: 2}
+    - target: {fileID: 284312670277836373, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 408094111789312280, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1596457177620258293, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_RootOrder
@@ -153,6 +163,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VisualOrganicForm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359718211770491562, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372483442606428292, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358024156136924470, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8766001296093121481, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}

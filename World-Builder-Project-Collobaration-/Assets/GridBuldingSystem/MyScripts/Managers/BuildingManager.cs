@@ -8,6 +8,7 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager Instance { get; private set; }
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     public PlacedObjectTypeSO placedObjectTypeSO;
+    public PlacedObjectTypeSO lastSelectedObjToPlaceTypeSO;
     public PlacedObjectTypeSO.Dir dir;
     public event EventHandler OnSelectedChanged; // for ghost building
     public static MyGridXZ<MyGridBuildingSystem.MyGridObject> grid;
@@ -26,18 +27,35 @@ public class BuildingManager : MonoBehaviour
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType(); }
     }
 
+    public void SelectResource(int resourceId)
+    {
+        placedObjectTypeSO = placedObjectTypeSOList[resourceId]; 
+        RefreshSelectedObjectType();
+        DeselectObjectType();
+    }
     public void DeselectObjectType()
     {
-        placedObjectTypeSO = null; RefreshSelectedObjectType();
+        placedObjectTypeSO = null;
+        OnSelectedChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void RefreshSelectedObjectType()
     {
+        if(placedObjectTypeSO == null)
+        {
+            placedObjectTypeSO = lastSelectedObjToPlaceTypeSO;
+        }
+
+        else if(placedObjectTypeSO != null)
+        {
+            lastSelectedObjToPlaceTypeSO = placedObjectTypeSO;
+        }
+
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
     }
 

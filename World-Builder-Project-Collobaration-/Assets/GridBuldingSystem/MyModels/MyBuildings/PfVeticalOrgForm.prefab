@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8000281925568123889}
   - component: {fileID: 8000281925568123888}
   - component: {fileID: 8000281925568123895}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PfVeticalOrgForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8000281925568123889}
     m_Modifications:
+    - target: {fileID: 927755576888202837, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1720639731397605248, guid: 0614bed7ddfb35642ba19ff02d90e02b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -98,6 +103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VisualVerticalOrganicForm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161724160377315515, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3127568270603804644, guid: 0614bed7ddfb35642ba19ff02d90e02b,
         type: 3}
@@ -159,10 +169,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 39bb95f18be4abd4795b45c5126b0804, type: 2}
+    - target: {fileID: 4517830897256324164, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4965091190598552024, guid: 0614bed7ddfb35642ba19ff02d90e02b,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673745197677029159, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202337621307956440, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0614bed7ddfb35642ba19ff02d90e02b, type: 3}

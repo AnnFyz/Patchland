@@ -29,7 +29,7 @@ public class LocalLevelState : MonoBehaviour
     }
     void ChangeLevel(int newHeight)
     {
-        if(newHeight <= 0)
+        if(newHeight <= 1 && blockPrefab.transform.localRotation.z == -1)
         {
             currentLevelState = LevelState.Pond;
             renderer.material = BuildingManager.Instance.levelsMaterials[0];

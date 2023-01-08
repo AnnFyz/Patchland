@@ -22,12 +22,7 @@ public class MyBuildingGhost : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Debug.Log("visual.localScale.y " + visual.localScale.y);
-            Debug.Log("visual.localPosition " + visual.localPosition);
-            Debug.Log("BuildingManager.blockPrefab.GetStartScale() " + BuildingManager.blockPrefab.GetStartScale());
-        }
+        
     }
 
     private void LateUpdate()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 {
-    public bool IsThisObjWasHighlighted = false;
+
     BlockPrefab localPrefabBlock;
     MyGridBuildingSystem localGrid;
     Ray ray;
@@ -32,12 +32,15 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                 }
                 if (localPrefabBlock.IsThisBlockWasSelected)
                 {
-                    if (BuildingManager.grid != localGrid.grid)
+                    if(BuildingManager.Instance.placedObjectTypeSO == null)
                     {
+                        BuildingManager.Instance.placedObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
+                    }
+
                         BuildingManager.grid = localGrid.grid;
                         BuildingManager.blockPrefab = localPrefabBlock;
-                        //BuildingManager.Instance.RefreshSelectedObjectType();
-                    }
+                        BuildingManager.Instance.RefreshSelectedObjectType();
+   
                 }
             }
             else
@@ -46,7 +49,6 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                 if (!localPrefabBlock.IsThisBlockWasSelected)
                 {
                     localPrefabBlock.ChangeColorBack();
-                    //BuildingManager.Instance.DeselectObjectType();
                 }
                 else
                 {

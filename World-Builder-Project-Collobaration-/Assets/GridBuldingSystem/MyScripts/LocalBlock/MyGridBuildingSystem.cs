@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 
@@ -95,6 +96,10 @@ public class MyGridBuildingSystem : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted) 
         {
+            //if (EventSystem.current.IsPointerOverGameObject())
+            //{
+            //    return;
+            //}
             Vector3 mousePosition = GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
 
