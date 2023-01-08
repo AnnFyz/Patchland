@@ -2120,7 +2120,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 87
+    m_Bits: 471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 471
   m_MaxRayIntersections: 0
 --- !u!1 &1286976736
 GameObject:
@@ -3806,6 +3806,7 @@ MonoBehaviour:
   height: 6
   colorOfHighlightedOblock: {r: 0.7311321, g: 0.8004031, b: 1, a: 0}
   colorOfSelectedOblock: {r: 0.46604383, g: 0.37254906, b: 1, a: 0}
+  surface: {fileID: 0}
 --- !u!114 &2056276495
 MonoBehaviour:
   m_ObjectHideFlags: 0

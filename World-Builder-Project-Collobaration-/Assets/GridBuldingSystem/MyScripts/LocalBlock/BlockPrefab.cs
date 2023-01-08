@@ -43,6 +43,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.FloorToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("transform.localScale " + transform.localScale);
         }
         if (addedHeight > 0 && transform.localScale.y == 1)
         {
@@ -52,6 +53,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.FloorToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("transform.localScale " + transform.localScale);
         }
         else
         {
@@ -59,6 +61,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.FloorToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("transform.localScale " + transform.localScale);
         }
     }
 

@@ -11,6 +11,7 @@ public class BuildingManager : MonoBehaviour
     public PlacedObjectTypeSO lastSelectedObjToPlaceTypeSO;
     public PlacedObjectTypeSO.Dir dir;
     public event EventHandler OnSelectedChanged; // for ghost building
+    public event EventHandler OnObjectPlaced; // for sound 
     public static MyGridXZ<MyGridBuildingSystem.MyGridObject> grid;
     public static BlockPrefab blockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
@@ -19,9 +20,18 @@ public class BuildingManager : MonoBehaviour
         Instance = this;
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
     }
+    private void OnEnable()
+    {
+      
+    }
 
     private void Update()
     {
+        if(Input.GetMouseButtonDown(1))
+        {
+            DeselectObjectType();
+            lastSelectedObjToPlaceTypeSO = null;
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             dir = PlacedObjectTypeSO.GetNextDir(dir);

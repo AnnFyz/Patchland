@@ -15,12 +15,13 @@ public class MyGridBuildingSystem : MonoBehaviour
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
-    public event EventHandler OnObjectPlaced; // for sound 
+    public event Action OnObjectPlaced;
+    //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
     private void Awake()
     {
         origin = transform.position;
-        blockPrefab = GetComponent<BlockPrefab>(); 
+        blockPrefab = GetComponent<BlockPrefab>();
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnHeightChanged += UpdateGrid;
         blockPrefab.OnHeightChanged += DeleteOldObjects;
@@ -38,7 +39,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         {
             for (int z = 0; z < gridHeight; z++)
             {
-               if (oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
+                if (oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
                 {
                     oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
                     grid.GetGridObject(x, z).ClearPlacedObject();
@@ -46,7 +47,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             }
         }
     }
-    public class MyGridObject 
+    public class MyGridObject
     {
 
         private MyGridXZ<MyGridObject> grid;
@@ -93,8 +94,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
-
-        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted) 
+        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted)
         {
             //if (EventSystem.current.IsPointerOverGameObject())
             //{
@@ -113,16 +113,16 @@ public class MyGridBuildingSystem : MonoBehaviour
             foreach (Vector2Int gridPosition in gridPositionList)
             {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
-                    {
-                        canBuild = false;
-                        break;
-                    }
+                {
+                    canBuild = false;
+                    break;
+                }
             }
 
             if (canBuild)
             {
                 Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
-                Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize(); 
+                Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
                 PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
 
                 foreach (Vector2Int gridPosition in gridPositionList)
@@ -130,7 +130,8 @@ public class MyGridBuildingSystem : MonoBehaviour
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                 }
 
-                //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound
+                //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
+                OnObjectPlaced?.Invoke();
 
                 BuildingManager.Instance.DeselectObjectType();
             }
