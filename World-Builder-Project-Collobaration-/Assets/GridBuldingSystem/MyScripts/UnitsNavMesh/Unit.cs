@@ -21,10 +21,10 @@ public class Unit : MonoBehaviour
         OnDeselected();
     }
 
-    //public virtual void OnEnable()
-    //{
-    //    SetupAgentFromConfiguration();
-    //}
+    public virtual void OnEnable()
+    {
+        SetupAgentFromConfiguration();
+    }
 
     public void OnSelected()
     {

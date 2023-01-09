@@ -40,15 +40,27 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
-                //float height = heightScale * Mathf.PerlinNoise(Time.time * xScale, 6.0f);
-                //Debug.Log("Height " + height);
-                //blockPrefab.transform.localScale =new Vector3(1, Mathf.RoundToInt(height),1);
+                float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
+                blockPrefab.transform.localScale = new Vector3(1, Mathf.RoundToInt(height), 1);
+                int newHeight = Mathf.FloorToInt(height);
+                blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
+                blockPrefab.ChangeHeight(0);
+                if (blockPrefab.transform.localScale.y <= 3)
+                {
+                    blockPrefab.transform.localScale = new Vector3(1, 1, 1);
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
+                    blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
+                    blockPrefab.ChangeHeight(0);
+                }
+
+                else if (blockPrefab.transform.localScale.y > 3 && blockPrefab.transform.localScale.y <= 5)
+                {
+                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
+                    blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
+                    blockPrefab.ChangeHeight(0);
+                }
+
             }
-        }
-        for (int i = 0; i < width; i++)
-        {
-            float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(1,10)* xScale*((i+1)*10), 6.0f);
-            Debug.Log("Height " + height);
         }
 
         RebuildNavMesh();
@@ -56,7 +68,14 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void RebuildNavMesh()
     {
-        surface.BuildNavMesh();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            { 
+             
+            }
+        }
+                surface.BuildNavMesh();
     }
     public Transform GetCenterObjInGrid()
     {

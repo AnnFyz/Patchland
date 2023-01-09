@@ -27,13 +27,14 @@ public class LocalLevelState : MonoBehaviour
     {
         return currentLevelState;
     }
-    void ChangeLevel(int newHeight)
+    public void ChangeLevel(int newHeight)
     {
         if(newHeight <= 1 && blockPrefab.transform.localRotation.z == -1)
         {
             currentLevelState = LevelState.Pond;
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
             blockPrefab.defaultColor = renderer.material.color;
+            UIManager.Instance.LocalSetupUIIcons();
         }
 
         else if(newHeight <= 5)
@@ -41,6 +42,7 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Desert;
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultColor = renderer.material.color;
+            UIManager.Instance.LocalSetupUIIcons();
         }
 
         else if (newHeight > 5)
@@ -48,6 +50,7 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultColor = renderer.material.color;
+            UIManager.Instance.LocalSetupUIIcons();
         }
     }
 }

@@ -1297,7 +1297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 181.31, y: -460.65005}
+  m_AnchoredPosition: {x: 181.31, y: -460.65002}
   m_SizeDelta: {x: -534.55, y: -921.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764148873
@@ -3220,6 +3220,57 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1772516888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1772516889}
+  - component: {fileID: 1772516890}
+  m_Layer: 0
+  m_Name: UnitsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1772516889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772516888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -113.02394, y: -269.04623, z: 464.20093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1772516890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772516888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc8ce9e409e4554094bb48ba45ab72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedUnits: []
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
 --- !u!1 &1780513877
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,12 +3836,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefabObj: {fileID: 6254500726256895673, guid: b1ea23813fb17f949bd5b65c68920349,
     type: 3}
-  width: 8
-  height: 10
+  width: 15
+  height: 15
   colorOfHighlightedOblock: {r: 0.66140735, g: 1, b: 0.40251565, a: 0}
   colorOfSelectedOblock: {r: 1, g: 0.37254906, b: 0.6940691, a: 0}
-  heightScale: 17.6
-  xScale: 40.16
+  heightScale: 10
+  xScale: 50
   surface: {fileID: 0}
 --- !u!114 &2056276496
 MonoBehaviour:

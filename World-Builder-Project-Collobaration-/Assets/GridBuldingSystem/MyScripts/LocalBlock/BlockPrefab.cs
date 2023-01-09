@@ -44,15 +44,17 @@ public class BlockPrefab : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
         }
-        if (addedHeight > 0 && transform.localScale.y == 1)
+        if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z == -1)
         {
             float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, 0);
-            transform.localScale += new Vector3(0, addedHeight, 0);
+            transform.localScale += new Vector3(0, 0, 0);
             newHeight = Mathf.FloorToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("transform.localRotation.z " + transform.localRotation.z);
         }
+
         else
         {
             transform.localScale += new Vector3(0, addedHeight, 0);

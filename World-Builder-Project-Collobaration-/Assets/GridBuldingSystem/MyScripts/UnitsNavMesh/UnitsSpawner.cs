@@ -31,50 +31,6 @@ public class UnitsSpawner : MonoBehaviour
         surface = GridOfPrefabs.Instance.surface;
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))
-            {
-                Unit unit = hit.transform.GetComponent<Unit>();
-                if (!selectedUnits.Contains(unit))
-                {
-
-                    if (unit != null)
-                    {
-                        selectedUnits.Add(unit);
-                        unit.OnSelected();
-                    }
-
-                }
-            }
-
-            else
-            {
-                foreach (var unit in selectedUnits)
-                {
-                    if (unit != null)
-                        unit.OnDeselected();
-                }
-
-                selectedUnits.Clear();
-            }
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, groundMask))
-            {
-                foreach (Unit unit in selectedUnits)
-                {
-                    if (unit != null)
-                    unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
-                }
-            }
-        }
-    }
-
     void SpawnUnits()
     {
         triangulation = NavMesh.CalculateTriangulation();
@@ -90,10 +46,10 @@ public class UnitsSpawner : MonoBehaviour
                 GameObject currentUnit = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity);
                 //currentUnit.transform.parent = this.transform;
                 units.Add(currentUnit);
-                if (currentUnit.GetComponent<Unit>())
+                if (currentUnit.GetComponentInChildren<Unit>())
                 {
-                    currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
-                    currentUnit.GetComponent<Unit>().agent.enabled = true;
+                    currentUnit.GetComponentInChildren<Unit>().agent.Warp(hit.position);
+                    currentUnit.GetComponentInChildren<Unit>().agent.enabled = true;
                 }
             }
             else
