@@ -94,12 +94,13 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
+     
         if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted)
         {
-            //if (EventSystem.current.IsPointerOverGameObject())
-            //{
-            //    return;
-            //}
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             Vector3 mousePosition = GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
 

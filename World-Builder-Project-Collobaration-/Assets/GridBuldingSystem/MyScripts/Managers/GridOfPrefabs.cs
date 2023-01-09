@@ -12,6 +12,8 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] int height = 5;
     [SerializeField] Color colorOfHighlightedOblock = new Color();
     [SerializeField] Color colorOfSelectedOblock = new Color();
+    [SerializeField] float heightScale = 40.0f;
+    [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
@@ -38,7 +40,15 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
+                //float height = heightScale * Mathf.PerlinNoise(Time.time * xScale, 6.0f);
+                //Debug.Log("Height " + height);
+                //blockPrefab.transform.localScale =new Vector3(1, Mathf.RoundToInt(height),1);
             }
+        }
+        for (int i = 0; i < width; i++)
+        {
+            float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(1,10)* xScale*((i+1)*10), 6.0f);
+            Debug.Log("Height " + height);
         }
 
         RebuildNavMesh();

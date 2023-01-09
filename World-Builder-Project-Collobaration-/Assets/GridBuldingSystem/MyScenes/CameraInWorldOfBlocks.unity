@@ -1297,7 +1297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 181.31, y: -460.65002}
+  m_AnchoredPosition: {x: 181.31, y: -460.65005}
   m_SizeDelta: {x: -534.55, y: -921.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764148873
@@ -2065,7 +2065,6 @@ GameObject:
   - component: {fileID: 1065981917}
   - component: {fileID: 1065981922}
   - component: {fileID: 1065981921}
-  - component: {fileID: 1065981923}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2215,22 +2214,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &1065981923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065981916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 471
-  m_MaxRayIntersections: 0
 --- !u!1 &1286976736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3802,10 +3785,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefabObj: {fileID: 6254500726256895673, guid: b1ea23813fb17f949bd5b65c68920349,
     type: 3}
-  width: 6
-  height: 6
-  colorOfHighlightedOblock: {r: 0.7311321, g: 0.8004031, b: 1, a: 0}
-  colorOfSelectedOblock: {r: 0.46604383, g: 0.37254906, b: 1, a: 0}
+  width: 8
+  height: 10
+  colorOfHighlightedOblock: {r: 0.66140735, g: 1, b: 0.40251565, a: 0}
+  colorOfSelectedOblock: {r: 1, g: 0.37254906, b: 0.6940691, a: 0}
+  heightScale: 17.6
+  xScale: 40.16
   surface: {fileID: 0}
 --- !u!114 &2056276496
 MonoBehaviour:

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 {
@@ -17,6 +18,10 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
     }
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
