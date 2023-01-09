@@ -133,7 +133,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
                 OnObjectPlaced?.Invoke();
-
+                UnitsManager.Instance.waypoints.Add(placedObject.transform); //TO USE DICTIONARY FOR DIFFERENT TYPES?
                 BuildingManager.Instance.DeselectObjectType();
             }
             else

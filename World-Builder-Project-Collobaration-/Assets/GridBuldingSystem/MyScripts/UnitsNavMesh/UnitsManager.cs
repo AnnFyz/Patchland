@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UnitsManager : MonoBehaviour
 {
-
+    public static UnitsManager Instance { get; private set; }
     public List<Unit> selectedUnits = new List<Unit>();
-    List<GameObject> units = new List<GameObject>();
+    //List<GameObject> units = new List<GameObject>();
     public LayerMask unitMask;
     public LayerMask groundMask;
-
-    void Update()
+    public List<Transform> waypoints; // to make them for each type of building and unit
+    public Action TimeToGo;
+    private void Awake()
     {
+        Instance = this;
+    }
+        void Update()
+    {
+        if(waypoints.Count >= 2)
+        {
+            TimeToGo?.Invoke();
+        }
         if (Input.GetMouseButtonUp(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))

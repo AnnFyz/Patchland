@@ -12,9 +12,9 @@ public class UnitsSpawner : MonoBehaviour
     public LayerMask groundMask;
     //[SerializeField] MazeSpawner mazeSpawner;
     [SerializeField] GameObject unitPrefab;
-    [SerializeField] int numberOfUnits = 3;
+    [SerializeField] int numberOfUnits = 1;
     NavMeshSurface surface;
-    NavMeshTriangulation triangulation;
+    //NavMeshTriangulation triangulation;
     List<GameObject> units = new List<GameObject>();
     MyGridBuildingSystem localBuildingSystem;
     private void Awake()
@@ -33,7 +33,7 @@ public class UnitsSpawner : MonoBehaviour
 
     void SpawnUnits()
     {
-        triangulation = NavMesh.CalculateTriangulation();
+        //triangulation = NavMesh.CalculateTriangulation();
         NavMeshHit hit;
         for (int i = 0; i < numberOfUnits; i++)
         {
