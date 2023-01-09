@@ -23,8 +23,6 @@ public class UnitsSpawner : MonoBehaviour
     }
     void OnEnable()
     {
-        //mazeSpawner.OnMazeSpawned += SpawnUnits;
-        //mazeSpawner.OnMazeDestroyed += DestroyUnits;
         localBuildingSystem.OnObjectPlaced += SpawnUnits;
     }
 
@@ -87,9 +85,10 @@ public class UnitsSpawner : MonoBehaviour
             float randomPosX = Random.Range(transform.position.x, transform.position.x + 1.5f);
             float randomPosZ = Random.Range(transform.position.z, transform.position.z + 1.5f);
             //int vertexIndex = UnityEngine.Random.Range(transform.position, );
-            if (NavMesh.SamplePosition(new Vector3(randomPosX - transform.localScale.x*0.5f, 0, randomPosZ - transform.localScale.z * 0.5f), out hit, 200f, groundMask))
+            if (NavMesh.SamplePosition(new Vector3(randomPosX, 0, randomPosZ), out hit, 200f, groundMask))
             {
                 GameObject currentUnit = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity);
+                //currentUnit.transform.parent = this.transform;
                 units.Add(currentUnit);
                 if (currentUnit.GetComponent<Unit>())
                 {

@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 1289161497042541120}
   - component: {fileID: -629676016913631631}
   m_Layer: 7
-  m_Name: Unit
+  m_Name: BasicUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675644380505310728}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 1.05
   m_Speed: 20
   m_Acceleration: 18
@@ -219,6 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitScriptableObjects: {fileID: 11400000, guid: 313d4535674193a4e854db85ca73b5dd,
+    type: 2}
   selectedFigur: {fileID: 0}
   agent: {fileID: 0}
 --- !u!114 &-629676016913631631

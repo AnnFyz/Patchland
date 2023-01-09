@@ -3765,7 +3765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056276493}
   - component: {fileID: 2056276494}
-  - component: {fileID: 2056276495}
+  - component: {fileID: 2056276496}
   m_Layer: 6
   m_Name: GridOfPrefabs
   m_TagString: Untagged
@@ -3807,7 +3807,7 @@ MonoBehaviour:
   colorOfHighlightedOblock: {r: 0.7311321, g: 0.8004031, b: 1, a: 0}
   colorOfSelectedOblock: {r: 0.46604383, g: 0.37254906, b: 1, a: 0}
   surface: {fileID: 0}
---- !u!114 &2056276495
+--- !u!114 &2056276496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3819,7 +3819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -3835,7 +3835,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: dabdf255173dde14fbd05081fdd0cfc1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5af688c0a81ba434c809314911760d77, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2110376074
 GameObject:

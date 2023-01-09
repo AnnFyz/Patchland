@@ -15,7 +15,7 @@ public class GridOfPrefabs : MonoBehaviour
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
-    public NavMeshSurface surface;
+    public NavMeshSurface surface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
     private void Awake()
     {
