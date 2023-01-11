@@ -43,23 +43,27 @@ public class GridOfPrefabs : MonoBehaviour
                 float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
                 blockPrefab.transform.localScale = new Vector3(1, Mathf.RoundToInt(height), 1);
                 int newHeight = Mathf.FloorToInt(height);
-                blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
-                blockPrefab.ChangeHeight(0);
-                if (blockPrefab.transform.localScale.y <= 3)
+                if (blockPrefab.transform.localScale.y <= 2) //Water
                 {
                     blockPrefab.transform.localScale = new Vector3(1, 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-                    blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
                     blockPrefab.ChangeHeight(0);
+
                 }
 
-                else if (blockPrefab.transform.localScale.y > 3 && blockPrefab.transform.localScale.y <= 5)
+                if (blockPrefab.transform.localScale.y >= 3 && blockPrefab.transform.localScale.y <= 5)
                 {
-                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
-                    blockPrefab.gameObject.GetComponent<LocalLevelState>().ChangeLevel(newHeight);
+                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     blockPrefab.ChangeHeight(0);
                 }
 
+                else
+                {
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    blockPrefab.ChangeHeight(0);
+
+                }
             }
         }
 
