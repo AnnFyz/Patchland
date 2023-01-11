@@ -28,7 +28,7 @@ public class UnitsSpawner : MonoBehaviour
 
     private void Start()
     {
-        surface = GridOfPrefabs.Instance.surface;
+        surface = GridOfPrefabs.Instance.horizontalSurface;
     }
 
     void SpawnUnits()

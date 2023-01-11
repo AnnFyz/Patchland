@@ -17,12 +17,12 @@ public class GridOfPrefabs : MonoBehaviour
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     private MyGridXZ<PrefabGridObject> grid;
-    public NavMeshSurface surface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
+    public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
     private void Awake()
     {
         Instance = this;
-        surface = GetComponent<NavMeshSurface>();
+        horizontalSurface = GetComponent<NavMeshSurface>();
     }
     private void OnEnable()
     {
@@ -51,7 +51,7 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
 
-                if (blockPrefab.transform.localScale.y >= 3 && blockPrefab.transform.localScale.y <= 5)
+                else if(blockPrefab.transform.localScale.y >= 3 && blockPrefab.transform.localScale.y <= 5)
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -72,14 +72,7 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void RebuildNavMesh()
     {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            { 
-             
-            }
-        }
-                surface.BuildNavMesh();
+        horizontalSurface.BuildNavMesh();
     }
     public Transform GetCenterObjInGrid()
     {
