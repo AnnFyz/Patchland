@@ -30,14 +30,15 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             if (localPrefabBlock == block)
             {
                 localPrefabBlock.IsThisBlockWasHighlighted = true;
-                localPrefabBlock.ChangeHighlightedColor();
+                localPrefabBlock.ChangeHighlightedColorl();
                 if (!localPrefabBlock.IsThisBlockWasSelected)
                 {
                     BuildingManager.Instance.DeselectObjectType();
                 }
                 if (localPrefabBlock.IsThisBlockWasSelected)
                 {
-                    if(BuildingManager.Instance.placedObjectTypeSO == null)
+                    localPrefabBlock.ChangeSelectedMaterial();
+                    if (BuildingManager.Instance.placedObjectTypeSO == null)
                     {
                         BuildingManager.Instance.placedObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
                     }
@@ -54,10 +55,11 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                 if (!localPrefabBlock.IsThisBlockWasSelected)
                 {
                     localPrefabBlock.ChangeColorBack();
+                    localPrefabBlock.ChangeMaterialBack();
                 }
                 else
                 {
-                    localPrefabBlock.ChangeSelectedColor();
+                    localPrefabBlock.ChangeSelectedMaterial();
                 }
                 
             }
@@ -69,10 +71,11 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             if (!localPrefabBlock.IsThisBlockWasSelected)
             {
                 localPrefabBlock.ChangeColorBack();
+                localPrefabBlock.ChangeMaterialBack();
             }
             else
             {
-                localPrefabBlock.ChangeSelectedColor();
+                localPrefabBlock.ChangeSelectedMaterial();
             }
         }
     }

@@ -33,6 +33,7 @@ public class LocalLevelState : MonoBehaviour
         {
             currentLevelState = LevelState.Pond;
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
+            blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.defaultColor = renderer.material.color;
             UIManager.Instance.LocalSetupUIIcons();
         }
@@ -41,6 +42,7 @@ public class LocalLevelState : MonoBehaviour
         {
             currentLevelState = LevelState.Desert;
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
+            blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.defaultColor = renderer.material.color;
             UIManager.Instance.LocalSetupUIIcons();
         }
@@ -49,6 +51,7 @@ public class LocalLevelState : MonoBehaviour
         {
             currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
+            blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.defaultColor = renderer.material.color;
             UIManager.Instance.LocalSetupUIIcons();
         }

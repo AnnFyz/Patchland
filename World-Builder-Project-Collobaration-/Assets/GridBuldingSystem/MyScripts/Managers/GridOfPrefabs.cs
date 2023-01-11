@@ -11,7 +11,8 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
     [SerializeField] Color colorOfHighlightedOblock = new Color();
-    [SerializeField] Color colorOfSelectedOblock = new Color();
+    //[SerializeField] Color materialOfSelectedOblock = new Color();
+    [SerializeField] Material materialOfSelectedOblock;
     [SerializeField] float heightScale = 40.0f;
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
@@ -19,6 +20,7 @@ public class GridOfPrefabs : MonoBehaviour
     private MyGridXZ<PrefabGridObject> grid;
     public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
+    
     private void Awake()
     {
         Instance = this;
@@ -43,7 +45,7 @@ public class GridOfPrefabs : MonoBehaviour
                 float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
                 blockPrefab.transform.localScale = new Vector3(1, Mathf.RoundToInt(height), 1);
                 int newHeight = Mathf.FloorToInt(height);
-                if (blockPrefab.transform.localScale.y <= 2) //Water
+                if (blockPrefab.transform.localScale.y <= 4) //Water
                 {
                     blockPrefab.transform.localScale = new Vector3(1, 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
@@ -51,16 +53,16 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
 
-                else if(blockPrefab.transform.localScale.y >= 3 && blockPrefab.transform.localScale.y <= 5)
+                else if(blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
-                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
                     blockPrefab.ChangeHeight(0);
                 }
 
                 else
                 {
-                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
                     blockPrefab.ChangeHeight(0);
 
                 }
@@ -74,6 +76,28 @@ public class GridOfPrefabs : MonoBehaviour
     {
         horizontalSurface.BuildNavMesh();
     }
+
+    float RandomRotation()
+    {
+        int randomAngle = UnityEngine.Random.Range(1, 4);
+        float angle = 0;
+        switch (randomAngle)
+        {
+            case 1:
+                angle = 90;
+                break;
+            case 2:
+                angle = 180;
+                break;
+            case 3:
+                angle = 270;
+                break;
+            default:
+                angle = 0;
+                break;
+        }
+        return angle;
+    }
     public Transform GetCenterObjInGrid()
     {
         int halfWidth = Mathf.RoundToInt(width / 2);
@@ -85,9 +109,9 @@ public class GridOfPrefabs : MonoBehaviour
     {
         return colorOfHighlightedOblock;
     }
-    public Color GetColorOfSelectedBlocks()
+    public Material GetMaterialOfSelectedBlocks()
     {
-        return colorOfSelectedOblock;
+        return materialOfSelectedOblock;
     }
 
     private void Update()
@@ -125,11 +149,12 @@ public class GridOfPrefabs : MonoBehaviour
                         {
                             grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
                             placedObject.ChangeColorBack();
+                            placedObject.ChangeMaterialBack();
                             UIManager.Instance.HidePanels();
                         }
                     }
                     placedObject.IsThisBlockWasSelected = true;
-                    placedObject.ChangeSelectedColor();
+                    placedObject.ChangeSelectedMaterial();
                     grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
                     UIManager.Instance.ShowPanels();
                     UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();

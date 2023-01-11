@@ -4,11 +4,12 @@ using UnityEngine;
 namespace OToon
 {
 
-    public class CameraController : MonoBehaviour
+    public class LightController : MonoBehaviour
     {
         public Transform Target;
         public Transform[] Rotator;
         public float Speed = 50f;
+
         // Start is called before the first frame update
         void Start()
         {

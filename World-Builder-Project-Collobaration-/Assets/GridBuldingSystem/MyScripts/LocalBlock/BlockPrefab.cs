@@ -13,7 +13,7 @@ public class BlockPrefab : MonoBehaviour
     public bool IsThisBlockWasSelected = false;
     Renderer renderer;
     public Color defaultColor = new Color();
-
+    public Material defaultMaterial;
     private void Start()
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y)/100;
@@ -75,9 +75,10 @@ public class BlockPrefab : MonoBehaviour
         return startScale;
     }
 
-    public void ChangeHighlightedColor()
+    public void ChangeHighlightedColorl()
     {
         renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
+
     }
 
     public void ChangeColorBack()
@@ -85,8 +86,12 @@ public class BlockPrefab : MonoBehaviour
         renderer.material.color = defaultColor;
     }
 
-    public void ChangeSelectedColor()
+    public void ChangeMaterialBack()
     {
-        renderer.material.color = GridOfPrefabs.Instance.GetColorOfSelectedBlocks();
+        renderer.material = defaultMaterial; 
+    }
+    public void ChangeSelectedMaterial()
+    {
+        renderer.material = GridOfPrefabs.Instance.GetMaterialOfSelectedBlocks();
     }
 }
