@@ -31,6 +31,10 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             {
                 localPrefabBlock.IsThisBlockWasHighlighted = true;
                 localPrefabBlock.ChangeHighlightedColorl();
+                if (!localPrefabBlock.IsThisBlockWasSelected)
+                {
+                    BuildingManager.Instance.DeselectObjectType();
+                }
                 if (localPrefabBlock.IsThisBlockWasSelected)
                 {
                     localPrefabBlock.ChangeSelectedMaterial();
@@ -41,11 +45,8 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 
                         BuildingManager.grid = localGrid.grid;
                         BuildingManager.blockPrefab = localPrefabBlock;
-                        BuildingManager.Instance.RefreshSelectedObjectType();  
-                }
-                else if (!localPrefabBlock.IsThisBlockWasSelected)
-                {
-                    BuildingManager.Instance.DeselectObjectType();
+                        BuildingManager.Instance.RefreshSelectedObjectType();
+   
                 }
             }
             else

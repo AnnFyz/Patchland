@@ -46,10 +46,6 @@ public class MyBuildingGhost : MonoBehaviour
 
         if (placedObjectTypeSO != null)
         {
-            if(visual == null)
-            {
-                return;
-            }
             visual = Instantiate(placedObjectTypeSO.visual, Vector3.zero, Quaternion.identity);
             visual.parent = transform;
             //visual.localPosition = GhostBildingPosition();

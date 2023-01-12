@@ -103,7 +103,6 @@ public class MyGridXZ<TGridObject> {
 
     public TGridObject GetGridObject(int x, int z) {
         if (x >= 0 && z >= 0 && x < width && z < height) {
-            Debug.Log("POS IN GRID " + gridArray[x, z]);
             return gridArray[x, z];
         } else {
             return default(TGridObject);

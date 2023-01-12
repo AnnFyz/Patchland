@@ -12,7 +12,6 @@ public class UnitsManager : MonoBehaviour
     public LayerMask groundMask;
     public List<Transform> waypoints; // to make them for each type of building and unit
     public Action TimeToGo;
-    [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     private void Awake()
     {
         Instance = this;
@@ -64,10 +63,5 @@ public class UnitsManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public List<Transform> GetListOfUnits()
-    {
-        return unitsPrefabs;
     }
 }
