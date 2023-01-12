@@ -18,7 +18,6 @@ public class MyGridBuildingSystem : MonoBehaviour
     public event Action<int> OnObjectPlaced;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
-    public int indexForWaypoints = 0;
     private void Awake()
     {
         origin = transform.position;
@@ -134,10 +133,9 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
                 int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
-                OnObjectPlaced?.Invoke(placedObjectId);
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
-                indexForWaypoints++;
                 Debug.Log("Waypoint were added");
+                OnObjectPlaced?.Invoke(placedObjectId);
                 BuildingManager.Instance.DeselectObjectType();
             }
 

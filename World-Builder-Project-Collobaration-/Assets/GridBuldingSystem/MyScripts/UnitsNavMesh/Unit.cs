@@ -12,8 +12,12 @@ public class Unit : MonoBehaviour
     public GameObject selectedFigur;
     public NavMeshAgent agent;
     public Transform target;
+    public Transform startPoint;
+    public Transform currentPoint;
+    List<Transform> localOrder = new List<Transform>();
     private NavMeshPath path;
     private float elapsed = 0.0f;
+    public int placedObjTypeId;
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -31,17 +35,29 @@ public class Unit : MonoBehaviour
         UnitsManager.Instance.TimeToGo += GoToWayPoint;
         SetupAgentFromConfiguration();
     }
+    public void UpdateListOfWaypoints()
+    {
+        localOrder.Clear();
+        if(target == null) // it means the unit was just created
+        {
+            localOrder.Add(startPoint);
+            target = startPoint;
+        }
+        else
+        {
+            localOrder.Add(currentPoint); 
+        }
+        List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
+        reversedList.Reverse();
+        localOrder.AddRange(reversedList);
+
+
+    }
     void GoToWayPoint()
     {
         // Update the way to the goal every second.
         elapsed += Time.deltaTime;
-        if(UnitsManager.Instance.waypoints[1] != null)
-        {
-            //target = UnitsManager.Instance.waypoints[0];
-        }
-
-        foreach (var waypoint in UnitsManager.Instance.waypoints)
-        { }
+        //target = GetUpdatedDestination();
             if (target != null)
             {
                 if (elapsed > 1.0f)
@@ -63,7 +79,10 @@ public class Unit : MonoBehaviour
        
     }
 
-
+    //Transform GetUpdatedDestination()
+    //{ 
+    //   target = 
+    //}
     public void OnSelected()
     {
         selectedFigur.SetActive(true);
@@ -90,6 +109,5 @@ public class Unit : MonoBehaviour
         //movement.radius = unitScriptableObjects.triggerRadius;
         //startHealth = unitScriptableObjects.health;
     }
-
 
 }

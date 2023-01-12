@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.AI.Navigation;
 using UnityEngine.AI;
 using Cinemachine;
+using System.Linq;
 
 public class UnitsSpawner : MonoBehaviour
 {
@@ -46,12 +47,20 @@ public class UnitsSpawner : MonoBehaviour
             if (NavMesh.SamplePosition(new Vector3(randomPosX, 0, randomPosZ), out hit, 200f, groundMask))
             {
                 currentUnit = Instantiate(SelectRightUnit(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
-                //currentUnit.transform.parent = this.transform;
-                units.Add(currentUnit);
-                if (currentUnit.GetComponentInChildren<Unit>())
+                if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
                 {
-                    currentUnit.GetComponentInChildren<Unit>().agent.Warp(hit.position);
-                    currentUnit.GetComponentInChildren<Unit>().agent.enabled = true;
+                    currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
+                    currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
+                    currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
+
+                }
+                //currentUnit.transform.parent = this.transform;
+                //units.Add(currentUnit);
+                if (currentUnit.GetComponent<Unit>())
+                {
+                    currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
+                    currentUnit.GetComponent<Unit>().agent.enabled = true;
+                    UnitsManager.Instance.numberOfPoints++;
                 }
             }
             else
@@ -63,7 +72,7 @@ public class UnitsSpawner : MonoBehaviour
 
     Transform SelectRightUnit(int placedObjId)
     {
-        switch (placedObjId)
+        switch (placedObjId) 
         {
             case 0:
                 unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[0];

@@ -13,7 +13,7 @@ public class UnitsManager : MonoBehaviour
     public List<List<Transform>> waypoints = new List<List<Transform>>(); // to make them for each type of building and unit
     public Action TimeToGo;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
-    int l;
+    public int numberOfPoints;
     private void Awake()
     {
         Instance = this;
