@@ -24,7 +24,10 @@ public class BuildingManager : MonoBehaviour
     {
       
     }
-
+    public int GetNumberOfPlacedObjTypes()
+    {
+        return placedObjectTypeSOList.Count;
+    }
     private void Update()
     {
         if(Input.GetMouseButtonDown(1))

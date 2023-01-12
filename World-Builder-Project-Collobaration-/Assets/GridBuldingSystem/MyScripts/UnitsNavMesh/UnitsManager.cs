@@ -10,19 +10,32 @@ public class UnitsManager : MonoBehaviour
     //List<GameObject> units = new List<GameObject>();
     public LayerMask unitMask;
     public LayerMask groundMask;
-    public List<Transform> waypoints; // to make them for each type of building and unit
+    public List<List<Transform>> waypoints = new List<List<Transform>>(); // to make them for each type of building and unit
     public Action TimeToGo;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
+    int l;
     private void Awake()
     {
         Instance = this;
     }
-        void Update()
+    private void Start()
     {
-        if(waypoints.Count >= 2)
+
+        for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj
         {
-            TimeToGo?.Invoke();
+           waypoints.Insert(i, new List<Transform>());
         }
+    }
+    void Update()
+    {
+        if (waypoints != null)
+        {
+            if (waypoints.Count >= 2)
+            {
+                TimeToGo?.Invoke();
+            }
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))

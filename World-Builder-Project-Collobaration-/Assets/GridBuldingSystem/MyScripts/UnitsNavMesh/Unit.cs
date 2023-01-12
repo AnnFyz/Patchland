@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
         elapsed += Time.deltaTime;
         if(UnitsManager.Instance.waypoints[1] != null)
         {
-            target = UnitsManager.Instance.waypoints[0];
+            //target = UnitsManager.Instance.waypoints[0];
         }
 
         foreach (var waypoint in UnitsManager.Instance.waypoints)

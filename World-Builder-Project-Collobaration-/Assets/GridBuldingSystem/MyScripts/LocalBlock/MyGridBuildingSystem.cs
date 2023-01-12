@@ -15,9 +15,10 @@ public class MyGridBuildingSystem : MonoBehaviour
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
-    public event Action<int>OnObjectPlaced;
+    public event Action<int> OnObjectPlaced;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
+    public int indexForWaypoints = 0;
     private void Awake()
     {
         origin = transform.position;
@@ -94,7 +95,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
-     
+        
         if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -132,10 +133,14 @@ public class MyGridBuildingSystem : MonoBehaviour
                 }
 
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
-                OnObjectPlaced?.Invoke(BuildingManager.Instance.placedObjectTypeSO.placedObjId);
-                UnitsManager.Instance.waypoints.Add(placedObject.transform); //TO USE DICTIONARY FOR DIFFERENT TYPES?
+                int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
+                OnObjectPlaced?.Invoke(placedObjectId);
+                UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
+                indexForWaypoints++;
+                Debug.Log("Waypoint were added");
                 BuildingManager.Instance.DeselectObjectType();
             }
+
             else
             {
                 // Cannot build here
@@ -144,15 +149,16 @@ public class MyGridBuildingSystem : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    dir = PlacedObjectTypeSO.GetNextDir(dir);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); Debug.Log("First org form selected"); }
-        //if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); Debug.Log("Second building selected"); }
-        //if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); Debug.Log("Third building selected"); }
     }
+    //if (Input.GetKeyDown(KeyCode.R))
+    //{
+    //    dir = PlacedObjectTypeSO.GetNextDir(dir);
+    //}
+
+    //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); Debug.Log("First org form selected"); }
+    //if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); Debug.Log("Second building selected"); }
+    //if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); Debug.Log("Third building selected"); }
+
 
     //private void DeselectObjectType()
     //{
