@@ -17,6 +17,8 @@ public class UnitsSpawner : MonoBehaviour
     //NavMeshTriangulation triangulation;
     List<GameObject> units = new List<GameObject>();
     MyGridBuildingSystem localBuildingSystem;
+    Transform unitPrefabToSpawn;
+    GameObject currentUnit;
     private void Awake()
     {
         localBuildingSystem = GetComponent<MyGridBuildingSystem>();
@@ -31,7 +33,7 @@ public class UnitsSpawner : MonoBehaviour
         surface = GridOfPrefabs.Instance.horizontalSurface;
     }
 
-    void SpawnUnits()
+    void SpawnUnits(int placedObjId)
     {
         //triangulation = NavMesh.CalculateTriangulation();
         NavMeshHit hit;
@@ -43,7 +45,7 @@ public class UnitsSpawner : MonoBehaviour
             //int vertexIndex = UnityEngine.Random.Range(transform.position, );
             if (NavMesh.SamplePosition(new Vector3(randomPosX, 0, randomPosZ), out hit, 200f, groundMask))
             {
-                GameObject currentUnit = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity);
+                currentUnit = Instantiate(SelectRightUnit(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
                 //currentUnit.transform.parent = this.transform;
                 units.Add(currentUnit);
                 if (currentUnit.GetComponentInChildren<Unit>())
@@ -59,6 +61,22 @@ public class UnitsSpawner : MonoBehaviour
         }
     }
 
+    Transform SelectRightUnit(int placedObjId)
+    {
+        switch (placedObjId)
+        {
+            case 0:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[0];
+                break;
+            case 1:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[1];
+                break;
+            case 2:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[2];
+                break;
+        }
+        return unitPrefabToSpawn;
+    }
     void DestroyUnits()
     {
         foreach (var unit in units)
@@ -68,3 +86,4 @@ public class UnitsSpawner : MonoBehaviour
         }
     }
 }
+

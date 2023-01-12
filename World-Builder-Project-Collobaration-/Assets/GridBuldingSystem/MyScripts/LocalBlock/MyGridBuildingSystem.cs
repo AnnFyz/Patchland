@@ -15,7 +15,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
-    public event Action OnObjectPlaced;
+    public event Action<int>OnObjectPlaced;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
     private void Awake()
@@ -132,7 +132,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                 }
 
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
-                OnObjectPlaced?.Invoke();
+                OnObjectPlaced?.Invoke(BuildingManager.Instance.placedObjectTypeSO.placedObjId);
                 UnitsManager.Instance.waypoints.Add(placedObject.transform); //TO USE DICTIONARY FOR DIFFERENT TYPES?
                 BuildingManager.Instance.DeselectObjectType();
             }
