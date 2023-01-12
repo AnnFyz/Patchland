@@ -27,7 +27,7 @@ public class UnitsManager : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))
             {
 
-                Unit unit = hit.transform.GetComponentInParent<Unit>();
+                Unit unit = hit.collider.transform.GetComponentInParent<Unit>();
                 if (!selectedUnits.Contains(unit))
                 {
 
