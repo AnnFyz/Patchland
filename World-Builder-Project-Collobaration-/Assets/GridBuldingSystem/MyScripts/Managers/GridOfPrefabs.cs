@@ -116,52 +116,69 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(2))
+
+
+        //if (Input.GetMouseButtonDown(0))
         //{
         //    Vector3 mousePosition = GetMouseWorldPosition();
         //    if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
         //    {
-        //        // Valid Grid Position
+
         //        BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
         //        if (placedObject != null)
         //        {
-        //            // Demolish
-        //            placedObject.DestroySelf();
-        //            grid.GetGridObject(mousePosition).ClearPlacedObject();
-
+        //            //placedObject.ChangeHeight(1); // on arrow up -1 on arrow down
+        //            for (int x = 0; x < width; x++)
+        //            {
+        //                for (int z = 0; z < height; z++)
+        //                {
+        //                    grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
+        //                    placedObject.ChangeColorBack();
+        //                    placedObject.ChangeMaterialBack();
+        //                    UIManager.Instance.HidePanels();
+        //                }
+        //            }
+        //            placedObject.IsThisBlockWasSelected = true;
+        //            placedObject.ChangeSelectedMaterial();
+        //            grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
+        //            UIManager.Instance.ShowPanels();
+        //            UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();
+        //            UIManager.Instance.LocalSetupUIIcons();
         //        }
         //    }
         //}
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePosition = GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
+            if (Input.GetMouseButtonDown(0))
             {
-
-                BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-                if (placedObject != null)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, 9999f))
                 {
-                    //placedObject.ChangeHeight(1); // on arrow up -1 on arrow down
-                    for (int x = 0; x < width; x++)
+
+                    if (raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>())
                     {
-                        for (int z = 0; z < height; z++)
+                        BlockPrefab placedObject = raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>();
+                        for (int x = 0; x < width; x++)
                         {
-                            grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
-                            placedObject.ChangeColorBack();
-                            placedObject.ChangeMaterialBack();
-                            UIManager.Instance.HidePanels();
+                            for (int z = 0; z < height; z++)
+                            {
+                                grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
+                                placedObject.ChangeColorBack();
+                                placedObject.ChangeMaterialBack();
+                                UIManager.Instance.HidePanels();
+                            }
                         }
+                        placedObject.IsThisBlockWasSelected = true;
+                        placedObject.ChangeSelectedMaterial();
+                        UIManager.Instance.ShowPanels();
+                        UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
+                        UIManager.Instance.LocalSetupUIIcons();
                     }
-                    placedObject.IsThisBlockWasSelected = true;
-                    placedObject.ChangeSelectedMaterial();
-                    grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
-                    UIManager.Instance.ShowPanels();
-                    UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();
-                    UIManager.Instance.LocalSetupUIIcons();
                 }
             }
-        }
+
+        
+
+
     }
 
     private Vector3 GetMouseWorldPosition()
