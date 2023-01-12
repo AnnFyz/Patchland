@@ -20,7 +20,7 @@ public class GridOfPrefabs : MonoBehaviour
     private MyGridXZ<PrefabGridObject> grid;
     public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
-    
+
     private void Awake()
     {
         Instance = this;
@@ -53,7 +53,7 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
 
-                else if(blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
+                else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
@@ -115,34 +115,16 @@ public class GridOfPrefabs : MonoBehaviour
     }
 
     private void Update()
-    {
-        //if (Input.GetMouseButtonDown(2))
-        //{
-        //    Vector3 mousePosition = GetMouseWorldPosition();
-        //    if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
-        //    {
-        //        // Valid Grid Position
-        //        BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-        //        if (placedObject != null)
-        //        {
-        //            // Demolish
-        //            placedObject.DestroySelf();
-        //            grid.GetGridObject(mousePosition).ClearPlacedObject();
-
-        //        }
-        //    }
-        //}
-
+    {      
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 9999f))
             {
 
-                BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-                if (placedObject != null)
+                if (raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>())
                 {
-                    //placedObject.ChangeHeight(1); // on arrow up -1 on arrow down
+                    BlockPrefab placedObject = raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>();
                     for (int x = 0; x < width; x++)
                     {
                         for (int z = 0; z < height; z++)
@@ -155,19 +137,19 @@ public class GridOfPrefabs : MonoBehaviour
                     }
                     placedObject.IsThisBlockWasSelected = true;
                     placedObject.ChangeSelectedMaterial();
-                    grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
                     UIManager.Instance.ShowPanels();
-                    UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();
+                    UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
                     UIManager.Instance.LocalSetupUIIcons();
                 }
             }
         }
+
     }
 
     private Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 9999f))
         {
 
             IsValidGridPos = true;
