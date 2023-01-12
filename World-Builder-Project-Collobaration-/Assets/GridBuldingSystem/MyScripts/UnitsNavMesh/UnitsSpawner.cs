@@ -16,7 +16,6 @@ public class UnitsSpawner : MonoBehaviour
     //NavMeshTriangulation triangulation;
     List<GameObject> units = new List<GameObject>();
     MyGridBuildingSystem localBuildingSystem;
-    PlacedObjectTypeSO placedObjId;
     Transform unitPrefabToSpawn;
     GameObject currentUnit;
     private void Awake()
