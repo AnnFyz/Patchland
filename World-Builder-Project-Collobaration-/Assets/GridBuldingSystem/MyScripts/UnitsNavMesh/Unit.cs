@@ -23,7 +23,9 @@ public class Unit : MonoBehaviour
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
         agent = GetComponent<NavMeshAgent>();
     }
-    
+
+
+
     void Start()
     {
         OnDeselected();
@@ -32,11 +34,13 @@ public class Unit : MonoBehaviour
     }
     public virtual void OnEnable()
     {
+        UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         UnitsManager.Instance.TimeToGo += GoToWayPoint;
         SetupAgentFromConfiguration();
     }
     public void UpdateListOfWaypoints()
     {
+        Debug.Log("Order was updated");
         localOrder.Clear();
         if(target == null) // it means the unit was just created
         {
@@ -50,7 +54,10 @@ public class Unit : MonoBehaviour
         List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
         reversedList.Reverse();
         localOrder.AddRange(reversedList);
-
+        foreach (var item in localOrder)
+        {
+            Debug.Log("Waypoints " + item);
+        }
 
     }
     void GoToWayPoint()

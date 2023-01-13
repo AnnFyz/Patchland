@@ -51,7 +51,7 @@ public class UnitsSpawner : MonoBehaviour
                 {
                     currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
                     currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
-                    currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
+                    //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
 
                 }
                 //currentUnit.transform.parent = this.transform;

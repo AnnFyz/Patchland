@@ -16,6 +16,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     BlockPrefab blockPrefab;
     public Vector3 origin;
     public event Action<int> OnObjectPlaced;
+    public static event Action OnAddedWaypoint;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
     private void Awake()
@@ -131,11 +132,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                 }
 
-                //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound // to send Type of PlacedObj !!!
+                //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
                 int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
-                Debug.Log("Waypoint were added");
                 OnObjectPlaced?.Invoke(placedObjectId);
+                OnAddedWaypoint?.Invoke();
+                Debug.Log("Waypoints were added");
                 BuildingManager.Instance.DeselectObjectType();
             }
 

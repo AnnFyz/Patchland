@@ -14,9 +14,14 @@ public class UnitsManager : MonoBehaviour
     public Action TimeToGo;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     public int numberOfPoints;
+    public event Action OnChangedGlobalOrder;
     private void Awake()
     {
         Instance = this;
+    }
+    private void OnEnable()
+    {
+        MyGridBuildingSystem.OnAddedWaypoint += OnChangedGlobalOrderM;
     }
     private void Start()
     {
@@ -82,5 +87,10 @@ public class UnitsManager : MonoBehaviour
     public List<Transform> GetListOfUnits()
     {
         return unitsPrefabs;
+    }
+
+    void OnChangedGlobalOrderM()
+    {
+        OnChangedGlobalOrder?.Invoke();
     }
 }

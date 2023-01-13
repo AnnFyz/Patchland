@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using Unity.AI.Navigation;
+using UnityEngine.EventSystems;
+
 
 public class GridOfPrefabs : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class GridOfPrefabs : MonoBehaviour
     private MyGridXZ<PrefabGridObject> grid;
     public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
-    
+
     private void Awake()
     {
         Instance = this;
@@ -53,7 +55,7 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
 
-                else if(blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
+                else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
@@ -116,67 +118,40 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
 
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector3 mousePosition = GetMouseWorldPosition();
-        //    if (grid.GetGridObject(mousePosition) != null && IsValidGridPos)
-        //    {
-
-        //        BlockPrefab placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-        //        if (placedObject != null)
-        //        {
-        //            //placedObject.ChangeHeight(1); // on arrow up -1 on arrow down
-        //            for (int x = 0; x < width; x++)
-        //            {
-        //                for (int z = 0; z < height; z++)
-        //                {
-        //                    grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
-        //                    placedObject.ChangeColorBack();
-        //                    placedObject.ChangeMaterialBack();
-        //                    UIManager.Instance.HidePanels();
-        //                }
-        //            }
-        //            placedObject.IsThisBlockWasSelected = true;
-        //            placedObject.ChangeSelectedMaterial();
-        //            grid.GetGridObject(mousePosition).SetPlacedObject(placedObject);
-        //            UIManager.Instance.ShowPanels();
-        //            UIManager.Instance.prefabsState = grid.GetGridObject(mousePosition).GetPlacedObject().GetComponent<LocalLevelState>();
-        //            UIManager.Instance.LocalSetupUIIcons();
-        //        }
-        //    }
-        //}
-
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 9999f))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit raycastHit, 9999f))
-                {
 
-                    if (raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>())
+                if (raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>())
+                {
+                    BlockPrefab placedObject = raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>();
+                    for (int x = 0; x < width; x++)
                     {
-                        BlockPrefab placedObject = raycastHit.collider.gameObject.GetComponentInParent<BlockPrefab>();
-                        for (int x = 0; x < width; x++)
+                        for (int z = 0; z < height; z++)
                         {
-                            for (int z = 0; z < height; z++)
-                            {
-                                grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
-                                placedObject.ChangeColorBack();
-                                placedObject.ChangeMaterialBack();
-                                UIManager.Instance.HidePanels();
-                            }
+                            grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
+                            placedObject.ChangeColorBack();
+                            placedObject.ChangeMaterialBack();
+                            UIManager.Instance.HidePanels();
                         }
-                        placedObject.IsThisBlockWasSelected = true;
-                        placedObject.ChangeSelectedMaterial();
-                        UIManager.Instance.ShowPanels();
-                        UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
-                        UIManager.Instance.LocalSetupUIIcons();
                     }
+                    placedObject.IsThisBlockWasSelected = true;
+                    placedObject.ChangeSelectedMaterial();
+                    UIManager.Instance.ShowPanels();
+                    UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
+                    UIManager.Instance.LocalSetupUIIcons();
                 }
             }
+        }
 
-        
+
 
 
     }
