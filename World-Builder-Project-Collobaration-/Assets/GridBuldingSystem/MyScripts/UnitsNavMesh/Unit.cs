@@ -47,11 +47,14 @@ public class Unit : MonoBehaviour
         if (target == null) // it means the unit was just created
         {
             localOrder.Add(startPoint);
+            currentPoint = startPoint;
             target = startPoint;
         }
         else
         {
+            currentPoint = target;
             localOrder.Add(currentPoint);
+            Debug.Log("currentPoint was updated");
         }
         List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
         reversedList.Reverse();
@@ -74,20 +77,31 @@ public class Unit : MonoBehaviour
             if (elapsed > 1.0f)
             {
                 elapsed -= 1.0f;
-                if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
+                Debug.Log("target.transform.position " + target.transform.position);
+                agent.SetDestination(target.transform.position);
+                if (Vector3.Distance(transform.position, target.transform.position * 0.5f) < 10f)
                 {
-                    agent.SetDestination(target.transform.position);
+                    GoToWayPoint();
+                    Debug.Log("destination is approached");
                 }
+                //if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
+                //{
+                //    agent.SetDestination(target.transform.position);
+                //}
                 else
                 {
-                    IterateWaypointIndex(); // to continue the loop at this point
-                    //GoToWayPoint();
+                    //IterateWaypointIndex(); // to continue the loop at this point
+                    GoToWayPoint();
                     Debug.Log("Unable to approach destination"); 
                 }
             }
             for (int i = 0; i < path.corners.Length - 1; i++)
                 Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
+
+
         }
+
+
 
 
     }

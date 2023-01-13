@@ -137,7 +137,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
                 OnObjectPlaced?.Invoke(placedObjectId);
                 OnAddedWaypoint?.Invoke();
-                Debug.Log("Waypoints were added");
+                Debug.Log("Waypoints were added, transform ");
                 BuildingManager.Instance.DeselectObjectType();
             }
 

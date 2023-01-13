@@ -36,11 +36,9 @@ public class UnitsSpawner : MonoBehaviour
 
     void SpawnUnits(int placedObjId)
     {
-        //triangulation = NavMesh.CalculateTriangulation();
         NavMeshHit hit;
         for (int i = 0; i < numberOfUnits; i++)
         {
-            // int vertexIndex = UnityEngine.Random.Range(0, triangulation.vertices.Length);
             float randomPosX = Random.Range(transform.position.x, transform.position.x + 1.5f);
             float randomPosZ = Random.Range(transform.position.z, transform.position.z + 1.5f);
             //int vertexIndex = UnityEngine.Random.Range(transform.position, );
