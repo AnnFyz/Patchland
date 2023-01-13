@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour
     private NavMeshPath path;
     private float elapsed = 0.0f;
     public int placedObjTypeId;
+    int waypointIndex = 0;
+
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -42,18 +44,19 @@ public class Unit : MonoBehaviour
     {
         Debug.Log("Order was updated");
         localOrder.Clear();
-        if(target == null) // it means the unit was just created
+        if (target == null) // it means the unit was just created
         {
             localOrder.Add(startPoint);
             target = startPoint;
         }
         else
         {
-            localOrder.Add(currentPoint); 
+            localOrder.Add(currentPoint);
         }
         List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
         reversedList.Reverse();
         localOrder.AddRange(reversedList);
+        waypointIndex = 0; // to reset the path and start from zero point again
         foreach (var item in localOrder)
         {
             Debug.Log("Waypoints " + item);
@@ -64,32 +67,38 @@ public class Unit : MonoBehaviour
     {
         // Update the way to the goal every second.
         elapsed += Time.deltaTime;
-        //target = GetUpdatedDestination();
-            if (target != null)
+        IterateWaypointIndex();
+        target = localOrder[waypointIndex];
+        if (target != null)
+        {
+            if (elapsed > 1.0f)
             {
-                if (elapsed > 1.0f)
+                elapsed -= 1.0f;
+                if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
                 {
-                    elapsed -= 1.0f;
-                    if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
-                    {
-                        agent.SetDestination(target.transform.position);
-                    }
-                    else
-                    {
-                        Debug.Log("Unable to approach destination"); // to continue the loop at this point
-                    }
+                    agent.SetDestination(target.transform.position);
                 }
-                for (int i = 0; i < path.corners.Length - 1; i++)
-                    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
+                else
+                {
+                    IterateWaypointIndex(); // to continue the loop at this point
+                    //GoToWayPoint();
+                    Debug.Log("Unable to approach destination"); 
+                }
             }
-       
-       
-    }
+            for (int i = 0; i < path.corners.Length - 1; i++)
+                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
+        }
 
-    //Transform GetUpdatedDestination()
-    //{ 
-    //   target = 
-    //}
+
+    }
+    void IterateWaypointIndex()
+    {
+        waypointIndex++;
+        if(waypointIndex == localOrder.Count)
+        {
+            waypointIndex = 0;
+        }
+    }
     public void OnSelected()
     {
         selectedFigur.SetActive(true);
