@@ -16,7 +16,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     BlockPrefab blockPrefab;
     public Vector3 origin;
     public event Action<int> OnObjectPlaced;
-    public static event Action OnAddedWaypoint;
+    public static event Action OnChangedWaypoints;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
     private void Awake()
@@ -25,7 +25,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         blockPrefab = GetComponent<BlockPrefab>();
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnHeightChanged += UpdateGrid;
-        blockPrefab.OnHeightChanged += DeleteOldObjects;
+        blockPrefab.OnHeightChanged += DeleteOldObjectsAndWaypoints;
     }
 
     public void UpdateGrid(int newHeight)
@@ -34,7 +34,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
     }
 
-    public void DeleteOldObjects(int newHeight)
+    public void DeleteOldObjectsAndWaypoints(int newHeight)
     {
         for (int x = 0; x < gridWidth; x++)
         {
@@ -42,11 +42,20 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 if (oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
                 {
+                    int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
+                    if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
+                    {
+                        UnitsManager.Instance.waypoints[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
+                        Debug.Log("Waypoint was removed " + oldGrid.GetGridObject(x, z).GetPlacedObject());
+                        OnChangedWaypoints?.Invoke();
+                    }
                     oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
                     grid.GetGridObject(x, z).ClearPlacedObject();
+        
                 }
             }
         }
+
     }
     public class MyGridObject
     {
@@ -136,7 +145,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                 int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
                 OnObjectPlaced?.Invoke(placedObjectId);
-                OnAddedWaypoint?.Invoke();
+                OnChangedWaypoints?.Invoke();
                 Debug.Log("Waypoints were added, transform ");
                 BuildingManager.Instance.DeselectObjectType();
             }
@@ -221,7 +230,6 @@ public class MyGridBuildingSystem : MonoBehaviour
         else
         {
             return Vector3.zero;
-
         }
     }
 }

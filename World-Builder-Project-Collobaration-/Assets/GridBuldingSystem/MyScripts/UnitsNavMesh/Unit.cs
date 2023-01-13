@@ -90,7 +90,7 @@ public class Unit : MonoBehaviour
                 //}
                 else
                 {
-                    //IterateWaypointIndex(); // to continue the loop at this point
+         
                     GoToWayPoint();
                     Debug.Log("Unable to approach destination"); 
                 }

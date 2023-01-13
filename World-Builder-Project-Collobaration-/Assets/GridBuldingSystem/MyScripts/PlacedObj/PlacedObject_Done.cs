@@ -15,7 +15,7 @@ public class PlacedObject_Done : MonoBehaviour {
 
 
 
-    private PlacedObjectTypeSO placedObjectTypeSO;
+    public PlacedObjectTypeSO placedObjectTypeSO;
     private Vector2Int origin;
     private PlacedObjectTypeSO.Dir dir;
 
