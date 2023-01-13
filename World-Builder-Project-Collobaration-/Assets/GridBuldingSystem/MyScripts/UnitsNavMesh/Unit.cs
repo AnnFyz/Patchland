@@ -77,7 +77,6 @@ public class Unit : MonoBehaviour
             if (elapsed > 1.0f)
             {
                 elapsed -= 1.0f;
-                Debug.Log("target.transform.position " + target.transform.position);
                 agent.SetDestination(target.transform.position);
                 if (Vector3.Distance(transform.position, target.transform.position * 0.5f) < 10f)
                 {
