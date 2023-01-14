@@ -7,13 +7,14 @@ public class LightAtomaticRotation : MonoBehaviour
     [SerializeField][Range(0f, 5f)] float lerpTime;
     [SerializeField] Vector3[] myAngles;
 
-    int angleIndex;
+    [SerializeField]  int angleIndex;
     int len;
 
     float t = 0f;
     void Start()
     {
         len = myAngles.Length;
+        angleIndex = 0;
     }
 
     // Update is called once per frame
@@ -24,7 +25,12 @@ public class LightAtomaticRotation : MonoBehaviour
         if( t > .9f)
         {
             t = 0f;
-            angleIndex = (Random.Range(0, len - 1));
+            angleIndex++;
+            //angleIndex = (Random.Range(0, len - 1));
+        }
+        if(angleIndex >= myAngles.Length)
+        {
+            angleIndex = 0;
         }
     }
 }
