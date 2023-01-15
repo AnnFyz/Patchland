@@ -3653,10 +3653,10 @@ MonoBehaviour:
   selectedUnits: []
   unitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
   unitsPrefabs:
   - {fileID: 2675644380505310733, guid: 660428be2dc14244db2002b148112250, type: 3}
   - {fileID: 2675644380505310733, guid: 6546d8169f246174d84a7cbb08ea08ee, type: 3}
