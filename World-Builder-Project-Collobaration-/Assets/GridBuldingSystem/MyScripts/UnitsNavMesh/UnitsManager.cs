@@ -11,7 +11,7 @@ public class UnitsManager : MonoBehaviour
     public LayerMask unitMask;
     public LayerMask groundMask;
     public List<List<Transform>> waypoints = new List<List<Transform>>(); // to make them for each type of building and unit
-    public Action TimeToGo;
+    public Action TimeToMoveAutomatically;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     public int numberOfPoints;
     public event Action OnChangedGlobalOrder;
@@ -35,12 +35,14 @@ public class UnitsManager : MonoBehaviour
     {
         if (waypoints != null)
         {
-            if (waypoints.Count >= 2)
-            {
-                TimeToGo?.Invoke();
-            }
+            TimeToMoveAutomatically?.Invoke();
+            Debug.Log("TimeToMoveAutomatically");
         }
 
+        ToControlUnitsManually();
+    }
+    void ToControlUnitsManually()
+    {
         if (Input.GetMouseButtonUp(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))
@@ -54,8 +56,8 @@ public class UnitsManager : MonoBehaviour
                     {
                         selectedUnits.Add(unit);
                         unit.OnSelected();
+                        unit.currentMovemenetState = UnitsMovementState.ControlledFromPlayer;
                     }
-
                 }
             }
 
@@ -65,6 +67,7 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                         unit.OnDeselected();
+                        unit.currentMovemenetState = UnitsMovementState.Autopilot;
                 }
 
                 selectedUnits.Clear();
@@ -83,7 +86,6 @@ public class UnitsManager : MonoBehaviour
             }
         }
     }
-
     public List<Transform> GetListOfUnits()
     {
         return unitsPrefabs;

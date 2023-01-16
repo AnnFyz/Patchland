@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placedObjectTypeSO: {fileID: 0}
 --- !u!114 &8000281925568123895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e2e404699e3571245a3a11f7f6958517, type: 2}
+    - target: {fileID: 4517830897256324163, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517830897256324163, guid: 0614bed7ddfb35642ba19ff02d90e02b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4517830897256324164, guid: 0614bed7ddfb35642ba19ff02d90e02b,
         type: 3}
       propertyPath: m_Layer

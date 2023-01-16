@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-
+using System;
+public enum UnitsMovementState
+{
+    Autopilot,
+    ControlledFromPlayer
+}
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
@@ -19,7 +23,8 @@ public class Unit : MonoBehaviour
     private float elapsed = 0.0f;
     public int placedObjTypeId;
     int waypointIndex = 0;
-
+    public UnitsMovementState currentMovemenetState;
+    [SerializeField] GameObject targetPoint; 
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -27,18 +32,23 @@ public class Unit : MonoBehaviour
     }
 
 
-
     void Start()
     {
         OnDeselected();
+        currentMovemenetState = UnitsMovementState.Autopilot;
         path = new NavMeshPath();
         elapsed = 0.0f;
     }
     public virtual void OnEnable()
     {
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
-        UnitsManager.Instance.TimeToGo += GoToWayPoint;
+        UnitsManager.Instance.TimeToMoveAutomatically += MoveAutomaticallyToWayPoint;
         SetupAgentFromConfiguration();
+    }
+
+    private void Update()
+    {
+        targetPoint.transform.position = target.transform.position;
     }
     public void UpdateListOfWaypoints()
     {
@@ -66,48 +76,47 @@ public class Unit : MonoBehaviour
         }
 
     }
-    void GoToWayPoint()
+    void MoveAutomaticallyToWayPoint()
     {
-        // Update the way to the goal every second.
-        elapsed += Time.deltaTime;
-        IterateWaypointIndex();
-        target = localOrder[waypointIndex];
-        if (target != null)
+        if (currentMovemenetState == UnitsMovementState.Autopilot)
         {
-            if (elapsed > 1.0f)
+            // Update the way to the goal every second.
+            elapsed += Time.deltaTime;
+            IterateWaypointIndex();
+            target = localOrder[waypointIndex];
+            if (target != null)
             {
-                elapsed -= 1.0f;
-                agent.SetDestination(target.transform.position);
-                if (Vector3.Distance(transform.position, target.transform.position * 0.5f) < 10f)
+                if (elapsed > 1.0f)
                 {
-                    GoToWayPoint();
-                    Debug.Log("destination is approached");
-                }
-                //if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
-                //{
-                //    agent.SetDestination(target.transform.position);
-                //}
-                else
-                {
-         
-                    GoToWayPoint();
-                    Debug.Log("Unable to approach destination"); 
-                }
-            }
-            for (int i = 0; i < path.corners.Length - 1; i++)
-                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
+                    elapsed -= 1.0f;
+                    agent.SetDestination(target.transform.position);
+                    if (Vector3.Distance(transform.position, target.transform.position) < 10f)
+                    {
+                        IterateWaypointIndex();
+                        Debug.Log("destination is approached");
+                    }
+                    //if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
+                    //{
+                    //    agent.SetDestination(target.transform.position);
+                    //}
+                    else
+                    {
 
+                        IterateWaypointIndex();
+                        Debug.Log("Keeps moving towards the waypoint");
+                    }
+                }
+                for (int i = 0; i < path.corners.Length - 1; i++)
+                    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
+            }
 
         }
-
-
-
 
     }
     void IterateWaypointIndex()
     {
         waypointIndex++;
-        if(waypointIndex == localOrder.Count)
+        if (waypointIndex == localOrder.Count)
         {
             waypointIndex = 0;
         }
@@ -138,5 +147,44 @@ public class Unit : MonoBehaviour
         //movement.radius = unitScriptableObjects.triggerRadius;
         //startHealth = unitScriptableObjects.health;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
+        {
+            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
+            {
+                GetComponentInChildren<UnitsHealth>().FillHealth(50);
+                GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
+        {
+            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
+            {
+                Debug.Log("COROUTINE");
+                StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+            }
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
+        {
+            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
+            {
+                StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+                GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+            }
+        }
+    }
+
 
 }
