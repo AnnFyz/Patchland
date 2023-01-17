@@ -33,12 +33,6 @@ public class UnitsManager : MonoBehaviour
     }
     void Update()
     {
-        if (waypoints != null)
-        {
-            TimeToMoveAutomatically?.Invoke();
-            Debug.Log("TimeToMoveAutomatically");
-        }
-
         ToControlUnitsManually();
     }
     void ToControlUnitsManually()

@@ -9,6 +9,12 @@ public enum UnitsMovementState
     ControlledFromPlayer
 }
 
+public enum UnitsState // to add weight
+{
+    Alive,
+    Dead,
+    Zombi
+}
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
@@ -24,7 +30,9 @@ public class Unit : MonoBehaviour
     public int placedObjTypeId;
     int waypointIndex = 0;
     public UnitsMovementState currentMovemenetState;
-    [SerializeField] GameObject targetPoint; 
+    public UnitsState currentUnitsState;
+    public GameObject Pointer;
+    public bool isWaypointApproached = false;
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -36,23 +44,25 @@ public class Unit : MonoBehaviour
     {
         OnDeselected();
         currentMovemenetState = UnitsMovementState.Autopilot;
+        currentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-    }
-    public virtual void OnEnable()
-    {
-        UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
-        UnitsManager.Instance.TimeToMoveAutomatically += MoveAutomaticallyToWayPoint;
-        SetupAgentFromConfiguration();
+        Pointer = GameObject.Find("Pointer");
+        MoveAutomaticallyToWayPoint();
     }
 
-    private void Update()
+    public virtual void OnEnable()
     {
-        targetPoint.transform.position = target.transform.position;
+        SetupAgentFromConfiguration();
+        UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;    
+    }
+    private void FixedUpdate()
+    {
+        Pointer.transform.position = target.position;
+        MoveAutomaticallyToWayPoint();
     }
     public void UpdateListOfWaypoints()
     {
-        Debug.Log("Order was updated");
         localOrder.Clear();
         if (target == null) // it means the unit was just created
         {
@@ -64,18 +74,13 @@ public class Unit : MonoBehaviour
         {
             currentPoint = target;
             localOrder.Add(currentPoint);
-            Debug.Log("currentPoint was updated");
         }
         List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
         reversedList.Reverse();
         localOrder.AddRange(reversedList);
         waypointIndex = 0; // to reset the path and start from zero point again
-        foreach (var item in localOrder)
-        {
-            Debug.Log("Waypoints " + item);
-        }
-
     }
+
     void MoveAutomaticallyToWayPoint()
     {
         if (currentMovemenetState == UnitsMovementState.Autopilot)
@@ -86,28 +91,19 @@ public class Unit : MonoBehaviour
             target = localOrder[waypointIndex];
             if (target != null)
             {
-                if (elapsed > 1.0f)
+                if (elapsed > 2.0f)
                 {
-                    elapsed -= 1.0f;
+                    elapsed -= 2.0f;
                     agent.SetDestination(target.transform.position);
-                    if (Vector3.Distance(transform.position, target.transform.position) < 10f)
+                    if (Vector3.Distance(transform.position, target.transform.position) < 1f)
                     {
-                        IterateWaypointIndex();
-                        Debug.Log("destination is approached");
+                        MoveAutomaticallyToWayPoint();
                     }
-                    //if (NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path))
-                    //{
-                    //    agent.SetDestination(target.transform.position);
-                    //}
                     else
                     {
-
                         IterateWaypointIndex();
-                        Debug.Log("Keeps moving towards the waypoint");
                     }
                 }
-                for (int i = 0; i < path.corners.Length - 1; i++)
-                    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
             }
 
         }
@@ -157,6 +153,8 @@ public class Unit : MonoBehaviour
             {
                 GetComponentInChildren<UnitsHealth>().FillHealth(50);
                 GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+                //if health.amout = full
+                // else stay until health.amout = full
             }
         }
     }
@@ -167,7 +165,6 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                Debug.Log("COROUTINE");
                 StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
             }
         }

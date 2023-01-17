@@ -34,6 +34,10 @@ public class UnitsHealth : MonoBehaviour
         curretValue -= value;
         curretValue = Mathf.Clamp(curretValue, 0, maxValue);
         levelBar.fillAmount = curretValue / maxValue;
+        if(curretValue <= 0)
+        {
+            GetComponentInParent<Unit>().currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+        }
     }
 
     public void FillHealth(float value)
