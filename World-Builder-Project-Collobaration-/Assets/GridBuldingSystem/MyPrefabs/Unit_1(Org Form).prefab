@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 1289161497042541120}
   - component: {fileID: -629676016913631631}
   - component: {fileID: 5451358411182073546}
+  - component: {fileID: -516034753906181574}
   m_Layer: 0
   m_Name: Unit_1(Org Form)
   m_TagString: Untagged
@@ -231,6 +232,9 @@ MonoBehaviour:
   currentPoint: {fileID: 0}
   placedObjTypeId: 0
   currentMovemenetState: 0
+  currentUnitsState: 0
+  Pointer: {fileID: 0}
+  isWaypointApproached: 0
 --- !u!114 &-629676016913631631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +297,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-516034753906181574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675644380505310728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1 &8929424162315997419
 GameObject:
   m_ObjectHideFlags: 0

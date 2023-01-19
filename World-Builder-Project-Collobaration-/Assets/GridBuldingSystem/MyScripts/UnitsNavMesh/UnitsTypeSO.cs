@@ -8,7 +8,7 @@ public class UnitsTypeSO : ScriptableObject
 {
     //Unit stats
     public int health = 100;
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 100.0f)]
     public float chanceToBecomeZombi;
     public Sprite UIHealthSp;
     //NavMeshAgent Configs

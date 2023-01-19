@@ -12,6 +12,8 @@ public enum UnitsMovementState
 public enum UnitsState // to add weight
 {
     Alive,
+    Hungry,
+    Attacked,
     Dead,
     Zombi
 }
@@ -39,7 +41,6 @@ public class Unit : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-
     void Start()
     {
         OnDeselected();
@@ -51,15 +52,35 @@ public class Unit : MonoBehaviour
         MoveAutomaticallyToWayPoint();
     }
 
-    public virtual void OnEnable()
+    public void OnEnable()
     {
         SetupAgentFromConfiguration();
-        UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;    
+        UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
+        GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChangeToBecomeZombi;
     }
+    private void Update()
+    {
+
+    }
+
     private void FixedUpdate()
     {
         Pointer.transform.position = target.position;
         MoveAutomaticallyToWayPoint();
+    }
+
+    void UseChangeToBecomeZombi()
+    {
+        int chance = Mathf.RoundToInt(100 / unitScriptableObjects.chanceToBecomeZombi);
+        int randomValue = UnityEngine.Random.Range(0, chance);
+        if (randomValue == 0)
+        {
+            currentUnitsState = UnitsState.Zombi;
+            Zombi zombi = GetComponent<Zombi>();
+            zombi.currentState = ZombiState.AttackBlock;
+            zombi.HandleZombiTransformation();
+        }
+
     }
     public void UpdateListOfWaypoints()
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UnitsHealth : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class UnitsHealth : MonoBehaviour
     [SerializeField] float curretValue;
     const float maxValue = 100f;
     public bool isFoodAround = true;
+    public Action OnUnitDeath;
+    Unit unit;
     private void Awake()
     {
         levelBar = GetComponent<Image>();
+        unit = GetComponentInParent<Unit>();
     }
     private void Start()
     {
@@ -21,13 +25,12 @@ public class UnitsHealth : MonoBehaviour
         curretValue = startValue;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!isFoodAround)
+        if (!isFoodAround && curretValue > 0)
         {
-            LoseHealth(0.01f);
-        }
-       
+            LoseHealth(0.5f);
+        }       
     }
     private void LoseHealth(float value)
     {
@@ -36,7 +39,8 @@ public class UnitsHealth : MonoBehaviour
         levelBar.fillAmount = curretValue / maxValue;
         if(curretValue <= 0)
         {
-            GetComponentInParent<Unit>().currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+            unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+            OnUnitDeath?.Invoke();
         }
     }
 
