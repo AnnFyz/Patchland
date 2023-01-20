@@ -82,6 +82,7 @@ public class Unit : MonoBehaviour
             Zombi zombi = GetComponent<Zombi>();
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
+            zombi.FillTheListOfWaypints();
             zombi.HandleZombiMovement();
         }
 
@@ -172,10 +173,14 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                GetComponentInChildren<UnitsHealth>().FillHealth(50);
-                GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                //if health.amout = full
-                // else stay until health.amout = full
+                if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+                {
+                    GetComponentInChildren<UnitsHealth>().FillHealth(50);
+                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+                    //if health.amout = full
+                    // else stay until health.amout = full
+                }
+
             }
         }
     }

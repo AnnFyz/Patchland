@@ -40,7 +40,10 @@ public class UnitsHealth : MonoBehaviour
         if (curretValue <= 0)
         {
             unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-            OnUnitDeath?.Invoke();
+            if(unit.currentUnitsState != UnitsState.Zombi)
+            {
+                OnUnitDeath?.Invoke();
+            }
         }
     }
 

@@ -309,12 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: 0
-  speed: 10
   currentState: 0
   occupiedBlock: {fileID: 0}
-  blockCenter: {x: 0, y: 0, z: 0}
-  step: 5
+  step: 4
+  target: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!1 &8929424162315997419
 GameObject:
   m_ObjectHideFlags: 0
