@@ -16,7 +16,7 @@ public class BlockPrefab : MonoBehaviour
     public Material defaultMaterial;
     private void Start()
     {
-        startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y)/100;
+        startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y);
         renderer = GetComponentInChildren<Renderer>();
         defaultColor = renderer.material.color;
     }
