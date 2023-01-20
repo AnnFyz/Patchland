@@ -52,7 +52,6 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.FloorToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-            Debug.Log("transform.localRotation.z " + transform.localRotation.z);
         }
 
         else

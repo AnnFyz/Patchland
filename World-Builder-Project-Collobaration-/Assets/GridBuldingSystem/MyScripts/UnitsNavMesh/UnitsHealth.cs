@@ -11,13 +11,15 @@ public class UnitsHealth : MonoBehaviour
     [SerializeField] float startValue = 100f;
     [SerializeField] float curretValue;
     const float maxValue = 100f;
-    public bool isFoodAround = true;
+    public bool isFoodAround = false;
     public Action OnUnitDeath;
     Unit unit;
+    float damageToUnit;
     private void Awake()
     {
         levelBar = GetComponent<Image>();
         unit = GetComponentInParent<Unit>();
+        damageToUnit = unit.unitScriptableObjects.damageToUnitWithoutFood;
     }
     private void Start()
     {
@@ -29,21 +31,26 @@ public class UnitsHealth : MonoBehaviour
     {
         if (!isFoodAround && curretValue > 0)
         {
-            LoseHealth(0.5f);
+            LoseHealth();
         }       
     }
-    private void LoseHealth(float value)
+    private void LoseHealth()
     {
-        curretValue -= value;
-        curretValue = Mathf.Clamp(curretValue, 0, maxValue);
-        levelBar.fillAmount = curretValue / maxValue;
-        if(curretValue <= 0)
+        StartCoroutine(SubstractHealthGradually());
+        if (curretValue <= 0)
         {
             unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
             OnUnitDeath?.Invoke();
         }
     }
 
+    IEnumerator SubstractHealthGradually()
+    {
+        curretValue -= damageToUnit;
+        curretValue = Mathf.Clamp(curretValue, 0, maxValue);
+        levelBar.fillAmount = curretValue / maxValue;
+        yield return new WaitForSeconds(1f);
+    }
     public void FillHealth(float value)
     {
         curretValue += value;

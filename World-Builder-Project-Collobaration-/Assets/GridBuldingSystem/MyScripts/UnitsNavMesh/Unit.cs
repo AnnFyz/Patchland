@@ -20,7 +20,7 @@ public enum UnitsState // to add weight
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
-    [SerializeField] UnitsTypeSO unitScriptableObjects;
+    public UnitsTypeSO unitScriptableObjects;
     public GameObject selectedFigur;
     public NavMeshAgent agent;
     public Transform target;
@@ -66,7 +66,10 @@ public class Unit : MonoBehaviour
     private void FixedUpdate()
     {
         Pointer.transform.position = target.position;
-        MoveAutomaticallyToWayPoint();
+        if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+        {
+            MoveAutomaticallyToWayPoint();
+        }
     }
 
     void UseChangeToBecomeZombi()
@@ -79,6 +82,7 @@ public class Unit : MonoBehaviour
             Zombi zombi = GetComponent<Zombi>();
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
+            zombi.HandleZombiMovement();
         }
 
     }
@@ -118,7 +122,7 @@ public class Unit : MonoBehaviour
                     agent.SetDestination(target.transform.position);
                     if (Vector3.Distance(transform.position, target.transform.position) < 1f)
                     {
-                        MoveAutomaticallyToWayPoint();
+                      MoveAutomaticallyToWayPoint();
                     }
                     else
                     {
@@ -159,10 +163,6 @@ public class Unit : MonoBehaviour
         agent.radius = unitScriptableObjects.radius;
         agent.speed = unitScriptableObjects.speed;
         agent.stoppingDistance = unitScriptableObjects.stoppingDistance;
-
-        //movement.updateRate = unitScriptableObjects.AIUpdateInterval;
-        //movement.radius = unitScriptableObjects.triggerRadius;
-        //startHealth = unitScriptableObjects.health;
     }
 
     private void OnTriggerEnter(Collider other)

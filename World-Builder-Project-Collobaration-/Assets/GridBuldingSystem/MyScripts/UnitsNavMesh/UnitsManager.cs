@@ -48,9 +48,12 @@ public class UnitsManager : MonoBehaviour
 
                     if (unit != null)
                     {
-                        selectedUnits.Add(unit);
-                        unit.OnSelected();
-                        unit.currentMovemenetState = UnitsMovementState.ControlledFromPlayer;
+                        if(unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi )
+                        {
+                            selectedUnits.Add(unit);
+                            unit.OnSelected();
+                            unit.currentMovemenetState = UnitsMovementState.ControlledFromPlayer;
+                        }
                     }
                 }
             }
@@ -75,7 +78,14 @@ public class UnitsManager : MonoBehaviour
                 foreach (Unit unit in selectedUnits)
                 {
                     if (unit != null)
-                        unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
+                    {
+                        if(unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
+                        {
+                            unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
+                        }
+                        
+                    }
+                      
                 }
             }
         }

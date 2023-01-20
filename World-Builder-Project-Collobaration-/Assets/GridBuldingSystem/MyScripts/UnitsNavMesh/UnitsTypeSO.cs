@@ -6,12 +6,12 @@ using UnityEngine.AI;
 [CreateAssetMenu()] //fileName = "Unit Configuration", menuName = "ScriptableObject/Unit Configuration")]
 public class UnitsTypeSO : ScriptableObject
 {
-    //Unit stats
-    public int health = 100;
+    [Header("Health Settings")]
+    public float damageToUnitWithoutFood = 1f;
     [Range(0.0f, 100.0f)]
     public float chanceToBecomeZombi;
-    public Sprite UIHealthSp;
-    //NavMeshAgent Configs
+    public Sprite UIHealthSp; // currently not in use
+    [Header("NavMeshAgent Configs")]
     public float AIUpdateInterval = 0.1f;
     public float acceleration = 18f;
     public float angularSpeed = 120f;
@@ -23,6 +23,6 @@ public class UnitsTypeSO : ScriptableObject
     public float radius = 1.05f;
     public float speed = 13f;
     public float stoppingDistance = 0.5f;
-    public float triggerRadius = 0.15f;
-   
+    public float triggerRadius = 0.15f;  // currently not in use
+
 }

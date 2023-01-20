@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -1446097718899038186}
   - component: {fileID: 6780022455924304188}
   - component: {fileID: 8456145508500795584}
+  - component: {fileID: 8877595191525507116}
   m_Layer: 6
   m_Name: BlockPrefab
   m_TagString: Untagged
@@ -119,6 +120,18 @@ MonoBehaviour:
   unitPrefab: {fileID: 2675644380505310728, guid: 660428be2dc14244db2002b148112250,
     type: 3}
   numberOfUnits: 1
+--- !u!114 &8877595191525507116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e18d5cbe70337e47b2c894a3802b463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8452613873916484050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +208,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bfc7e6340e834264793b3a093c9fb7ed,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bfc7e6340e834264793b3a093c9fb7ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: bfc7e6340e834264793b3a093c9fb7ed,
         type: 3}
