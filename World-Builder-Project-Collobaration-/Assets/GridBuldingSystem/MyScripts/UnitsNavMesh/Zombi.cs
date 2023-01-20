@@ -35,7 +35,8 @@ public class Zombi : MonoBehaviour
             GameObject generatedWaypoint = new GameObject();
             generatedWaypoint.transform.RotateAround(occupiedBlock.gameObject.transform.position,Vector3.up ,angleStep * i);
             Vector3 dir = (generatedWaypoint.transform.position - occupiedBlock.gameObject.transform.position).normalized;
-            //Debug.DrawLine(occupiedBlock.gameObject.transform.position, occupiedBlock.gameObject.transform.position + dir * 100, Color.red, Mathf.Infinity);
+            generatedWaypoint.transform.position = occupiedBlock.gameObject.transform.position + dir * 5;
+            //Debug.DrawLine(occupiedBlock.gameObject.transform.position, occupiedBlock.gameObject.transform.position + dir * 10, Color.red, Mathf.Infinity);
         }
     }
 
