@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Pointer.transform.position = target.position;
+        //Pointer.transform.position = target.position;
         if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
             MoveAutomaticallyToWayPoint();
@@ -82,58 +82,63 @@ public class Unit : MonoBehaviour
             Zombi zombi = GetComponent<Zombi>();
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
-            zombi.FillTheListOfWaypints();
             zombi.HandleZombiMovement();
         }
 
     }
     public void UpdateListOfWaypoints()
     {
-        localOrder.Clear();
-        if (target == null) // it means the unit was just created
+        if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
-            localOrder.Add(startPoint);
-            currentPoint = startPoint;
-            target = startPoint;
+            localOrder.Clear();
+            if (target == null) // it means the unit was just created
+            {
+                localOrder.Add(startPoint);
+                currentPoint = startPoint;
+                target = startPoint;
+            }
+            else
+            {
+                currentPoint = target;
+                localOrder.Add(currentPoint);
+            }
+            List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
+            reversedList.Reverse();
+            localOrder.AddRange(reversedList);
+            waypointIndex = 0; // to reset the path and start from zero point again
         }
-        else
-        {
-            currentPoint = target;
-            localOrder.Add(currentPoint);
-        }
-        List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
-        reversedList.Reverse();
-        localOrder.AddRange(reversedList);
-        waypointIndex = 0; // to reset the path and start from zero point again
+   
     }
 
     void MoveAutomaticallyToWayPoint()
     {
-        if (currentMovemenetState == UnitsMovementState.Autopilot)
+        if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
-            // Update the way to the goal every second.
-            elapsed += Time.deltaTime;
-            IterateWaypointIndex();
-            target = localOrder[waypointIndex];
-            if (target != null)
+            if (currentMovemenetState == UnitsMovementState.Autopilot)
             {
-                if (elapsed > 2.0f)
+                // Update the way to the goal every second.
+                elapsed += Time.deltaTime;
+                IterateWaypointIndex();
+                target = localOrder[waypointIndex];
+                if (target != null)
                 {
-                    elapsed -= 2.0f;
-                    agent.SetDestination(target.transform.position);
-                    if (Vector3.Distance(transform.position, target.transform.position) < 1f)
+                    if (elapsed > 2.0f)
                     {
-                      MoveAutomaticallyToWayPoint();
-                    }
-                    else
-                    {
-                        IterateWaypointIndex();
+                        elapsed -= 2.0f;
+                        agent.SetDestination(target.transform.position);
+                        if (Vector3.Distance(transform.position, target.transform.position) < 1f)
+                        {
+                            MoveAutomaticallyToWayPoint();
+                        }
+                        else
+                        {
+                            IterateWaypointIndex();
+                        }
                     }
                 }
+
             }
-
         }
-
     }
     void IterateWaypointIndex()
     {
@@ -191,7 +196,10 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+                {
+                    StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+                }
             }
         }
     }
