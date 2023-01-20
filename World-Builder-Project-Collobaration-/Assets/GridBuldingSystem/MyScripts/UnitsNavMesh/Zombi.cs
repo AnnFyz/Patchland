@@ -77,10 +77,13 @@ public class Zombi : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<BlockHealth>())
+        if(occupiedBlock == null)
         {
-            occupiedBlock = other.GetComponentInParent<BlockHealth>();
-        }
+            if (other.GetComponentInParent<BlockHealth>())
+            {
+                occupiedBlock = other.GetComponentInParent<BlockHealth>();
+            }
+        }  
     }
 
 }
