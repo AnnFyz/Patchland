@@ -45,6 +45,10 @@ public class UIManager : MonoBehaviour
                     break;
 
                 case LevelState.Desert:
+                    foreach (var icon in icons)
+                    {
+                        icon.SetActive(false);
+                    }
                     icons[0].SetActive(true);
                     break;
 
@@ -86,6 +90,6 @@ public class UIManager : MonoBehaviour
     public void BlockDown(int subtractedV)
     {
        BuildingManager.blockPrefab.ChangeHeight(subtractedV);
-        OnChangedGrid?.Invoke();
+       OnChangedGrid?.Invoke();
     }
 }

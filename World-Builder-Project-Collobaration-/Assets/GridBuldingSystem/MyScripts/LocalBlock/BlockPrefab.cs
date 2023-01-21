@@ -8,7 +8,7 @@ public class BlockPrefab : MonoBehaviour
     public static Vector3 offset = new Vector3(7.5f, -5f, 7.5f);
     private int newHeight;
     private int startScale;
-    public event Action <int> OnHeightChanged;
+    public event Action<int> OnHeightChanged;
     public bool IsThisBlockWasHighlighted = false;
     public bool IsThisBlockWasSelected = false;
     Renderer renderer;
@@ -40,34 +40,91 @@ public class BlockPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void ChangeHeight(int addedHeight) 
+    //public void ChangeHeight(int addedHeight) 
+    //{
+    //    if (addedHeight < 0 && transform.localScale.y == 1)
+    //    {
+    //        float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
+    //        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
+    //        transform.localScale += new Vector3(0, -addedHeight, 0);
+    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
+    //        UIManager.Instance.LocalSetupUIIcons();
+    //        OnHeightChanged?.Invoke(newHeight );
+    //    }
+
+    //    if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z == -1)
+    //    {
+    //        float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
+    //        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, 0);
+    //        transform.localScale += new Vector3(0, 0, 0);
+    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
+    //        UIManager.Instance.LocalSetupUIIcons();
+    //        OnHeightChanged?.Invoke(newHeight);
+    //    }
+
+    //    else
+    //    {
+    //        transform.localScale += new Vector3(0, addedHeight, 0);
+    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
+    //        UIManager.Instance.LocalSetupUIIcons();
+    //        OnHeightChanged?.Invoke(newHeight);
+
+    //    }
+    //}
+
+    public void ChangeHeight(int addedHeight)
     {
-        if (addedHeight < 0 && transform.localScale.y == 1)
+        if (addedHeight < 0 && transform.localScale.y <= 1 && transform.localRotation.z >= 0) // flip from desert to pond 
         {
-            float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
-            transform.localScale += new Vector3(0, -addedHeight, 0);
-            newHeight = Mathf.FloorToInt(transform.localScale.y);
+            newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-        }
-        if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z == -1)
-        {
-            float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
-            transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, 0);
-            transform.localScale += new Vector3(0, 0, 0);
-            newHeight = Mathf.FloorToInt(transform.localScale.y);
-            UIManager.Instance.LocalSetupUIIcons();
-            OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("flip from desert to pond  " + transform.localRotation.z);
+            return;
         }
 
-        else
+        if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z <= -0.1) //flip from pond to desert 
         {
-            transform.localScale += new Vector3(0, addedHeight, 0);
-            newHeight = Mathf.FloorToInt(transform.localScale.y);
+            transform.localRotation = Quaternion.identity;
+            newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-     
+            Debug.Log("flip from pond to desert  " + transform.localRotation.z);
+            return;
+        }
+
+        if (addedHeight > 0 && transform.localScale.y >= 1 && transform.localRotation.z >= 0)  // from desert  to forest
+        {
+            transform.localRotation = Quaternion.identity;
+            transform.localScale += new Vector3(0, addedHeight, 0);
+            newHeight = Mathf.RoundToInt(transform.localScale.y);
+            UIManager.Instance.LocalSetupUIIcons();
+            OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("from desert  to forest " + transform.localRotation.z);
+            return;
+
+        }
+
+        if (addedHeight < 0 && transform.localScale.y > 1)
+        {
+            transform.localRotation = Quaternion.identity;
+            transform.localScale += new Vector3(0, addedHeight, 0);
+            newHeight = Mathf.RoundToInt(transform.localScale.y);
+            UIManager.Instance.LocalSetupUIIcons();
+            OnHeightChanged?.Invoke(newHeight);
+            Debug.Log("from forest or desert to desert or to pond  " + transform.localRotation.z);
+            return;
+        }
+
+        if (addedHeight == 0) //setup at the start
+        {
+            transform.localScale += new Vector3(0, addedHeight, 0);
+            newHeight = Mathf.RoundToInt(transform.localScale.y);
+            UIManager.Instance.LocalSetupUIIcons();
+            OnHeightChanged?.Invoke(newHeight);
+            return;
+
         }
     }
 
@@ -83,13 +140,13 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeHighlightedColorl()
     {
-        if(renderer.material.HasColor("_BaseColor"))
+        if (renderer.material.HasColor("_BaseColor"))
         {
             renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
         }
         else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
-        { 
-           renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
+        {
+            renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
         }
 
     }
@@ -108,7 +165,7 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeMaterialBack()
     {
-        renderer.material = defaultMaterial; 
+        renderer.material = defaultMaterial;
     }
     public void ChangeSelectedMaterial()
     {

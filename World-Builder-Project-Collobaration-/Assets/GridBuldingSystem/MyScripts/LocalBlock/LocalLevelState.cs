@@ -27,9 +27,10 @@ public class LocalLevelState : MonoBehaviour
     {
         return currentLevelState;
     }
+
     public void ChangeLevel(int newHeight)
     {
-        if(newHeight <= 1 && blockPrefab.transform.localRotation.z == -1)
+        if (newHeight <= 1 && blockPrefab.transform.localRotation.z <= -1)
         {
             currentLevelState = LevelState.Pond;
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
@@ -37,9 +38,21 @@ public class LocalLevelState : MonoBehaviour
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
             UIManager.Instance.LocalSetupUIIcons();
+            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
         }
 
-        else if(newHeight <= 5)
+        if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
+        {
+            currentLevelState = LevelState.Desert;
+            renderer.material = BuildingManager.Instance.levelsMaterials[1];
+            blockPrefab.defaultMaterial = renderer.material;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
+            UIManager.Instance.LocalSetupUIIcons();
+            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
+
+        }
+        if (newHeight <= 5 && newHeight > 1)
         {
             currentLevelState = LevelState.Desert;
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
@@ -49,7 +62,7 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        else if (newHeight > 5)
+        if (newHeight > 5)
         {
             currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
@@ -59,4 +72,5 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
     }
+   
 }
