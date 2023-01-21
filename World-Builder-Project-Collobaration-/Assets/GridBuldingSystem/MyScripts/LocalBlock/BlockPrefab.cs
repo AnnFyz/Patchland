@@ -90,7 +90,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-            Debug.Log("flip from pond to desert  " + transform.localRotation.z);
+            //Debug.Log("flip from pond to desert  " + transform.localRotation.z);
             return;
         }
 
@@ -101,7 +101,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-            Debug.Log("from desert  to forest " + transform.localRotation.z);
+            //Debug.Log("from desert  to forest " + transform.localRotation.z);
             return;
 
         }
@@ -113,7 +113,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-            Debug.Log("from forest or desert to desert or to pond  " + transform.localRotation.z);
+            //Debug.Log("from forest or desert to desert or to pond  " + transform.localRotation.z);
             return;
         }
 
