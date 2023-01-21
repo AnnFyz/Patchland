@@ -11,9 +11,16 @@ public class BlockPrefab : MonoBehaviour
     public event Action<int> OnHeightChanged;
     public bool IsThisBlockWasHighlighted = false;
     public bool IsThisBlockWasSelected = false;
-    Renderer renderer;
+    public Renderer renderer;
     public Color defaultColor = new Color();
+    public Color defaultBottomColor = new Color();
+    public float origin;
     public Material defaultMaterial;
+    float minOrigin;
+    float maxOrigin;
+    float duration = 2.0f;
+    float startTime;
+    float t;
     private void Start()
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y);
@@ -25,7 +32,13 @@ public class BlockPrefab : MonoBehaviour
         else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+            defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+            origin = renderer.material.GetFloat(Shader.PropertyToID("Vector1_6e12275293314cb7a52c177f83f8f9aa"));
         }
+        minOrigin = -0.25f;
+        maxOrigin =  0.1f;
+        startTime = Time.deltaTime;
+        t = UnityEngine.Random.Range(3f, 5f);
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {
@@ -34,44 +47,21 @@ public class BlockPrefab : MonoBehaviour
         return placedBlockPrefab;
     }
 
+    private void Update()
+    {
+        ChangeOriginOfGradient();
+    }
 
+    void ChangeOriginOfGradient()
+    {
+        float v = Mathf.PingPong(Time.time, t);
+        origin = Mathf.SmoothStep(minOrigin, maxOrigin, v * 0.5f);
+        renderer.material.SetFloat("Vector1_6e12275293314cb7a52c177f83f8f9aa", origin);
+    }
     public void DestroySelf()
     {
         Destroy(gameObject);
     }
-
-    //public void ChangeHeight(int addedHeight) 
-    //{
-    //    if (addedHeight < 0 && transform.localScale.y == 1)
-    //    {
-    //        float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
-    //        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
-    //        transform.localScale += new Vector3(0, -addedHeight, 0);
-    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnHeightChanged?.Invoke(newHeight );
-    //    }
-
-    //    if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z == -1)
-    //    {
-    //        float zRotation = BuildingManager.blockPrefab.transform.localRotation.z;
-    //        transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, 0);
-    //        transform.localScale += new Vector3(0, 0, 0);
-    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnHeightChanged?.Invoke(newHeight);
-    //    }
-
-    //    else
-    //    {
-    //        transform.localScale += new Vector3(0, addedHeight, 0);
-    //        newHeight = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnHeightChanged?.Invoke(newHeight);
-
-    //    }
-    //}
-
     public void ChangeHeight(int addedHeight)
     {
         if (addedHeight < 0 && transform.localScale.y <= 1 && transform.localRotation.z >= 0) // flip from desert to pond 
@@ -160,6 +150,7 @@ public class BlockPrefab : MonoBehaviour
         else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
+            renderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
         }
     }
 

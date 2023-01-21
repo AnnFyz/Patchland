@@ -83,6 +83,7 @@ public class Unit : MonoBehaviour
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
+            StartCoroutine(zombi.AttackBlock());
         }
 
     }

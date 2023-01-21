@@ -7,6 +7,8 @@ public class BlockHealth : MonoBehaviour
     public Vector3 CenterOfBlock { get; set; }
     [SerializeField] int step = 3;
     public Transform[] generatedWaypoints;
+    public float startHealth = 100f;
+    public float currentHealth;
     private void Awake()
     {
         generatedWaypoints = new Transform[step];
@@ -15,6 +17,7 @@ public class BlockHealth : MonoBehaviour
     private void Start()
     {
         FillTheListOfWaypints();
+        currentHealth = startHealth;
     }
 
     public void FillTheListOfWaypints()
@@ -30,5 +33,11 @@ public class BlockHealth : MonoBehaviour
             generatedWaypoints[i - 1] = generatedWaypoint.transform;
             generatedWaypoint.transform.SetParent(transform);
         }
+    }
+
+    public void Damage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, startHealth);
     }
 }

@@ -36,7 +36,11 @@ public class LocalLevelState : MonoBehaviour
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
             blockPrefab.defaultMaterial = renderer.material;
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            { 
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+            }
             UIManager.Instance.LocalSetupUIIcons();
             //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
         }
@@ -47,7 +51,11 @@ public class LocalLevelState : MonoBehaviour
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+            }
             UIManager.Instance.LocalSetupUIIcons();
             //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
 
@@ -58,7 +66,11 @@ public class LocalLevelState : MonoBehaviour
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+            }
             UIManager.Instance.LocalSetupUIIcons();
         }
 
@@ -68,7 +80,11 @@ public class LocalLevelState : MonoBehaviour
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultMaterial = renderer.material;
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+            }
             UIManager.Instance.LocalSetupUIIcons();
         }
     }
