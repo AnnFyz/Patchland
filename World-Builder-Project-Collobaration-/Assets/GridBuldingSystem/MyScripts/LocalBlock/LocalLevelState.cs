@@ -34,7 +34,8 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Pond;
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
             blockPrefab.defaultMaterial = renderer.material;
-            blockPrefab.defaultColor = renderer.material.color;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
             UIManager.Instance.LocalSetupUIIcons();
         }
 
@@ -43,7 +44,8 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Desert;
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
-            blockPrefab.defaultColor = renderer.material.color;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
             UIManager.Instance.LocalSetupUIIcons();
         }
 
@@ -52,7 +54,8 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultMaterial = renderer.material;
-            blockPrefab.defaultColor = renderer.material.color;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6")) { blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6")); }
             UIManager.Instance.LocalSetupUIIcons();
         }
     }
