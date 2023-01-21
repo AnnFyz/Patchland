@@ -86,6 +86,6 @@ public class UIManager : MonoBehaviour
     public void BlockDown(int subtractedV)
     {
        BuildingManager.blockPrefab.ChangeHeight(subtractedV);
-       OnChangedGrid?.Invoke();
+        OnChangedGrid?.Invoke();
     }
 }

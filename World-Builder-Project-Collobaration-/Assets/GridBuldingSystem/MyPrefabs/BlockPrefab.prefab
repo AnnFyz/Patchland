@@ -147,13 +147,13 @@ GameObject:
   - component: {fileID: 466880387880011305}
   - component: {fileID: 1786613802273418966}
   - component: {fileID: 6409068502265470689}
-  m_Layer: 0
-  m_Name: Cube (1)
+  m_Layer: 6
+  m_Name: reflection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &771608892197240689
 Transform:
   m_ObjectHideFlags: 0
@@ -162,8 +162,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8479984077012579543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.71, z: 0}
-  m_LocalScale: {x: 15, y: 5, z: 15}
+  m_LocalPosition: {x: 0, y: -2.37, z: 0}
+  m_LocalScale: {x: 15, y: 3, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5436688609594192080}
@@ -186,7 +186,7 @@ BoxCollider:
   m_GameObject: {fileID: 8479984077012579543}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -323,7 +323,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3cbd8da85d0b47c458e18ee1a200773b, type: 2}
+      objectReference: {fileID: 2100000, guid: b0467b38803c363408aeebada8622392, type: 2}
     - target: {fileID: 919132149155446097, guid: bfc7e6340e834264793b3a093c9fb7ed,
         type: 3}
       propertyPath: m_Name
@@ -333,6 +333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bfc7e6340e834264793b3a093c9fb7ed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfc7e6340e834264793b3a093c9fb7ed, type: 3}
