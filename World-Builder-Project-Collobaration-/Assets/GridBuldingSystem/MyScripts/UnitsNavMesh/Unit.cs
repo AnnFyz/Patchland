@@ -80,8 +80,18 @@ public class Unit : MonoBehaviour
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
             StartCoroutine(zombi.AttackBlock());
+           
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
+    }
+
+    void DestroyUnit()
+    {
+        Destroy(gameObject);
     }
     public void UpdateListOfWaypoints()
     {

@@ -32,6 +32,7 @@ public class Zombi : MonoBehaviour
     float S_2; float oldS_2;
     float V_2; float oldV_2;
     public bool OLDISDEAD = false;
+    public bool isAttacking = false;
     private void Awake()
     {
         unit = GetComponent<Unit>();
@@ -54,11 +55,15 @@ public class Zombi : MonoBehaviour
         {
             MoveToNextNeighbourAliveBlock();
         }
-        if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead)
+       if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead)
         {
-            currentState = ZombiState.FindAnotherBlock;
-            FindNeighboursBlocks();
-            OLDISDEAD = true;
+            if(occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
+            {
+                currentState = ZombiState.FindAnotherBlock;
+                FindNeighboursBlocks();
+                //StopCoroutine(AttackBlock()); Debug.Log("STOP");
+                OLDISDEAD = true;
+            }
         }
         else
         {
@@ -67,7 +72,7 @@ public class Zombi : MonoBehaviour
     }
     public void HandleZombiMovement()
     {
-        if (currentState == ZombiState.AttackBlock && !occupiedBlockHealth.IsBlockDead)
+        if (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null && !occupiedBlockHealth.IsBlockDead)
         {
             // Update the way to the goal every second.
             elapsed += Time.deltaTime;
@@ -107,24 +112,48 @@ public class Zombi : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (occupiedBlockHealth == null)
-        //{
         if (other.GetComponentInParent<BlockHealth>())
         {
-            occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
-            occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
-            //StartCoroutine(AttackBlock()); Debug.Log("COROUTINE");
-            Color.RGBToHSV(occupiedBlock.defaultColor, out H_1, out S_1, out V_1);
-            Color.RGBToHSV(occupiedBlock.defaultBottomColor, out H_2, out S_2, out V_2);
-            //oldH_1 = H_1;
-            //oldS_1 = S_1;
-            //oldV_1 = V_1;
+            if(occupiedBlockHealth == null) // first assignment
+            {
+                occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
+                occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
+                //StartCoroutine(AttackBlock()); Debug.Log("COROUTINE");
+                Color.RGBToHSV(occupiedBlock.defaultColor, out H_1, out S_1, out V_1);
+                Color.RGBToHSV(occupiedBlock.defaultBottomColor, out H_2, out S_2, out V_2);
+                //oldH_1 = H_1;
+                //oldS_1 = S_1;
+                //oldV_1 = V_1;
 
-            //oldH_2 = H_2;
-            //oldS_2 = S_2;
-            //oldV_2 = V_2;
+                //oldH_2 = H_2;
+                //oldS_2 = S_2;
+                //oldV_2 = V_2;
+            }
+
+            else if (occupiedBlockHealth.currentHealth <= 0)  //reaasign occupied block only if the current one is dead
+            {
+                occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
+                occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
+                //StartCoroutine(AttackBlock()); Debug.Log("COROUTINE");
+                Color.RGBToHSV(occupiedBlock.defaultColor, out H_1, out S_1, out V_1);
+                Color.RGBToHSV(occupiedBlock.defaultBottomColor, out H_2, out S_2, out V_2);
+                //oldH_1 = H_1;
+                //oldS_1 = S_1;
+                //oldV_1 = V_1;
+
+                //oldH_2 = H_2;
+                //oldS_2 = S_2;
+                //oldV_2 = V_2;
+            }
+            else
+            {
+                //StopCoroutine(AttackBlock()); Debug.Log("STOP");
+            }
         }
-        // }
+        else
+        {
+            //StopCoroutine(AttackBlock()); Debug.Log("STOP");
+        }
     }
     //private void OnTriggerExit(Collider other)
     //{
@@ -147,22 +176,20 @@ public class Zombi : MonoBehaviour
     {
         while (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null)
         {
-
-            occupiedBlockHealth.Damage(1f);
-
-            V_1 -= 0.005f;
-            S_1 -= 0.005f;
-            S_2 -= 0.005f;
-            V_2 += 0.005f;
-            V_1 = Mathf.Clamp(V_1, 0.4f, 1f);
-            S_1 = Mathf.Clamp(S_1, 0.01f, 0.75f);
-            S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
-            V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
-            occupiedBlock.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
-            occupiedBlock.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
-            yield return new WaitForSeconds(0.1f);
+            if (occupiedBlockHealth.currentHealth > 0)
+            {
+                Debug.Log("ATTACK");
+                isAttacking = true;
+                occupiedBlockHealth.Damage(1f); // Change color in BlockHealth               
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+                isAttacking = false;
+                break;
+            }
+            //isAttacking = false;
         }
-        yield return new WaitForSeconds(0.1f);
     }
 
     void FindNeighboursBlocks()
@@ -199,20 +226,25 @@ public class Zombi : MonoBehaviour
 
     void MoveToNextNeighbourAliveBlock()
     {
-
-        foreach (var newOccupiedBlock in possibleNextOccupiedBlocks)
+        for (int i = 0; i < possibleNextOccupiedBlocks.Length; i++)
         {
-            if (newOccupiedBlock != null)
+            if (possibleNextOccupiedBlocks[i] != null)
             {
-                Transform newTarget = newOccupiedBlock.GetComponent<BlockHealth>().generatedWaypoints[1];
+                Transform newTarget = possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().generatedWaypoints[1];
+                Transform lastTarget = possibleNextOccupiedBlocks[possibleNextOccupiedBlocks.Length - 1].GetComponent<BlockHealth>().generatedWaypoints[1];
                 //if (Vector3.Distance(transform.position, new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z)) < 5f)
-                if (agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !newOccupiedBlock.GetComponent<BlockHealth>().IsBlockDead)
+                if (agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
                 {
-                    Debug.Log("PATH WAS CALCULATED"); // WHY IT WAS CALLED SO MANY TIMES????
-                    agent.SetDestination(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z));
-                    currentState = ZombiState.AttackBlock;
-                    StartCoroutine(AttackBlock());
-                    break;
+                  
+                        Debug.Log("PATH WAS CALCULATED"); // WHY IT WAS CALLED SO MANY TIMES????
+                        currentState = ZombiState.AttackBlock;
+                        agent.SetDestination(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z));
+                        StartCoroutine(AttackBlock());
+                        break;
+                }
+                else if (!agent.CalculatePath(new Vector3(lastTarget.transform.position.x, transform.position.y, lastTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
+                {
+                    DestroyZombi();
                 }
                 else
                 {
@@ -226,6 +258,11 @@ public class Zombi : MonoBehaviour
                 continue;
             }
         }
-
     }
+
+    void DestroyZombi()
+    {
+        Destroy(gameObject);
+    }
+    
 }
