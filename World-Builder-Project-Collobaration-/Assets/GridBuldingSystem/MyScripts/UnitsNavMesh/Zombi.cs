@@ -22,7 +22,7 @@ public class Zombi : MonoBehaviour
     private int waypointIndex = 0;
     private float elapsed = 0.0f;
     public Transform target;
-    public UnityEngine.AI.NavMeshAgent agent;
+    public NavMeshAgent agent;
     private NavMeshPath path;
     float H_1; float oldH_1;
     float S_1; float oldS_1;
@@ -47,7 +47,7 @@ public class Zombi : MonoBehaviour
     {
         Debug.Log("I AM A ZOMBI NOW!");
     }
-    private void Update()
+    private void FixedUpdate()
     {
         HandleZombiMovement();
         if (currentState == ZombiState.FindAnotherBlock)
@@ -155,8 +155,8 @@ public class Zombi : MonoBehaviour
             S_2 -= 0.005f;
             V_2 += 0.005f;
             V_1 = Mathf.Clamp(V_1, 0.4f, 1f);
-            S_1 = Mathf.Clamp(S_1, 0.05f, 0.75f);
-            S_2 = Mathf.Clamp(S_2, 0.025f, 0.9f);
+            S_1 = Mathf.Clamp(S_1, 0.01f, 0.75f);
+            S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
             V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
             occupiedBlock.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
             occupiedBlock.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);

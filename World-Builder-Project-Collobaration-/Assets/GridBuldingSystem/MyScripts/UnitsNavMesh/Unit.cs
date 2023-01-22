@@ -58,10 +58,6 @@ public class Unit : MonoBehaviour
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChangeToBecomeZombi;
     }
-    private void Update()
-    {
-
-    }
 
     private void FixedUpdate()
     {
