@@ -9,6 +9,7 @@ public class BlockHealth : MonoBehaviour
     public Transform[] generatedWaypoints;
     public float startHealth = 100f;
     public float currentHealth;
+    public bool IsBlockDead = false;
     private void Awake()
     {
         generatedWaypoints = new Transform[step];
@@ -39,5 +40,6 @@ public class BlockHealth : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, startHealth);
+        if(currentHealth <= 0 ) { IsBlockDead = true; }
     }
 }

@@ -10,8 +10,8 @@ using UnityEngine.EventSystems;
 public class GridOfPrefabs : MonoBehaviour
 {
     [SerializeField] GameObject blockPrefabObj;
-    [SerializeField] int width = 3;
-    [SerializeField] int height = 5;
+    public int width = 3;
+    public int height = 5;
     [SerializeField] Color colorOfHighlightedOblock = new Color();
     //[SerializeField] Color materialOfSelectedOblock = new Color();
     [SerializeField] Material materialOfSelectedOblock;
@@ -19,7 +19,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
-    private MyGridXZ<PrefabGridObject> grid;
+    public MyGridXZ<PrefabGridObject> grid;
     public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
 
