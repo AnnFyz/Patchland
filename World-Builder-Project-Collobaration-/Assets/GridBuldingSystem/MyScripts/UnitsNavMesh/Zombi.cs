@@ -231,8 +231,6 @@ public class Zombi : MonoBehaviour
             if (possibleNextOccupiedBlocks[i] != null)
             {
                 Transform newTarget = possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().generatedWaypoints[1];
-                Transform lastTarget = possibleNextOccupiedBlocks[possibleNextOccupiedBlocks.Length - 1].GetComponent<BlockHealth>().generatedWaypoints[1];
-                //if (Vector3.Distance(transform.position, new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z)) < 5f)
                 if (agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
                 {
                   
@@ -242,7 +240,7 @@ public class Zombi : MonoBehaviour
                         StartCoroutine(AttackBlock());
                         break;
                 }
-                else if (!agent.CalculatePath(new Vector3(lastTarget.transform.position.x, transform.position.y, lastTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
+                else if (i == possibleNextOccupiedBlocks.Length -1 && !agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
                 {
                     DestroyZombi();
                 }
