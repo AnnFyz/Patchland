@@ -7,25 +7,43 @@ using UnityEngine.EventSystems;
 
 public class GemManager : MonoBehaviour //make spawn in waves with particles
 {
+    public List<GemsSO> gems = new List<GemsSO>();
     NavMeshSurface surface;
-    [SerializeField] List<WeightedGem> gems = new List<WeightedGem>();
-    private void Awake()
+
+    private void Start()
     {
+        for (int i = 0; i < 20; i++)
+        {
+            Debug.Log(GetRandomGem().ToString());
+        }
+
         surface = GridOfPrefabs.Instance.horizontalSurface;
     }
-
     Transform GetRandomGem()
     {
-        return transform;
+        Transform gem = null;
+        var totalWeight = 0;
+        foreach(var item in gems)
+        {
+            totalWeight += item.weight;
+        }
+        var rndWeightGem = UnityEngine.Random.Range(0, totalWeight);
+        var processedWeight = 0;
+        foreach(var item in gems)
+        {
+            processedWeight += item.weight;
+            if(rndWeightGem <= processedWeight)
+            {
+                gem = item.gemPrefab.transform;
+                break;
+            }
+        }
+        return gem;
     }
     void SpawnGems()
     {
         NavMeshHit hit;
     }
 
-    class WeightedGem
-    {
-        public int weight;
-        public Transform gemPrefab;
-    }
 }
+

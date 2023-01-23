@@ -98,5 +98,11 @@ public class UnitsManager : MonoBehaviour
     void OnChangedGlobalOrderM()
     {
         OnChangedGlobalOrder?.Invoke();
+        foreach(var item in waypoints[0])
+        {
+            GameObject generatedWaypoint = new GameObject();
+            generatedWaypoint.transform.position = item.position;
+            generatedWaypoint.transform.SetParent(transform);
+        }
     }
 }

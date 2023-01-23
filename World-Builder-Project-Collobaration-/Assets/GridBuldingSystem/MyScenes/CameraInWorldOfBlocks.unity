@@ -4757,6 +4757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2120624608}
+  - component: {fileID: 2120624609}
   m_Layer: 0
   m_Name: GemManager
   m_TagString: Untagged
@@ -4780,6 +4781,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2120624609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120624607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe769b2f6677e141b1c86ed81d68492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gems:
+  - {fileID: 11400000, guid: 439cd6157189cf34d8f753a0fee295b3, type: 2}
+  - {fileID: 11400000, guid: 2eeab9ec439a2d645a582193cc64dde9, type: 2}
+  - {fileID: 11400000, guid: a3d6b1ea6dbb15347b66b7623432407d, type: 2}
+  - {fileID: 11400000, guid: 73b7aee6029ee9047a308266379ec304, type: 2}
+  - {fileID: 11400000, guid: 5d9bd2e6e8326884099fc7bda3ab7a9b, type: 2}
+  - {fileID: 11400000, guid: 70f5b338a409445408bdcc5cc418f38e, type: 2}
+  - {fileID: 11400000, guid: fc19360f0c68ec14da7f011433a17d52, type: 2}
 --- !u!4 &260688965015798476
 Transform:
   m_ObjectHideFlags: 0
