@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject iconsPanel;
     [SerializeField] List<GameObject> icons;
     [SerializeField] GameObject amountOfGemsUI;
-    int amountOfGems;
+    public TMP_Text textAmount;
+    int amountOfGems = 0;
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
     public event Action OnChangedGrid;
@@ -19,6 +21,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        textAmount = amountOfGemsUI.GetComponent<TMP_Text>();
+        
     }
 
     private void Start()
@@ -29,6 +33,7 @@ public class UIManager : MonoBehaviour
             icon.SetActive(false);
         }
 
+        textAmount.SetText("0");
     }
 
     public void LocalSetupUIIcons()
@@ -97,5 +102,6 @@ public class UIManager : MonoBehaviour
     public void CollectGem()
     {
         amountOfGems++;
+        textAmount.SetText(amountOfGems.ToString());
     }
 }

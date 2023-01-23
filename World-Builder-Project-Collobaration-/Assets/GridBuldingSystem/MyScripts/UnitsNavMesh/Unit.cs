@@ -196,6 +196,11 @@ public class Unit : MonoBehaviour
             }
         }
 
+        if (other.gameObject.tag == "Gem")
+        {
+            other.gameObject.GetComponent<Gem>().CollectGem();
+        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -222,14 +227,6 @@ public class Unit : MonoBehaviour
                 StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 GetComponentInChildren<UnitsHealth>().isFoodAround = false;
             }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Gem")
-        {
-            collision.gameObject.GetComponent<Gem>().CollectGem();
         }
     }
 

@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: -6873717532528800393}
   - component: {fileID: 6512348588675037399}
   - component: {fileID: -6848648683191705220}
+  - component: {fileID: -2108640288703200874}
   m_Layer: 0
   m_Name: Orange_Gem_1
   m_TagString: Gem
@@ -401,3 +402,15 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-2108640288703200874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908967398769862543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac520c5c7cdfb4146883bff86e45808f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3251053014605347123}
   - component: {fileID: -8506449294022204280}
   - component: {fileID: 7525515977994899637}
+  - component: {fileID: -7795014722989017369}
   m_Layer: 0
   m_Name: Black_Gem_1
   m_TagString: Gem
@@ -91,6 +92,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7795014722989017369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768779861327571737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac520c5c7cdfb4146883bff86e45808f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725538762202943129
 GameObject:
   m_ObjectHideFlags: 0

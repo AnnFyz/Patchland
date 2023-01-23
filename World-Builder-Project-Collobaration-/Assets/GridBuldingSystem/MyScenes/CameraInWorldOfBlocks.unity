@@ -4170,6 +4170,7 @@ MonoBehaviour:
   - {fileID: 1888124042}
   - {fileID: 1669227812}
   amountOfGemsUI: {fileID: 723034812}
+  textAmount: {fileID: 723034814}
   prefabsState: {fileID: 0}
 --- !u!114 &1797793840
 MonoBehaviour:
