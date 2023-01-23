@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject arrowsPanel;
     [SerializeField] GameObject iconsPanel;
     [SerializeField] List<GameObject> icons;
-
+    [SerializeField] GameObject amountOfGemsUI;
+    int amountOfGems;
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
     public event Action OnChangedGrid;
@@ -91,5 +92,10 @@ public class UIManager : MonoBehaviour
     {
        BuildingManager.blockPrefab.ChangeHeight(subtractedV);
        OnChangedGrid?.Invoke();
+    }
+
+    public void CollectGem()
+    {
+        amountOfGems++;
     }
 }

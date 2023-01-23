@@ -195,6 +195,7 @@ public class Unit : MonoBehaviour
 
             }
         }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -224,5 +225,12 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Gem")
+        {
+            collision.gameObject.GetComponent<Gem>().CollectGem();
+        }
+    }
 
 }
