@@ -53,7 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsThisBlockWasHighlighted: 0
   IsThisBlockWasSelected: 0
+  renderer: {fileID: 0}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
+  origin: 0
   defaultMaterial: {fileID: 0}
 --- !u!114 &-4611271471455439405
 MonoBehaviour:
@@ -135,6 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 3
   generatedWaypoints: []
+  startHealth: 100
+  currentHealth: 0
+  IsBlockDead: 0
 --- !u!1 &8479984077012579543
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +254,7 @@ MonoBehaviour:
   m_OverrideArea: 1
   m_Area: 1
   m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
+  m_AffectedAgents: f2652fae
 --- !u!1001 &8452613873916484050
 PrefabInstance:
   m_ObjectHideFlags: 0
