@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> icons;
     [SerializeField] GameObject amountOfGemsUI;
     public TMP_Text textAmount;
-    int amountOfGems = 0;
+    float amountOfGems = 0;
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
     public event Action OnChangedGrid;
@@ -33,7 +33,8 @@ public class UIManager : MonoBehaviour
             icon.SetActive(false);
         }
 
-        textAmount.SetText("0");
+        amountOfGems = 20;
+        textAmount.SetText(amountOfGems.ToString());
     }
 
     public void LocalSetupUIIcons()
@@ -88,15 +89,29 @@ public class UIManager : MonoBehaviour
     }
 
     public void BlockUp(int addedV)
-    {
-        BuildingManager.blockPrefab.ChangeHeight(addedV);
-        OnChangedGrid?.Invoke();
+    {  if(amountOfGems > 0)
+        {
+            // Block Settings 
+            BuildingManager.blockPrefab.ChangeHeight(addedV);
+            OnChangedGrid?.Invoke();
+            // Gems Settings 
+            amountOfGems -= 1;
+            amountOfGems = Mathf.Clamp(amountOfGems, 0, 100);
+            textAmount.SetText(amountOfGems.ToString());
+        }
+       
     }
 
     public void BlockDown(int subtractedV)
     {
-       BuildingManager.blockPrefab.ChangeHeight(subtractedV);
-       OnChangedGrid?.Invoke();
+        if (amountOfGems > 0 && BuildingManager.blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond)
+        {
+            BuildingManager.blockPrefab.ChangeHeight(subtractedV);
+            OnChangedGrid?.Invoke();
+            amountOfGems -= 0.5f;
+            amountOfGems = Mathf.Clamp(amountOfGems, 0, 100);
+            textAmount.SetText(amountOfGems.ToString());
+        }
     }
 
     public void CollectGem()
