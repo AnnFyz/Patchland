@@ -8,19 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cube_Rotator
-  m_Shader: {fileID: -6465566751694194690, guid: a9aea49e19495174f80f910ddb189a37,
+  m_Shader: {fileID: -6465566751694194690, guid: e129b5c72ae28844783c4a28c0291920,
     type: 3}
   m_ValidKeywords:
   - INTERSECTION_EFFECTS_ON
   - SURFACE_FOAM_ON
   - WORLD_SPACE_UV_ON
-  m_InvalidKeywords:
-  - FOAM_SHADOWS_ON
-  - WATER_LIGHTING_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -70,15 +68,15 @@ Material:
     - _IntersectionFoamMovement: {r: 0, g: 0, b: 0, a: 0}
     - _IntersectionFoamSampling: {r: 5.05, g: 0, b: 0, a: 0}
     - _NormalsMovement: {r: 0.04, g: 0.36, b: 0, a: 0}
-    - _ShoreColor: {r: 1, g: 1, b: 1, a: 0}
-    - _SurfaceFoamColor1: {r: 0.71364576, g: 0.495283, b: 1, a: 0.3215686}
+    - _ShoreColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
+    - _SurfaceFoamColor1: {r: 0.71364576, g: 0.495283, b: 1, a: 0.42745098}
     - _SurfaceFoamColor2: {r: 0.7264151, g: 0.46257564, b: 0.6269347, a: 0.11764706}
     - _SurfaceFoamMovement: {r: 0, g: 0, b: 0, a: 0.001}
     - _SurfaceFoamSampling: {r: 0.05, g: 0.98, b: 0, a: 0}
     - _SurfaceFoamTilingAndOffset: {r: -1, g: -1, b: 0.57, a: 1}
-    - _WaterColorDeep: {r: 0.34117648, g: 0.50988865, b: 0.59607846, a: 0.3882353}
-    - _WaterColorHorizon: {r: 0.32981718, g: 0.2654859, b: 0.35849056, a: 0.5019608}
-    - _WaterColorShallow: {r: 0.75045365, g: 0.42693123, b: 0.7735849, a: 0.36078432}
+    - _WaterColorDeep: {r: 0.376602, g: 0.6327105, b: 0.8584906, a: 0.80784315}
+    - _WaterColorHorizon: {r: 0.51082, g: 0.33383763, b: 0.5849056, a: 0.6313726}
+    - _WaterColorShallow: {r: 0, g: 1, b: 0.64705884, a: 1}
     - _WaveColor: {r: 0.40428084, g: 0.4600094, b: 0.745283, a: 0}
     - _WaveDirections: {r: 4.57, g: 0.64, b: 1, a: 0.33}
     - _WaveVisuals: {r: 0.1, g: 5, b: 1.5, a: 0}

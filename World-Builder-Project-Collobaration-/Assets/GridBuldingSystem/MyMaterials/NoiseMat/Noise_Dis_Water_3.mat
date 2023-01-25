@@ -125,7 +125,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _Amount: 0.05
+    - _Amount: 0.001
     - _Blend: 1
     - _BrushLowerCut: 0
     - _BrushSize: 0.8

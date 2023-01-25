@@ -23,7 +23,8 @@ public class BlockPrefab : MonoBehaviour
     float t;
     private void Start()
     {
-        startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y);
+        //startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y);
+        startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderer = GetComponentInChildren<Renderer>();
         if (renderer.material.HasColor("_BaseColor"))
         {

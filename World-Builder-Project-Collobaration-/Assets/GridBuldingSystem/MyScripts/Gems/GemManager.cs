@@ -20,14 +20,6 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
         StartCoroutine(SpawnGemsInWaves());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SpawnRandomGems(10);
-        }
-    }
-
     IEnumerator SpawnGemsInWaves()
     {
         while (createdGems.Count <= 30)
