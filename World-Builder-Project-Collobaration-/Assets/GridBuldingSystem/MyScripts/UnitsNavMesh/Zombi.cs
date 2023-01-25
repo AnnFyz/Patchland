@@ -80,9 +80,9 @@ public class Zombi : MonoBehaviour
             target = occupiedBlockHealth.generatedWaypoints[waypointIndex];
             if (target != null)
             {
-                if (elapsed > 0.2f)
+                if (elapsed > 2f)
                 {
-                    elapsed -= 0.2f;
+                    elapsed -= 2f;
                     agent.SetDestination(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                     if (Vector3.Distance(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), target.transform.position) < 10f)
                     {

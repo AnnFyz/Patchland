@@ -117,7 +117,7 @@ public class Unit : MonoBehaviour
    
     }
 
-    void MoveAutomaticallyToWayPoint()
+    void MoveAutomaticallyToWayPoint() //ELAPSED 
     {
         if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
@@ -129,9 +129,9 @@ public class Unit : MonoBehaviour
                 target = localOrder[waypointIndex];
                 if (target != null)
                 {
-                    if (elapsed > 2.0f)
+                    if (elapsed > 3.0f)
                     {
-                        elapsed -= 2.0f;
+                        elapsed -= 3.0f;
                         agent.SetDestination(target.transform.position);
                         if (Vector3.Distance(transform.position, target.transform.position) < 1f)
                         {

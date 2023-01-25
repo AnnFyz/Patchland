@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Noise_Desert_M
-  m_Shader: {fileID: -6465566751694194690, guid: f0943f5998623d7479b4efa111946732,
+  m_Name: Noise_Forest_M
+  m_Shader: {fileID: -6465566751694194690, guid: 431a8abf6d1c74348a60dc0bcf338102,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -128,9 +128,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_64d861fce71044349695d1bac7f2ea98: {r: 0.38679248, g: 0.24487582, b: 0,
+    - Color_64d861fce71044349695d1bac7f2ea98: {r: 0.9150943, g: 0.71316487, b: 0.366901,
         a: 0}
-    - Color_d3f90b46fa4040c48d4031973961bef6: {r: 1, g: 0.95073235, b: 0.3443396,
+    - Color_d3f90b46fa4040c48d4031973961bef6: {r: 0.49451488, g: 0.8679245, b: 0.38074043,
         a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

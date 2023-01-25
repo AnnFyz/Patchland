@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicUnit
   m_EditorClassIdentifier: 
   damageToUnitWithoutFood: 0.01
-  chanceToBecomeZombi: 45
+  chanceToBecomeZombi: 68.6
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 18

@@ -249,7 +249,7 @@ namespace WorldSpaceTransitions
             {
                 gizmo.localPosition = new Vector3(0, 0, distance);
             }
-            if (radiusOrDistanceSlider.transform.parent.gameObject != null)
+            if (radiusOrDistanceSlider != null && radiusOrDistanceSlider.transform.parent.gameObject != null)
             {
                 radiusOrDistanceSlider.transform.parent.gameObject.SetActive(fadingCentre == FadingTransition.FadingCentre.camera);
                 radiusOrDistanceTitle.text = "plane distance";
