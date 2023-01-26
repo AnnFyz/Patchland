@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transparent_Noise
-  m_Shader: {fileID: -6465566751694194690, guid: 8201dfc629e8be847afce1e97b4ca549,
+  m_Shader: {fileID: -6465566751694194690, guid: 8aaf211c174acfd4481161a46fb263b6,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -103,8 +103,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Vector1_04db18677079417e99b7f95a422950d3: 0
+    - Vector1_0c1eff59554148a2892c7222f9ef6edb: 0
+    - Vector1_63a0afd297734dc9998b9b19bd747613: 0.1
+    - Vector1_6e12275293314cb7a52c177f83f8f9aa: 0
     - _AlphaClip: 0
-    - _Amount: 149.4
+    - _Amount: 100
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -140,8 +144,10 @@ Material:
     - _ZWrite: 1
     - _inverse: 0
     m_Colors:
+    - Color_64d861fce71044349695d1bac7f2ea98: {r: 0, g: 0.23381606, b: 1, a: 0}
+    - Color_d3f90b46fa4040c48d4031973961bef6: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0, g: 0.4272151, b: 1, a: 1}
-    - _Color: {r: 1, g: 0.24550551, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.24550545, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
