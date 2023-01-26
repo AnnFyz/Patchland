@@ -42,7 +42,9 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                         BuildingManager.grid = localGrid.grid;
                         BuildingManager.blockPrefab = localPrefabBlock;
                         BuildingManager.Instance.RefreshSelectedObjectType();
-   
+
+                        localPrefabBlock.blockInside.gameObject.SetActive(false);
+
                 }
                 else
                 {
@@ -59,10 +61,15 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
            
                     localPrefabBlock.ChangeColorBack();
                     localPrefabBlock.ChangeMaterialBack();
+                    if(localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
+                    {
+                        localPrefabBlock.blockInside.gameObject.SetActive(true);
+                    }
                 }
                 else
                 {
                     localPrefabBlock.ChangeSelectedMaterial();
+                    localPrefabBlock.blockInside.gameObject.SetActive(false);
                 }
                 
             }
@@ -76,11 +83,16 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             {
                 localPrefabBlock.ChangeColorBack();
                 localPrefabBlock.ChangeMaterialBack();
+                if (localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
+                {
+                    localPrefabBlock.blockInside.gameObject.SetActive(true);
+                }
                 BuildingManager.Instance.DeselectObjectType();
             }
             else
             {
                 localPrefabBlock.ChangeSelectedMaterial();
+                localPrefabBlock.blockInside.gameObject.SetActive(false);
             }
         }
     }

@@ -65,6 +65,7 @@ public class GridOfPrefabs : MonoBehaviour
                 else
                 {
                     blockPrefab.ChangeHeight(0);
+                    blockPrefab.blockInside.gameObject.SetActive(true);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
 
                 }

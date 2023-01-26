@@ -57,6 +57,7 @@ public class LocalLevelState : MonoBehaviour
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
             }
             UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(false);
             //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
 
         }
@@ -72,10 +73,12 @@ public class LocalLevelState : MonoBehaviour
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
             }
             UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(false);
         }
 
         if (newHeight > 5)
         {
+           
             currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultMaterial = renderer.material;
@@ -86,6 +89,7 @@ public class LocalLevelState : MonoBehaviour
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
             }
             UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(true);
         }
     }
    

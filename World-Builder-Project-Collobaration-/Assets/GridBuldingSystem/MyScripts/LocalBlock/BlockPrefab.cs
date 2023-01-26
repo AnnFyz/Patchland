@@ -21,9 +21,11 @@ public class BlockPrefab : MonoBehaviour
     float duration = 2.0f;
     float startTime;
     float t;
+    public Transform blockInside;
     private void Start()
     {
-        //startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y);
+        blockInside = gameObject.transform.GetChild(0).GetChild(0);
+        blockInside.gameObject.SetActive(false);
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderer = GetComponentInChildren<Renderer>();
         if (renderer.material.HasColor("_BaseColor"))
@@ -37,7 +39,7 @@ public class BlockPrefab : MonoBehaviour
             origin = renderer.material.GetFloat(Shader.PropertyToID("Vector1_6e12275293314cb7a52c177f83f8f9aa"));
         }
         minOrigin = -0.25f;
-        maxOrigin =  0.1f;
+        maxOrigin =  0.5f;
         startTime = Time.deltaTime;
         t = UnityEngine.Random.Range(3f, 5f);
     }
