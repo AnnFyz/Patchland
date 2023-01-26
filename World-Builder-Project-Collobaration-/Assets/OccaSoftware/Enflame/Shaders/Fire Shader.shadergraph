@@ -61,7 +61,11 @@
         }
     ],
     "m_Dropdowns": [],
-    "m_CategoryData": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "d6a8aa0b45f144a0a72273222257c621"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "7212c4ebfffbcf8dbfeb0389173872ba"
@@ -9837,6 +9841,69 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "d6a8aa0b45f144a0a72273222257c621",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "149fb19f848ed181b17739f9ba14be81"
+        },
+        {
+            "m_Id": "2eadba851f8cbd84a22ae527e8ad73bd"
+        },
+        {
+            "m_Id": "d73b057fb6d4fb829a35f9cc36095c12"
+        },
+        {
+            "m_Id": "0a8a4b950b49ba8b92aedcc6340ef73a"
+        },
+        {
+            "m_Id": "b97467568ef7698487b7e11cae973025"
+        },
+        {
+            "m_Id": "a1f22fa13c52ed8987e258b299ea7d55"
+        },
+        {
+            "m_Id": "9c90d0949ec931828817f589123d5c47"
+        },
+        {
+            "m_Id": "f854c921d8592c8eb6d1512e4abaeb4a"
+        },
+        {
+            "m_Id": "d00fe78a08c6cc8ba4e0ce81acfb8800"
+        },
+        {
+            "m_Id": "8d989cdfafe9fc86ab40a37a0ec88fd0"
+        },
+        {
+            "m_Id": "ca9711f2c4e82c8e988cda4ae7b9a61d"
+        },
+        {
+            "m_Id": "d8e60dc1c770ca85a1e6dede572117e1"
+        },
+        {
+            "m_Id": "8c353621eae55b8490b31a8bafb0eb7b"
+        },
+        {
+            "m_Id": "5c01196f1022868ebbd22f5088c553c0"
+        },
+        {
+            "m_Id": "b69cf1239cd5898596d39db1a7c8bba2"
+        },
+        {
+            "m_Id": "a9d4c24817e1bd899e61f3be886a76b0"
+        },
+        {
+            "m_Id": "c45bcb5ca5b3b987ba9377643835a118"
+        },
+        {
+            "m_Id": "c7d205a487c14692aeaa6cc92adc189b"
+        }
+    ]
 }
 
 {

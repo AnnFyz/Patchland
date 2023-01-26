@@ -22,21 +22,26 @@ public class BlockPrefab : MonoBehaviour
     float startTime;
     float t;
     public Transform blockInside;
+    public Renderer blockInsiderenderer;
     private void Start()
     {
         blockInside = gameObject.transform.GetChild(0).GetChild(0);
         blockInside.gameObject.SetActive(false);
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderer = GetComponentInChildren<Renderer>();
+        blockInsiderenderer = blockInside.GetComponent<Renderer>();
         if (renderer.material.HasColor("_BaseColor"))
         {
             defaultColor = renderer.material.color;
+            blockInsiderenderer.material.color = defaultColor;
         }
         else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
             defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
             origin = renderer.material.GetFloat(Shader.PropertyToID("Vector1_6e12275293314cb7a52c177f83f8f9aa"));
+            blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
+            blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
         }
         minOrigin = -0.25f;
         maxOrigin =  0.5f;
@@ -140,6 +145,7 @@ public class BlockPrefab : MonoBehaviour
         else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
+            blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
         }
 
     }
@@ -154,6 +160,8 @@ public class BlockPrefab : MonoBehaviour
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
             renderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
+            blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
+            blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
         }
     }
 
