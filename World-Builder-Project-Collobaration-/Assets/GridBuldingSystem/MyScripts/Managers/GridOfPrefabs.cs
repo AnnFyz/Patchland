@@ -58,12 +58,14 @@ public class GridOfPrefabs : MonoBehaviour
                 else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
                     blockPrefab.ChangeHeight(0);
                 }
 
                 else
                 {
                     blockPrefab.ChangeHeight(0);
+                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
 
                 }
             }
