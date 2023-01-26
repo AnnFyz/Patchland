@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void BlockUp(int addedV)
-    {  if(amountOfGems > 0)
+    {  if(amountOfGems > 0 && !BuildingManager.blockPrefab.GetComponent<BlockHealth>().IsBlockDead)
         {
             // Block Settings 
             BuildingManager.blockPrefab.ChangeHeight(addedV);
@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
 
     public void BlockDown(int subtractedV)
     {
-        if (amountOfGems > 0 && BuildingManager.blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond)
+        if (amountOfGems > 0 && BuildingManager.blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond && !BuildingManager.blockPrefab.GetComponent<BlockHealth>().IsBlockDead)
         {
             BuildingManager.blockPrefab.ChangeHeight(subtractedV);
             OnChangedGrid?.Invoke();
