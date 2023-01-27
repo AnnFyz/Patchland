@@ -3,7 +3,7 @@ guid: b4b92f0b69af39f499df0d982df7ea50
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -24,6 +24,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -62,9 +63,34 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -88,9 +114,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-  userData: '{"mode":1,"colorKeys":[{"color":{"r":0.0,"g":0.13879680633544923,"b":1.0,"a":1.0},"time":0.040482185781002048},{"color":{"r":0.0,"g":1.0,"b":0.25371599197387698,"a":1.0},"time":0.1428549587726593},{"color":{"r":0.9710689783096314,"g":0.028931021690368654,"b":0.9365183115005493,"a":1.0},"time":0.39075303077697756},{"color":{"r":1.0,"g":0.0,"b":0.9568610191345215,"a":1.0},"time":0.7190508842468262},{"color":{"r":1.0,"g":0.4121848940849304,"b":0.0,"a":1.0},"time":0.9309529066085815},{"color":{"r":1.0,"g":1.0,"b":0.0,"a":1.0},"time":0.9690546989440918},{"color":{"r":1.0,"g":1.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}'
+  userData: '{"mode":1,"colorKeys":[{"color":{"r":0.3679245114326477,"g":0.19958169758319856,"b":0.25882965326309206,"a":1.0},"time":0.040482185781002048},{"color":{"r":0.468093603849411,"g":0.6320754289627075,"b":0.5098928809165955,"a":1.0},"time":0.20881971716880799},{"color":{"r":0.41108933091163638,"g":0.5138987302780151,"b":0.5849056243896484,"a":1.0},"time":0.45294880867004397},{"color":{"r":1.0,"g":0.7661837339401245,"b":0.0,"a":1.0},"time":0.729411780834198},{"color":{"r":1.0,"g":0.4121848940849304,"b":0.0,"a":1.0},"time":0.9309529066085815},{"color":{"r":1.0,"g":1.0,"b":0.0,"a":1.0},"time":0.9690546989440918},{"color":{"r":1.0,"g":1.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}'
   assetBundleName: 
   assetBundleVariant: 
