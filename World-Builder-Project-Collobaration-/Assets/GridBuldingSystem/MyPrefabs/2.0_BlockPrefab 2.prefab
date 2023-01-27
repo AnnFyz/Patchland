@@ -114,7 +114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5015007681107202423
 Transform:
   m_ObjectHideFlags: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   origin: 0
   defaultMaterial: {fileID: 0}
   blockInside: {fileID: 2391420829893923744}
+  blockInsiderenderer: {fileID: 0}
 --- !u!114 &-4611271471455439405
 MonoBehaviour:
   m_ObjectHideFlags: 0
