@@ -24,19 +24,15 @@ public class Zombi : MonoBehaviour
     public Transform target;
     public NavMeshAgent agent;
     private NavMeshPath path;
-    float H_1; float oldH_1;
-    float S_1; float oldS_1;
-    float V_1; float oldV_1;
-
-    float H_2; float oldH_2;
-    float S_2; float oldS_2;
-    float V_2; float oldV_2;
-    public bool OLDISDEAD = false;
     public bool isAttacking = false;
+    [SerializeField] Renderer modelRenderer;
+    [SerializeField] Color zombiTopColor = Color.white;
+    [SerializeField] Color zombiBottomColor = Color.grey;
     private void Awake()
     {
         unit = GetComponent<Unit>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        modelRenderer = transform.GetChild(3).GetChild(0).GetComponent<Renderer>();
     }
     private void Start()
     {
@@ -47,6 +43,8 @@ public class Zombi : MonoBehaviour
     public void HandleZombiTransformation()
     {
         Debug.Log("I AM A ZOMBI NOW!");
+        modelRenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), zombiTopColor);
+        modelRenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), zombiBottomColor);
     }
     private void FixedUpdate()
     {
@@ -55,21 +53,16 @@ public class Zombi : MonoBehaviour
         {
             MoveToNextNeighbourAliveBlock();
         }
-       if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead)
+        if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead)
         {
-            if(occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
+            if (occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
             {
                 currentState = ZombiState.FindAnotherBlock;
                 FindNeighboursBlocks();
-                //StopCoroutine(AttackBlock()); Debug.Log("STOP");
-                OLDISDEAD = true;
             }
         }
-        else
-        {
-            OLDISDEAD = false;
-        }
     }
+
     public void HandleZombiMovement()
     {
         if (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null && !occupiedBlockHealth.IsBlockDead)
@@ -118,60 +111,16 @@ public class Zombi : MonoBehaviour
             {
                 occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
                 occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
-                //StartCoroutine(AttackBlock()); Debug.Log("COROUTINE");
-                Color.RGBToHSV(occupiedBlock.defaultColor, out H_1, out S_1, out V_1);
-                Color.RGBToHSV(occupiedBlock.defaultBottomColor, out H_2, out S_2, out V_2);
-                //oldH_1 = H_1;
-                //oldS_1 = S_1;
-                //oldV_1 = V_1;
-
-                //oldH_2 = H_2;
-                //oldS_2 = S_2;
-                //oldV_2 = V_2;
             }
 
             else if (occupiedBlockHealth.currentHealth <= 0)  //reaasign occupied block only if the current one is dead
             {
                 occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
                 occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
-                //StartCoroutine(AttackBlock()); Debug.Log("COROUTINE");
-                Color.RGBToHSV(occupiedBlock.defaultColor, out H_1, out S_1, out V_1);
-                Color.RGBToHSV(occupiedBlock.defaultBottomColor, out H_2, out S_2, out V_2);
-                //oldH_1 = H_1;
-                //oldS_1 = S_1;
-                //oldV_1 = V_1;
-
-                //oldH_2 = H_2;
-                //oldS_2 = S_2;
-                //oldV_2 = V_2;
-            }
-            else
-            {
-                //StopCoroutine(AttackBlock()); Debug.Log("STOP");
             }
         }
-        else
-        {
-            //StopCoroutine(AttackBlock()); Debug.Log("STOP");
-        }
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.GetComponentInParent<BlockHealth>())
-    //    {
-    //        StopCoroutine(AttackBlock()); Debug.Log("COROUTINE");
-    //    }
-    //}
-        void ResetColor()
-    {
-        H_1 = oldH_1;
-        S_1 = oldS_1;
-        V_1 = oldV_1;
 
-        H_2 = oldH_2;
-        S_2 = oldS_2;
-        V_2 = oldV_2;
-    }
     public IEnumerator AttackBlock()
     {
         while (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null)
@@ -180,7 +129,7 @@ public class Zombi : MonoBehaviour
             {
                 Debug.Log("ATTACK");
                 isAttacking = true;
-                occupiedBlockHealth.Damage(1f); // Change color in BlockHealth               
+                occupiedBlockHealth.Damage(1f);               
                 yield return new WaitForSeconds(0.1f);
             }
             else
@@ -188,7 +137,6 @@ public class Zombi : MonoBehaviour
                 isAttacking = false;
                 break;
             }
-            //isAttacking = false;
         }
     }
 

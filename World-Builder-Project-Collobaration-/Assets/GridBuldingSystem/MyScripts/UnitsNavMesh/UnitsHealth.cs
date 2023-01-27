@@ -14,7 +14,6 @@ public enum UIState
 }
 public class UnitsHealth : MonoBehaviour
 {
-    [SerializeField] Image levelBar;
     [SerializeField] float startValue = 100f;
     [SerializeField] float curretValue;
     const float maxValue = 100f;
@@ -26,7 +25,6 @@ public class UnitsHealth : MonoBehaviour
     public GameObject stateFire;
     private void Awake()
     {
-        //levelBar = GetComponent<Image>();
         unit = GetComponentInParent<Unit>();
         damageToUnit = unit.unitScriptableObjects.damageToUnitWithoutFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
@@ -77,7 +75,6 @@ public class UnitsHealth : MonoBehaviour
     }
     private void Start()
     {
-        levelBar.fillAmount = startValue;
         curretValue = startValue;
     }
 
@@ -106,14 +103,12 @@ public class UnitsHealth : MonoBehaviour
     {
         curretValue -= damageToUnit;
         curretValue = Mathf.Clamp(curretValue, 0, maxValue);
-        levelBar.fillAmount = curretValue / maxValue;
         yield return new WaitForSeconds(1f);
     }
     public void FillHealth(float value)
     {
         curretValue += value;
         curretValue = Mathf.Clamp(curretValue, 0, maxValue);
-        levelBar.fillAmount = curretValue / maxValue;
         SwitchUIState();
     }
 
