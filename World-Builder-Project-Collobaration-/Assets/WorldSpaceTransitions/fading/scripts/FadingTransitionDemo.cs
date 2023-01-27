@@ -245,15 +245,13 @@ namespace WorldSpaceTransitions
             Shader.EnableKeyword("CLIP_PLANE");
             Shader.SetGlobalInt("_FADE_PLANE", 1);
             Shader.SetGlobalInt("_FADE_SPHERE", 0);
-            if (fadingCentre == FadingTransition.FadingCentre.camera)
-            {
+     
                 gizmo.localPosition = new Vector3(0, 0, distance);
-            }
-            if (radiusOrDistanceSlider != null && radiusOrDistanceSlider.transform.parent.gameObject != null)
-            {
+          
+
                 radiusOrDistanceSlider.transform.parent.gameObject.SetActive(fadingCentre == FadingTransition.FadingCentre.camera);
                 radiusOrDistanceTitle.text = "plane distance";
-            }
+
 
         }
 
@@ -261,8 +259,10 @@ namespace WorldSpaceTransitions
         {
             fadingCentre = FadingTransition.FadingCentre.camera;
 
-            gizmoPos = gizmo.position;//store the gizmo position
-            gizmoRot = gizmo.rotation;//store the gizmo rotation
+
+                gizmoPos = gizmo.position;//store the gizmo position
+                gizmoRot = gizmo.rotation;//store the gizmo rotation
+                
 
             Plane sPlane = new Plane(gizmo.forward, gizmo.position);//fading transition plane
             float planeDist = sPlane.GetDistanceToPoint(Camera.main.transform.position);

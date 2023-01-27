@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 using System;
 using TMPro;
 
@@ -12,8 +12,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject iconsPanel;
     [SerializeField] List<GameObject> icons;
     [SerializeField] GameObject amountOfGemsUI;
-    public TMP_Text textAmount;
-    float amountOfGems = 0;
+    [SerializeField] TMP_Text textAmount;
+    [SerializeField] Image uiCircle;
+    [SerializeField] float amountOfGemsForNextLevel = 3;
+    [SerializeField] float amountOfGems = 0f;
+    [SerializeField] float amountOfSpecialGems = 0f;
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
     public event Action OnChangedGrid;
@@ -22,7 +25,6 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         textAmount = amountOfGemsUI.GetComponent<TMP_Text>();
-        
     }
 
     private void Start()
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour
 
         amountOfGems = 20;
         textAmount.SetText(amountOfGems.ToString());
+        uiCircle.fillAmount = amountOfSpecialGems;
     }
 
     public void LocalSetupUIIcons()
@@ -117,6 +120,19 @@ public class UIManager : MonoBehaviour
     public void CollectGem()
     {
         amountOfGems++;
+        amountOfGems = Mathf.Clamp(0, 100, amountOfGems);
         textAmount.SetText(amountOfGems.ToString());
+    }
+
+    public void CollectSpecialGem()
+    {
+        Debug.Log("COLLECT");
+        amountOfSpecialGems ++;
+        uiCircle.fillAmount = amountOfSpecialGems / amountOfGemsForNextLevel;
+
+        if(amountOfSpecialGems >= amountOfGemsForNextLevel)
+        {
+            Debug.Log("Next Level");
+        }
     }
 }

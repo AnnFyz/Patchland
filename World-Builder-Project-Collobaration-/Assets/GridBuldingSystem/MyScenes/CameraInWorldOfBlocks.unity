@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 737215311}
   - component: {fileID: 737215310}
   m_Layer: 3
-  m_Name: CircleUI (3)
+  m_Name: CircleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,7 +1696,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1635841705}
   m_Father: {fileID: 2106086887}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3732,7 +3733,7 @@ GameObject:
   - component: {fileID: 1635841707}
   - component: {fileID: 1635841706}
   m_Layer: 3
-  m_Name: CircleUI (4)
+  m_Name: 'Background_CircleUI '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3750,12 +3751,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2106086887}
-  m_RootOrder: 3
+  m_Father: {fileID: 737215309}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -250, y: -256}
+  m_AnchoredPosition: {x: -250, y: -249.9999}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635841706
@@ -4316,6 +4317,10 @@ MonoBehaviour:
   - {fileID: 1669227812}
   amountOfGemsUI: {fileID: 723034812}
   textAmount: {fileID: 723034814}
+  uiCircle: {fileID: 737215310}
+  amountOfGemsForNextLevel: 3
+  amountOfGems: 0
+  amountOfSpecialGems: 0
   prefabsState: {fileID: 0}
 --- !u!114 &1797793840
 MonoBehaviour:
@@ -4931,7 +4936,6 @@ RectTransform:
   - {fileID: 723034813}
   - {fileID: 737215309}
   - {fileID: 3469287838579731367}
-  - {fileID: 1635841705}
   m_Father: {fileID: 731138046}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

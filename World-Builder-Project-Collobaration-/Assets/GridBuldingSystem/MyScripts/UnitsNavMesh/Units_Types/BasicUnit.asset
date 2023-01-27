@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
   m_Name: BasicUnit
   m_EditorClassIdentifier: 
-  damageToUnitWithoutFood: 1
+  damageToUnitWithoutFood: 0.01
   chanceToBecomeZombi: 68.6
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1

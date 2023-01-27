@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
-   public void CollectGem()
+    public bool IsThisGemSpecial = false;
+    public void CollectGem()
     {
         UIManager.Instance.CollectGem();
+        if (IsThisGemSpecial)
+        {
+            UIManager.Instance.CollectSpecialGem();
+        }
         Destroy(gameObject);
     }
+
+
 }
