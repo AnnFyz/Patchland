@@ -23,12 +23,12 @@ Material:
   m_Name: Aqua
   m_Shader: {fileID: -6465566751694194690, guid: 2c3c6a46626419c4f8bbdeab2ec2afbd,
     type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _HAFTONESHAPES_DOT
+  - _RIMLIGHTING_ON
+  m_InvalidKeywords:
   - _HALFTONESHAPE_CUSTOM
   - _RECEIVE_SHADOWS_OFF
-  - _RIMLIGHTING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -144,7 +144,7 @@ Material:
     - Vector1_85d44c600d6c46b38d9c8065f25681ea: 0
     - Vector1_c89cb8dc56774a9583c7b9c3a5725c4c: 0
     - Vector1_de51566bbe0c417e92cb30ec37e99494: 1
-    - Vector1_e5b6f1488dec4326bd8bbd0e05156810: 0.14
+    - Vector1_e5b6f1488dec4326bd8bbd0e05156810: 0.048
     - Vector1_e6af2df5a4984d6894c4b8686e9d91cb: 0.5
     - _AllToon_OverrideShadowColor: 0
     - _AlphaClip: 0
@@ -207,6 +207,7 @@ Material:
     - _OutlineWidth: 0
     - _OverrideShadowColor: 0
     - _Parallax: 0.005
+    - _QueueControl: -1
     - _QueueOffset: 0
     - _RIMLIGHTING: 1
     - _ReceiveShadows: 0
@@ -236,9 +237,9 @@ Material:
     - _SrcBlend: 1
     - _StencilComp: 0
     - _StencilRef: 0
-    - _StepViaRampTexture: 0
+    - _StepViaRampTexture: 1
     - _Surface: 0
-    - _USERAMPCOLOR: 0
+    - _USERAMPCOLOR: 1
     - _UseClipPattern: 0
     - _UseNormalMap: 0
     - _UseRampColor: 0
@@ -246,7 +247,7 @@ Material:
     - _ZWrite: 1
     - _brushScale: 16.4
     m_Colors:
-    - _BaseColor: {r: 0.5896226, g: 1, b: 0.8542863, a: 1}
+    - _BaseColor: {r: 0.8632076, g: 1, b: 0.95179695, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
@@ -258,7 +259,7 @@ Material:
     - _HatchingScale: {r: 1, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
-    - _RimColor: {r: 0, g: 0.5871551, b: 2.670157, a: 1}
+    - _RimColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}

@@ -77,8 +77,21 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 
         else
         {
-            
-            localPrefabBlock.IsThisBlockWasHighlighted = false;
+            if (Input.GetMouseButtonDown(0))
+            {
+                localPrefabBlock.IsThisBlockWasHighlighted = false;
+                localPrefabBlock.IsThisBlockWasSelected = false;
+                localPrefabBlock.ChangeColorBack();
+                localPrefabBlock.ChangeMaterialBack();
+                if (localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
+                {
+                    localPrefabBlock.blockInside.gameObject.SetActive(true);
+                }
+                BuildingManager.Instance.DeselectObjectType();
+                UIManager.Instance.LocalSetupUIIcons();
+            }
+           
+
             if (!localPrefabBlock.IsThisBlockWasSelected)
             {
                 localPrefabBlock.ChangeColorBack();

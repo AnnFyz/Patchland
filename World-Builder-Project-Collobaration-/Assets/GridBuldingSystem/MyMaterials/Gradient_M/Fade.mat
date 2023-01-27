@@ -94,7 +94,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 4.82
+    - _Metallic: 5
     - _Mode: 0
     - _NOISETRIPLANAR: 0
     - _OcclusionStrength: 1
@@ -107,21 +107,21 @@ Material:
     - _UVSec: 0
     - _UseColorMap: 0
     - _UseEmissiveMap: 0
-    - _UseMetallicMap: 1
-    - _UseNormalMap: 1
+    - _UseMetallicMap: 0
+    - _UseNormalMap: 0
     - _UseRoughnessMap: 0
     - _ZWrite: 1
     - _dissolve: 1
     - _dissolveTexture: 1
     - _doubleSided: 0
-    - _inverse: 0
+    - _inverse: 1
     - _retractBackfaces: 0
     - _screendissolve: 1
     - _span: 0.93
     - _spread: 1
     m_Colors:
-    - _Color: {r: 0.5968509, g: 1, b: 0.13235295, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SectionColor: {r: 0.36764705, g: 0.4485293, b: 1, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}
