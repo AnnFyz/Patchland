@@ -120,7 +120,6 @@ public class UIManager : MonoBehaviour
     public void CollectGem()
     {
         amountOfGems++;
-        amountOfGems = Mathf.Clamp(0, 100, amountOfGems);
         textAmount.SetText(amountOfGems.ToString());
     }
 

@@ -5,6 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+public enum UIState
+{
+    healthy,
+    hungry,
+    veryHungry,
+    zombi
+}
 public class UnitsHealth : MonoBehaviour
 {
     [SerializeField] Image levelBar;
@@ -15,11 +22,58 @@ public class UnitsHealth : MonoBehaviour
     public Action OnUnitDeath;
     Unit unit;
     float damageToUnit;
+    [SerializeField] UIState currentUIState = UIState.healthy;
+    public GameObject stateFire;
     private void Awake()
     {
-        levelBar = GetComponent<Image>();
+        //levelBar = GetComponent<Image>();
         unit = GetComponentInParent<Unit>();
         damageToUnit = unit.unitScriptableObjects.damageToUnitWithoutFood;
+        stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
+    }
+
+    void SwitchUIState()
+    {
+       if(curretValue > 80)
+        {
+           
+            currentUIState = UIState.healthy;
+            stateFire.SetActive(false);
+            stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
+            stateFire.SetActive(true);
+
+        }
+       else if (curretValue <= 80 && curretValue >= 50)
+        {
+            currentUIState = UIState.hungry;
+            stateFire.SetActive(false);
+            stateFire = gameObject.transform.GetChild(1).GetChild(1).gameObject;
+            stateFire.SetActive(true);
+
+        }
+        else if (curretValue < 50 && curretValue > 0)
+        {
+            currentUIState = UIState.veryHungry;
+            stateFire.SetActive(false);
+            stateFire = gameObject.transform.GetChild(1).GetChild(2).gameObject;
+            stateFire.SetActive(true);
+
+        }
+       else if (curretValue <= 0)
+        {
+            if(unit.currentUnitsState == UnitsState.Zombi)
+            {
+                currentUIState = UIState.zombi;
+                stateFire.SetActive(false);
+                stateFire = gameObject.transform.GetChild(1).GetChild(3).gameObject;
+                stateFire.SetActive(true);
+
+            }
+            else
+            {
+                stateFire.SetActive(false);
+            }
+        }
     }
     private void Start()
     {
@@ -29,6 +83,7 @@ public class UnitsHealth : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SwitchUIState();
         if (!isFoodAround && curretValue > 0)
         {
             LoseHealth();
@@ -59,6 +114,7 @@ public class UnitsHealth : MonoBehaviour
         curretValue += value;
         curretValue = Mathf.Clamp(curretValue, 0, maxValue);
         levelBar.fillAmount = curretValue / maxValue;
+        SwitchUIState();
     }
 
     public IEnumerator FillHealthGradually()
