@@ -28,7 +28,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
     public int width;
     public int height;
     public int placedObjId;
-
+    public Material materialForDeadObj;
 
     public int GetRotationAngle(Dir dir) {
         switch (dir) {

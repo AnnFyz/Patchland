@@ -61,6 +61,6 @@ public class BlockHealth : MonoBehaviour
         V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
         block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
         block.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
-        if (currentHealth <= 0 ) { IsBlockDead = true; }
+        if (currentHealth <= 0 ) { IsBlockDead = true; gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock(); }
     }
 }

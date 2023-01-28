@@ -17,6 +17,7 @@ public class GrabRotation : MonoBehaviour
     {
         offsetX = Input.GetAxis("Mouse X");
         offsetY = Input.GetAxis("Mouse Y");
+        offsetX = Mathf.Clamp(offsetX, -70f, 70f);
         //rotator.transform.Rotate(Vector3.down, offsetX);
         //rotator.transform.Rotate(Vector3.right, offsetY);
         rotator.transform.eulerAngles += sensitivityRotation * new Vector3(-offsetY, offsetX, 0);

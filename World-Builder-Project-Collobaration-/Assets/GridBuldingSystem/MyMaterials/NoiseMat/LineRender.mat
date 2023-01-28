@@ -2,15 +2,13 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: F
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: LineRender
   m_Shader: {fileID: 4800000, guid: d25492679ddc94a49b6992a162dd0232, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,22 +18,34 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _DisTex:
-        m_Texture: {fileID: 2800000, guid: 33c9097e3e001cc48b5b502c726ff2a2, type: 3}
-        m_Scale: {x: 0.1, y: 0.1}
-        m_Offset: {x: 0, y: 0}
-    - _Emi1:
-        m_Texture: {fileID: 2800000, guid: a75cd299f049f4f40b0a0e131860bd9b, type: 3}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Emi2:
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisTex:
+        m_Texture: {fileID: 2800000, guid: 7c5e8eeff3f0a994ca0e22287365afc4, type: 3}
+        m_Scale: {x: 9.259835, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a75cd299f049f4f40b0a0e131860bd9b, type: 3}
-        m_Scale: {x: 5, y: 5}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 52c35818c7f2b4d4999db89278788ef7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0.3}
     - _MainTex2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,40 +54,51 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Prlx:
-        m_Texture: {fileID: 2800000, guid: 33c9097e3e001cc48b5b502c726ff2a2, type: 3}
-        m_Scale: {x: 0.1, y: 0.1}
-        m_Offset: {x: 0, y: 0}
-    - _PrlxMsk:
-        m_Texture: {fileID: 2800000, guid: edd954ed702a6c941b744f8919914a49, type: 3}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha1: 1
+    - _Alpha1: 0
     - _Alpha2: 0
     - _Alpha3: 0
-    - _Bias: 0.07
-    - _BiasDs: 0.07
-    - _BiasMT: 0
+    - _BiasDs: 10
+    - _BiasMT: 0.2
     - _BiasMT2: 1
     - _BiasMT3: 1
     - _Bri: 0
+    - _BumpScale: 1
     - _Con: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
     - _DisTexType: 1
     - _DstBlend: 1
+    - _EmissionScaleUI: 0
+    - _Glossiness: 0.5
     - _InvFade: 5
+    - _Metallic: 0
     - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
     - _Queue: 3000
     - _SrcBlend: 5
+    - _UVSec: 0
+    - _ZWrite: 1
     - _ac: 0
-    - _bright: 0
     - _dT: 1
     - _dTA: 1
     - _dTAE: 1
     - _fT: 1
-    - _fTA: 0
-    - _fTAE: 0
+    - _fTA: 1
+    - _fTAE: 1
     - _inv1: 1
     - _inv2: 0
     - _inv3: 0
@@ -85,8 +106,6 @@ Material:
     - _invAlpha2: 0
     - _invAlpha3: 0
     - _numberTex: 0
-    - _prl1: 0
-    - _prl2: 0
     - _rgbc: 0
     - _sT: 1
     - _sTA: 0
@@ -96,21 +115,16 @@ Material:
     - _tTAE: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _Pan1: {r: 0, g: 0, b: 0, a: 0}
     - _Pan2: {r: 0, g: 0, b: 0, a: 0}
     - _Pan3: {r: 0, g: 0, b: 0, a: 0}
-    - _PanDs: {r: 0.01, g: 0, b: 0, a: 0}
-    - _PanPr: {r: 0.01, g: 0, b: 0, a: 0}
-    - _PanPrlx: {r: 0.2, g: 0, b: 0, a: 0}
-    - _PanPrlxMsk: {r: 0, g: 0, b: 0, a: 0}
-    - _Rot1: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _PanDs: {r: 0, g: 0, b: 0, a: 0}
+    - _Rot1: {r: 0.5, g: 0.5, b: 0, a: 90}
     - _Rot2: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Rot3: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RotDs: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RotPr: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RotPrlx: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RotPrlxMsk: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotDs: {r: 0.5, g: 0.5, b: 0, a: 180}
     - _Scale: {r: 1, g: 1, b: 0.5, a: 0.5}
     - _Scale2: {r: 1, g: 1, b: 0.5, a: 0.5}
     - _Scale3: {r: 1, g: 1, b: 0.5, a: 0.5}
@@ -118,6 +132,5 @@ Material:
     - _Tile1: {r: 1, g: 1, b: 0, a: 0}
     - _Tile2: {r: 1, g: 1, b: 0, a: 0}
     - _Tile3: {r: 1, g: 1, b: 0, a: 0}
-    - _TileDs: {r: 1, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 0.2830189, g: 0.18289427, b: 0.18289427, a: 1}
-  m_BuildTextureStacks: []
+    - _TileDs: {r: 10, g: 10, b: 15, a: 0}
+    - _TintColor: {r: 0, g: 0.46206856, b: 1, a: 1}

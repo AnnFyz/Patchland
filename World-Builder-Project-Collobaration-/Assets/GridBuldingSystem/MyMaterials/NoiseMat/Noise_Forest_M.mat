@@ -97,7 +97,7 @@ Material:
     - Vector1_63a0afd297734dc9998b9b19bd747613: 3
     - Vector1_6e12275293314cb7a52c177f83f8f9aa: 0.53
     - _AlphaClip: 0
-    - _Amount: 0.1
+    - _Amount: 0.05
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0

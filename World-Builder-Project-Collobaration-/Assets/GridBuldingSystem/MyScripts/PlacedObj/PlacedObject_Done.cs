@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlacedObject_Done : MonoBehaviour {
 
+   [SerializeField] Material material;
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO) {
         Transform placedObjectTransform = Instantiate(placedObjectTypeSO.prefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
@@ -23,6 +24,7 @@ public class PlacedObject_Done : MonoBehaviour {
         this.placedObjectTypeSO = placedObjectTypeSO;
         this.origin = origin;
         this.dir = dir;
+        material = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material;
     }
 
     public List<Vector2Int> GetGridPositionList() {
@@ -38,4 +40,10 @@ public class PlacedObject_Done : MonoBehaviour {
         return placedObjectTypeSO.nameString;
     }
 
+    public void ChangeMaterialOfObject()
+    {
+        material = placedObjectTypeSO.materialForDeadObj;
+        transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material = material;
+        transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+    }
 }

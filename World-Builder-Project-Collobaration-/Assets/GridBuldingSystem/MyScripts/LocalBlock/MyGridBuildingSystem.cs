@@ -57,6 +57,28 @@ public class MyGridBuildingSystem : MonoBehaviour
         }
 
     }
+
+    public void GetAllPlacedObjectsOnTheBlock()
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int z = 0; z < gridHeight; z++)
+            {
+                if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
+                {
+                    grid.GetGridObject(x, z).GetPlacedObject().ChangeMaterialOfObject();
+
+                    int placedObjectId = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
+                    if (UnitsManager.Instance.waypoints[placedObjectId].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
+                    {
+                        UnitsManager.Instance.waypoints[placedObjectId].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
+                        Debug.Log("Waypoint was removed " + grid.GetGridObject(x, z).GetPlacedObject());
+                        OnChangedWaypoints?.Invoke();
+                    }
+                } 
+            }
+        }
+    }
     public class MyGridObject
     {
 
@@ -159,66 +181,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         }
 
     }
-    //if (Input.GetKeyDown(KeyCode.R))
-    //{
-    //    dir = PlacedObjectTypeSO.GetNextDir(dir);
-    //}
 
-    //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); Debug.Log("First org form selected"); }
-    //if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); Debug.Log("Second building selected"); }
-    //if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); Debug.Log("Third building selected"); }
-
-
-    //private void DeselectObjectType()
-    //{
-    //    placedObjectTypeSO = null; RefreshSelectedObjectType();
-    //}
-
-    //private void RefreshSelectedObjectType()
-    //{
-    //    OnSelectedChanged?.Invoke(this, EventArgs.Empty);
-    //}
-
-
-    //public Vector2Int GetGridPosition(Vector3 worldPosition)
-    //{
-    //    grid.GetXZ(worldPosition, out int x, out int z);
-    //    return new Vector2Int(x, z);
-    //}
-
-    //public Vector3 GetMouseWorldSnappedPosition()
-    //{
-    //    Vector3 mousePosition = GetMouseWorldPosition();
-    //    grid.GetXZ(mousePosition, out int x, out int z);
-
-    //    if (placedObjectTypeSO != null)
-    //    {
-    //        Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
-    //        Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
-    //        return placedObjectWorldPosition;
-    //    }
-    //    else
-    //    {
-    //        return mousePosition;
-    //    }
-    //}
-
-    //public Quaternion GetPlacedObjectRotation()
-    //{
-    //    if (placedObjectTypeSO != null)
-    //    {
-    //        return Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0);
-    //    }
-    //    else
-    //    {
-    //        return Quaternion.identity;
-    //    }
-    //}
-
-    //public PlacedObjectTypeSO GetPlacedObjectTypeSO()
-    //{
-    //    return placedObjectTypeSO;
-    //}
 
     private Vector3 GetMouseWorldPosition()
     {

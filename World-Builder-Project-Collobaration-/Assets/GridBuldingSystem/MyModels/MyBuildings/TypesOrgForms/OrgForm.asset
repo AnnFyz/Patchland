@@ -18,3 +18,4 @@ MonoBehaviour:
   width: 1
   height: 1
   placedObjId: 0
+  materialForDeadObj: {fileID: 2100000, guid: 7d868f0084bfe654b9e590091faa439c, type: 2}

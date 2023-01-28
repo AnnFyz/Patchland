@@ -143,11 +143,15 @@ public class GridOfPrefabs : MonoBehaviour
                             UIManager.Instance.HidePanels();
                         }
                     }
-                    placedObject.IsThisBlockWasSelected = true;
-                    placedObject.ChangeSelectedMaterial();
-                    UIManager.Instance.ShowPanels();
-                    UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
-                    UIManager.Instance.LocalSetupUIIcons();
+                    if (!placedObject.GetComponent<BlockHealth>().IsBlockDead)
+                    {
+                        placedObject.IsThisBlockWasSelected = true;
+                        placedObject.ChangeSelectedMaterial();
+                        UIManager.Instance.ShowPanels();
+                        UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
+                        UIManager.Instance.LocalSetupUIIcons();
+                    }
+                    
                 }
             }
         }

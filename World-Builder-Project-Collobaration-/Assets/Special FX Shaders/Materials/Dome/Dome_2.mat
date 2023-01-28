@@ -2,13 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Dome_2
   m_Shader: {fileID: 4800000, guid: fae0664a96a088d48aa250419f2b8402, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -36,7 +38,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DisTex:
         m_Texture: {fileID: 2800000, guid: d7c2c0b968ff3c6429ac3ad7182e7aba, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DslTex:
         m_Texture: {fileID: 2800000, guid: 1b2365c4d674e2b499e7ac906a20fda4, type: 3}
@@ -70,30 +72,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
-    - _Alpha1: 0
-    - _Alpha2: 0
-    - _Alpha3: 0
+    - _Alpha1: 1
+    - _Alpha2: 1
+    - _Alpha3: 1
     - _BiasDs: 0.05
     - _BiasDsl: 0
     - _BiasMT: 0
-    - _BiasMT2: 0
+    - _BiasMT2: 1
     - _BiasMT3: 1
-    - _Bri: 0
+    - _Bri: 0.12
     - _BumpScale: 1
-    - _Con: 1
+    - _Con: 1.09
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DisTexType: 0
     - _DslEA: 1
-    - _DslEI: 1
-    - _DslER: 0.039
-    - _DslGl: 0.38
+    - _DslEI: 0.266
+    - _DslER: 0.2
+    - _DslGl: 0
     - _DstBlend: 10
     - _EmissionScaleUI: 0
     - _Glossiness: 0.5
-    - _InterAlpha: 1
-    - _InterEdge: 1.57
+    - _InterAlpha: 0
+    - _InterEdge: 3
     - _InterPow: 20
     - _InvFade: 5
     - _Metallic: 0
@@ -107,7 +110,7 @@ Material:
     - _ac: 3
     - _dT: 1
     - _dTA: 1
-    - _dTAE: 1
+    - _dTAE: 0
     - _dslT: 1
     - _dslTA: 1
     - _dslTAE: 0
@@ -117,10 +120,10 @@ Material:
     - _interT: 1
     - _inv1: 1
     - _inv2: 1
-    - _inv3: 0
+    - _inv3: 1
     - _invAlpha1: 1
     - _invAlpha2: 1
-    - _invAlpha3: 0
+    - _invAlpha3: 1
     - _numberTex: 2
     - _rgbc: 3
     - _sT: 1
@@ -131,10 +134,10 @@ Material:
     - _tTAE: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DslEC: {r: 1, g: 0.09803921, b: 0.1882353, a: 1}
+    - _DslEC: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
-    - _InterColor: {r: 0.8, g: 0.7764706, b: 0.078431375, a: 1}
+    - _InterColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
     - _Pan1: {r: 0, g: 0, b: 0, a: 0}
     - _Pan2: {r: 0, g: 0, b: 0, a: 0}
     - _Pan3: {r: 0, g: 0, b: 0, a: 0}
@@ -155,4 +158,5 @@ Material:
     - _Tile3: {r: 1, g: 1, b: 0, a: 0}
     - _TileDs: {r: 1, g: 1, b: 0, a: 0}
     - _TileDsl: {r: 1, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 0, g: 0.68, b: 1, a: 1}
+    - _TintColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  m_BuildTextureStacks: []
