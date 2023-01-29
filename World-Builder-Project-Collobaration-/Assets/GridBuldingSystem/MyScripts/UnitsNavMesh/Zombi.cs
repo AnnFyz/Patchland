@@ -32,7 +32,7 @@ public class Zombi : MonoBehaviour
     {
         unit = GetComponent<Unit>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //modelRenderer = transform.GetChild(4).GetChild(0).GetComponent<Renderer>();
+        //modelRenderer.GetMaterials()
     }
     private void Start()
     {

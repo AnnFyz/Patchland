@@ -76,6 +76,7 @@ public class Unit : MonoBehaviour
         {
             currentUnitsState = UnitsState.Zombi;
             Zombi zombi = GetComponent<Zombi>();
+
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
