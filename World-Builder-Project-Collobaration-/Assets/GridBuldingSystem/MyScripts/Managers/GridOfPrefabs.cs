@@ -20,13 +20,13 @@ public class GridOfPrefabs : MonoBehaviour
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
     public MyGridXZ<PrefabGridObject> grid;
-    public NavMeshSurface horizontalSurface; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
+    public NavMeshSurface[] horizontalSurfaces; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
 
 
     private void Awake()
     {
         Instance = this;
-        horizontalSurface = GetComponent<NavMeshSurface>();
+        horizontalSurfaces = GetComponents<NavMeshSurface>();
     }
     private void OnEnable()
     {
@@ -77,7 +77,11 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void RebuildNavMesh()
     {
-        horizontalSurface.BuildNavMesh();
+        for (int i = 0; i < horizontalSurfaces.Length; i++)
+        {
+            horizontalSurfaces[i].BuildNavMesh();
+        }
+        
     }
 
     float RandomRotation()

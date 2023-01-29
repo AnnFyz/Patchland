@@ -8,13 +8,11 @@ using UnityEngine.EventSystems;
 public class GemManager : MonoBehaviour //make spawn in waves with particles
 {
     public List<GemsSO> gems = new List<GemsSO>();
-    NavMeshSurface surface;
     NavMeshTriangulation triangulation;
     GameObject rainObj;
     List<Transform> createdGems = new List<Transform>();
     private void Start()
     {
-        surface = GridOfPrefabs.Instance.horizontalSurface;
         rainObj = transform.GetChild(0).gameObject;
         rainObj.SetActive(false);
         StartCoroutine(SpawnGemsInWaves());

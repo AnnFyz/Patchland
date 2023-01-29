@@ -14,7 +14,6 @@ public class UnitsSpawner : MonoBehaviour
     //[SerializeField] MazeSpawner mazeSpawner;
     [SerializeField] GameObject unitPrefab;
     [SerializeField] int numberOfUnits = 1;
-    NavMeshSurface surface;
     //NavMeshTriangulation triangulation;
     List<GameObject> units = new List<GameObject>();
     MyGridBuildingSystem localBuildingSystem;
@@ -27,11 +26,6 @@ public class UnitsSpawner : MonoBehaviour
     void OnEnable()
     {
         localBuildingSystem.OnObjectPlaced += SpawnUnits;
-    }
-
-    private void Start()
-    {
-        surface = GridOfPrefabs.Instance.horizontalSurface;
     }
 
     void SpawnUnits(int placedObjId)
