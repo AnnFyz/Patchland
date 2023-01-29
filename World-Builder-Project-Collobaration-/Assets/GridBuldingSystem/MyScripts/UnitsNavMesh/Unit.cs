@@ -35,10 +35,13 @@ public class Unit : MonoBehaviour
     public UnitsState currentUnitsState;
     public GameObject Pointer;
     public bool isWaypointApproached = false;
+    BlockHealth occupiedBlockHealth;
+    Zombi zombi;
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
         agent = GetComponent<NavMeshAgent>();
+        zombi = GetComponent<Zombi>();
     }
 
     void Start()
@@ -75,8 +78,6 @@ public class Unit : MonoBehaviour
         if (randomValue == 0)
         {
             currentUnitsState = UnitsState.Zombi;
-            Zombi zombi = GetComponent<Zombi>();
-
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
@@ -90,6 +91,17 @@ public class Unit : MonoBehaviour
 
     }
 
+    public void SetOccupiedBlock(Collider other)
+    {
+        if (other.GetComponentInParent<BlockHealth>())
+        {
+            if (zombi.currentState == ZombiState.None) // first assignment
+            {
+               zombi.occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
+               zombi.occupiedBlock = other.GetComponentInParent<BlockPrefab>();
+            }
+        }
+    }
     void DestroyUnit()
     {
         Destroy(gameObject);
@@ -208,6 +220,7 @@ public class Unit : MonoBehaviour
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
 
+        SetOccupiedBlock(other);
     }
 
     private void OnTriggerStay(Collider other)
@@ -222,6 +235,8 @@ public class Unit : MonoBehaviour
                 }
             }
         }
+
+        SetOccupiedBlock(other);
     }
 
 

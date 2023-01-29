@@ -16,8 +16,8 @@ public class Zombi : MonoBehaviour
 {
     public ZombiState currentState;
     Unit unit;
-    [SerializeField] BlockHealth occupiedBlockHealth;
-    [SerializeField] BlockPrefab occupiedBlock;
+    public BlockHealth occupiedBlockHealth;
+    public BlockPrefab occupiedBlock;
     [SerializeField] BlockPrefab[] possibleNextOccupiedBlocks;
     private int waypointIndex = 0;
     private float elapsed = 0.0f;
@@ -102,25 +102,28 @@ public class Zombi : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    public void SetOccupiedBlock(Collider other)
     {
-        if (other.GetComponentInParent<BlockHealth>())
-        {
-            if(occupiedBlockHealth == null) // first assignment
-            {
-                occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
-                occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
-            }
-
-            else if (occupiedBlockHealth.currentHealth <= 0)  //reaasign occupied block only if the current one is dead
+        if (other.GetComponentInParent<BlockHealth>()) 
+        {          
+            if (currentState != ZombiState.None && occupiedBlockHealth.currentHealth <= 0)  //reaasign occupied block only if the current one is dead
             {
                 occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
                 occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
             }
         }
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        SetOccupiedBlock(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        SetOccupiedBlock(other);
+    }
     public IEnumerator AttackBlock()
     {
         while (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null)
