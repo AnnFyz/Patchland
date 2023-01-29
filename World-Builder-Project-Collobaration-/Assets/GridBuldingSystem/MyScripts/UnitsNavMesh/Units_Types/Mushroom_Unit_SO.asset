@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
-  m_Name: BasicUnit
+  m_Name: Mushroom_Unit_SO
   m_EditorClassIdentifier: 
   damageToUnitWithoutFood: 0.001
   chanceToBecomeZombi: 68.6
@@ -20,8 +20,8 @@ MonoBehaviour:
   angularSpeed: 120
   areaMask: -1
   avoidancePriority: 50
-  baseOffset: 0.5
-  height: 1
+  baseOffset: 0
+  height: 9
   obstacleAvoidanceType: 1
   radius: 1.05
   speed: 13

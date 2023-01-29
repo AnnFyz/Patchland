@@ -19,6 +19,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     public static event Action OnChangedWaypoints;
     //public event EventHandler OnObjectPlaced; // for sound 
     //public event EventHandler OnSelectedChanged; // for ghost building
+    int newHeight = 0;
     private void Awake()
     {
         origin = transform.position;
@@ -30,10 +31,15 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     public void UpdateGrid(int newHeight)
     {
+        this.newHeight = newHeight;
         oldGrid = grid;
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
     }
 
+    public Vector3 GetOriginOfGrid()
+    {
+        return new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z);
+    }
     public void DeleteOldObjectsAndWaypoints(int newHeight)
     {
         for (int x = 0; x < gridWidth; x++)

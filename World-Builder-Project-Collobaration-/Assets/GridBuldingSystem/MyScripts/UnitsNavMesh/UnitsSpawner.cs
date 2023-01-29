@@ -31,12 +31,13 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(int placedObjId)
     {
         NavMeshHit hit;
+        Debug.Log("Height " + localBuildingSystem.GetOriginOfGrid().y);
         for (int i = 0; i < numberOfUnits; i++)
         {
-            float randomPosX = Random.Range(transform.position.x, transform.position.x + 1.5f);
-            float randomPosZ = Random.Range(transform.position.z, transform.position.z + 1.5f);
+            float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+            float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
             //int vertexIndex = UnityEngine.Random.Range(transform.position, );
-            if (NavMesh.SamplePosition(new Vector3(randomPosX, 0, randomPosZ), out hit, 200f, groundMask))
+            if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
             {
                 currentUnit = Instantiate(SelectRightUnit(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
                 if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)

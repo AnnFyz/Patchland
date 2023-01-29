@@ -132,10 +132,16 @@ public class Unit : MonoBehaviour
                     if (elapsed > 3.0f)
                     {
                         elapsed -= 3.0f;
-                        agent.SetDestination(target.transform.position);
-                        if (Vector3.Distance(transform.position, target.transform.position) < 1f)
+                        if (agent.SetDestination(target.transform.position))
                         {
-                            MoveAutomaticallyToWayPoint();
+                            if (Vector3.Distance(transform.position, target.transform.position) < 1f)
+                            {
+                                MoveAutomaticallyToWayPoint();
+                            }
+                            else
+                            {
+                                IterateWaypointIndex();
+                            }
                         }
                         else
                         {
