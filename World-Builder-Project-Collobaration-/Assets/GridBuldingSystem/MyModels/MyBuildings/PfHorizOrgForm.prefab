@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 0}
   placedObjectTypeSO: {fileID: 0}
 --- !u!114 &8519390558105600891
 MonoBehaviour:
@@ -148,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 5159909994114268617, guid: e68f21773de19e24a8031310b77fc633,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5159909994114268621, guid: e68f21773de19e24a8031310b77fc633,
         type: 3}
