@@ -37,6 +37,7 @@ public class Unit : MonoBehaviour
     public bool isWaypointApproached = false;
     BlockHealth occupiedBlockHealth;
     Zombi zombi;
+    List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -78,6 +79,7 @@ public class Unit : MonoBehaviour
         if (randomValue == 0)
         {
             currentUnitsState = UnitsState.Zombi;
+            SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
@@ -91,17 +93,35 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void SetOccupiedBlock(Collider other)
+    public void SetOccupiedBlock()
     {
-        if (other.GetComponentInParent<BlockHealth>())
+        float dist = Mathf.Infinity;
+        if (zombi.currentState == ZombiState.None) // first assignment
         {
-            if (zombi.currentState == ZombiState.None) // first assignment
+            foreach (var block in intersectedWithUnitBlocks)
             {
-
-                    zombi.occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
-                    zombi.occupiedBlock = other.GetComponentInParent<BlockPrefab>();
+                float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, block.transform.position + block.transform.position * 0.5f);
+                if(newDist < dist)
+                {
+                    dist = newDist;
+                    zombi.occupiedBlockHealth = block.GetComponentInParent<BlockHealth>();
+                    zombi.occupiedBlock = block;
+                }
             }
         }
+    }
+    void CheckIntersectedBlock(Collider other)
+    {
+        BlockPrefab block;
+        if (other.GetComponentInParent<BlockPrefab>())
+        {
+            block = other.GetComponentInParent<BlockPrefab>();
+            if (!intersectedWithUnitBlocks.Contains(block))
+            {
+                intersectedWithUnitBlocks.Add(block);
+                Debug.Log("ADD BLOCK");
+            }
+        }      
     }
     void DestroyUnit()
     {
@@ -217,8 +237,7 @@ public class Unit : MonoBehaviour
         {
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
-
-        SetOccupiedBlock(other);
+        CheckIntersectedBlock(other);
     }
 
     private void OnTriggerStay(Collider other)
@@ -234,8 +253,6 @@ public class Unit : MonoBehaviour
                 }
             }
         }
-
-        SetOccupiedBlock(other);
     }
 
 

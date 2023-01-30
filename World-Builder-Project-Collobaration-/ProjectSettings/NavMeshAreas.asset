@@ -109,7 +109,7 @@ NavMeshProjectSettings:
       m_Flags: 0
   - serializedVersion: 2
     agentTypeID: -334000983
-    agentRadius: 1
+    agentRadius: 2
     agentHeight: 9
     agentSlope: 45
     agentClimb: 8
@@ -146,5 +146,5 @@ NavMeshProjectSettings:
   m_SettingNames:
   - Humanoid
   - BasicUnit
-  - Mushroom
+  - GiantMushroom
   - FlyingAgent
