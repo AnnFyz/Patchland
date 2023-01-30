@@ -23,11 +23,13 @@ public class Zombi : MonoBehaviour
     private float elapsed = 0.0f;
     public Transform target;
     public NavMeshAgent agent;
-    private NavMeshPath path;
+    public NavMeshPath path;
     public bool isAttacking = false;
     [SerializeField] Renderer modelRenderer;
     [SerializeField] Color zombiTopColor = Color.white;
     [SerializeField] Color zombiBottomColor = Color.grey;
+    [SerializeField] Material newMaterial;
+    int x = 0;
     private void Awake()
     {
         unit = GetComponent<Unit>();
@@ -45,15 +47,34 @@ public class Zombi : MonoBehaviour
         Debug.Log("I AM A ZOMBI NOW!");
         modelRenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), zombiTopColor);
         modelRenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), zombiBottomColor);
+        if(newMaterial != null)
+        {
+            ChangeMaterial(newMaterial);
+        }
+    }
+
+    void ChangeMaterial(Material newMat)
+    {
+        Renderer[] oldMat;
+        oldMat = modelRenderer.GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in oldMat)
+         {
+            var mats = new Material[rend.materials.Length];
+            for (var j = 0; j < rend.materials.Length; j++)
+            {
+                mats[j] = newMat;
+            }
+            rend.materials = mats;
+        }
     }
     private void FixedUpdate()
     {
         HandleZombiMovement();
-        if (currentState == ZombiState.FindAnotherBlock)
+        if (currentState == ZombiState.FindAnotherBlock && unit.currentUnitsState == UnitsState.Zombi)
         {
             MoveToNextNeighbourAliveBlock();
         }
-        if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead)
+        if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
         {
             if (occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
             {
@@ -175,8 +196,10 @@ public class Zombi : MonoBehaviour
 
     }
 
+
     void MoveToNextNeighbourAliveBlock()
     {
+      
         for (int i = 0; i < possibleNextOccupiedBlocks.Length; i++)
         {
             if (possibleNextOccupiedBlocks[i] != null)
@@ -197,14 +220,31 @@ public class Zombi : MonoBehaviour
                 }
                 else
                 {
+                    x++;
                     Debug.Log("THERE ARE NO WAY");
-                    continue;
+                    if (x > 2000)
+                    {
+                        DestroyZombi();
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
                 }
             }
             else
             {
+                x++;
                 Debug.Log("Block IS NULL");
-                continue;
+                if (x > 2000)
+                {
+                    DestroyZombi();
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
     }

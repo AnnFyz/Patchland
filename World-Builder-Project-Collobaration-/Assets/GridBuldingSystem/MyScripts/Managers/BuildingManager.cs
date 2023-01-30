@@ -40,9 +40,9 @@ public class BuildingManager : MonoBehaviour
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }  //OVERRIDE
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }  //OVERRIDE
+        if (Input.GetKeyDown(KeyCode.Alpha2) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType(); }
     }
 
     public void SelectResource(int resourceId)

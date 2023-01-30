@@ -33,7 +33,14 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         this.newHeight = newHeight;
         oldGrid = grid;
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
+        if(blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond)
+        {
+            grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
+        }
+        else
+        {
+            grid = null;
+        }
     }
 
     public Vector3 GetOriginOfGrid()
@@ -46,7 +53,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         {
             for (int z = 0; z < gridHeight; z++)
             {
-                if (oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
+                if (oldGrid != null && oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
                 {
                     int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
                     if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))

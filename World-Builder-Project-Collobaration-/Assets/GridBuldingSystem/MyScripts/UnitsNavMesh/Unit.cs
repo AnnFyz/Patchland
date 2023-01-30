@@ -97,8 +97,9 @@ public class Unit : MonoBehaviour
         {
             if (zombi.currentState == ZombiState.None) // first assignment
             {
-               zombi.occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
-               zombi.occupiedBlock = other.GetComponentInParent<BlockPrefab>();
+
+                    zombi.occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
+                    zombi.occupiedBlock = other.GetComponentInParent<BlockPrefab>();
             }
         }
     }
@@ -207,15 +208,12 @@ public class Unit : MonoBehaviour
                 if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
                 {
                     GetComponentInChildren<UnitsHealth>().FillHealth(50);
-                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                    //if health.amout = full
-                    // else stay until health.amout = full
                 }
 
             }
         }
 
-        if (other.gameObject.tag == "Gem")
+        if (other.gameObject.tag == "Gem" && currentUnitsState != UnitsState.Zombi)
         {
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
@@ -231,6 +229,7 @@ public class Unit : MonoBehaviour
             {
                 if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
                 {
+                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 }
             }

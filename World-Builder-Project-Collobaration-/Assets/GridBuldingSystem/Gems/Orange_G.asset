@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfef0d912bd6b44cbda368aea50d531, type: 3}
   m_Name: Orange_G
   m_EditorClassIdentifier: 
-  weight: 50
+  weight: 15
   gemPrefab: {fileID: 6908967398769862543, guid: 302c6102afcb33142bbfbc62b7d20c83,
     type: 3}
