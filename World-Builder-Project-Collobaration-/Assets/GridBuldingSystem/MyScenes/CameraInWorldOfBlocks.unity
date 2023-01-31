@@ -5298,7 +5298,7 @@ MonoBehaviour:
   dir: 0
   levelsMaterials:
   - {fileID: 2100000, guid: e8be774d36a92514a8cef77caf8243d1, type: 2}
-  - {fileID: 2100000, guid: 533dad97319eb3744864e6eaa968d972, type: 2}
+  - {fileID: 2100000, guid: 9a899d9c8fbdc8e40ace2790d909d9d2, type: 2}
   - {fileID: 2100000, guid: 760e0ab2ad19b034f8a75ce5763d8f02, type: 2}
 --- !u!1 &2120624607
 GameObject:
@@ -5374,7 +5374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &227473131321560774
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -27,7 +27,6 @@ Material:
   - FOAM_SHADOWS_ON
   - INTERSECTION_EFFECTS_ON
   - WATER_LIGHTING_ON
-  - WORLD_SPACE_UV_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -105,7 +104,7 @@ Material:
     - SHORE_MOVEMENT: 0
     - SURFACE_FOAM: 0
     - WATER_LIGHTING: 1
-    - WORLD_SPACE_UV: 1
+    - WORLD_SPACE_UV: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -120,7 +119,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FoamShadowDepth: 10
-    - _FoamShadowStrength: 0.45
+    - _FoamShadowStrength: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -129,10 +128,10 @@ Material:
     - _IntersectionFoamScale: 0.19
     - _IntersectionFoamShadowProjection: 4.6
     - _IntersectionWaterBlend: 0
-    - _LightingHardness: 0.485
-    - _LightingSmoothness: 0.93
+    - _LightingHardness: 1.38
+    - _LightingSmoothness: 0
     - _Metallic: 0
-    - _NormalsStrength: 0.211
+    - _NormalsStrength: 133.4
     - _OcclusionStrength: 1
     - _PlanarReflectionFresnel: 2.5
     - _PlanarReflectionStrength: 0.22
@@ -154,9 +153,9 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _SurfaceFoamBlend: 1
-    - _SurfaceFoamHeightMask: 0.12
+    - _SurfaceFoamHeightMask: 0
     - _SurfaceFoamHeightMaskSmoothness: 1
-    - _SurfaceFoamShadowProjection: 15
+    - _SurfaceFoamShadowProjection: 14.69
     - _UnderwaterRefractionStrength: 0.099
     - _WaterColorDepth: 0.57
     - _WaterColorHorizonDistance: 20
@@ -166,7 +165,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IntersectionFoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _IntersectionFoamColor: {r: 0, g: 0, b: 0, a: 1}
     - _IntersectionFoamMovement: {r: 0, g: 0, b: 0, a: 0}
     - _IntersectionFoamSampling: {r: 1, g: 0, b: 0, a: 0}
     - _LightingDiffuseColor: {r: 0, g: 0, b: 0, a: 0}
@@ -175,7 +174,7 @@ Material:
     - _ShoreColor: {r: 0, g: 0.98039216, b: 0.3018418, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SurfaceFoamColor1: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.6509804}
-    - _SurfaceFoamColor2: {r: 1, g: 1, b: 1, a: 0}
+    - _SurfaceFoamColor2: {r: 1, g: 1, b: 1, a: 1}
     - _SurfaceFoamMovement: {r: 0.7, g: 0, b: 0.47, a: 0.01}
     - _SurfaceFoamSampling: {r: 0.56, g: 0, b: 0, a: 0}
     - _SurfaceFoamTilingAndOffset: {r: -1, g: -1, b: 0.77, a: 0.22}

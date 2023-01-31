@@ -106,13 +106,13 @@ Material:
     - _FADE_CIRCLE: 1
     - _FADE_SPHERE: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.503
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _NOISETRIPLANAR: 0
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -130,14 +130,14 @@ Material:
     - _dissolve: 1
     - _dissolveTexture: 1
     - _doubleSided: 1
-    - _inverse: 0
+    - _inverse: 1
     - _retractBackfaces: 0
     - _screendissolve: 1
     - _span: 1
     - _spread: 0.38
     m_Colors:
-    - _Color: {r: 0, g: 0.39719817, b: 1, a: 1}
-    - _EmissionColor: {r: 0.003979955, g: 0.0028130573, b: 0.0028130573, a: 1}
+    - _Color: {r: 0, g: 0.39719814, b: 1, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SectionColor: {r: 0.56820476, g: 0.99264705, b: 0, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 2.5, g: 1, b: 0, a: 0}

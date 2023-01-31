@@ -42,10 +42,10 @@ Material:
     - REFRACTION: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionStrength: 0.014
+    - _RefractionStrength: 1.49
     m_Colors:
     - _NormalsMovement: {r: 0.035, g: 0.22, b: 0, a: 0}
-    - _WaterColorUnderwater: {r: 0.24270204, g: 0.33161274, b: 0.509434, a: 1}
+    - _WaterColorUnderwater: {r: 0.6127626, g: 0.69268554, b: 0.8490566, a: 0.8784314}
     - _WaveDirections: {r: 0, g: 0.64, b: 1, a: 0.33}
     - _WaveVisuals: {r: 0.132, g: 7.9, b: 1.38, a: 0}
   m_BuildTextureStacks: []

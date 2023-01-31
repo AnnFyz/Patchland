@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon_Block_2.0_Noise_Desert_1.0
+  m_Name: Toon_Block_2.0_Noise_Forest_1.0
   m_Shader: {fileID: -6465566751694194690, guid: 9c0ff15bfcd768c4f9c75e9a33881389,
     type: 3}
   m_ValidKeywords: []
