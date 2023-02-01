@@ -23,6 +23,7 @@ public class BlockPrefab : MonoBehaviour
     float t;
     public Transform blockInside;
     public Renderer blockInsiderenderer;
+    public GameObject reflectionBlock;
     private void Start()
     {
         blockInside = gameObject.transform.GetChild(0).GetChild(0);
@@ -30,11 +31,11 @@ public class BlockPrefab : MonoBehaviour
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderer = GetComponentInChildren<Renderer>();
         blockInsiderenderer = blockInside.GetComponent<Renderer>();
-        //if (renderer.material.HasColor("_BaseColor"))
-        //{
-        //    defaultColor = renderer.material.color;
-        //    blockInsiderenderer.material.color = defaultColor;
-        //}
+        if (renderer.material.HasColor("_BaseColor"))
+        {
+            defaultColor = renderer.material.color;
+            blockInsiderenderer.material.color = defaultColor;
+        }
         if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
@@ -138,10 +139,10 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeHighlightedColorl()
     {
-        //if (renderer.material.HasColor("_BaseColor"))
-        //{
-        //    renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
-        //}
+        if (renderer.material.HasColor("_BaseColor"))
+        {
+            renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
+        }
         if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
@@ -152,10 +153,10 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeColorBack()
     {
-        //if (renderer.material.HasColor("_BaseColor"))
-        //{
-        //    renderer.material.color = defaultColor;
-        //}
+        if (renderer.material.HasColor("_BaseColor"))
+        {
+            renderer.material.color = defaultColor;
+        }
         if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6") )
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);

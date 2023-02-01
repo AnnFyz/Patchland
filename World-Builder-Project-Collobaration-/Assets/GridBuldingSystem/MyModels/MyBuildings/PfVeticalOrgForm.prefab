@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 0}
   placedObjectTypeSO: {fileID: 0}
 --- !u!114 &8000281925568123895
 MonoBehaviour:
@@ -99,7 +100,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bb0a314ae2d3c264ca404a3ef80430f4, type: 2}
+      objectReference: {fileID: 2100000, guid: a9c3119583e00f44c9c3ee9f35e00404, type: 2}
     - target: {fileID: 2161724160377315515, guid: 0614bed7ddfb35642ba19ff02d90e02b,
         type: 3}
       propertyPath: m_Name

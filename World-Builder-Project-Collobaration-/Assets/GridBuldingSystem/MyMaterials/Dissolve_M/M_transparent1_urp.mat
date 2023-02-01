@@ -125,7 +125,7 @@ Material:
     - _UseMetallicMap: 0
     - _UseNormalMap: 0
     - _UseOpacityMap: 0
-    - _UseRoughnessMap: 0
+    - _UseRoughnessMap: 1
     - _ZWrite: 1
     - _dissolve: 1
     - _dissolveTexture: 1

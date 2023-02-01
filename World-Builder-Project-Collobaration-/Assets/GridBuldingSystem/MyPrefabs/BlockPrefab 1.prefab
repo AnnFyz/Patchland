@@ -58,6 +58,8 @@ MonoBehaviour:
   defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
   origin: 0
   defaultMaterial: {fileID: 0}
+  blockInside: {fileID: 0}
+  blockInsiderenderer: {fileID: 0}
 --- !u!114 &6175436643528763293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +143,19 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
+  H_1: 0
+  S_1: 0
+  V_1: 0
+  H_2: 0
+  S_2: 0
+  V_2: 0
+  IsBlockInjuring: 0
+  HasDayingColor: 0
+  IsAttacking: 0
+  ind_Vdif_1: 0
+  ind_Sdif_1: 0
+  ind_Vdif_2: 0
+  ind_Sdif_2: 0
 --- !u!1 &6254500726256895673
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +215,8 @@ MonoBehaviour:
   defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
   origin: 0
   defaultMaterial: {fileID: 0}
+  blockInside: {fileID: 0}
+  blockInsiderenderer: {fileID: 0}
 --- !u!114 &-4611271471455439405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +300,19 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
+  H_1: 0
+  S_1: 0
+  V_1: 0
+  H_2: 0
+  S_2: 0
+  V_2: 0
+  IsBlockInjuring: 0
+  HasDayingColor: 0
+  IsAttacking: 0
+  ind_Vdif_1: 0
+  ind_Sdif_1: 0
+  ind_Vdif_2: 0
+  ind_Sdif_2: 0
 --- !u!1 &6750704830333515116
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,8 +478,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8479984077012579543}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

@@ -15,24 +15,35 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     {
         rainObj = transform.GetChild(0).gameObject;
         rainObj.SetActive(false);
-        StartCoroutine(SpawnGemsInWaves());
+        //StartCoroutine(SpawnGemsInWaves());
     }
 
-    IEnumerator SpawnGemsInWaves()
+    void OnEnable()
     {
+        DayAndNightController.Instance.isTimeToSpawnGems += StartSpawning;
+    }
+
+    void StartSpawning()
+    {
+        StartCoroutine(SpawnGemsInWaves());
+    }
+        IEnumerator SpawnGemsInWaves()
+    {
+
         while (createdGems.Count <= 30)
         {
-         rainObj.SetActive(true);
-         yield return new WaitForSeconds(5f);
-        for (int i = 0; i < 10; i++)
-        {
-          SpawnRandomGems(1);
-          yield return new WaitForSeconds(1f);
-        }
-         rainObj.SetActive(false);
-         yield return null;
+            Debug.Log("SpawnGem");
+            rainObj.SetActive(true);
+            yield return new WaitForSeconds(5f);
+            for (int i = 0; i < 10; i++)
+            {
+                SpawnRandomGems(1);
+                yield return new WaitForSeconds(1f);
+            }
+            rainObj.SetActive(false);
+            yield return null;
 
-        }    
+        }
     }
     Transform GetRandomGem()
     {
