@@ -44,7 +44,6 @@ public class Zombi : MonoBehaviour
     }
     public void HandleZombiTransformation()
     {
-        Debug.Log("I AM A ZOMBI NOW!");
         modelRenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), zombiTopColor);
         modelRenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), zombiBottomColor);
         if(newMaterial != null)

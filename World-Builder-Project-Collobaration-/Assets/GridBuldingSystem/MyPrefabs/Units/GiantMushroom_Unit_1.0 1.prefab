@@ -44663,8 +44663,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 8.947375, z: 5}
-  m_Center: {x: 0, y: 2.578066, z: 0}
+  m_Size: {x: 4.2801943, y: 8.6427, z: 3.1193671}
+  m_Center: {x: 0.35990286, y: 2.4257288, z: 0.63736963}
 --- !u!114 &4079159686357829978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44700,7 +44700,7 @@ PrefabInstance:
     - target: {fileID: 9087644455958913186, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9087644455958913186, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}
@@ -44710,7 +44710,7 @@ PrefabInstance:
     - target: {fileID: 9087644455958913186, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9087644455958913186, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}
@@ -44765,7 +44765,7 @@ PrefabInstance:
     - target: {fileID: 9087644455958913186, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9087644455958913187, guid: a1abdb027faf65e42b405832718198e1,
         type: 3}

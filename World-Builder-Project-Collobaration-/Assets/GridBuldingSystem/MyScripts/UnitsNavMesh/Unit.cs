@@ -119,7 +119,7 @@ public class Unit : MonoBehaviour
             if (!intersectedWithUnitBlocks.Contains(block))
             {
                 intersectedWithUnitBlocks.Add(block);
-                Debug.Log("ADD BLOCK");
+
             }
         }      
     }
@@ -242,7 +242,7 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() && other.gameObject.GetComponentInParent<PlacedObject_Done>()!= null)
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
@@ -252,6 +252,11 @@ public class Unit : MonoBehaviour
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 }
             }
+        }
+        else
+        {
+
+            GetComponentInChildren<UnitsHealth>().isFoodAround = false;
         }
     }
 

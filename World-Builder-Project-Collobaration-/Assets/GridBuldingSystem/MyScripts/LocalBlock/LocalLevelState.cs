@@ -16,11 +16,17 @@ public class LocalLevelState : MonoBehaviour
     [SerializeField] LevelState currentLevelState;
     [SerializeField] int heightToChangeLevel;
     BlockPrefab blockPrefab;
-    Renderer renderer ;
+    Renderer renderer;
+    public Action OnChangedState;
+    BlockHealth blHealth;
     private void Awake()
     {
         blockPrefab = GetComponent<BlockPrefab>();
         renderer = GetComponentInChildren<Renderer>();
+        blHealth = GetComponent<BlockHealth>();
+    }
+    private void OnEnable()
+    {
         blockPrefab.OnHeightChanged += ChangeLevel;
     }
     public LevelState GetCurrentLevelState()
@@ -32,65 +38,90 @@ public class LocalLevelState : MonoBehaviour
     {
         if (newHeight <= 1 && blockPrefab.transform.localRotation.z <= -1)
         {
-            currentLevelState = LevelState.Pond;
+
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
             blockPrefab.defaultMaterial = renderer.material;
-            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
-            { 
-                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
-                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-            }
-            UIManager.Instance.LocalSetupUIIcons();
-            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
-        }
-
-        if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
-        {
-            currentLevelState = LevelState.Desert;
-            renderer.material = BuildingManager.Instance.levelsMaterials[1];
-            blockPrefab.defaultMaterial = renderer.material;
-            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            //if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-            }
-            UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
 
+            }
+            if (currentLevelState != LevelState.Pond)
+            {
+                Debug.Log("State was changed");
+                OnChangedState?.Invoke();            
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Pond;
+            UIManager.Instance.LocalSetupUIIcons();
+            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
         }
+
+        //if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
+        //{
+        //    if (currentLevelState != LevelState.Desert) { Debug.Log("State was changed"); }
+        //    currentLevelState = LevelState.Desert;
+        //    renderer.material = BuildingManager.Instance.levelsMaterials[1];
+        //    blockPrefab.defaultMaterial = renderer.material;
+        //    if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+        //    else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+        //    {
+        //        blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+        //        blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+        //    }
+        //    UIManager.Instance.LocalSetupUIIcons();
+        //    blockPrefab.blockInside.gameObject.SetActive(false);
+        //    //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
+
+        //}
         if (newHeight <= 5 && newHeight > 1)
         {
-            currentLevelState = LevelState.Desert;
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
-            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            //if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
+                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
             }
+
+            if (currentLevelState != LevelState.Desert)
+            {
+                Debug.Log("State was changed");
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Desert;
             UIManager.Instance.LocalSetupUIIcons();
             blockPrefab.blockInside.gameObject.SetActive(false);
         }
 
         if (newHeight > 5)
         {
-           
-            currentLevelState = LevelState.Forest;
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultMaterial = renderer.material;
-            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            //if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
+                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
             }
+            if (currentLevelState != LevelState.Forest)
+            {
+                Debug.Log("State was changed");
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Forest;
             UIManager.Instance.LocalSetupUIIcons();
             blockPrefab.blockInside.gameObject.SetActive(true);
         }
     }
-   
+
 }

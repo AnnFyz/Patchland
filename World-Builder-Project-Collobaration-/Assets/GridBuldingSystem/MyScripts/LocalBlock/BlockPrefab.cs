@@ -30,12 +30,12 @@ public class BlockPrefab : MonoBehaviour
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderer = GetComponentInChildren<Renderer>();
         blockInsiderenderer = blockInside.GetComponent<Renderer>();
-        if (renderer.material.HasColor("_BaseColor"))
-        {
-            defaultColor = renderer.material.color;
-            blockInsiderenderer.material.color = defaultColor;
-        }
-        else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+        //if (renderer.material.HasColor("_BaseColor"))
+        //{
+        //    defaultColor = renderer.material.color;
+        //    blockInsiderenderer.material.color = defaultColor;
+        //}
+        if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
             defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
@@ -138,11 +138,11 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeHighlightedColorl()
     {
-        if (renderer.material.HasColor("_BaseColor"))
-        {
-            renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
-        }
-        else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+        //if (renderer.material.HasColor("_BaseColor"))
+        //{
+        //    renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
+        //}
+        if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
             blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
@@ -152,11 +152,11 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeColorBack()
     {
-        if (renderer.material.HasColor("_BaseColor"))
-        {
-            renderer.material.color = defaultColor;
-        }
-        else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+        //if (renderer.material.HasColor("_BaseColor"))
+        //{
+        //    renderer.material.color = defaultColor;
+        //}
+        if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6") )
         {
             renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
             renderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
@@ -168,9 +168,11 @@ public class BlockPrefab : MonoBehaviour
     public void ChangeMaterialBack()
     {
         renderer.material = defaultMaterial;
+        //ChangeColorBack();
     }
     public void ChangeSelectedMaterial()
     {
         renderer.material = GridOfPrefabs.Instance.GetMaterialOfSelectedBlocks();
+        //ChangeColorBack();
     }
 }

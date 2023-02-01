@@ -796,7 +796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -771, y: 78}
+  m_AnchoredPosition: {x: -771.00006, y: 78}
   m_SizeDelta: {x: -1690.08, y: -692.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500968342
@@ -2881,7 +2881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1351275786
 Transform:
   m_ObjectHideFlags: 0
@@ -2944,7 +2944,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.5943396, g: 0.56049263, b: 0.46818262, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -11880,3 +11880,16 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
+  H_1: 0
+  S_1: 0
+  V_1: 0
+  H_2: 0
+  S_2: 0
+  V_2: 0
+  IsBlockInjuring: 0
+  HasDayingColor: 0
+  IsAttacking: 0
+  ind_Vdif_1: 0
+  ind_Sdif_1: 0
+  ind_Vdif_2: 0
+  ind_Sdif_2: 0

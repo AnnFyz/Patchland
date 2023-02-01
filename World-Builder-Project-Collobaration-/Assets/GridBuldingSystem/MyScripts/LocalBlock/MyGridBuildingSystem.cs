@@ -59,7 +59,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                     if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
                     {
                         UnitsManager.Instance.waypoints[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
-                        Debug.Log("Waypoint was removed " + oldGrid.GetGridObject(x, z).GetPlacedObject());
                         OnChangedWaypoints?.Invoke();
                     }
                     oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
@@ -181,7 +180,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
                 OnObjectPlaced?.Invoke(placedObjectId);
                 OnChangedWaypoints?.Invoke();
-                Debug.Log("Waypoints were added, transform ");
                 BuildingManager.Instance.DeselectObjectType();
             }
 
