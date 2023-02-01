@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DayAndNightController : MonoBehaviour
 {
-    [SerializeField] Material skybox;
+    [SerializeField] Material skyboxOnRunTime;
     [SerializeField] Color topColor;
     [SerializeField] Color bottomColor;
     [SerializeField] Material backUpMaterial;
@@ -20,9 +20,11 @@ public class DayAndNightController : MonoBehaviour
     private void Start()
     {
         //backUpMaterial = makeSkyboxBackUp();
-        RenderSettings.skybox = skybox;
-        topColor  = skybox.GetColor(Shader.PropertyToID("_Color1"));
-        bottomColor = skybox.GetColor(Shader.PropertyToID("_Color2"));
+        Material originalSkybox = RenderSettings.skybox;
+        skyboxOnRunTime = Instantiate(originalSkybox);
+        RenderSettings.skybox = skyboxOnRunTime;
+        topColor  = skyboxOnRunTime.GetColor(Shader.PropertyToID("_Color1"));
+        bottomColor = skyboxOnRunTime.GetColor(Shader.PropertyToID("_Color2"));
         oldTopColor = topColor;
         oldBottomColor = bottomColor;
 
@@ -42,7 +44,7 @@ public class DayAndNightController : MonoBehaviour
             H_1 -= 0.05f;
 
             S_2 -= 0.05f;
-            V_2 += 0.05f;
+            V_2 -= 0.05f;
             H_2 -= 0.05f;
 
             V_1 = Mathf.Clamp(V_1, 0.001f, 0.9f);
@@ -54,9 +56,9 @@ public class DayAndNightController : MonoBehaviour
 
             topColor = Color.HSVToRGB(H_1, S_1, V_1);
             bottomColor = Color.HSVToRGB(H_2, S_2, V_2);
-            skybox.SetColor((Shader.PropertyToID("_Color1")), topColor);
-            skybox.SetColor((Shader.PropertyToID("_Color2")), bottomColor);
-            yield return new WaitForSeconds(1f);
+            skyboxOnRunTime.SetColor((Shader.PropertyToID("_Color1")), topColor);
+            skyboxOnRunTime.SetColor((Shader.PropertyToID("_Color2")), bottomColor);
+            yield return new WaitForSeconds(0.5f);
         }
 
     }
@@ -64,8 +66,6 @@ public class DayAndNightController : MonoBehaviour
     //Restore skybox material back to the Default values
     void OnDisable()
     {
-        skybox = backUpMaterial;
-        RenderSettings.skybox = backUpMaterial;
         DynamicGI.UpdateEnvironment();
     }
 
