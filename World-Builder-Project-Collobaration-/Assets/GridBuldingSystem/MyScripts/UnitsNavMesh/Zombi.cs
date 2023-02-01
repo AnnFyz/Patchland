@@ -29,6 +29,7 @@ public class Zombi : MonoBehaviour
     [SerializeField] Color zombiTopColor = Color.white;
     [SerializeField] Color zombiBottomColor = Color.grey;
     [SerializeField] Material newMaterial;
+    [SerializeField] GameObject attacking_Particles;
     int x = 0;
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class Zombi : MonoBehaviour
         currentState = ZombiState.None;
         possibleNextOccupiedBlocks = new BlockPrefab[4];
         path = new NavMeshPath();
+        attacking_Particles.gameObject.SetActive(false);
     }
     public void HandleZombiTransformation()
     {
@@ -50,6 +52,7 @@ public class Zombi : MonoBehaviour
         {
             ChangeMaterial(newMaterial);
         }
+        attacking_Particles.gameObject.SetActive(true);
     }
 
     void ChangeMaterial(Material newMat)
@@ -150,7 +153,6 @@ public class Zombi : MonoBehaviour
         {
             if (occupiedBlockHealth.currentHealth > 0)
             {
-                Debug.Log("ATTACK");
                 isAttacking = true;
                 occupiedBlockHealth.Damage(1f);               
                 yield return new WaitForSeconds(0.1f);

@@ -16,7 +16,7 @@ MonoBehaviour:
   chanceToBecomeZombi: 68.6
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
-  acceleration: 8
+  acceleration: 20
   angularSpeed: 50
   areaMask: -1
   avoidancePriority: 50

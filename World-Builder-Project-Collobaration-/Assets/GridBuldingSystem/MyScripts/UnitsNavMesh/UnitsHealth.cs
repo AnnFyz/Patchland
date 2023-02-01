@@ -23,6 +23,8 @@ public class UnitsHealth : MonoBehaviour
     float damageToUnit;
     [SerializeField] UIState currentUIState = UIState.healthy;
     public GameObject stateFire;
+    [SerializeField] GameObject whenAttacked_Particles;
+    public bool isAttacked = false;
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
@@ -32,16 +34,16 @@ public class UnitsHealth : MonoBehaviour
 
     void SwitchUIState()
     {
-       if(curretValue > 80)
+        if (curretValue > 80)
         {
-           
+
             currentUIState = UIState.healthy;
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
             stateFire.SetActive(true);
 
         }
-       else if (curretValue <= 80 && curretValue >= 50)
+        else if (curretValue <= 80 && curretValue >= 50)
         {
             currentUIState = UIState.hungry;
             stateFire.SetActive(false);
@@ -57,9 +59,9 @@ public class UnitsHealth : MonoBehaviour
             stateFire.SetActive(true);
 
         }
-       else if (curretValue <= 0)
+        else if (curretValue <= 0)
         {
-            if(unit.currentUnitsState == UnitsState.Zombi)
+            if (unit.currentUnitsState == UnitsState.Zombi)
             {
                 currentUIState = UIState.zombi;
                 stateFire.SetActive(false);
@@ -76,6 +78,7 @@ public class UnitsHealth : MonoBehaviour
     private void Start()
     {
         curretValue = startValue;
+        whenAttacked_Particles.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -84,15 +87,17 @@ public class UnitsHealth : MonoBehaviour
         if (!isFoodAround && curretValue > 0)
         {
             LoseHealth();
-        }       
+        }
     }
+
+
     private void LoseHealth()
     {
         StartCoroutine(SubstractHealthGradually());
         if (curretValue <= 0)
         {
             unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-            if(unit.currentUnitsState != UnitsState.Zombi)
+            if (unit.currentUnitsState != UnitsState.Zombi)
             {
                 OnUnitDeath?.Invoke();
             }
@@ -116,5 +121,85 @@ public class UnitsHealth : MonoBehaviour
     {
         FillHealth(0.5f);
         yield return new WaitForSeconds(1f);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+
+        if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
+        {
+            Debug.Log("ANOTHER UNIT");
+            StartCoroutine(SubstractHealthGradually());
+            whenAttacked_Particles.SetActive(true);
+            isAttacked = true;
+            if (curretValue <= 0)
+            {
+                unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                if (unit.currentUnitsState != UnitsState.Zombi)
+                {
+                    OnUnitDeath?.Invoke();
+                }
+            }
+        }
+    
+        if (other.gameObject.GetComponentInParent<BlockHealth>())
+        {
+            if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
+            {
+                Debug.Log("DeadBlock!");
+                StartCoroutine(SubstractHealthGradually());
+                whenAttacked_Particles.SetActive(true);
+                isAttacked = true;
+                if (curretValue <= 0)
+                {
+                    unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                    if (unit.currentUnitsState != UnitsState.Zombi)
+                    {
+                        OnUnitDeath?.Invoke();
+                    }
+                }
+            }
+        }
+  
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
+
+        {
+            StopCoroutine(SubstractHealthGradually());
+            whenAttacked_Particles.SetActive(false);
+            isAttacked = false;
+            if (curretValue <= 0)
+            {
+                unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                if (unit.currentUnitsState != UnitsState.Zombi)
+                {
+                    OnUnitDeath?.Invoke();
+                }
+            }
+        }
+
+        if (other.gameObject.GetComponentInParent<BlockHealth>())
+        {
+            Debug.Log("Block!");
+            if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
+                Debug.Log("DEAD BLOCK");
+            {
+                StopCoroutine(SubstractHealthGradually());
+                whenAttacked_Particles.SetActive(false);
+                isAttacked = false;
+                if (curretValue <= 0)
+                {
+                    unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                    if (unit.currentUnitsState != UnitsState.Zombi)
+                    {
+                        OnUnitDeath?.Invoke();
+                    }
+                }
+            }
+    
+        }
     }
 }

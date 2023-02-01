@@ -543,6 +543,19 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
+  H_1: 0
+  S_1: 0
+  V_1: 0
+  H_2: 0
+  S_2: 0
+  V_2: 0
+  IsBlockInjuring: 0
+  HasDayingColor: 0
+  IsAttacking: 0
+  ind_Vdif_1: 0
+  ind_Sdif_1: 0
+  ind_Vdif_2: 0
+  ind_Sdif_2: 0
 --- !u!1 &7904328982731598685
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,3 +717,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd6fbbcac83d5b458508e8485c8ab2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &7759803506766958020
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4267953086727794976}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
