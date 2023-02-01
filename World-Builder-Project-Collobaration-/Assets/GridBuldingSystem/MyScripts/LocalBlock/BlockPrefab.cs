@@ -47,7 +47,7 @@ public class BlockPrefab : MonoBehaviour
         minOrigin = -0f;
         maxOrigin =  0.75f;
         startTime = Time.deltaTime;
-        t = UnityEngine.Random.Range(0.5f, 3f);
+        t = UnityEngine.Random.Range(0.5f, 7f);
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {

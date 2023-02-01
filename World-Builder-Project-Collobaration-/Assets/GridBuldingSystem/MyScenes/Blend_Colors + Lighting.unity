@@ -3066,6 +3066,10 @@ MonoBehaviour:
   H_2: 0
   S_2: 0
   V_2: 0
+  isSunrise: 0
+  isSunset: 0
+  timeOfDay: 20
+  timeOfNight: 0
 --- !u!1 &898826612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4758,7 +4762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1684288571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4886,7 +4890,7 @@ Transform:
   m_GameObject: {fileID: 1684288570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.13, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3.5927, z: 1}
+  m_LocalScale: {x: 1, y: 4.6963773, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 815881373}
@@ -11065,7 +11069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &6314038720621992547
 MeshRenderer:
   m_ObjectHideFlags: 0
