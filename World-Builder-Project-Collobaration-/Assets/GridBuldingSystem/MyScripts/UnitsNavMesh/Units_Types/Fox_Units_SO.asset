@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
   m_Name: Fox_Units_SO
   m_EditorClassIdentifier: 
-  damageToUnitWithoutFood: 0.001
+  damageToUnitWithoutFood: 0.01
   chanceToBecomeZombi: 68.6
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 25
-  angularSpeed: 150
+  angularSpeed: 130
   areaMask: -1
   avoidancePriority: 50
   baseOffset: 0

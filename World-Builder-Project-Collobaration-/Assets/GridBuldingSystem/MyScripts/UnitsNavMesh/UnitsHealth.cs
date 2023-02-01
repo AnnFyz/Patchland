@@ -123,7 +123,7 @@ public class UnitsHealth : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay(Collision other)
     {
 
         if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
@@ -142,7 +142,7 @@ public class UnitsHealth : MonoBehaviour
             }
         }
     
-        if (other.gameObject.GetComponentInParent<BlockHealth>())
+        else if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponentInParent<BlockHealth>())
         {
             if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
             {
@@ -165,7 +165,7 @@ public class UnitsHealth : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
+        if (other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
 
         {
             StopCoroutine(SubstractHealthGradually());
@@ -181,11 +181,10 @@ public class UnitsHealth : MonoBehaviour
             }
         }
 
-        if (other.gameObject.GetComponentInParent<BlockHealth>())
+       else if (other.gameObject.GetComponentInParent<BlockHealth>())
         {
-            Debug.Log("Block!");
+
             if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
-                Debug.Log("DEAD BLOCK");
             {
                 StopCoroutine(SubstractHealthGradually());
                 whenAttacked_Particles.SetActive(false);

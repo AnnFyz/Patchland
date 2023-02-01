@@ -17,7 +17,7 @@ MonoBehaviour:
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 20
-  angularSpeed: 50
+  angularSpeed: 130
   areaMask: -1
   avoidancePriority: 50
   baseOffset: 0
