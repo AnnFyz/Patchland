@@ -160,7 +160,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseStep: -0.1
+    - _DiffuseStep: -0.166
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
     - _DotSize: 0.7
@@ -231,7 +231,7 @@ Material:
     - _OutlineEnabled: 1
     - _OutlineMode: 0
     - _OutlineScale: 1
-    - _OutlineWidth: 6
+    - _OutlineWidth: 9.08
     - _Outline_Width: 0
     - _OverrideLightmapDir: 0
     - _Parallax: 0.02

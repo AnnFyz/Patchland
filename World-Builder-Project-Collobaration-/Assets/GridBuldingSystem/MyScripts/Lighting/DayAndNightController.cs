@@ -61,7 +61,7 @@ public class DayAndNightController : MonoBehaviour
     IEnumerator Sunset()
     {
       
-            while (timeOfNight < 24)
+            while (timeOfNight < 20)
             {
                 isSunset = false;
                 DynamicGI.UpdateEnvironment();
@@ -72,7 +72,7 @@ public class DayAndNightController : MonoBehaviour
                 V_2 = Mathf.Clamp(V_2, 0.35f, 0.9f);
 
                 timeOfNight += 0.25f;
-
+                if(timeOfNight == 10) { isTimeToSpawnGems?.Invoke(); }
                 topColor = Color.HSVToRGB(H_1, S_1, V_1);
                 bottomColor = Color.HSVToRGB(H_2, S_2, V_2);
                 skyboxOnRunTime.SetColor((Shader.PropertyToID("_Color1")), topColor);
@@ -81,7 +81,6 @@ public class DayAndNightController : MonoBehaviour
             }
 
         isSunrise = true;
-        isTimeToSpawnGems?.Invoke();
         timeOfNight = 0;
     }
 
@@ -98,16 +97,16 @@ public class DayAndNightController : MonoBehaviour
             V_1 = Mathf.Clamp(V_1, 0.35f, 0.85f);
             V_2 = Mathf.Clamp(V_2, 0.35f, 0.9f);
 
-            if (V_1 <= 0.85)
-            {
-                timeOfDay -= 0.25f;
-            }
+
+            timeOfDay -= 0.25f;
+
             topColor = Color.HSVToRGB(H_1, S_1, V_1);
             bottomColor = Color.HSVToRGB(H_2, S_2, V_2);
             skyboxOnRunTime.SetColor((Shader.PropertyToID("_Color1")), topColor);
             skyboxOnRunTime.SetColor((Shader.PropertyToID("_Color2")), bottomColor);
             yield return new WaitForSeconds(0.5f);
         }
+        yield return new WaitForSeconds(20f);
         isSunset = true;
         timeOfDay = 20;
     }

@@ -205,7 +205,7 @@ Material:
     - _HatchingRotation: 0
     - _HatchingSmoothness: 0.654
     - _HideInInspector__Vector1_c89cb8dc56774a9583c7b9c3a5725c4c: 0
-    - _LightProbeContribution: 3.5
+    - _LightProbeContribution: 2.32
     - _NoiseScale: 1
     - _NoiseStrength: 0.1
     - _OutlineDepthSensitivity: 1
@@ -228,7 +228,7 @@ Material:
     - _ShadowPatternSize: 0.55
     - _Shininess: 0
     - _SizeFalloff: 0
-    - _Smoothness: 0.5
+    - _Smoothness: 0.482
     - _SmoothnessSource: 0
     - _SpecClipMaskScale: 1
     - _SpecColor_1: 0.119
@@ -265,14 +265,14 @@ Material:
     - _HalftoneColor: {r: 0, g: 0, b: 0, a: 0.5882353}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingScale: {r: 15, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MainColor: {r: 1, g: 0.9297575, b: 0.5990566, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0.3301887, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: 0, g: 47.899986, b: 0, a: 0}
     - _RimColor: {r: 0.23584908, g: 0.18459094, b: 0, a: 1}
     - _ShadowColor: {r: 0.735849, g: 0.20478266, b: 0.62321174, a: 1}
     - _SpecColor: {r: 38.075054, g: 38.075054, b: 38.075054, a: 0.5}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SpecularColor: {r: 0.9245283, g: 0.5538448, b: 0.5538448, a: 0}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

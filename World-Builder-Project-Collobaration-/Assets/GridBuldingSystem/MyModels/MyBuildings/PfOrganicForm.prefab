@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 0}
   placedObjectTypeSO: {fileID: 0}
 --- !u!114 &2608708882569115096
 MonoBehaviour:
@@ -185,10 +186,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6148856052099649751, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696878399933362083, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7372483442606428292, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372483442606428292, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358024156136924470, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
