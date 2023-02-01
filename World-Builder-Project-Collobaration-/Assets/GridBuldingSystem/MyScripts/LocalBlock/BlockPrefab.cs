@@ -43,10 +43,10 @@ public class BlockPrefab : MonoBehaviour
             blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
             blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
         }
-        minOrigin = -0.25f;
-        maxOrigin =  0.5f;
+        minOrigin = -0f;
+        maxOrigin =  0.75f;
         startTime = Time.deltaTime;
-        t = UnityEngine.Random.Range(3f, 5f);
+        t = UnityEngine.Random.Range(0.5f, 3f);
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {

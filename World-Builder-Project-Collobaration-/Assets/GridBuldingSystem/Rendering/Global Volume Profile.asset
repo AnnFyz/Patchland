@@ -31,19 +31,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.1
+    m_Value: -0.3
   contrast:
     m_OverrideState: 1
-    m_Value: 25
+    m_Value: 13
   colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
   hueShift:
     m_OverrideState: 0
-    m_Value: -108.8
+    m_Value: 33
   saturation:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: -13
 --- !u!114 &-7018526725269914797
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -78,7 +78,7 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.13207549, g: 0.101223454, b: 0, a: 1}
+    m_Value: {r: 0.6509434, g: 0.45750266, b: 0.62150675, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
@@ -144,10 +144,10 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: 34.8
+    m_Value: 20.2
   tint:
     m_OverrideState: 1
-    m_Value: 38.1
+    m_Value: -63.6
 --- !u!114 &5734225660906133031
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -212,16 +212,16 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   scatter:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.04
   clamp:
     m_OverrideState: 0
     m_Value: 65468.79
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+    m_Value: {r: 0.007787468, g: 0.044701885, b: 0.3301887, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 1
@@ -229,12 +229,12 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   dirtTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 351.5
 --- !u!114 &8637557990233824848
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -253,7 +253,7 @@ MonoBehaviour:
     m_Value: 9
   intensity:
     m_OverrideState: 1
-    m_Value: 0.345
+    m_Value: 0.441
   response:
     m_OverrideState: 1
     m_Value: 1
