@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
     public UnitsTypeSO unitScriptableObjects;
     public GameObject selectedFigur;
     public NavMeshAgent agent;
+    public float agentVel;
     public Transform target;
     public Transform startPoint;
     public Transform currentPoint;
@@ -38,6 +39,8 @@ public class Unit : MonoBehaviour
     BlockHealth occupiedBlockHealth;
     Zombi zombi;
     List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
+    [SerializeField] Animator animator;
+    private const string IsWalking = ""
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -70,6 +73,9 @@ public class Unit : MonoBehaviour
         {
             MoveAutomaticallyToWayPoint();
         }
+
+        animator.SetBool("IsRunning", agent.velocity.magnitude > 0.01f);
+        agentVel = agent.velocity.magnitude;
     }
 
     void UseChangeToBecomeZombi()

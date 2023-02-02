@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9087644455958913187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9087644455958913186}
+  m_Layer: 0
+  m_Name: Mushroom_Pr 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9087644455958913186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087644455958913187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.022029817, y: 1.1890296, z: 0.74165314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6831241829779474132}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6433334056925454655
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9087644455958913186}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Name
+      value: 2.Mushroom.Slow Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0195438ab824204892f1ed2166de8c9, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6816378122dac214d9b805c5d0062495, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef181dcb07c5faf4da1ca85f6524a3c7, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef181dcb07c5faf4da1ca85f6524a3c7, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81299ae3c72f14742aa7d2880f4eda95, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0195438ab824204892f1ed2166de8c9, type: 2}
+    - target: {fileID: 7603786706384944740, guid: e38d392cdb3cb3d428194705d2c68d29,
+        type: 3}
+      propertyPath: m_Materials.Array.data[9]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8954eb79a8bad434fbaba0ffa0bd0e14, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e38d392cdb3cb3d428194705d2c68d29, type: 3}
+--- !u!1 &6162792277627100270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e38d392cdb3cb3d428194705d2c68d29,
+    type: 3}
+  m_PrefabInstance: {fileID: 6433334056925454655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3492930383944433107
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162792277627100270}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 206b56ccf01178344afde787445d2b1c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &6831241829779474132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e38d392cdb3cb3d428194705d2c68d29,
+    type: 3}
+  m_PrefabInstance: {fileID: 6433334056925454655}
+  m_PrefabAsset: {fileID: 0}

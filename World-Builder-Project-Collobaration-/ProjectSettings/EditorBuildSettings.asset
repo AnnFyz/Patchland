@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/GridBuldingSystem/MyScenes/Fixed_Colors + Lighting 1.unity
     guid: 81f1585740269384290bf011e57eb619
   - enabled: 1
-    path: Assets/GridBuldingSystem/MyScenes/Blend_Colors + Lighting.unity
+    path: Assets/GridBuldingSystem/MyScenes/Obj+Blend_Colors + Lighting.unity
     guid: 43fdcdf91096426429379dd04622424a
   - enabled: 1
     path: Assets/GridBuldingSystem/MyScenes/WithoutOitline.unity

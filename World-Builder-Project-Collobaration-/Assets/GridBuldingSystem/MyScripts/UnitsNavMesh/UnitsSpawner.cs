@@ -56,10 +56,6 @@ public class UnitsSpawner : MonoBehaviour
                     UnitsManager.Instance.numberOfPoints++;
                 }
             }
-            else
-            {
-                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use"); //{triangulation.vertices[vertexIndex]}");
-            }
         }
     }
 
@@ -75,6 +71,9 @@ public class UnitsSpawner : MonoBehaviour
                 break;
             case 2:
                 unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[2];
+                break;
+            default:
+                Debug.Log("ERROR");
                 break;
         }
         return unitPrefabToSpawn;
