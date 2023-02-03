@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hat
+  m_Name: SecondMushroomRed
   m_Shader: {fileID: -6465566751694194690, guid: 131ed2b8d00c056488238911472f813e,
     type: 3}
   m_ValidKeywords: []
@@ -93,9 +93,9 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_04db18677079417e99b7f95a422950d3: 0
-    - Vector1_0c1eff59554148a2892c7222f9ef6edb: 0
-    - Vector1_63a0afd297734dc9998b9b19bd747613: 0.8
-    - Vector1_6e12275293314cb7a52c177f83f8f9aa: -1.21
+    - Vector1_0c1eff59554148a2892c7222f9ef6edb: 1
+    - Vector1_63a0afd297734dc9998b9b19bd747613: 0.65
+    - Vector1_6e12275293314cb7a52c177f83f8f9aa: 0.4
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -164,7 +164,7 @@ Material:
     - _HalftoneFadeDistance: 100
     - _HalftoneFadeToColor: 0
     - _HalftoneNoiseClip: 1.6
-    - _HalftoneTilling: 3
+    - _HalftoneTilling: 1.21
     - _HatchingDensity: 1
     - _HatchingDiffuseOffset: 0
     - _HatchingDrawStrength: 1

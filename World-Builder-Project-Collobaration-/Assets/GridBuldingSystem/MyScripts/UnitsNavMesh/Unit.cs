@@ -40,7 +40,6 @@ public class Unit : MonoBehaviour
     Zombi zombi;
     List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
     [SerializeField] Animator animator;
-    private const string IsWalking = ""
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
