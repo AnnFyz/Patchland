@@ -445,6 +445,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GiantMushroom_Unit_1.0 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2675644380505310728, guid: e6801d9f49327ce4cbac8ed19170cb2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2675644380505310733, guid: e6801d9f49327ce4cbac8ed19170cb2e,
         type: 3}
       propertyPath: m_RootOrder
@@ -3021,6 +3026,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SecondGiantMushroom_Unit_1.0 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2675644380505310728, guid: f55f0288b26e8b44a89bb257048ae7e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2675644380505310733, guid: f55f0288b26e8b44a89bb257048ae7e8,
         type: 3}

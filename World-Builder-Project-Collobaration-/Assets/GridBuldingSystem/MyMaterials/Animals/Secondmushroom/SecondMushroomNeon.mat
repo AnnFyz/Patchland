@@ -221,10 +221,10 @@ Material:
     - _RIMLIGHTING: 1
     - _ReceiveShadows: 0
     - _RimEnabled: 1
-    - _RimLightAlign: 0
+    - _RimLightAlign: 0.66
     - _RimLightSmoothness: 0.263
     - _RimLightSmootness: 0
-    - _RimPower: 0.444
+    - _RimPower: 0.882
     - _SPECULARHIGHTLIGHTS: 0
     - _ShadowPatternSize: 0.3
     - _Shininess: 0
@@ -271,7 +271,7 @@ Material:
     - _HatchingScale: {r: 1, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
-    - _RimColor: {r: 0.46763584, g: 0, b: 0.06365719, a: 1}
+    - _RimColor: {r: 0.084376216, g: 0.2462014, b: 0.2086369, a: 0.652}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 1}
