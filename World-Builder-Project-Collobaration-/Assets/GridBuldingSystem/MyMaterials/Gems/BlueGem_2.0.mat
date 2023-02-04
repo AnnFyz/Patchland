@@ -23,9 +23,7 @@ Material:
   m_Name: BlueGem_2.0
   m_Shader: {fileID: -6465566751694194690, guid: cd8d379c153106841b243431ae206722,
     type: 3}
-  m_ValidKeywords:
-  - INTERSECTION_EFFECTS_ON
-  - SURFACE_FOAM_ON
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -110,9 +108,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - INTERSECTION_EFFECTS: 1
+    - INTERSECTION_EFFECTS: 0
+    - LIGHTMAP: 0
     - REFRACTION: 0
-    - SURFACE_FOAM: 1
+    - SURFACE_FOAM: 0
     - WORLD_SPACE_UV: 0
     - _AlphaClip: 0
     - _Blend: 0

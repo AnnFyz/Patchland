@@ -7,7 +7,10 @@ public enum LevelState
 {
     Desert,
     Forest,
-    Pond
+    Pond,
+    Mountain,
+    SnowMountain,
+    Hill
 }
 public class LocalLevelState : MonoBehaviour
 {
@@ -76,7 +79,7 @@ public class LocalLevelState : MonoBehaviour
         //    //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
 
         //}
-        if (newHeight <= 5 && newHeight > 1)
+        if (newHeight <= 5 && newHeight > 1) // Desert
         {
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
@@ -101,7 +104,7 @@ public class LocalLevelState : MonoBehaviour
             blockPrefab.reflectionBlock.SetActive(true);
         }
 
-        if (newHeight > 5)
+        if (newHeight > 5 && newHeight < 8) // Forest
         {
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
             blockPrefab.defaultMaterial = renderer.material;
@@ -124,6 +127,79 @@ public class LocalLevelState : MonoBehaviour
             blockPrefab.blockInside.gameObject.SetActive(true);
             blockPrefab.reflectionBlock.SetActive(true);
         }
+
+        if (newHeight >= 8  && newHeight < 11) // Montain
+        {
+            renderer.material = BuildingManager.Instance.levelsMaterials[3];
+            blockPrefab.defaultMaterial = renderer.material;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
+                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
+            }
+            if (currentLevelState != LevelState.Mountain)
+            {
+                Debug.Log("Montain");
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Mountain;
+            UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(false);
+            blockPrefab.reflectionBlock.SetActive(true);
+        }
+
+        if (newHeight >= 11 && newHeight < 13) //Snow mountain
+        {
+            renderer.material = BuildingManager.Instance.levelsMaterials[4];
+            blockPrefab.defaultMaterial = renderer.material;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
+                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
+            }
+            if (currentLevelState != LevelState.SnowMountain)
+            {
+                Debug.Log("/Snow mountain");
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.SnowMountain;
+            UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(false);
+            blockPrefab.reflectionBlock.SetActive(true);
+        }
+
+        if (newHeight >= 13 && newHeight < 15) // Hill
+        {
+            renderer.material = BuildingManager.Instance.levelsMaterials[5];
+            blockPrefab.defaultMaterial = renderer.material;
+            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
+            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
+            {
+                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
+                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
+                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
+                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
+            }
+            if (currentLevelState != LevelState.Hill)
+            {
+                Debug.Log("HILL");
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Hill;
+            UIManager.Instance.LocalSetupUIIcons();
+            blockPrefab.blockInside.gameObject.SetActive(false);
+            blockPrefab.reflectionBlock.SetActive(true);
+        }
+
     }
 
 }

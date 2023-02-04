@@ -11,8 +11,8 @@ public class BlockHealth : MonoBehaviour
     public float currentHealth;
     public bool IsBlockDead = false;
     public float H_1; float difH_1;
-    public float S_1; float difS_1;
-    public float V_1; float difV_1;
+    public float S_1; public  float difS_1;
+    public float V_1; public float difV_1;
 
     public float H_2; float difH_2;
     public float S_2; float difS_2;
@@ -70,7 +70,7 @@ public class BlockHealth : MonoBehaviour
         S_2 -= 0.05f;
         V_2 += 0.05f;
         V_1 = Mathf.Clamp(V_1, 0.4f, 1f);
-        S_1 = Mathf.Clamp(S_1, 0.01f, 0.75f);
+        S_1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
         S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
         V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
         block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
@@ -114,10 +114,10 @@ public class BlockHealth : MonoBehaviour
             S_2 -= difS_2;
             V_2 += difV_2;
 
-            V_1 = Mathf.Clamp(V_1, 0.4f, 1f);
-            S_1 = Mathf.Clamp(S_1, 0.01f, 0.75f);
-            S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
-            V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
+            //V_1 = Mathf.Clamp(V_1, 0.4f, 0.8f);
+            //S_1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
+            //S_2 = Mathf.Clamp(S_2, 0.001f, 0.8f);
+            //V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
 
             block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
             block.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
@@ -142,10 +142,10 @@ public class BlockHealth : MonoBehaviour
         S2 -= ind_Sdif_2;
         //V1 -= ind_Vdif_2;
 
-        V1 = Mathf.Clamp(V_1, 0.4f, 1f);
-        S1 = Mathf.Clamp(S_1, 0.01f, 0.75f);
-        S2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
-        V2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
+        //V1 = Mathf.Clamp(V_1, 0.4f, 0.8f);
+        //S1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
+        //S2 = Mathf.Clamp(S_2, 0.001f, 0.8f);
+        //V2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
         block.defaultColor = Color.HSVToRGB(H1, S1, V1);
         block.defaultBottomColor = Color.HSVToRGB(H2, S2, V2);
     }

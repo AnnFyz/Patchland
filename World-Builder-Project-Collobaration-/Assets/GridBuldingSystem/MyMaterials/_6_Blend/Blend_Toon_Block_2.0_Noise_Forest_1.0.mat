@@ -126,7 +126,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Intensity: 1
-    - _LightProbeContribution: 18.3
+    - _LightProbeContribution: 11.6
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineDepthSensitivity: 1

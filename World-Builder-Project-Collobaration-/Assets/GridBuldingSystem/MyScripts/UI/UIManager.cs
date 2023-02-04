@@ -77,6 +77,7 @@ public class UIManager : MonoBehaviour
     }
     public void ShowPanels()
     {
+        Debug.Log("SHOW PANELS1");
         arrowsPanel.SetActive(true);
         iconsPanel.SetActive(true);
     }
