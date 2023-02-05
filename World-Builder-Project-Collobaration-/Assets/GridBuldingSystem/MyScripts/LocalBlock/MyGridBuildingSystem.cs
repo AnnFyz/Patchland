@@ -10,8 +10,8 @@ public class MyGridBuildingSystem : MonoBehaviour
 {
     public MyGridXZ<MyGridObject> grid;
     public MyGridXZ<MyGridObject> oldGrid;
-    [SerializeField] int gridWidth = 3;
-    [SerializeField] int gridHeight = 3;
+    [SerializeField] int gridWidth = 2;
+    [SerializeField] int gridHeight = 2;
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
@@ -61,6 +61,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                         UnitsManager.Instance.waypoints[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
                         OnChangedWaypoints?.Invoke();
                     }
+
+                    if(BuildingManager.placedObjects[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject()))
+                    {
+                        BuildingManager.placedObjects[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject());
+                    }
+
                     oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
                     grid.GetGridObject(x, z).ClearPlacedObject();
         
@@ -178,6 +184,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                 //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
                 int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
+
+
+                BuildingManager.placedObjects[placedObjectId].Add(placedObject); 
+                Debug.Log("placedObjects " + BuildingManager.placedObjects[placedObjectId].Count);
+                BuildingManager.Instance.DestroySurplusPlacedObjects();
+
                 OnObjectPlaced?.Invoke(placedObjectId);
                 OnChangedWaypoints?.Invoke();
                 BuildingManager.Instance.DeselectObjectType();

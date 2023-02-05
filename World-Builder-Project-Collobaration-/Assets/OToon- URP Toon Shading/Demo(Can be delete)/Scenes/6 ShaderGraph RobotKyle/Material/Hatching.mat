@@ -10,9 +10,9 @@ Material:
   m_Name: Hatching
   m_Shader: {fileID: -6465566751694194690, guid: 2c3c6a46626419c4f8bbdeab2ec2afbd,
     type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _HAFTONESHAPES_DOT
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -95,7 +95,7 @@ Material:
     - Vector1_48bb6f524e494da799e6a2b3cc237cf8: 0
     - Vector1_85d44c600d6c46b38d9c8065f25681ea: 0
     - Vector1_c89cb8dc56774a9583c7b9c3a5725c4c: 0
-    - Vector1_e5b6f1488dec4326bd8bbd0e05156810: 0
+    - Vector1_e5b6f1488dec4326bd8bbd0e05156810: -0.222
     - _AllToon_OverrideShadowColor: 0
     - _AlphaClip: 0
     - _Blend: 0
@@ -125,13 +125,14 @@ Material:
     - _HalftoneUseScreenSpaceUV: 0
     - _HatchingDensity: 1.28
     - _HatchingDiffuseOffset: 0.18
-    - _HatchingDrawStrength: 12.88
+    - _HatchingDrawStrength: 6.87
     - _HatchingEnabled: 1
     - _HatchingRotation: 0
     - _HatchingSmoothness: 0.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: -1
     - _QueueOffset: 0
     - _RIMLIGHTING: 0
     - _ReceiveShadows: 1

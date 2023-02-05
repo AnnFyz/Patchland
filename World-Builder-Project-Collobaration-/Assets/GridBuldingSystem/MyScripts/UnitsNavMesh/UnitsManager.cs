@@ -15,6 +15,11 @@ public class UnitsManager : MonoBehaviour
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     public int numberOfPoints;
     public event Action OnChangedGlobalOrder;
+    public int maxUnits_0 = 5;
+    public int maxUnits_1 = 4;
+    public int maxUnits_2 = 3;
+    int maxUnits;
+    public List<int> amountOfUnits;
     private void Awake()
     {
         Instance = this;
@@ -29,11 +34,41 @@ public class UnitsManager : MonoBehaviour
         for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj
         {
            waypoints.Insert(i, new List<Transform>());
+           amountOfUnits.Insert(i, 0);
         }
     }
     void Update()
     {
         ToControlUnitsManually();
+    }
+
+    public void SetAmountOfUnits(int placedObjId)
+    {
+
+        amountOfUnits[placedObjId]++;
+    }
+    public int GetAmountOfUnits(int placedObjId)
+    {
+        return amountOfUnits[placedObjId];
+    }
+     public int GetMaxUnits(int placedObjId)
+    {
+        switch (placedObjId)
+        {
+            case 0:
+                maxUnits = maxUnits_0;
+                break;
+            case 1:
+                maxUnits = maxUnits_1;
+                break;
+            case 2:
+                maxUnits = maxUnits_2;
+                break;
+            default:
+                Debug.Log("ERROR");
+                break;
+        }
+        return maxUnits;
     }
     void ToControlUnitsManually()
     {

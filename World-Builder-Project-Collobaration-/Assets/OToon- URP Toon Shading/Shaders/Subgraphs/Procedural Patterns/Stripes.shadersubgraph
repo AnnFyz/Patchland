@@ -1,5 +1,5 @@
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.GraphData",
     "m_ObjectId": "86b9180bd0274b1c98852a8c62220a1e",
     "m_Properties": [
@@ -20,6 +20,12 @@
         }
     ],
     "m_Keywords": [],
+    "m_Dropdowns": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "63c92d2a463c470291506f755d9ca989"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "d11436ac89d14580aab2e8d704baf4b2"
@@ -251,10 +257,11 @@
         "serializedMesh": {
             "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
             "m_Guid": ""
-        }
+        },
+        "preventRotation": false
     },
     "m_Path": "Patterns/Simple",
-    "m_ConcretePrecision": 0,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "d11436ac89d14580aab2e8d704baf4b2"
@@ -509,9 +516,13 @@
         "m_GuidSerialized": "b6beac32-d833-4acd-aaed-788a20bd0b6e"
     },
     "m_Name": "UV",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector2_4ec7f1a77fc24b0c8ada754436bda938",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -680,9 +691,13 @@
         "m_GuidSerialized": "0d849058-d64e-43de-a0bb-0bb240ec48c1"
     },
     "m_Name": "Frequency",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "",
     "m_OverrideReferenceName": "_frequency",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -693,6 +708,30 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "63c92d2a463c470291506f755d9ca989",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "61157b56f6eb6b87b721fdb38152c30e"
+        },
+        {
+            "m_Id": "79dc0055881f8d86ad9f3b9c3377cda8"
+        },
+        {
+            "m_Id": "91325c071e4e538499c57fb9efad3dbc"
+        },
+        {
+            "m_Id": "aa6b1e3ecc1e1c8ba9b2e23a42054b54"
+        },
+        {
+            "m_Id": "4ec7f1a77fc24b0c8ada754436bda938"
+        }
+    ]
 }
 
 {
@@ -806,9 +845,13 @@
         "m_GuidSerialized": "91a33419-b6f2-42f9-9ce1-c93676393ca7"
     },
     "m_Name": "Offset",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "",
     "m_OverrideReferenceName": "_offset",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -912,9 +955,13 @@
         "m_GuidSerialized": "1a8eef04-8603-4090-ac40-5d53bd43b040"
     },
     "m_Name": "Thickness",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "",
     "m_OverrideReferenceName": "_width",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -1092,9 +1139,13 @@
         "m_GuidSerialized": "311e4602-e6e7-4b26-86ba-5ee9ad40c131"
     },
     "m_Name": "Rotation",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "",
     "m_OverrideReferenceName": "_rotation",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -1162,7 +1213,8 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
-    }
+    },
+    "m_ClampType": 0
 }
 
 {

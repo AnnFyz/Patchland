@@ -19,9 +19,8 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
-    public MyGridXZ<PrefabGridObject> grid;
+    public MyGridXZ<PrefabGridObject> globalGrid;
     public NavMeshSurface[] horizontalSurfaces; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
-
 
     private void Awake()
     {
@@ -35,15 +34,15 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Start()
     {
-        grid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
+        globalGrid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                BlockPrefab blockPrefab = BlockPrefab.Create(grid.GetWorldPosition(x, y), blockPrefabObj);
+                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), blockPrefabObj);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
-                grid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
+                globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
                 float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
                 blockPrefab.transform.localScale = new Vector3(1, Mathf.RoundToInt(height), 1);
                 int newHeight = Mathf.FloorToInt(height);
@@ -55,9 +54,9 @@ public class GridOfPrefabs : MonoBehaviour
 
                 }
 
-                else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 5)
+                else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 6)
                 {
-                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 1, 1);
+                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
                     blockPrefab.ChangeHeight(0);
                 }
@@ -74,6 +73,7 @@ public class GridOfPrefabs : MonoBehaviour
 
         RebuildNavMesh();
     }
+
 
     private void RebuildNavMesh()
     {
@@ -109,7 +109,7 @@ public class GridOfPrefabs : MonoBehaviour
     {
         int halfWidth = Mathf.RoundToInt(width / 2);
         int halfHeight = Mathf.RoundToInt(height / 2);
-        return grid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
+        return globalGrid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
     }
 
     public Color GetColorOfHighlightedBlocks()
@@ -141,7 +141,7 @@ public class GridOfPrefabs : MonoBehaviour
                     {
                         for (int z = 0; z < height; z++)
                         {
-                            grid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
+                            globalGrid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
                             placedObject.ChangeColorBack();
                             placedObject.ChangeMaterialBack();
                             UIManager.Instance.HidePanels();

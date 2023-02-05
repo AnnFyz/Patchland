@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject amountOfGemsUI;
     [SerializeField] TMP_Text textAmount;
     [SerializeField] Image uiCircle;
+    [SerializeField] float startAmountOfSpecialGems = 100f;
     [SerializeField] float amountOfGemsForNextLevel = 3;
     [SerializeField] float amountOfGems = 0f;
     [SerializeField] float amountOfSpecialGems = 0f;
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
             icon.SetActive(false);
         }
 
-        amountOfGems = 20;
+        amountOfGems = startAmountOfSpecialGems;
         textAmount.SetText(amountOfGems.ToString());
         uiCircle.fillAmount = amountOfSpecialGems;
     }

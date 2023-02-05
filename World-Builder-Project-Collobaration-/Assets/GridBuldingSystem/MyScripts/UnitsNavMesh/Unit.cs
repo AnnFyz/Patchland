@@ -73,7 +73,11 @@ public class Unit : MonoBehaviour
             MoveAutomaticallyToWayPoint();
         }
 
-        animator.SetBool("IsRunning", agent.velocity.magnitude > 0.01f);
+        if(animator != null)
+        {
+            animator.SetBool("IsRunning", agent.velocity.magnitude > 0.01f);
+        }
+
         agentVel = agent.velocity.magnitude;
     }
 

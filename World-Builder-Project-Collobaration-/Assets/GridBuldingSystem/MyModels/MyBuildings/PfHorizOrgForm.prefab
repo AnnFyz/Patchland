@@ -131,6 +131,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 3522456959975745170, guid: e68f21773de19e24a8031310b77fc633,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522456959975745170, guid: e68f21773de19e24a8031310b77fc633,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4004844371895273130, guid: e68f21773de19e24a8031310b77fc633,
         type: 3}
       propertyPath: m_Layer

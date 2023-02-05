@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 6780022455924304188}
   - component: {fileID: 8456145508500795584}
   - component: {fileID: 8877595191525507116}
+  - component: {fileID: 5950601933551546208}
   m_Layer: 6
   m_Name: 2.0_BlockPrefab 2
   m_TagString: Untagged
@@ -473,9 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd6b9865a71d446a1423cf49f5ab6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 3
-  gridHeight: 3
-  cellSize: 5
+  gridWidth: 2
+  gridHeight: 2
+  cellSize: 6
   origin: {x: 0, y: 0, z: 0}
 --- !u!114 &-1446097718899038186
 MonoBehaviour:
@@ -527,6 +528,7 @@ MonoBehaviour:
   unitPrefab: {fileID: 2675644380505310728, guid: 660428be2dc14244db2002b148112250,
     type: 3}
   numberOfUnits: 1
+  levelState: 0
 --- !u!114 &8877595191525507116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +548,9 @@ MonoBehaviour:
   IsBlockDead: 0
   H_1: 0
   S_1: 0
+  difS_1: 0
   V_1: 0
+  difV_1: 0
   H_2: 0
   S_2: 0
   V_2: 0
@@ -557,6 +561,18 @@ MonoBehaviour:
   ind_Sdif_1: 0
   ind_Vdif_2: 0
   ind_Sdif_2: 0
+--- !u!114 &5950601933551546208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c47ecd51a0da834999011166bcb6832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7904328982731598685
 GameObject:
   m_ObjectHideFlags: 0

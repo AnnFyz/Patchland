@@ -172,24 +172,24 @@ public class Zombi : MonoBehaviour
         {
             for (int y = 0; y < GridOfPrefabs.Instance.height; y++)
             {
-                if (GridOfPrefabs.Instance.grid.GetGridObject(x, y).GetPlacedObject().Equals(occupiedBlock))
+                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y).GetPlacedObject().Equals(occupiedBlock))
                 {
-                    if (GridOfPrefabs.Instance.grid.GetGridObject(x - 1, y) != null && GridOfPrefabs.Instance.grid.GetGridObject(x - 1, y).GetPlacedObject() != null)
+                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject() != null)
                     {
-                        possibleNextOccupiedBlocks[0] = GridOfPrefabs.Instance.grid.GetGridObject(x - 1, y).GetPlacedObject();
+                        possibleNextOccupiedBlocks[0] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject();
                     }
 
-                    if (GridOfPrefabs.Instance.grid.GetGridObject(x + 1, y) != null && GridOfPrefabs.Instance.grid.GetGridObject(x + 1, y).GetPlacedObject() != null)
+                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject() != null)
                     {
-                        possibleNextOccupiedBlocks[1] = GridOfPrefabs.Instance.grid.GetGridObject(x + 1, y).GetPlacedObject();
+                        possibleNextOccupiedBlocks[1] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject();
                     }
-                    if (GridOfPrefabs.Instance.grid.GetGridObject(x, y - 1) != null && GridOfPrefabs.Instance.grid.GetGridObject(x, y - 1).GetPlacedObject() != null)
+                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject() != null)
                     {
-                        possibleNextOccupiedBlocks[2] = GridOfPrefabs.Instance.grid.GetGridObject(x, y - 1).GetPlacedObject();
+                        possibleNextOccupiedBlocks[2] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject();
                     }
-                    if (GridOfPrefabs.Instance.grid.GetGridObject(x, y + 1) != null && GridOfPrefabs.Instance.grid.GetGridObject(x, y + 1).GetPlacedObject() != null)
+                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject() != null)
                     {
-                        possibleNextOccupiedBlocks[3] = GridOfPrefabs.Instance.grid.GetGridObject(x, y + 1).GetPlacedObject();
+                        possibleNextOccupiedBlocks[3] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject();
                     }
                 }
             }

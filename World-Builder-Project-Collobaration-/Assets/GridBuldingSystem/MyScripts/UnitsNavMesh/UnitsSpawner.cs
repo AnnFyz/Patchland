@@ -19,10 +19,12 @@ public class UnitsSpawner : MonoBehaviour
     MyGridBuildingSystem localBuildingSystem;
     Transform unitPrefabToSpawn;
     GameObject currentUnit;
+    public LevelState levelState;
     private void Awake()
     {
         localBuildingSystem = GetComponent<MyGridBuildingSystem>();
     }
+
     void OnEnable()
     {
         localBuildingSystem.OnObjectPlaced += SpawnUnits;
@@ -30,36 +32,44 @@ public class UnitsSpawner : MonoBehaviour
 
     void SpawnUnits(int placedObjId)
     {
-        NavMeshHit hit;
-        Debug.Log("Height " + localBuildingSystem.GetOriginOfGrid().y);
-        for (int i = 0; i < numberOfUnits; i++)
+        levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
+        if (levelState == LevelState.Desert || levelState == LevelState.Forest)
         {
-            float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
-            float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
-            //int vertexIndex = UnityEngine.Random.Range(transform.position, );
-            if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
+            if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
             {
-                currentUnit = Instantiate(SelectRightUnit(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
-                if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
+                NavMeshHit hit;
+                for (int i = 0; i < numberOfUnits; i++)
                 {
-                    currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
-                    currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
-                    //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
+                    float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+                    float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+                    //int vertexIndex = UnityEngine.Random.Range(transform.position, );
+                    if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
+                    {
+                        currentUnit = Instantiate(SelectRightUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
+                        if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
+                        {
+                            currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
+                            currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
+                            //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
 
-                }
-                //currentUnit.transform.parent = this.transform;
-                //units.Add(currentUnit);
-                if (currentUnit.GetComponent<Unit>())
-                {
-                    currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
-                    currentUnit.GetComponent<Unit>().agent.enabled = true;
-                    UnitsManager.Instance.numberOfPoints++;
+                        }
+                        //currentUnit.transform.parent = this.transform;
+                        //units.Add(currentUnit);
+                        if (currentUnit.GetComponent<Unit>())
+                        {
+                            currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
+                            currentUnit.GetComponent<Unit>().agent.enabled = true;
+                            UnitsManager.Instance.numberOfPoints++;
+                            UnitsManager.Instance.SetAmountOfUnits(placedObjId);
+                        }
+                    }
                 }
             }
+     
         }
     }
 
-    Transform SelectRightUnit(int placedObjId)
+    Transform SelectRightUnitAndAmount(int placedObjId)
     {
         switch (placedObjId) 
         {
@@ -78,6 +88,9 @@ public class UnitsSpawner : MonoBehaviour
         }
         return unitPrefabToSpawn;
     }
+
+  
+
     void DestroyUnits()
     {
         foreach (var unit in units)

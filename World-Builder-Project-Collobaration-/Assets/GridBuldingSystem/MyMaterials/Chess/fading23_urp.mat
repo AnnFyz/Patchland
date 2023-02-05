@@ -92,7 +92,7 @@ Material:
     - _GlossyReflections: 1
     - _GlowColFac: 0.777
     - _GlowIntensity: 1.65
-    - _GlowScale: 1.97
+    - _GlowScale: 1.45
     - _Metallic: 1
     - _Mode: 0
     - _NOISETRIPLANAR: 0
@@ -119,10 +119,10 @@ Material:
     - _span: 0.93
     - _spread: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.3915094, b: 0.3915094, a: 0}
+    - _Color: {r: 0, g: 0.22328612, b: 0.3962264, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.90588236}
-    - _Glow: {r: 1, g: 0.99999994, b: 0, a: 0}
-    - _GlowEnd: {r: 0.99056596, g: 0.03270739, b: 0.03270739, a: 0}
+    - _Glow: {r: 0.2264151, g: 0.2264151, b: 0, a: 0}
+    - _GlowEnd: {r: 0.23754005, g: 0.26042658, b: 0.3207547, a: 0}
     - _SectionColor: {r: 0.36764705, g: 0.4485293, b: 1, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}

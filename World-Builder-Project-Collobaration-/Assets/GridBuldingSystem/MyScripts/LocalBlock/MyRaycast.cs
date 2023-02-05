@@ -39,7 +39,7 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                         BuildingManager.Instance.placedObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
                     }
 
-                        BuildingManager.grid = localGrid.grid;
+                        BuildingManager.localGrid = localGrid.grid;
                         BuildingManager.blockPrefab = localPrefabBlock;
                         BuildingManager.Instance.RefreshSelectedObjectType();
 

@@ -94,7 +94,6 @@ public class BlockHealth : MonoBehaviour
     {
         if (!HasDayingColor && !IsAttacking)
         {
-            Debug.Log("SetDyingColor!!!");
 
             difS_1 -= S_1;
             difV_1 -= V_1;
@@ -131,7 +130,6 @@ public class BlockHealth : MonoBehaviour
 
     void ConvertInDyingColor()
     {
-        Debug.Log("ConvertInDyingColor");
         float H1; float S1; float V1;
         float H2; float S2; float V2;
         Color.RGBToHSV(block.defaultColor, out H1, out S1, out V1);

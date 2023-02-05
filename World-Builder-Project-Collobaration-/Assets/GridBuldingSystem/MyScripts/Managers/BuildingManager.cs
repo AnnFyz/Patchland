@@ -12,17 +12,68 @@ public class BuildingManager : MonoBehaviour
     public PlacedObjectTypeSO.Dir dir;
     public event EventHandler OnSelectedChanged; // for ghost building
     public event EventHandler OnObjectPlaced; // for sound 
-    public static MyGridXZ<MyGridBuildingSystem.MyGridObject> grid;
+    public static MyGridXZ<MyGridBuildingSystem.MyGridObject> localGrid;
     public static BlockPrefab blockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
+    [SerializeField] int maxObj_1 = 5;
+    List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
+    public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
     private void Awake()
     {
         Instance = this;
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
     }
+
+    private void Start()
+    {
+        for (int i = 0; i < GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj
+        {
+            placedObjects.Insert(i, new List<PlacedObject_Done>());
+        }
+    }
     private void OnEnable()
     {
-      
+
+
+    }
+    public void DestroySurplusPlacedObjects()
+    {
+        if (placedObjects[0].Count >= 5)
+        {
+
+            if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
+            {
+                UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
+            }
+            // ADD PARTICLES IN DESTROYSELF
+            placedObjects[0][0].DestroySelf();
+            placedObjects[0].RemoveAt(0);
+        }
+
+        if (placedObjects[1].Count >= 4)
+        {
+
+            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
+            {
+                UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
+            }
+            // ADD PARTICLES IN DESTROYSELF
+            placedObjects[1][0].DestroySelf();
+            placedObjects[1].RemoveAt(0);
+        }
+
+        if (placedObjects[2].Count >= 3)
+        {
+
+            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+            {
+                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+            }
+            // ADD PARTICLES IN DESTROYSELF
+            placedObjects[2][0].DestroySelf();
+            placedObjects[2].RemoveAt(0);
+        }
+
     }
     public int GetNumberOfPlacedObjTypes()
     {
@@ -30,7 +81,7 @@ public class BuildingManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             DeselectObjectType();
             lastSelectedObjToPlaceTypeSO = null;
@@ -47,7 +98,7 @@ public class BuildingManager : MonoBehaviour
 
     public void SelectResource(int resourceId)
     {
-        placedObjectTypeSO = placedObjectTypeSOList[resourceId]; 
+        placedObjectTypeSO = placedObjectTypeSOList[resourceId];
         RefreshSelectedObjectType();
         DeselectObjectType();
     }
@@ -59,12 +110,12 @@ public class BuildingManager : MonoBehaviour
 
     public void RefreshSelectedObjectType()
     {
-        if(placedObjectTypeSO == null)
+        if (placedObjectTypeSO == null)
         {
             placedObjectTypeSO = lastSelectedObjToPlaceTypeSO;
         }
 
-        else if(placedObjectTypeSO != null)
+        else if (placedObjectTypeSO != null)
         {
             lastSelectedObjToPlaceTypeSO = placedObjectTypeSO;
         }
@@ -75,20 +126,20 @@ public class BuildingManager : MonoBehaviour
 
     public Vector2Int GetGridPosition(Vector3 worldPosition)
     {
-        grid.GetXZ(worldPosition, out int x, out int z);
+        localGrid.GetXZ(worldPosition, out int x, out int z);
         return new Vector2Int(x, z);
     }
 
     public Vector3 GetMouseWorldSnappedPosition()
     {
         Vector3 mousePosition = GetMouseWorldPosition();
-        if(grid == null) return mousePosition;
-        grid.GetXZ(mousePosition, out int x, out int z);
+        if (localGrid == null) return mousePosition;
+        localGrid.GetXZ(mousePosition, out int x, out int z);
 
         if (placedObjectTypeSO != null)
         {
             Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
-            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+            Vector3 placedObjectWorldPosition = localGrid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * localGrid.GetCellSize();
             return placedObjectWorldPosition;
         }
         else

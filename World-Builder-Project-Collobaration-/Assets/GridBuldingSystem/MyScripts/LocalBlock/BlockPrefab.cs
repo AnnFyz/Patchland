@@ -5,7 +5,8 @@ using System;
 
 public class BlockPrefab : MonoBehaviour
 {
-    public static Vector3 offset = new Vector3(7.5f, -5f, 7.5f);
+    //public static Vector3 offset = new Vector3(7.5f, -5f, 7.5f);
+    public static Vector3 offset = new Vector3(6f, -5f, 6f);
     private int newHeight;
     private int startScale;
     public event Action<int> OnHeightChanged;
