@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfef0d912bd6b44cbda368aea50d531, type: 3}
   m_Name: Black_G
   m_EditorClassIdentifier: 
-  weight: 30
+  weight: 1
   gemPrefab: {fileID: 768779861327571737, guid: 91c9ac1e234d3f04299d87c95935478b,
     type: 3}
-  IsThisGemSpecial: 1

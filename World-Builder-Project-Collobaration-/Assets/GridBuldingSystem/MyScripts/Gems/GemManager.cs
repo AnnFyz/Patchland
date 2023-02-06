@@ -7,10 +7,17 @@ using UnityEngine.EventSystems;
 
 public class GemManager : MonoBehaviour //make spawn in waves with particles
 {
+    public static GemManager Instance { get; private set; }
     public List<GemsSO> gems = new List<GemsSO>();
     NavMeshTriangulation triangulation;
     GameObject rainObj;
-    List<Transform> createdGems = new List<Transform>();
+    public List<Transform> createdGems = new List<Transform>();
+    public List<Transform> createdSpecialGems = new List<Transform>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         rainObj = transform.GetChild(0).gameObject;
@@ -24,15 +31,23 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     }
 
     void StartSpawning()
-    {
-        StartCoroutine(SpawnGemsInWaves());
+    { 
+        if (DayAndNightController.Instance.timeOfNight >= 0)
+        {
+            StartCoroutine(SpawnGemsInWaves());
+            Debug.Log("SPAWN GEMS");
+        }
+        else
+        {
+            StopCoroutine(SpawnGemsInWaves());
+            Debug.Log("STOP SPAWN GEMS");
+        }
     }
         IEnumerator SpawnGemsInWaves()
     {
 
         while (createdGems.Count <= 30)
         {
-            Debug.Log("SpawnGem");
             rainObj.SetActive(true);
             yield return new WaitForSeconds(5f);
             for (int i = 0; i < 10; i++)

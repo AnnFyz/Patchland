@@ -11,19 +11,18 @@ public class DayAndNightController : MonoBehaviour
     [SerializeField] Material backUpMaterial;
     [SerializeField] Color oldTopColor;
     [SerializeField] Color oldBottomColor;
-    public float H_1; 
-    public float S_1; 
+    public float H_1;
+    public float S_1;
     public float V_1;
 
-    public float H_2; 
-    public float S_2; 
+    public float H_2;
+    public float S_2;
     public float V_2;
     public bool isSunrise = false;
     public bool isSunset = false;
     public Action isTimeToSpawnGems;
     [SerializeField] float timeOfDay = 20;
-
-    [SerializeField] float timeOfNight = 0;
+    public float timeOfNight = 0;
 
     private void Awake()
     {

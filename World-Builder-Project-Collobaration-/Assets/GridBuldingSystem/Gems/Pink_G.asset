@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfef0d912bd6b44cbda368aea50d531, type: 3}
   m_Name: Pink_G
   m_EditorClassIdentifier: 
-  weight: 20
+  weight: 40
   gemPrefab: {fileID: 2672689293273753485, guid: 1977160ca52c4fb4a855cde01f85616f,
     type: 3}

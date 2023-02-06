@@ -11,7 +11,10 @@ public class Gem : MonoBehaviour
         if (IsThisGemSpecial)
         {
             UIManager.Instance.CollectSpecialGem();
+            GemManager.Instance.createdSpecialGems.Remove(this.gameObject.transform);
         }
+
+        GemManager.Instance.createdGems.Remove(gameObject.transform);
         Destroy(gameObject);
     }
 
