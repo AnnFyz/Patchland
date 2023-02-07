@@ -103,8 +103,8 @@ Material:
     - LIGHTMAP: 0
     - Vector1_04db18677079417e99b7f95a422950d3: 0
     - Vector1_0c1eff59554148a2892c7222f9ef6edb: 0
-    - Vector1_63a0afd297734dc9998b9b19bd747613: 3
-    - Vector1_6e12275293314cb7a52c177f83f8f9aa: -0.24
+    - Vector1_63a0afd297734dc9998b9b19bd747613: 1.69
+    - Vector1_6e12275293314cb7a52c177f83f8f9aa: 0.15
     - _AlphaClip: 0
     - _Amount: 0.75
     - _Blend: 0
@@ -142,7 +142,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_64d861fce71044349695d1bac7f2ea98: {r: 0.021982923, g: 0.3584906, b: 0.030000595,
+    - Color_64d861fce71044349695d1bac7f2ea98: {r: 0.59656316, g: 0.8396226, b: 0.04356533,
         a: 0}
     - Color_d3f90b46fa4040c48d4031973961bef6: {r: 1, g: 0.95073235, b: 0.3443396,
         a: 0}

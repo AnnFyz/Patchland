@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 4
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -21,26 +21,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hatching
-  m_Shader: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9f3df17a8082a8b4197d364d9ee1de7b,
+    type: 3}
   m_ValidKeywords:
-  - _HALFTONESHAPE_STRIPE
-  - _RECEIVE_SHADOWS_OFF
-  - _TOON_SHADING_ON
-  m_InvalidKeywords:
-  - _OVERRIDESHADOWCOLOR_ON
-  - _RECEIVESHADOWS_OFF
+  - LIGHTMAP_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 63dcc4d41c052f841ad87725e481caca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9014bade1fdbd244795646ac6e76e2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -92,7 +88,11 @@ Material:
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 63dcc4d41c052f841ad87725e481caca, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9014bade1fdbd244795646ac6e76e2fb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 9014bade1fdbd244795646ac6e76e2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -119,6 +119,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -133,6 +137,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - LIGHTMAP: 1
+    - Vector1_c77d81e545954cd0b55278e2ba9a8830: 0
+    - Vector1_fde129e198e94c77ac906bc5d7f525ab: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BrushLowerCut: 0
@@ -184,15 +191,20 @@ Material:
     - _HatchingSmoothness: 0.01
     - _LightContribution: 1
     - _LightFalloffSize: 1
+    - _LightProbeContribution: 3.1
     - _Metallic: 0.14
     - _NoiseScale: 3
     - _NoiseStrength: 0.31
     - _OcclusionStrength: 1
+    - _OutlineDepthSensitivity: 1
     - _OutlineEnabled: 0
     - _OutlineMode: 0
+    - _OutlineNormalsSensitivity: 1
+    - _OutlineThickness: 1
     - _OutlineWidth: 6.4
     - _OverrideShadowColor: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 0
     - _RimEnabled: 0
@@ -224,6 +236,8 @@ Material:
     - _ZWrite: 1
     - _brushScale: 30
     m_Colors:
+    - Color_4426999063b847ddb3ca0200d0cd3a69: {r: 1, g: 0, b: 0, a: 0}
+    - Color_c2df8d538a29426d87cca79e3feeba9c: {r: 0, g: 0.23381606, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -233,10 +247,14 @@ Material:
     - _HalfToneColor: {r: 0.099449664, g: 0, b: 0.20754719, a: 1}
     - _HatchColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.5849056, g: 0.3448736, b: 0.3448736, a: 0}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 1}
+    - _Tiling: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []

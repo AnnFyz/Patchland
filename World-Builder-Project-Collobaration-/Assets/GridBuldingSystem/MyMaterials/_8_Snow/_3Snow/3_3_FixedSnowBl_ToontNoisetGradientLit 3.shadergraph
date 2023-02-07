@@ -2474,10 +2474,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3551.000244140625,
-            "y": -712.0,
-            "width": 308.000244140625,
-            "height": 105.99981689453125
+            "x": -3637.0,
+            "y": -863.0000610351563,
+            "width": 314.0,
+            "height": 106.0
         }
     },
     "m_Slots": [
@@ -6191,8 +6191,8 @@
     "m_ShaderOutputName": "Offset",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 100.0,
-        "y": 200.0
+        "x": 71.97000122070313,
+        "y": 1.0
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -12855,10 +12855,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3211.0,
-            "y": -712.0,
+            "x": -3272.000244140625,
+            "y": -704.0,
             "width": 208.0,
-            "height": 435.0
+            "height": 435.0000305175781
         }
     },
     "m_Slots": [

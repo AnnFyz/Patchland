@@ -17,5 +17,5 @@ MonoBehaviour:
   visual: {fileID: 5930813321850338921, guid: 7b4daac551e10f142974f4c812642550, type: 3}
   width: 2
   height: 1
-  placedObjId: 1
+  placedObjId: 4
   materialForDeadObj: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}

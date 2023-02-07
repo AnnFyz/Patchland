@@ -82,6 +82,15 @@ public class UnitsSpawner : MonoBehaviour
             case 2:
                 unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[2];
                 break;
+            case 3:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[3];
+                break;
+            case 4:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[4];
+                break;
+            case 5:
+                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[5];
+                break;
             default:
                 Debug.Log("ERROR");
                 break;

@@ -18,6 +18,9 @@ public class UnitsManager : MonoBehaviour
     public int maxUnits_0 = 5;
     public int maxUnits_1 = 4;
     public int maxUnits_2 = 3;
+    public int maxUnits_3 = 5;
+    public int maxUnits_4 = 4;
+    public int maxUnits_5 = 3;
     int maxUnits;
     public List<int> amountOfUnits;
     private void Awake()
@@ -63,6 +66,15 @@ public class UnitsManager : MonoBehaviour
                 break;
             case 2:
                 maxUnits = maxUnits_2;
+                break;
+            case 3:
+                maxUnits = maxUnits_3;
+                break;
+            case 4:
+                maxUnits = maxUnits_4;
+                break;
+            case 5:
+                maxUnits = maxUnits_5;
                 break;
             default:
                 Debug.Log("ERROR");
