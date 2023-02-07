@@ -5410,7 +5410,7 @@ MonoBehaviour:
   modelRenderer: {fileID: 2530036732618605722}
   zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  newMaterial: {fileID: 2100000, guid: 4d381ed904864ab41948317ebb57a5ef, type: 2}
+  newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
@@ -35259,6 +35259,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580948709076259344, guid: afdac50ab58c6444ca0734af35616396,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580948709076259344, guid: afdac50ab58c6444ca0734af35616396,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580948709076259344, guid: afdac50ab58c6444ca0734af35616396,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8948534818980278568, guid: afdac50ab58c6444ca0734af35616396,
         type: 3}

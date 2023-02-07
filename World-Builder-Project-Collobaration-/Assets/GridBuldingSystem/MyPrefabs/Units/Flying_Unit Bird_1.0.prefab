@@ -5275,7 +5275,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675644380505310728}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 8.281237, z: 2.1355288}
@@ -5318,6 +5318,7 @@ MonoBehaviour:
     type: 2}
   selectedFigur: {fileID: 0}
   agent: {fileID: 0}
+  agentVel: 0
   target: {fileID: 0}
   startPoint: {fileID: 0}
   currentPoint: {fileID: 0}
@@ -5326,6 +5327,7 @@ MonoBehaviour:
   currentUnitsState: 0
   Pointer: {fileID: 0}
   isWaypointApproached: 0
+  animator: {fileID: 0}
 --- !u!114 &-629676016913631631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,7 +5412,7 @@ MonoBehaviour:
   modelRenderer: {fileID: 2104063565369224189}
   zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  newMaterial: {fileID: 0}
+  newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
@@ -44666,8 +44668,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5, y: 12.286256, z: 5}
+  m_Center: {x: 0, y: -3.6431289, z: 0}
 --- !u!114 &4079159686357829978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44738,6 +44740,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137001747131351174, guid: 22e82e37709fde34fb65a2fd28fbfb05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d42a6fab95dd4b4abd62752a1d14847, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e82e37709fde34fb65a2fd28fbfb05, type: 3}
 --- !u!4 &2073311080187582171 stripped

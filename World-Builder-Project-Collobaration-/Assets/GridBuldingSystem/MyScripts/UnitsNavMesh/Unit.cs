@@ -169,7 +169,10 @@ public class Unit : MonoBehaviour
                 // Update the way to the goal every second.
                 elapsed += Time.deltaTime;
                 IterateWaypointIndex();
-                target = localOrder[waypointIndex];
+                //if(localOrder[0] != null)
+                //{
+                    target = localOrder[waypointIndex];
+                //}
                 if (target != null)
                 {
                     if (elapsed > 3.0f)

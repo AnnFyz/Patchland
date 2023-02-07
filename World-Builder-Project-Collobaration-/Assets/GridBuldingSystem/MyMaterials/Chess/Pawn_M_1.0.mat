@@ -46,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4e102e41202d07428ed8b6e9d8c49fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -387,7 +387,7 @@ Material:
     m_Colors:
     - _AOColor: {r: 0, g: 0, b: 0, a: 1}
     - _AmbientColor: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0.8396226, g: 0.4023619, b: 0.29703632, a: 1}
+    - _BaseColor: {r: 0.8396226, g: 0.40236187, b: 0.2970363, a: 1}
     - _Color: {r: 0.8584906, g: 0, b: 0, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 0}
     - _Color1_B: {r: 1, g: 1, b: 1, a: 1}

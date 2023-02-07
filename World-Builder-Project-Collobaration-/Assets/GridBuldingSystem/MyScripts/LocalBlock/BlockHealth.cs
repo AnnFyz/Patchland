@@ -69,10 +69,10 @@ public class BlockHealth : MonoBehaviour
         S_1 -= 0.005f;
         S_2 -= 0.05f;
         V_2 += 0.05f;
-        V_1 = Mathf.Clamp(V_1, 0.4f, 1f);
+        V_1 = Mathf.Clamp(V_1, 0.01f, 1f);
         S_1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
         S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
-        V_2 = Mathf.Clamp(V_2, 0.025f, 0.75f);
+        V_2 = Mathf.Clamp(V_2, 0.001f, 0.75f);
         block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
         block.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
         if (currentHealth <= 0 ) { IsBlockDead = true; gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock(); }

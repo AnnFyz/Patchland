@@ -37,6 +37,7 @@ public class SpecialGemSpawner : MonoBehaviour
         while (GemManager.Instance.createdSpecialGems.Count <= 2)
         {
             yield return new WaitForSeconds(6f);
+            triangulation = UnityEngine.AI.NavMesh.CalculateTriangulation();
             SpawnSpecialGem();
             yield return new WaitForSeconds(1f);
 
@@ -46,7 +47,8 @@ public class SpecialGemSpawner : MonoBehaviour
 
     void SpawnSpecialGem()
     {
-        triangulation = UnityEngine.AI.NavMesh.CalculateTriangulation();
+        int index = 0;
+      
         int vertexIndex = UnityEngine.Random.Range(0, triangulation.vertices.Length);
         UnityEngine.AI.NavMeshHit hit;
         float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
@@ -60,7 +62,11 @@ public class SpecialGemSpawner : MonoBehaviour
         }
         else
         {
-            SpawnSpecialGem();
+            if (index < 50)
+            {
+                SpawnSpecialGem();
+                index++;
+            }
         }
 
     }

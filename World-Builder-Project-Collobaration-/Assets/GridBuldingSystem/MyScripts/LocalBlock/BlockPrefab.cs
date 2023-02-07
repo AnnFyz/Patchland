@@ -45,10 +45,10 @@ public class BlockPrefab : MonoBehaviour
             blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
             blockInsiderenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
         }
-        minOrigin = -0f;
-        maxOrigin =  0.75f;
+        minOrigin = 0f;
+        maxOrigin =  0.95f;
         startTime = Time.deltaTime;
-        t = UnityEngine.Random.Range(0.5f, 7f);
+        t = UnityEngine.Random.Range(2f, 7f);
     }
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
     {
@@ -65,7 +65,7 @@ public class BlockPrefab : MonoBehaviour
     void ChangeOriginOfGradient()
     {
         float v = Mathf.PingPong(Time.time, t);
-        origin = Mathf.SmoothStep(minOrigin, maxOrigin, v * 0.5f);
+        origin = Mathf.SmoothStep(minOrigin, maxOrigin, v * 0.25f);
         renderer.material.SetFloat("Vector1_6e12275293314cb7a52c177f83f8f9aa", origin);
     }
     public void DestroySelf()
