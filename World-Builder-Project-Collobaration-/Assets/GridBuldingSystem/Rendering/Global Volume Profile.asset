@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Value: {r: 0.7349709, g: 0.745283, b: 0.70661265, a: 1}
   hueShift:
     m_OverrideState: 0
-    m_Value: 25
+    m_Value: 6
   saturation:
     m_OverrideState: 1
     m_Value: 55

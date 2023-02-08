@@ -5326,6 +5326,7 @@ MonoBehaviour:
   Pointer: {fileID: 0}
   isWaypointApproached: 0
   animator: {fileID: 329126477367683308}
+  offsetY: 20
 --- !u!114 &-629676016913631631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5412,6 +5413,7 @@ MonoBehaviour:
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
+  messageFroomZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
   m_ObjectHideFlags: 0

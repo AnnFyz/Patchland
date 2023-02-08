@@ -87,13 +87,17 @@ public class Unit : MonoBehaviour
         int randomValue = UnityEngine.Random.Range(0, chance);
         if (randomValue == 0)
         {
+            if(currentUnitsState != UnitsState.Zombi && zombi.currentState == ZombiState.None)
+            {
+                Bubble.Instance.CreateBubble(transform.position, "I am a Zombie now!");
+            }
             currentUnitsState = UnitsState.Zombi;
             SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
             StartCoroutine(zombi.AttackBlock());
-           
+
         }
         else
         {

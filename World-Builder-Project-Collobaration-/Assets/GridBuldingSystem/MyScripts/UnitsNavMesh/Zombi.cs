@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 
 public enum ZombiState
@@ -30,12 +31,12 @@ public class Zombi : MonoBehaviour
     [SerializeField] Color zombiBottomColor = Color.grey;
     [SerializeField] Material newMaterial;
     [SerializeField] GameObject attacking_Particles;
+    [SerializeField] TMP_Text messageFroomZombi;
     int x = 0;
     private void Awake()
     {
         unit = GetComponent<Unit>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //modelRenderer.GetMaterials()
     }
     private void Start()
     {
@@ -52,7 +53,7 @@ public class Zombi : MonoBehaviour
         {
             ChangeMaterial(newMaterial);
         }
-        attacking_Particles.gameObject.SetActive(true);
+
     }
 
     void ChangeMaterial(Material newMat)
