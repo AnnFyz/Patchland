@@ -33,7 +33,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         this.newHeight = newHeight;
         oldGrid = grid;
-        if(blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond)
+        if (blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond)
         {
             grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         }
@@ -62,14 +62,14 @@ public class MyGridBuildingSystem : MonoBehaviour
                         OnChangedWaypoints?.Invoke();
                     }
 
-                    if(BuildingManager.placedObjects[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject()))
+                    if (BuildingManager.placedObjects[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject()))
                     {
                         BuildingManager.placedObjects[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject());
                     }
 
                     oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
                     grid.GetGridObject(x, z).ClearPlacedObject();
-        
+
                 }
             }
         }
@@ -90,10 +90,9 @@ public class MyGridBuildingSystem : MonoBehaviour
                     if (UnitsManager.Instance.waypoints[placedObjectId].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
                     {
                         UnitsManager.Instance.waypoints[placedObjectId].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
-                        Debug.Log("Waypoint was removed " + grid.GetGridObject(x, z).GetPlacedObject());
                         OnChangedWaypoints?.Invoke();
                     }
-                } 
+                }
             }
         }
     }
@@ -144,7 +143,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -174,7 +173,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
-                PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
+                PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition , placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
 
                 foreach (Vector2Int gridPosition in gridPositionList)
                 {
@@ -186,7 +185,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                 UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
 
 
-                BuildingManager.placedObjects[placedObjectId].Add(placedObject); 
+                BuildingManager.placedObjects[placedObjectId].Add(placedObject);
                 Debug.Log("placedObjects " + BuildingManager.placedObjects[placedObjectId].Count);
                 BuildingManager.Instance.DestroySurplusPlacedObjects();
 
@@ -199,11 +198,14 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 // Cannot build here
                 //UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
-                Debug.Log("Cannot Build Here!");
+                //Debug.Log("Cannot Build Here!");
+                Bubble.Instance.CreatePopupText(mousePosition, "Cannot Build Here!");
             }
         }
 
     }
+
+
 
 
     private Vector3 GetMouseWorldPosition()

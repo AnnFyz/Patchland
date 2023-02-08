@@ -7,7 +7,11 @@ public class MyBuildingGhost : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     private Transform visual;
     private PlacedObjectTypeSO placedObjectTypeSO;
-
+    public static MyBuildingGhost Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         RefreshVisual();
@@ -20,9 +24,9 @@ public class MyBuildingGhost : MonoBehaviour
         RefreshVisual();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
+       
     }
 
     private void LateUpdate()
@@ -71,7 +75,4 @@ public class MyBuildingGhost : MonoBehaviour
             SetLayerRecursive(child.gameObject, layer);
         }
     }
-
-  
-
 }

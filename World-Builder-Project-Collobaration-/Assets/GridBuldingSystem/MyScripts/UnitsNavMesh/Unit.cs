@@ -20,7 +20,7 @@ public enum UnitsState // to add weight
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
-    public UnitsTypeSO unitScriptableObjects;
+    public UnitsTypeSO unitScriptableObject;
     public GameObject selectedFigur;
     public NavMeshAgent agent;
     public float agentVel;
@@ -83,7 +83,7 @@ public class Unit : MonoBehaviour
 
     void UseChangeToBecomeZombi()
     {
-        int chance = Mathf.RoundToInt(100 / unitScriptableObjects.chanceToBecomeZombi);
+        int chance = Mathf.RoundToInt(100 / unitScriptableObject.chanceToBecomeZombi);
         int randomValue = UnityEngine.Random.Range(0, chance);
         if (randomValue == 0)
         {
@@ -101,7 +101,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            DestroyUnit();
         }
 
     }
@@ -138,6 +138,7 @@ public class Unit : MonoBehaviour
     }
     void DestroyUnit()
     {
+        UnitsManager.Instance.SetAmountOfUnits(unitScriptableObject.unitId, -1);
         Destroy(gameObject);
     }
     public void UpdateListOfWaypoints()
@@ -222,16 +223,16 @@ public class Unit : MonoBehaviour
 
     public virtual void SetupAgentFromConfiguration()
     {
-        agent.acceleration = unitScriptableObjects.acceleration;
-        agent.angularSpeed = unitScriptableObjects.angularSpeed;
-        agent.areaMask = unitScriptableObjects.areaMask;
-        agent.avoidancePriority = unitScriptableObjects.avoidancePriority;
-        agent.baseOffset = unitScriptableObjects.baseOffset;
-        agent.height = unitScriptableObjects.height;
-        agent.obstacleAvoidanceType = unitScriptableObjects.obstacleAvoidanceType;
-        agent.radius = unitScriptableObjects.radius;
-        agent.speed = unitScriptableObjects.speed;
-        agent.stoppingDistance = unitScriptableObjects.stoppingDistance;
+        agent.acceleration = unitScriptableObject.acceleration;
+        agent.angularSpeed = unitScriptableObject.angularSpeed;
+        agent.areaMask = unitScriptableObject.areaMask;
+        agent.avoidancePriority = unitScriptableObject.avoidancePriority;
+        agent.baseOffset = unitScriptableObject.baseOffset;
+        agent.height = unitScriptableObject.height;
+        agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
+        agent.radius = unitScriptableObject.radius;
+        agent.speed = unitScriptableObject.speed;
+        agent.stoppingDistance = unitScriptableObject.stoppingDistance;
     }
 
     private void OnTriggerEnter(Collider other)

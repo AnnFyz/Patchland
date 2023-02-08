@@ -45,10 +45,10 @@ public class UnitsManager : MonoBehaviour
         ToControlUnitsManually();
     }
 
-    public void SetAmountOfUnits(int placedObjId)
+    public void SetAmountOfUnits(int placedObjId, int a)
     {
 
-        amountOfUnits[placedObjId]++;
+        amountOfUnits[placedObjId] += a;
     }
     public int GetAmountOfUnits(int placedObjId)
     {

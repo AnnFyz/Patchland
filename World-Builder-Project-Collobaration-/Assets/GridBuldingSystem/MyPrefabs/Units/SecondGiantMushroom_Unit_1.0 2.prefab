@@ -5312,7 +5312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitScriptableObjects: {fileID: 11400000, guid: 4a4b94e1e0573ed48898fb13f74cd0d9,
+  unitScriptableObject: {fileID: 11400000, guid: 54d6b089a5c6fc1409d850dbb8969d94,
     type: 2}
   selectedFigur: {fileID: 0}
   agent: {fileID: 0}
@@ -5326,7 +5326,6 @@ MonoBehaviour:
   Pointer: {fileID: 0}
   isWaypointApproached: 0
   animator: {fileID: 2667640163126942527}
-  offsetY: 20
 --- !u!114 &-629676016913631631
 MonoBehaviour:
   m_ObjectHideFlags: 0

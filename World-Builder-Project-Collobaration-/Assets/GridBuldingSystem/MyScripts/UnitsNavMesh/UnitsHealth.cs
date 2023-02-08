@@ -28,7 +28,7 @@ public class UnitsHealth : MonoBehaviour
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
-        damageToUnit = unit.unitScriptableObjects.damageToUnitWithoutFood;
+        damageToUnit = unit.unitScriptableObject.damageToUnitWithoutFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
     }
 

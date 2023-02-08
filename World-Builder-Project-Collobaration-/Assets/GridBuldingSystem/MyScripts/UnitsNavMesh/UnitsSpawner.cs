@@ -33,7 +33,7 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(int placedObjId)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
-        if (levelState == LevelState.Desert || levelState == LevelState.Forest)
+        if (levelState == LevelState.Desert || levelState == LevelState.Forest) //OVERRIDE THE LAST THREE UNITS ONLY ON THE THREE HEIGHSET BLOCKS
         {
             if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
             {
@@ -60,7 +60,7 @@ public class UnitsSpawner : MonoBehaviour
                             currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
                             currentUnit.GetComponent<Unit>().agent.enabled = true;
                             UnitsManager.Instance.numberOfPoints++;
-                            UnitsManager.Instance.SetAmountOfUnits(placedObjId);
+                            UnitsManager.Instance.SetAmountOfUnits(placedObjId, 1);
                         }
                     }
                 }

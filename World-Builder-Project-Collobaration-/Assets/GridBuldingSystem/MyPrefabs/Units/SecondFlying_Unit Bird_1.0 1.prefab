@@ -5314,7 +5314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitScriptableObjects: {fileID: 11400000, guid: af7d1ec7410fc1b43955dbf608fd2a88,
+  unitScriptableObject: {fileID: 11400000, guid: 0660a1fcd11e2ab4487cd3294530907f,
     type: 2}
   selectedFigur: {fileID: 0}
   agent: {fileID: 0}
@@ -5414,6 +5414,7 @@ MonoBehaviour:
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
+  messageFroomZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
   m_ObjectHideFlags: 0

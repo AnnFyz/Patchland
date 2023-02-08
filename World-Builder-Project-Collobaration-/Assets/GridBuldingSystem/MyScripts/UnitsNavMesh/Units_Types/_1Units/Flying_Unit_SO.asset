@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
   m_Name: Flying_Unit_SO
   m_EditorClassIdentifier: 
-  damageToUnitWithoutFood: 0.25
-  chanceToBecomeZombi: 68.6
+  unitId: 2
+  damageToUnitWithoutFood: 0.15
+  chanceToBecomeZombi: 70
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
-  acceleration: 5
+  acceleration: 20
   angularSpeed: 130
   areaMask: -1
   avoidancePriority: 50

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
+    [SerializeField] LayerMask blockLayer;
     public static BuildingManager Instance { get; private set; }
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     public PlacedObjectTypeSO placedObjectTypeSO;
@@ -15,9 +16,9 @@ public class BuildingManager : MonoBehaviour
     public static MyGridXZ<MyGridBuildingSystem.MyGridObject> localGrid;
     public static BlockPrefab blockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
-    [SerializeField] int maxObj_1 = 5;
     List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
+    public static bool CanBuildSelected = false;
     private void Awake()
     {
         Instance = this;
@@ -173,6 +174,7 @@ public class BuildingManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
+            //Debug.Log(raycastHit.collider.name);
             return raycastHit.point;
         }
         else

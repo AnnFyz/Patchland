@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 857087881561959907}
   - component: {fileID: 857087881561959905}
   - component: {fileID: 857087881561959906}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,8 @@ MonoBehaviour:
   m_text: Rounds survived
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3489df206735e04196644364db27ea7, type: 2}
-  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7, type: 2}
+  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -148,7 +149,7 @@ GameObject:
   - component: {fileID: 857087881612734019}
   - component: {fileID: 857087881612734028}
   - component: {fileID: 857087881612734029}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Retry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c6b17f7eb5b5824185c4e54f023b13e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26f58583a0461c542ba76d03f433cd6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -301,7 +302,7 @@ GameObject:
   - component: {fileID: 857087881716812619}
   - component: {fileID: 857087881716812617}
   - component: {fileID: 857087881716812618}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +316,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857087881716812468}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -380,7 +381,7 @@ GameObject:
   - component: {fileID: 857087882129300206}
   - component: {fileID: 857087882129300204}
   - component: {fileID: 857087882129300205}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +439,8 @@ MonoBehaviour:
   m_text: Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3489df206735e04196644364db27ea7, type: 2}
-  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7, type: 2}
+  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -517,7 +519,7 @@ GameObject:
   - component: {fileID: 857087882297463112}
   - component: {fileID: 857087882297463113}
   - component: {fileID: 857087882297463114}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +672,7 @@ GameObject:
   - component: {fileID: 857087882571505150}
   - component: {fileID: 857087882571505148}
   - component: {fileID: 857087882571505149}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +730,8 @@ MonoBehaviour:
   m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3489df206735e04196644364db27ea7, type: 2}
-  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7, type: 2}
+  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -806,7 +809,7 @@ GameObject:
   - component: {fileID: 857087882631898640}
   - component: {fileID: 857087882631898641}
   - component: {fileID: 857087882631898642}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +853,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857087882631898652}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -910,7 +913,7 @@ GameObject:
   - component: {fileID: 857087882816916647}
   - component: {fileID: 857087882816916645}
   - component: {fileID: 857087882816916646}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Rounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +972,8 @@ MonoBehaviour:
   m_text: 125
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3489df206735e04196644364db27ea7, type: 2}
-  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7, type: 2}
+  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1046,7 +1050,7 @@ GameObject:
   - component: {fileID: 857087883078834636}
   - component: {fileID: 857087883078834626}
   - component: {fileID: 857087883078834627}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1108,8 @@ MonoBehaviour:
   m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3489df206735e04196644364db27ea7, type: 2}
-  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7, type: 2}
+  m_sharedMaterial: {fileID: 3604488500783283528, guid: c3489df206735e04196644364db27ea7,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

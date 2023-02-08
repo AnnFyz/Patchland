@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class UnitsTypeSO : ScriptableObject
 {
     [Header("Health Settings")]
+    public int unitId;
     public float damageToUnitWithoutFood = 1f;
     [Range(0.0f, 100.0f)]
     public float chanceToBecomeZombi;

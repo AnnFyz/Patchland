@@ -253,6 +253,7 @@ public class Zombi : MonoBehaviour
 
     void DestroyZombi()
     {
+        UnitsManager.Instance.SetAmountOfUnits(unit.unitScriptableObject.unitId, -1);
         Destroy(gameObject);
     }
     
