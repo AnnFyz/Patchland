@@ -24,7 +24,7 @@ MonoBehaviour:
   baseOffset: 0
   height: 9
   obstacleAvoidanceType: 1
-  radius: 1.05
+  radius: 1.15
   speed: 15
   stoppingDistance: 1.5
   triggerRadius: 0.15

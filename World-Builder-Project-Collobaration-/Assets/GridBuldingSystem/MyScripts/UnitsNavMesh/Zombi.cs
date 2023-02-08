@@ -103,12 +103,10 @@ public class Zombi : MonoBehaviour
                     agent.SetDestination(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                     if (Vector3.Distance(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), target.transform.position) < 10f)
                     {
-                        Debug.Log("MOVE TO NEXT POINT");
                         HandleZombiMovement();
                     }
                     else
                     {
-                        Debug.Log("Iterate");
                         IterateWaypointIndex();
                     }
                 }

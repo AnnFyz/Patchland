@@ -80,7 +80,7 @@ public class BlockPrefab : MonoBehaviour
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
-            Debug.Log("flip from desert to pond  " + transform.localRotation.z);
+            //Debug.Log("flip from desert to pond  " + transform.localRotation.z);
             return;
         }
 

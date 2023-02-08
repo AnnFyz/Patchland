@@ -33,39 +33,63 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(int placedObjId)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
-        if (levelState == LevelState.Desert || levelState == LevelState.Forest) //OVERRIDE THE LAST THREE UNITS ONLY ON THE THREE HEIGHSET BLOCKS
+        if (levelState == LevelState.Desert || levelState == LevelState.Forest)
         {
-            if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
+            Spawn(placedObjId);
+        }
+        else if (levelState == LevelState.Desert || levelState == LevelState.Forest || levelState == LevelState.Mountain)
+        {
+            if (placedObjId == 3 || placedObjId == 4 || placedObjId == 5)
+                Spawn(placedObjId);
+            else 
             {
-                NavMeshHit hit;
-                for (int i = 0; i < numberOfUnits; i++)
-                {
-                    float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
-                    float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
-                    //int vertexIndex = UnityEngine.Random.Range(transform.position, );
-                    if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
-                    {
-                        currentUnit = Instantiate(SelectRightUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
-                        if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
-                        {
-                            currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
-                            currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
-                            //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
+                float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+                float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+                Bubble.Instance.CreatePopupText(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), "I won't spawn here the Unit!");
+                Debug.Log("I won't spawn here the Unit!");
+            }
+        }
+       
+    }
 
-                        }
-                        //currentUnit.transform.parent = this.transform;
-                        //units.Add(currentUnit);
-                        if (currentUnit.GetComponent<Unit>())
-                        {
-                            currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
-                            currentUnit.GetComponent<Unit>().agent.enabled = true;
-                            UnitsManager.Instance.numberOfPoints++;
-                            UnitsManager.Instance.SetAmountOfUnits(placedObjId, 1);
-                        }
+    void Spawn(int placedObjId)
+    {
+        if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
+        {
+            NavMeshHit hit;
+            for (int i = 0; i < numberOfUnits; i++)
+            {
+                float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+                float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+                //int vertexIndex = UnityEngine.Random.Range(transform.position, );
+                if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
+                {
+                    currentUnit = Instantiate(SelectRightUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
+                    if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
+                    {
+                        currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
+                        currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
+                        //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
+
+                    }
+                    //currentUnit.transform.parent = this.transform;
+                    //units.Add(currentUnit);
+                    if (currentUnit.GetComponent<Unit>())
+                    {
+                        currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
+                        currentUnit.GetComponent<Unit>().agent.enabled = true;
+                        UnitsManager.Instance.numberOfPoints++;
+                        UnitsManager.Instance.SetAmountOfUnits(placedObjId, 1);
                     }
                 }
             }
-     
+        }
+        else
+        {
+            float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+            float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+            Bubble.Instance.CreatePopupText(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), "You have already created maximum creatures");
+            Debug.Log("You have already created maximum creatures");
         }
     }
 

@@ -64,12 +64,31 @@ public class UIManager : MonoBehaviour
                     break;
 
                 case LevelState.Forest:
+                    icons[0].SetActive(true);
+                    icons[1].SetActive(true);
+                    icons[2].SetActive(true);
+                    break;
+
+                case LevelState.Hill:
+                    foreach (var icon in icons)
+                    {
+                        icon.SetActive(false);
+                    }
+                    break;
+
+                case LevelState.Mountain:
                     foreach (var icon in icons)
                     {
                         icon.SetActive(true);
                     }
                     break;
 
+                case LevelState.SnowMountain:
+                    foreach (var icon in icons)
+                    {
+                        icon.SetActive(true);
+                    }
+                    break;
                 default:
                     Debug.Log("NOTHING");
                     break;
