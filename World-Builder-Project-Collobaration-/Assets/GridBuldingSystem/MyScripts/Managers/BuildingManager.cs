@@ -92,12 +92,48 @@ public class BuildingManager : MonoBehaviour
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }  
-        if (Input.GetKeyDown(KeyCode.Alpha2) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); DeselectObjectType(); } 
-        if (Input.GetKeyDown(KeyCode.Alpha5) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); DeselectObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha6) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            if (levelState != LevelState.Pond && levelState != LevelState.Desert)
+            {
+                placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            if (levelState != LevelState.Pond && levelState != LevelState.Desert)
+            {
+                placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
+            {
+                placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); DeselectObjectType();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
+            {
+                placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); DeselectObjectType();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
+            {
+                placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); DeselectObjectType();
+            }
+        }
+
     }
 
     public void SelectResource(int resourceId)

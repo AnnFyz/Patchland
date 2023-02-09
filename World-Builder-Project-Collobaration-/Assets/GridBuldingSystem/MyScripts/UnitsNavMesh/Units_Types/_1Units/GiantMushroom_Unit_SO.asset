@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GiantMushroom_Unit_SO
   m_EditorClassIdentifier: 
   unitId: 1
-  damageToUnitWithoutFood: 0.15
-  chanceToBecomeZombi: 50
+  damageToUnitWithoutFood: 0.5
+  chanceToBecomeZombi: 100
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 20

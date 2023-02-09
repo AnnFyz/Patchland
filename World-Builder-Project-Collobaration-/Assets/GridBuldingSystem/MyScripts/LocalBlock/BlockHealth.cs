@@ -132,7 +132,7 @@ public class BlockHealth : MonoBehaviour
         //    HasDayingColor = true;
         //}
         //else if (HasDayingColor && !IsBeingDamaged)
-        if(!IsBeingDamaged) //&& lastDamage != newDamage)
+        if(!IsBeingDamaged && currentHealth < startHealth) //&& lastDamage != newDamage)
         {
             ConvertInDyingColor();
         }
@@ -140,6 +140,7 @@ public class BlockHealth : MonoBehaviour
 
     void ConvertInDyingColor()
     {
+        block = GetComponent<BlockPrefab>();
         lastDamage = newDamage;
         float H1; float S1; float V1;
         float H2; float S2; float V2;
@@ -154,8 +155,8 @@ public class BlockHealth : MonoBehaviour
         V1 += ind_Vdif_2;
 
         V1 = Mathf.Clamp(V_1, 0.01f, 1f);
-        S1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
-        S2 = Mathf.Clamp(S_2, 0.001f, 0.8f);
+        S1 = Mathf.Clamp(S_1, 0.001f, 0.99f);
+        S2 = Mathf.Clamp(S_2, 0.001f, 0.7f);
         V2 = Mathf.Clamp(V_2, 0.001f, 0.75f);
 
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fox_Units_SO
   m_EditorClassIdentifier: 
   unitId: 0
-  damageToUnitWithoutFood: 0.15
-  chanceToBecomeZombi: 25
+  damageToUnitWithoutFood: 0.5
+  chanceToBecomeZombi: 100
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 25
