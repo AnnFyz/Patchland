@@ -63,8 +63,8 @@ public class LocalLevelState : MonoBehaviour
 
         if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
         {
-            if (currentLevelState != LevelState.Desert) { Debug.Log("State was changed"); }
-            currentLevelState = LevelState.Desert;
+            //if (currentLevelState != LevelState.Desert)
+            //{ Debug.Log("State was changed"); }
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
             blockPrefab.defaultMaterial = renderer.material;
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
@@ -73,6 +73,12 @@ public class LocalLevelState : MonoBehaviour
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
             }
+            if (currentLevelState != LevelState.Desert)
+            {
+                OnChangedState?.Invoke();
+            }
+            blHealth.SetDyingColor();
+            currentLevelState = LevelState.Desert;
             UIManager.Instance.LocalSetupUIIcons();
             blockPrefab.blockInside.gameObject.SetActive(false);
             //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
@@ -139,7 +145,6 @@ public class LocalLevelState : MonoBehaviour
             }
             if (currentLevelState != LevelState.Hill)
             {
-                Debug.Log("Montain");
                 OnChangedState?.Invoke();
             }
             blHealth.SetDyingColor();

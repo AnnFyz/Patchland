@@ -79,6 +79,7 @@ public class Zombi : MonoBehaviour
         }
         if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
         {
+            occupiedBlockHealth.IsBeingDamaged = false;
             if (occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
             {
                 currentState = ZombiState.FindAnotherBlock;
@@ -153,12 +154,14 @@ public class Zombi : MonoBehaviour
             if (occupiedBlockHealth.currentHealth > 0)
             {
                 isAttacking = true;
-                occupiedBlockHealth.Damage(1f);               
+                occupiedBlockHealth.Damage(1f);
+                occupiedBlockHealth.IsBeingDamaged = true;
                 yield return new WaitForSeconds(0.1f);
             }
             else
             {
                 isAttacking = false;
+                occupiedBlockHealth.IsBeingDamaged = false;
                 break;
             }
         }
@@ -166,6 +169,7 @@ public class Zombi : MonoBehaviour
 
     void FindNeighboursBlocks()
     {
+   
         waypointIndex = 0;
         for (int x = 0; x < GridOfPrefabs.Instance.width; x++)
         {

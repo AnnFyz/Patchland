@@ -27,6 +27,7 @@ public class ZombiCollector : MonoBehaviour
                 //}
                 GetComponentInParent<BlockHealth>().IsBlockInjuring = false;
                 GetComponentInParent<BlockHealth>().IsAttacking = false;
+                GetComponentInParent<BlockHealth>().IsBeingDamaged = false; 
                 Destroy(zombi.gameObject);
             }
         }
