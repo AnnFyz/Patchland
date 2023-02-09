@@ -75,8 +75,17 @@ public class BlockHealth : MonoBehaviour
         V_2 = Mathf.Clamp(V_2, 0.001f, 0.75f);
         block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
         block.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
-        if (currentHealth <= 0 ) { IsBlockDead = true; gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock(); }
-        if(currentHealth < startHealth) { IsBlockInjuring = true; HasDayingColor = false; IsAttacking = true; }
+        if (currentHealth <= 0 )
+        { IsBlockDead = true; 
+          gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock(); 
+        }
+
+        if(currentHealth < startHealth && !IsBlockDead)
+        {
+           IsBlockInjuring = true; 
+           HasDayingColor = false; 
+           IsAttacking = true;
+        }
 
         ind_Vdif_1 += 0.005f;
         ind_Sdif_1 += 0.005f;

@@ -18,7 +18,7 @@ MonoBehaviour:
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
   acceleration: 25
-  angularSpeed: 200
+  angularSpeed: 175
   areaMask: -1
   avoidancePriority: 50
   baseOffset: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   obstacleAvoidanceType: 1
   radius: 1.15
   speed: 15
-  stoppingDistance: 1.5
+  stoppingDistance: 1
   triggerRadius: 0.15

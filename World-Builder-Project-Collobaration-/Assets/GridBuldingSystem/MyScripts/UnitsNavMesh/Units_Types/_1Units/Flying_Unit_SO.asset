@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flying_Unit_SO
   m_EditorClassIdentifier: 
   unitId: 2
-  damageToUnitWithoutFood: 0.15
+  damageToUnitWithoutFood: 0.015
   chanceToBecomeZombi: 70
   UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
