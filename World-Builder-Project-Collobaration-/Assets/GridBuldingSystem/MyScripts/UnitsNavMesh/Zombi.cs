@@ -30,7 +30,7 @@ public class Zombi : MonoBehaviour
     [SerializeField] Color zombiTopColor = Color.white;
     [SerializeField] Color zombiBottomColor = Color.grey;
     [SerializeField] Material newMaterial;
-    [SerializeField] GameObject attacking_Particles;
+    public GameObject attacking_Particles;
     [SerializeField] TMP_Text messageFroomZombi;
     int x = 0;
     private void Awake()
@@ -257,6 +257,10 @@ public class Zombi : MonoBehaviour
     {
         UnitsManager.Instance.SetAmountOfUnits(unit.unitScriptableObject.unitId, -1);
         ParticleSystem particles = Instantiate(unit.unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
+        particles.gameObject.AddComponent<AudioSource>().clip = unit.glassBreaking;
+        particles.gameObject.GetComponent<AudioSource>().volume = 0.1f;
+        particles.gameObject.GetComponent<AudioSource>().Play();
+        particles.gameObject.GetComponent<AudioSource>().loop = false;
         particles.Play();
         Destroy(gameObject);
     }

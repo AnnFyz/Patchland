@@ -6,6 +6,8 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] LayerMask blockLayer;
+    public AudioClip placedSound;
+    public AudioSource audio;
     public static BuildingManager Instance { get; private set; }
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     public PlacedObjectTypeSO placedObjectTypeSO;
@@ -23,6 +25,7 @@ public class BuildingManager : MonoBehaviour
     {
         Instance = this;
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
+        audio = GetComponent<AudioSource>();
     }
 
     private void Start()

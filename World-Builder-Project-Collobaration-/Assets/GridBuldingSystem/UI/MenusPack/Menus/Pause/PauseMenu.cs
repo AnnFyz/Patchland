@@ -8,6 +8,12 @@ public class PauseMenu : MonoBehaviour
     public GameObject ui;
     public SceneFader sceneFader;
     public int mainMenuIndex = 0;
+    [SerializeField] AudioSource backgroundSound;
+    float gameVolume;
+    private void Start()
+    {
+        gameVolume = backgroundSound.volume;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -22,10 +28,12 @@ public class PauseMenu : MonoBehaviour
 
         if (ui.activeSelf)
         {
+            backgroundSound.volume = 0.025f;
             Time.timeScale = 0f;
         }
         else
         {
+            backgroundSound.volume = gameVolume;
             Time.timeScale = 1f;
         }
     }

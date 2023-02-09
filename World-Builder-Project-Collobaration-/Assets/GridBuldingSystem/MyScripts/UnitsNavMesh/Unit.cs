@@ -20,6 +20,8 @@ public enum UnitsState // to add weight
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
+    [SerializeField] AudioClip zombieSound;
+    public AudioClip glassBreaking;
     public UnitsTypeSO unitScriptableObject;
     public GameObject selectedFigur;
     public NavMeshAgent agent;
@@ -40,11 +42,13 @@ public class Unit : MonoBehaviour
     Zombi zombi;
     List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
     [SerializeField] Animator animator;
+    public AudioSource audioSource;
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
         agent = GetComponent<NavMeshAgent>();
         zombi = GetComponent<Zombi>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -68,14 +72,36 @@ public class Unit : MonoBehaviour
     private void FixedUpdate()
     {
         //Pointer.transform.position = target.position;
-        if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+        if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
             MoveAutomaticallyToWayPoint();
         }
 
-        if(animator != null)
+        if (animator != null)
         {
             animator.SetBool("IsRunning", agent.velocity.magnitude > 0.01f);
+            if (agent.velocity.magnitude < 0.01f && currentUnitsState != UnitsState.Zombi)
+            {
+                audioSource.volume = 0;
+            }
+            else
+            {
+                if (unitScriptableObject.unitId == 0 || unitScriptableObject.unitId == 3)
+                {
+                    audioSource.volume = 0.95f;
+                }
+                else if (currentUnitsState != UnitsState.Zombi)
+                {
+                    audioSource.volume = 0.25f;
+                }
+                else
+                {
+                    audioSource.volume = 0.95f;
+                }
+
+
+
+            }
         }
 
         agentVel = agent.velocity.magnitude;
@@ -87,10 +113,16 @@ public class Unit : MonoBehaviour
         int randomValue = UnityEngine.Random.Range(0, chance);
         if (randomValue == 0)
         {
-            if(currentUnitsState != UnitsState.Zombi && zombi.currentState == ZombiState.None)
+            if (currentUnitsState != UnitsState.Zombi && zombi.currentState == ZombiState.None)
             {
                 Bubble.Instance.CreateBubble(transform.position, "I am a Zombie now!");
+                audioSource.clip = zombieSound;
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
             }
+            zombi.attacking_Particles.gameObject.SetActive(true);
             currentUnitsState = UnitsState.Zombi;
             SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
@@ -114,7 +146,7 @@ public class Unit : MonoBehaviour
             foreach (var block in intersectedWithUnitBlocks)
             {
                 float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, block.transform.position + block.transform.position * 0.5f);
-                if(newDist < dist)
+                if (newDist < dist)
                 {
                     dist = newDist;
                     zombi.occupiedBlockHealth = block.GetComponentInParent<BlockHealth>();
@@ -134,18 +166,22 @@ public class Unit : MonoBehaviour
                 intersectedWithUnitBlocks.Add(block);
 
             }
-        }      
+        }
     }
     void DestroyUnit()
     {
         UnitsManager.Instance.SetAmountOfUnits(unitScriptableObject.unitId, -1);
         ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
+        particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
+        particles.gameObject.GetComponent<AudioSource>().volume = 0.1f;
+        particles.gameObject.GetComponent<AudioSource>().loop = false;
+        particles.gameObject.GetComponent<AudioSource>().Play();
         particles.Play();
         Destroy(gameObject);
     }
     public void UpdateListOfWaypoints()
     {
-        if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+        if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
             localOrder.Clear();
             if (target == null) // it means the unit was just created
@@ -164,7 +200,7 @@ public class Unit : MonoBehaviour
             localOrder.AddRange(reversedList);
             waypointIndex = 0; // to reset the path and start from zero point again
         }
-   
+
     }
 
     void MoveAutomaticallyToWayPoint() //ELAPSED 
@@ -178,13 +214,13 @@ public class Unit : MonoBehaviour
                 IterateWaypointIndex();
                 //if(localOrder[0] != null)
                 //{
-                    target = localOrder[waypointIndex];
+                target = localOrder[waypointIndex];
                 //}
                 if (target != null)
                 {
-                    if (elapsed > 3.0f)
+                    if (elapsed > 1.5f)
                     {
-                        elapsed -= 3.0f;
+                        elapsed -= 1.5f;
                         if (agent.SetDestination(target.transform.position))
                         {
                             if (Vector3.Distance(transform.position, target.transform.position) < 1f)
@@ -244,7 +280,7 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
                 {
                     GetComponentInChildren<UnitsHealth>().FillHealth(50);
                 }
@@ -261,7 +297,7 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() && other.gameObject.GetComponentInParent<PlacedObject_Done>()!= null)
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() && other.gameObject.GetComponentInParent<PlacedObject_Done>() != null)
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {

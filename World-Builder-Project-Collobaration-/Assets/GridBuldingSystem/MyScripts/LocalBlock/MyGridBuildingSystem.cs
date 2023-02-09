@@ -180,12 +180,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                         }
 
                         //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
+                        BuildingManager.Instance.audio.PlayOneShot(BuildingManager.Instance.placedSound);
                         int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
                         UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
 
 
                         BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                        Debug.Log("placedObjects " + BuildingManager.placedObjects[placedObjectId].Count);
                         BuildingManager.Instance.DestroySurplusPlacedObjects();
 
                         OnObjectPlaced?.Invoke(placedObjectId);

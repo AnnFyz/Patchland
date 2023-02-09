@@ -191,7 +191,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15.000002, y: 22.857586, z: 15.000002}
+  m_Size: {x: 17.85, y: 22.857586, z: 21.7}
   m_Center: {x: 0, y: 11.417053, z: 0}
 --- !u!1 &6836397051257588259 stripped
 GameObject:
@@ -209,7 +209,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.1630001, y: 1.695, z: 1.1630001}
+  m_Extents: {x: 0.84, y: 1.695, z: 0.88}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1

@@ -13,10 +13,12 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     GameObject rainObj;
     public List<Transform> createdGems = new List<Transform>();
     public List<Transform> createdSpecialGems = new List<Transform>();
+    AudioSource thunder;
 
     private void Awake()
     {
         Instance = this;
+        thunder = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -49,7 +51,9 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
         while (createdGems.Count <= 30)
         {
             rainObj.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
+            thunder.Play();
+            yield return new WaitForSeconds(2f);
             for (int i = 0; i < 10; i++)
             {
                 SpawnRandomGems(1);
