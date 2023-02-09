@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -154,6 +154,10 @@ public class GridOfPrefabs : MonoBehaviour
                         UIManager.Instance.ShowPanels();
                         UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
                         UIManager.Instance.LocalSetupUIIcons();
+                    }
+                    else
+                    {
+                        Bubble.Instance.CreatePopupText(GetMouseWorldPosition(), " I am dead.. ☹ ");
                     }
                     
                 }
