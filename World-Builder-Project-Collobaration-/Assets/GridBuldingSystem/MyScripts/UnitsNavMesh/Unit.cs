@@ -139,6 +139,8 @@ public class Unit : MonoBehaviour
     void DestroyUnit()
     {
         UnitsManager.Instance.SetAmountOfUnits(unitScriptableObject.unitId, -1);
+        ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
+        particles.Play();
         Destroy(gameObject);
     }
     public void UpdateListOfWaypoints()

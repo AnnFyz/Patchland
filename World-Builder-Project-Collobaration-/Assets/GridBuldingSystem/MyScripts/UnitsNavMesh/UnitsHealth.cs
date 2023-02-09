@@ -24,6 +24,7 @@ public class UnitsHealth : MonoBehaviour
     [SerializeField] UIState currentUIState = UIState.healthy;
     public GameObject stateFire;
     [SerializeField] GameObject whenAttacked_Particles;
+    public GameObject whenDead_Particles;
     public bool isAttacked = false;
     private void Awake()
     {
@@ -79,6 +80,7 @@ public class UnitsHealth : MonoBehaviour
     {
         curretValue = startValue;
         whenAttacked_Particles.SetActive(false);
+        whenDead_Particles.SetActive(false);
     }
 
     private void FixedUpdate()

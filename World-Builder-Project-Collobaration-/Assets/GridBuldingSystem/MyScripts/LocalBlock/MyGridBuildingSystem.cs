@@ -138,81 +138,108 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            LevelState blockState = BuildingManager.blockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
-            Vector3 mousePosition = GetMouseWorldPosition();
-
-            if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState != LevelState.Pond && blockState != LevelState.Hill)
+            if (BuildingManager.blockPrefab != null)
             {
-                if (EventSystem.current.IsPointerOverGameObject())
+                LevelState blockState = BuildingManager.blockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
+                Vector3 mousePosition = GetMouseWorldPosition();
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
                 {
-                    return;
-                }
-                //Vector3 mousePosition = GetMouseWorldPosition();
-                grid.GetXZ(mousePosition, out int x, out int z);
 
-                Vector2Int placedObjectOrigin = new Vector2Int(x, z);
-                placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
-
-                // Test Can Build
-                List<Vector2Int> gridPositionList = BuildingManager.Instance.placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, BuildingManager.Instance.dir);
-
-                bool canBuild = true;
-                foreach (Vector2Int gridPosition in gridPositionList)
-                {
-                    if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
+                    if (EventSystem.current.IsPointerOverGameObject())
                     {
-                        canBuild = false;
-                        break;
+                        return;
                     }
-                }
+                    //Vector3 mousePosition = GetMouseWorldPosition();
+                    grid.GetXZ(mousePosition, out int x, out int z);
 
-                if (canBuild)
-                {
-                    Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
-                    Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
-                    PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
+                    Vector2Int placedObjectOrigin = new Vector2Int(x, z);
+                    placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
 
+                    // Test Can Build
+                    List<Vector2Int> gridPositionList = BuildingManager.Instance.placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, BuildingManager.Instance.dir);
+
+                    bool canBuild = true;
                     foreach (Vector2Int gridPosition in gridPositionList)
                     {
-                        grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                        if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
+                        {
+                            canBuild = false;
+                            break;
+                        }
                     }
 
-                    //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
-                    int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
-                    UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
+                    if (canBuild)
+                    {
+                        Vector2Int rotationOffset = BuildingManager.Instance.placedObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
+                        Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+                        PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.placedObjectTypeSO);
+
+                        foreach (Vector2Int gridPosition in gridPositionList)
+                        {
+                            grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                        }
+
+                        //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
+                        int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId; // to know which unit should be spawned
+                        UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
 
 
-                    BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                    Debug.Log("placedObjects " + BuildingManager.placedObjects[placedObjectId].Count);
-                    BuildingManager.Instance.DestroySurplusPlacedObjects();
+                        BuildingManager.placedObjects[placedObjectId].Add(placedObject);
+                        Debug.Log("placedObjects " + BuildingManager.placedObjects[placedObjectId].Count);
+                        BuildingManager.Instance.DestroySurplusPlacedObjects();
 
-                    OnObjectPlaced?.Invoke(placedObjectId);
-                    OnChangedWaypoints?.Invoke();
-                    BuildingManager.Instance.DeselectObjectType();
+                        OnObjectPlaced?.Invoke(placedObjectId);
+                        OnChangedWaypoints?.Invoke();
+                        BuildingManager.Instance.DeselectObjectType();
+                    }
+
+                    else
+                    {
+                        // Cannot build here
+                        //UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
+                        //Debug.Log("Cannot Build Here!");
+                        Bubble.Instance.CreatePopupText(mousePosition, "Cannot build here!");
+                    }
                 }
 
-                else
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Pond)
                 {
-                    // Cannot build here
-                    //UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
-                    //Debug.Log("Cannot Build Here!");
-                    Bubble.Instance.CreatePopupText(mousePosition, "Cannot build here!");
+                    Bubble.Instance.CreatePopupText(mousePosition, "You can't build on a river...");
                 }
-            }
 
-            if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Pond)
-            {
-                Bubble.Instance.CreatePopupText(mousePosition, "You can't build on a river...");
-            }
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Hill)
+                {
+                    Bubble.Instance.CreatePopupText(mousePosition, "Noway");
+                }
 
-            if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Hill)
-            {
-                Bubble.Instance.CreatePopupText(mousePosition, "Noway");
             }
         }
     }
 
+    bool CheckIfFitBlock(LevelState blockState,Vector3 mousePosition)
+    {
+        if (BuildingManager.Instance.placedObjectTypeSO != null)
+        {
+            if (blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Desert && BuildingManager.Instance.placedObjectTypeSO.placedObjId != 0)
+            {
+                Bubble.Instance.CreatePopupText(mousePosition, "Noway");
+                return false;
+            }
 
+
+        }
+
+        if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Forest)
+        {
+            if (BuildingManager.Instance.placedObjectTypeSO.placedObjId == 3 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 4 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 5)
+            {
+                Bubble.Instance.CreatePopupText(mousePosition, "Noway");
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
     private Vector3 GetMouseWorldPosition()

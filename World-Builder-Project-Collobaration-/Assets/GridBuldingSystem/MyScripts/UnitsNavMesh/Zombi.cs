@@ -154,7 +154,7 @@ public class Zombi : MonoBehaviour
             if (occupiedBlockHealth.currentHealth > 0)
             {
                 isAttacking = true;
-                occupiedBlockHealth.Damage(1f);
+                occupiedBlockHealth.Damage(0.5f);
                 occupiedBlockHealth.IsBeingDamaged = true;
                 yield return new WaitForSeconds(0.1f);
             }
@@ -253,9 +253,11 @@ public class Zombi : MonoBehaviour
         }
     }
 
-    void DestroyZombi()
+    public void DestroyZombi()
     {
         UnitsManager.Instance.SetAmountOfUnits(unit.unitScriptableObject.unitId, -1);
+        ParticleSystem particles = Instantiate(unit.unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
+        particles.Play();
         Destroy(gameObject);
     }
     

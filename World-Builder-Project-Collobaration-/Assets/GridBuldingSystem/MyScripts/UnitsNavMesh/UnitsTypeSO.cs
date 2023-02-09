@@ -9,6 +9,7 @@ public class UnitsTypeSO : ScriptableObject
     [Header("Health Settings")]
     public int unitId;
     public float damageToUnitWithoutFood = 1f;
+    public ParticleSystem death_Particles;
     [Range(0.0f, 100.0f)]
     public float chanceToBecomeZombi;
     public Sprite UIHealthSp; // currently not in use
