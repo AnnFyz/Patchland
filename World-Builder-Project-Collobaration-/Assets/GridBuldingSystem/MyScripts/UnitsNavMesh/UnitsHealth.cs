@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +26,7 @@ public class UnitsHealth : MonoBehaviour
     [SerializeField] GameObject whenAttacked_Particles;
     public GameObject whenDead_Particles;
     public bool isAttacked = false;
+    string[] openLines = new string[7];
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
@@ -50,6 +51,7 @@ public class UnitsHealth : MonoBehaviour
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(1).gameObject;
             stateFire.SetActive(true);
+            Bubble.Instance.CreateBubble(transform.position, "I'm tired \n 💚"); 
 
         }
         else if (curretValue < 50 && curretValue > 0)
@@ -58,6 +60,7 @@ public class UnitsHealth : MonoBehaviour
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(2).gameObject;
             stateFire.SetActive(true);
+            Bubble.Instance.CreateBubble(transform.position, char.ConvertFromUtf32(0x1F92C));
 
         }
         else if (curretValue <= 0)
@@ -67,7 +70,8 @@ public class UnitsHealth : MonoBehaviour
                 currentUIState = UIState.zombi;
                 stateFire.SetActive(false);
                 stateFire = gameObject.transform.GetChild(1).GetChild(3).gameObject;
-                stateFire.SetActive(true);
+                stateFire.SetActive(true); //i want to come back
+                Bubble.Instance.CreateBubble(transform.position, "oh no I'm dying");
 
             }
             else
@@ -81,6 +85,8 @@ public class UnitsHealth : MonoBehaviour
         curretValue = startValue;
         whenAttacked_Particles.SetActive(false);
         whenDead_Particles.SetActive(false);
+        OpenLines();
+        Bubble.Instance.CreateBubble(transform.position, openLines[2]);
     }
 
     private void FixedUpdate()
@@ -92,7 +98,11 @@ public class UnitsHealth : MonoBehaviour
         }
     }
 
-
+    void OpenLines()
+    {
+        openLines[2] = " (•̤̀ᵕ•̤́) "; 
+        openLines[2] = " (•̤̀ᵕ•̤́) ";
+    }
     private void LoseHealth()
     {
         StartCoroutine(SubstractHealthGradually());
