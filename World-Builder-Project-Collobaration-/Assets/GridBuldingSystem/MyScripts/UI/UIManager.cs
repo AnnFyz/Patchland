@@ -14,13 +14,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject amountOfGemsUI;
     [SerializeField] TMP_Text textAmount;
     [SerializeField] Image uiCircle;
-    [SerializeField] float startAmountOfSpecialGems = 100f;
-    [SerializeField] float amountOfGemsForNextLevel = 3;
+    [SerializeField] float startAmountOfGems = 100f;
+    [SerializeField] float amountOfSpecialGemsForNextLevel = 3;
     [SerializeField] float amountOfGems = 0f;
-    [SerializeField] float amountOfSpecialGems = 0f;
+    public float amountOfSpecialGems = 0f;
     public LocalLevelState prefabsState;
     public static UIManager Instance { get; private set; }
     public event Action OnChangedGrid;
+    public event Action OnNextLevel;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class UIManager : MonoBehaviour
             icon.SetActive(false);
         }
 
-        amountOfGems = startAmountOfSpecialGems;
+        amountOfGems = startAmountOfGems;
         textAmount.SetText(amountOfGems.ToString());
         uiCircle.fillAmount = amountOfSpecialGems;
     }
@@ -147,10 +148,11 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("COLLECT");
         amountOfSpecialGems ++;
-        uiCircle.fillAmount = amountOfSpecialGems / amountOfGemsForNextLevel;
+        uiCircle.fillAmount = amountOfSpecialGems / amountOfSpecialGemsForNextLevel;
 
-        if(amountOfSpecialGems >= amountOfGemsForNextLevel)
+        if(amountOfSpecialGems >= amountOfSpecialGemsForNextLevel)
         {
+            OnNextLevel?.Invoke();
             Debug.Log("Next Level");
         }
     }

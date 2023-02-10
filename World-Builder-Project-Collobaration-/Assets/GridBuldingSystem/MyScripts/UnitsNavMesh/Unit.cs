@@ -173,7 +173,7 @@ public class Unit : MonoBehaviour
         UnitsManager.Instance.SetAmountOfUnits(unitScriptableObject.unitId, -1);
         ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
         particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
-        particles.gameObject.GetComponent<AudioSource>().volume = 0.1f;
+        particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
         particles.gameObject.GetComponent<AudioSource>().loop = false;
         particles.gameObject.GetComponent<AudioSource>().Play();
         particles.Play();

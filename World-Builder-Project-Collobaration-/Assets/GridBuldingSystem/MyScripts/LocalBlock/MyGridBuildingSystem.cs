@@ -48,6 +48,9 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 if (oldGrid != null && oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
                 {
+
+
+
                     int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
                     if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
                     {
@@ -161,6 +164,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                     bool canBuild = true;
                     foreach (Vector2Int gridPosition in gridPositionList)
                     {
+                       
                         if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
                         {
                             canBuild = false;

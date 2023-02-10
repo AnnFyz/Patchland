@@ -34,12 +34,16 @@ public class SpecialGemSpawner : MonoBehaviour
 
     IEnumerator SpawnSpecialGems()
     {
-        while (GemManager.Instance.createdSpecialGems.Count <= 2)
+        while (GemManager.Instance.createdSpecialGems.Count <= 1)
         {
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(3f);
             triangulation = UnityEngine.AI.NavMesh.CalculateTriangulation();
-            SpawnSpecialGem();
-            yield return new WaitForSeconds(1f);
+            if(GemManager.Instance.createdSpecialGems.Count <= 1)
+            {
+                SpawnSpecialGem();
+                yield return new WaitForSeconds(3f);
+            }
+        
 
         }
 

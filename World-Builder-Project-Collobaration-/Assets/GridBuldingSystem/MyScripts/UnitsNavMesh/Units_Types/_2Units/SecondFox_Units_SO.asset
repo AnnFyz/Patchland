@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SecondFox_Units_SO
   m_EditorClassIdentifier: 
   unitId: 3
-  damageToUnitWithoutFood: 0.05
+  damageToUnitWithoutFood: 0.15
   death_Particles: {fileID: 1370348035730281900, guid: 55de213987c9fcf429b9854405faf7c4,
     type: 3}
   chanceToBecomeZombi: 10

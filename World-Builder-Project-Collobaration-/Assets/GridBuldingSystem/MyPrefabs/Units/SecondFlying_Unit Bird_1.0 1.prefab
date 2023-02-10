@@ -5279,8 +5279,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 8.281237, z: 2.1355288}
-  m_Center: {x: 0, y: 3.6866248, z: -0.35470653}
+  m_Size: {x: 3.5013824, y: 9.66786, z: 3.188401}
+  m_Center: {x: -0.21313405, y: 4.106427, z: 0.17172956}
 --- !u!195 &2675644380505310729
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5315,6 +5315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieSound: {fileID: 0}
+  glassBreaking: {fileID: 0}
   unitScriptableObject: {fileID: 11400000, guid: 0660a1fcd11e2ab4487cd3294530907f,
     type: 2}
   selectedFigur: {fileID: 0}
@@ -5329,6 +5331,7 @@ MonoBehaviour:
   Pointer: {fileID: 0}
   isWaypointApproached: 0
   animator: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &-629676016913631631
 MonoBehaviour:
   m_ObjectHideFlags: 0

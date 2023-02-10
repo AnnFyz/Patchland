@@ -72,16 +72,18 @@ public class BlockHealth : MonoBehaviour
         S_1 -= 0.005f;
         S_2 -= 0.05f;
         V_2 += 0.05f;
-        V_1 = Mathf.Clamp(V_1, 0.01f, 1f);
-        S_1 = Mathf.Clamp(S_1, 0.01f, 0.8f);
-        S_2 = Mathf.Clamp(S_2, 0.001f, 0.9f);
-        V_2 = Mathf.Clamp(V_2, 0.001f, 0.75f);
+        V_1 = Mathf.Clamp(V_1, 0.22f, 0.8f);
+        S_1 = Mathf.Clamp(S_1, 0.22f, 0.8f);
+        S_2 = Mathf.Clamp(S_2, 0.22f, 0.8f);
+        V_2 = Mathf.Clamp(V_2, 0.22f, 0.7f);
         block.defaultColor = Color.HSVToRGB(H_1, S_1, V_1);
         block.defaultBottomColor = Color.HSVToRGB(H_2, S_2, V_2);
         if (currentHealth <= 0)
         {
             IsBlockDead = true;
             gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
+            GameManager.Instance.amountOfDeadBlocks++;
+            GameManager.Instance.CheckIfAllBlocksAreDead();
         }
 
         if (currentHealth < startHealth && !IsBlockDead)
@@ -154,10 +156,10 @@ public class BlockHealth : MonoBehaviour
         S2 -= ind_Sdif_2;
         V1 += ind_Vdif_2;
 
-        V1 = Mathf.Clamp(V_1, 0.01f, 1f);
-        S1 = Mathf.Clamp(S_1, 0.001f, 0.99f);
-        S2 = Mathf.Clamp(S_2, 0.001f, 0.7f);
-        V2 = Mathf.Clamp(V_2, 0.001f, 0.75f);
+        V1 = Mathf.Clamp(V_1, 0.22f, 0.8f);
+        S1 = Mathf.Clamp(S_1, 0.22f, 0.8f);
+        S2 = Mathf.Clamp(S_2, 0.22f, 0.8f);
+        V2 = Mathf.Clamp(V_2, 0.22f, 0.7f);
 
 
         block.defaultColor = Color.HSVToRGB(H1, S1, V1);
