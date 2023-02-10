@@ -8196,7 +8196,7 @@ MonoBehaviour:
   amountOfGemsUI: {fileID: 723034812}
   textAmount: {fileID: 723034814}
   uiCircle: {fileID: 737215310}
-  startAmountOfGems: 30
+  startAmountOfGems: 300
   amountOfSpecialGemsForNextLevel: 1
   amountOfGems: 0
   amountOfSpecialGems: 0
