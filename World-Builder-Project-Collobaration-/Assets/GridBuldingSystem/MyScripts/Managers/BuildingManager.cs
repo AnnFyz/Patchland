@@ -41,45 +41,45 @@ public class BuildingManager : MonoBehaviour
 
 
     }
-    public void DestroySurplusPlacedObjects()
-    {
-        if (placedObjects[0].Count >= 5)
-        {
+    //public void DestroySurplusPlacedObjects()
+    //{
+    //    if (placedObjects[0].Count >= 5)
+    //    {
 
-            if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
-            {
-                UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[0][0].DestroySelf();
-            placedObjects[0].RemoveAt(0);
-        }
+    //        if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
+    //        {
+    //            UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
+    //        }
+    //        // ADD PARTICLES IN DESTROYSELF
+    //        placedObjects[0][0].DestroySelf();
+    //        placedObjects[0].RemoveAt(0);
+    //    }
 
-        if (placedObjects[1].Count >= 4)
-        {
+    //    if (placedObjects[1].Count >= 4)
+    //    {
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[1][0].DestroySelf();
-            placedObjects[1].RemoveAt(0);
-        }
+    //        if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
+    //        {
+    //            UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
+    //        }
+    //        // ADD PARTICLES IN DESTROYSELF
+    //        placedObjects[1][0].DestroySelf();
+    //        placedObjects[1].RemoveAt(0);
+    //    }
 
-        if (placedObjects[2].Count >= 3)
-        {
+    //    if (placedObjects[2].Count >= 3)
+    //    {
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[2][0].DestroySelf();
-            placedObjects[2].RemoveAt(0);
-        }
+    //        if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+    //        {
+    //            UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+    //        }
+    //        // ADD PARTICLES IN DESTROYSELF
+    //        placedObjects[2][0].DestroySelf();
+    //        placedObjects[2].RemoveAt(0);
+    //    }
 
-    }
+    //}
     public int GetNumberOfPlacedObjTypes()
     {
         return placedObjectTypeSOList.Count;

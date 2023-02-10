@@ -195,10 +195,18 @@ public class Unit : MonoBehaviour
                 currentPoint = target;
                 localOrder.Add(currentPoint);
             }
-            List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
-            reversedList.Reverse();
-            localOrder.AddRange(reversedList);
+            if(UnitsManager.Instance.waypoints != null)
+            {
+               if( UnitsManager.Instance.waypoints[placedObjTypeId] != null)
+                {
+                    List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
+                    reversedList.Reverse();
+                    localOrder.AddRange(reversedList);
+                   
+                }
+            }
             waypointIndex = 0; // to reset the path and start from zero point again
+
         }
 
     }
@@ -212,11 +220,11 @@ public class Unit : MonoBehaviour
                 // Update the way to the goal every second.
                 elapsed += Time.deltaTime;
                 IterateWaypointIndex();
-                //if(localOrder[0] != null)
-                //{
-                target = localOrder[waypointIndex];
-                //}
-                if (target != null)
+                if (localOrder[0] != null && waypointIndex <= localOrder.Count)
+                {
+                    target = localOrder[waypointIndex];
+                 }
+            if (target != null)
                 {
                     if (elapsed > 1.5f)
                     {
@@ -244,11 +252,18 @@ public class Unit : MonoBehaviour
     }
     void IterateWaypointIndex()
     {
-        waypointIndex++;
-        if (waypointIndex == localOrder.Count)
+        if(localOrder != null)
         {
-            waypointIndex = 0;
+            if (waypointIndex <= localOrder.Count)
+            {
+                waypointIndex++;
+            }
+            if (waypointIndex == localOrder.Count)
+            {
+                waypointIndex = 0;
+            }
         }
+       
     }
     public void OnSelected()
     {

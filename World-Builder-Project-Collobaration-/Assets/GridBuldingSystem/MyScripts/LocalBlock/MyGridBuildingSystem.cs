@@ -27,7 +27,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnHeightChanged += UpdateGrid;
         blockPrefab.OnHeightChanged += DeleteOldObjectsAndWaypoints;
-        blockPrefab.OnHeightChanged += DeleteAgain;
+        //blockPrefab.OnHeightChanged += DeleteAgain;
     }
 
     public void UpdateGrid(int newHeight)
@@ -72,21 +72,21 @@ public class MyGridBuildingSystem : MonoBehaviour
         }
 
     }
-    void DeleteAgain(int newHeight)
-    {
-        for (int x = 0; x < gridWidth; x++)
-        {
-            for (int z = 0; z < gridHeight; z++)
-            {
-                if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
-                {
-                    grid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
-                    grid.GetGridObject(x, z).ClearPlacedObject();
+    //void DeleteAgain(int newHeight)
+    //{
+    //    for (int x = 0; x < gridWidth; x++)
+    //    {
+    //        for (int z = 0; z < gridHeight; z++)
+    //        {
+    //            if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
+    //            {
+    //                grid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
+    //                grid.GetGridObject(x, z).ClearPlacedObject();
                   
-                }
-            }
-        }
-    }
+    //            }
+    //        }
+    //    }
+    //}
     public void GetAllPlacedObjectsOnTheBlock()
     {
         for (int x = 0; x < gridWidth; x++)
@@ -179,8 +179,17 @@ public class MyGridBuildingSystem : MonoBehaviour
                     bool canBuild = true;
                     foreach (Vector2Int gridPosition in gridPositionList)
                     {
-                       
-                        if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
+                       if(grid == null)
+                        {
+                            canBuild = false;
+                            break;
+                        }
+                       else if(grid.GetGridObject(gridPosition.x, gridPosition.y) == null)
+                        {
+                            canBuild = false;
+                            break;
+                        }
+                       else if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
                         {
                             canBuild = false;
                             break;
@@ -205,7 +214,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
 
                         BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                        BuildingManager.Instance.DestroySurplusPlacedObjects();
+                        //BuildingManager.Instance.DestroySurplusPlacedObjects();
 
                         OnObjectPlaced?.Invoke(placedObjectId);
                         OnChangedWaypoints?.Invoke();

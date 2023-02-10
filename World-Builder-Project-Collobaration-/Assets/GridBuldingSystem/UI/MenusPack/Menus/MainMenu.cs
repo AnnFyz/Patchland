@@ -13,10 +13,16 @@ public class MainMenu : MonoBehaviour
     {
         controls.SetActive(false);
     }
-    public void Play()
+    public void PlayWithSound()
     {
         StartCoroutine(PlayWithSoundFadeOut());
      
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene(sceneToLoad);
+
     }
 
     public void Quit()
