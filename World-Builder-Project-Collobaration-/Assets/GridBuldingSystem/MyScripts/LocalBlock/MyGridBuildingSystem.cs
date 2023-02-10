@@ -27,6 +27,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnHeightChanged += UpdateGrid;
         blockPrefab.OnHeightChanged += DeleteOldObjectsAndWaypoints;
+        blockPrefab.OnHeightChanged += DeleteAgain;
     }
 
     public void UpdateGrid(int newHeight)
@@ -71,7 +72,21 @@ public class MyGridBuildingSystem : MonoBehaviour
         }
 
     }
-
+    void DeleteAgain(int newHeight)
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int z = 0; z < gridHeight; z++)
+            {
+                if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
+                {
+                    grid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
+                    grid.GetGridObject(x, z).ClearPlacedObject();
+                  
+                }
+            }
+        }
+    }
     public void GetAllPlacedObjectsOnTheBlock()
     {
         for (int x = 0; x < gridWidth; x++)

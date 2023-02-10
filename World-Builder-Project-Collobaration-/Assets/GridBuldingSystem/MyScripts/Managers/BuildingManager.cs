@@ -21,6 +21,7 @@ public class BuildingManager : MonoBehaviour
     List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
     public static bool CanBuildSelected = false;
+
     private void Awake()
     {
         Instance = this;

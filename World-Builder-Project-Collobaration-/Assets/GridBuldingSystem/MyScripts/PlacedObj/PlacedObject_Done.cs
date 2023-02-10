@@ -48,4 +48,11 @@ public class PlacedObject_Done : MonoBehaviour {
         transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
     }
 
+    private void FixedUpdate()
+    {
+        if (!UnitsManager.Instance.waypoints[placedObjectTypeSO.placedObjId].Contains(this.gameObject.transform))
+        {
+            DestroySelf();
+        }
+    }
 }
