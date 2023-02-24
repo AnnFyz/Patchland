@@ -8964,7 +8964,7 @@ MonoBehaviour:
   width: 3
   height: 3
   colorOfHighlightedOblock: {r: 0.72781426, g: 0.6745283, b: 1, a: 0}
-  materialOfSelectedOblock: {fileID: 2100000, guid: 1d9f97ade0aaf414d93e7664bd5ba35e,
+  materialOfSelectedOblock: {fileID: 2100000, guid: 33483afa60cc9dc4784eeb4ee8a0ea12,
     type: 2}
   heightScale: 10
   xScale: 0.25
@@ -9525,12 +9525,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gems:
-  - {fileID: 11400000, guid: 439cd6157189cf34d8f753a0fee295b3, type: 2}
-  - {fileID: 11400000, guid: 2eeab9ec439a2d645a582193cc64dde9, type: 2}
-  - {fileID: 11400000, guid: a3d6b1ea6dbb15347b66b7623432407d, type: 2}
-  - {fileID: 11400000, guid: 73b7aee6029ee9047a308266379ec304, type: 2}
-  - {fileID: 11400000, guid: 5d9bd2e6e8326884099fc7bda3ab7a9b, type: 2}
   - {fileID: 11400000, guid: fc19360f0c68ec14da7f011433a17d52, type: 2}
+  - {fileID: 11400000, guid: 73b7aee6029ee9047a308266379ec304, type: 2}
+  - {fileID: 11400000, guid: 70f5b338a409445408bdcc5cc418f38e, type: 2}
+  - {fileID: 11400000, guid: 2eeab9ec439a2d645a582193cc64dde9, type: 2}
   createdGems: []
   createdSpecialGems: []
 --- !u!82 &2120624610

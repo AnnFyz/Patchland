@@ -99,7 +99,7 @@ Material:
     - Vector1_63a0afd297734dc9998b9b19bd747613: 1.06
     - Vector1_6e12275293314cb7a52c177f83f8f9aa: -0.09
     - Vector1_c77d81e545954cd0b55278e2ba9a8830: -0.02
-    - Vector1_fde129e198e94c77ac906bc5d7f525ab: 0.85
+    - Vector1_fde129e198e94c77ac906bc5d7f525ab: 4.41
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -116,9 +116,9 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.196
+    - _OutlineDepthSensitivity: 0.182
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 4
+    - _OutlineThickness: 5
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -133,10 +133,10 @@ Material:
     - _direction: 1
     m_Colors:
     - Color_1: {r: 0, g: 1, b: 0.02382612, a: 0}
-    - Color_4426999063b847ddb3ca0200d0cd3a69: {r: 0.16834283, g: 0.3679245, b: 0.31257787,
+    - Color_4426999063b847ddb3ca0200d0cd3a69: {r: 0.5377358, g: 0.03297438, b: 0.14383839,
         a: 0}
     - Color_64d861fce71044349695d1bac7f2ea98: {r: 0, g: 0.15803385, b: 1, a: 0}
-    - Color_c2df8d538a29426d87cca79e3feeba9c: {r: 0, g: 0.14591189, b: 0.6037736,
+    - Color_c2df8d538a29426d87cca79e3feeba9c: {r: 0.09620556, g: 0, b: 0.3962264,
         a: 0}
     - Color_d3f90b46fa4040c48d4031973961bef6: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
