@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 389708d651edb314293c7e72dd2564b0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -62,8 +62,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_4a97cda856d14878a20e49aa867a022b_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 63dcc4d41c052f841ad87725e481caca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_942a37c293d44ffe87a1abd484432f6f_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 6942e6e9506179243aca4809ab2e0e48, type: 3}
+        m_Texture: {fileID: 2800000, guid: 265ee1b048405e14499440b8429c6eff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_ac24a2f85aaf45c0a2563c6717b7e419_Texture_1:
@@ -105,17 +109,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Glow: 2.011
+    - _Glow: 0.66
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Phase: 0.131
+    - _Phase: 0.129
     - _Pin_Right: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Segments: 10
+    - _Segments: 2.38
     - _Shininess: 0.368
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

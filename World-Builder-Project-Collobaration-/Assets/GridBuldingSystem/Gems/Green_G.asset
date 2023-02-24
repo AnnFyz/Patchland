@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Green_G
   m_EditorClassIdentifier: 
   weight: 70
-  gemPrefab: {fileID: 585524292228250662, guid: 7f6e933bf7c6b014c822ff4ea4f9a93c,
+  gemPrefab: {fileID: 8782586219572347034, guid: c2d6b5a24baab1f4aa0fd1208846801a,
     type: 3}

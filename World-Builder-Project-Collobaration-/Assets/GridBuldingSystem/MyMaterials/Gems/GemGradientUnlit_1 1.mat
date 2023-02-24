@@ -116,9 +116,9 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthSensitivity: 0.459
+    - _OutlineDepthSensitivity: 0.196
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 3.95
+    - _OutlineThickness: 4
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -133,7 +133,7 @@ Material:
     - _direction: 1
     m_Colors:
     - Color_1: {r: 0, g: 1, b: 0.02382612, a: 0}
-    - Color_4426999063b847ddb3ca0200d0cd3a69: {r: 0.7432527, g: 0.09803921, b: 1,
+    - Color_4426999063b847ddb3ca0200d0cd3a69: {r: 0.16834283, g: 0.3679245, b: 0.31257787,
         a: 0}
     - Color_64d861fce71044349695d1bac7f2ea98: {r: 0, g: 0.15803385, b: 1, a: 0}
     - Color_c2df8d538a29426d87cca79e3feeba9c: {r: 0, g: 0.14591189, b: 0.6037736,
