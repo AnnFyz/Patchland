@@ -148,8 +148,12 @@ public class UnitsManager : MonoBehaviour
         foreach(var item in waypoints[0])
         {
             GameObject generatedWaypoint = new GameObject();
-            generatedWaypoint.transform.position = item.position;
-            generatedWaypoint.transform.SetParent(transform);
+            if (generatedWaypoint.transform != null && item != null)
+            {
+                generatedWaypoint.transform.position = item.position;
+                generatedWaypoint.transform.SetParent(transform);
+            }
+      
         }
     }
 }

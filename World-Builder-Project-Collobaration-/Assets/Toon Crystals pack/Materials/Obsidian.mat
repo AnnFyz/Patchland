@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Obsidian
-  m_Shader: {fileID: -6465566751694194690, guid: 15f9c6ee25024a04fa78aa80e0dcad1e,
+  m_Shader: {fileID: -6465566751694194690, guid: 5bc21e5a5ed2712438b227fbfdc9e3bc,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 389708d651edb314293c7e72dd2564b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,6 +60,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_942a37c293d44ffe87a1abd484432f6f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 6942e6e9506179243aca4809ab2e0e48, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ac24a2f85aaf45c0a2563c6717b7e419_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d2ceb307ae70918439155c9240a83235, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -97,17 +105,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Glow: 0.5
+    - _Glow: 2.011
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Phase: 0.576
+    - _Phase: 0.131
     - _Pin_Right: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Segments: 1
+    - _Segments: 10
     - _Shininess: 0.368
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

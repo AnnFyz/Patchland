@@ -69,7 +69,7 @@ public class Unit : MonoBehaviour
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChangeToBecomeZombi;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         //Pointer.transform.position = target.position;
         if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
@@ -220,11 +220,8 @@ public class Unit : MonoBehaviour
                 // Update the way to the goal every second.
                 elapsed += Time.deltaTime;
                 IterateWaypointIndex();
-                if (localOrder[0] != null && waypointIndex <= localOrder.Count)
-                {
-                    target = localOrder[waypointIndex];
-                 }
-            if (target != null)
+                target = localOrder[waypointIndex];
+                if (target != null)
                 {
                     if (elapsed > 1.5f)
                     {
@@ -254,7 +251,7 @@ public class Unit : MonoBehaviour
     {
         if(localOrder != null)
         {
-            if (waypointIndex <= localOrder.Count)
+            if (waypointIndex < localOrder.Count)
             {
                 waypointIndex++;
             }

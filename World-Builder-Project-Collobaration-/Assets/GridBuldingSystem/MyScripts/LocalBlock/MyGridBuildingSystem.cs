@@ -27,9 +27,14 @@ public class MyGridBuildingSystem : MonoBehaviour
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnHeightChanged += UpdateGrid;
         blockPrefab.OnHeightChanged += DeleteOldObjectsAndWaypoints;
+       
         //blockPrefab.OnHeightChanged += DeleteAgain;
     }
 
+    //private void Start()
+    //{
+    //    OnChangedWaypoints?.Invoke();
+    //}
     public void UpdateGrid(int newHeight)
     {
         this.newHeight = newHeight;
@@ -214,7 +219,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
 
                         BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                        //BuildingManager.Instance.DestroySurplusPlacedObjects();
+                        BuildingManager.Instance.DestroySurplusPlacedObjects();
 
                         OnObjectPlaced?.Invoke(placedObjectId);
                         OnChangedWaypoints?.Invoke();

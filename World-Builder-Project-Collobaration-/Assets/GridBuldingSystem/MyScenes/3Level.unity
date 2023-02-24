@@ -5207,9 +5207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3000186343061409140}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Quit
+      - m_Target: {fileID: 3000186343061409144}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MenuAfterGameOverOrCompletedLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8273,8 +8273,8 @@ MonoBehaviour:
   amountOfGemsUI: {fileID: 723034812}
   textAmount: {fileID: 723034814}
   uiCircle: {fileID: 737215310}
-  startAmountOfGems: 55
-  amountOfSpecialGemsForNextLevel: 12
+  startAmountOfGems: 25
+  amountOfSpecialGemsForNextLevel: 9
   amountOfGems: 0
   amountOfSpecialGems: 0
   prefabsState: {fileID: 0}
