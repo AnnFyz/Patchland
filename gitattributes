@@ -4,4 +4,3 @@
 *.html linguist-detectable=false  
 *.xml linguist-detectable=false 
 *.asm linguist-detectable=false 
-* asp.net linguist-detectable=false 
