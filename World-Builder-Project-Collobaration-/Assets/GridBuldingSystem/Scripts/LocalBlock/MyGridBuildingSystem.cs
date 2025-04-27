@@ -165,7 +165,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 LevelState blockState = BuildingManager.blockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
                 Vector3 mousePosition = GetMouseWorldPosition();
-                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
                 {
 
                     if (EventSystem.current.IsPointerOverGameObject())
@@ -235,12 +235,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                     }
                 }
 
-                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Pond)
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Pond)
                 {
                     Bubble.Instance.CreatePopupText(mousePosition, "You can't build on a river...");
                 }
 
-                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Hill)
+                if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Hill)
                 {
                     Bubble.Instance.CreatePopupText(mousePosition, "Noway");
                 }
@@ -253,7 +253,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         if (BuildingManager.Instance.placedObjectTypeSO != null)
         {
-            if (blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Desert && BuildingManager.Instance.placedObjectTypeSO.placedObjId != 0)
+            if (blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Desert && BuildingManager.Instance.placedObjectTypeSO.placedObjId != 0)
             {
                 Bubble.Instance.CreatePopupText(mousePosition, "Noway");
                 return false;
@@ -262,7 +262,7 @@ public class MyGridBuildingSystem : MonoBehaviour
 
         }
 
-        if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockWasHighlighted && blockState == LevelState.Forest)
+        if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Forest)
         {
             if (BuildingManager.Instance.placedObjectTypeSO.placedObjId == 3 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 4 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 5)
             {

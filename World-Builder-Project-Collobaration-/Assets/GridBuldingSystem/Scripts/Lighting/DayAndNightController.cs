@@ -41,18 +41,18 @@ public class DayAndNightController : MonoBehaviour
 
         Color.RGBToHSV(topColor, out H_1, out S_1, out V_1);
         Color.RGBToHSV(bottomColor, out H_2, out S_2, out V_2);
-        StartCoroutine(Sunset());
+        //StartCoroutine(Sunset());
  
     }
     private void Update()
     {
         if (isSunrise)
         {
-            StartCoroutine(Sunrise());
+           // StartCoroutine(Sunrise());
         }
         if (isSunset)
         {
-            StartCoroutine(Sunset());
+           // StartCoroutine(Sunset());
         }
 
     }

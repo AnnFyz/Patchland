@@ -64,7 +64,6 @@ public class GridOfPrefabs : MonoBehaviour
                 else
                 {
                     blockPrefab.ChangeHeight(0);
-                    blockPrefab.blockInside.gameObject.SetActive(true);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
 
                 }
@@ -141,16 +140,18 @@ public class GridOfPrefabs : MonoBehaviour
                     {
                         for (int z = 0; z < height; z++)
                         {
-                            globalGrid.GetGridObject(x, z).GetPlacedObject().IsThisBlockWasSelected = false;
-                            placedObject.ChangeColorBack();
-                            placedObject.ChangeMaterialBack();
+                            globalGrid.GetGridObject(x, z).GetPlacedObject().IsThisBlockIsSelected = false;
+                            //placedObject.ChangeColorBack();
+                            //placedObject.ChangeMaterialBack();
                             UIManager.Instance.HidePanels();
+                            placedObject.GetComponent<MyRaycast>().SetOutline(false);
                         }
                     }
                     if (!placedObject.GetComponent<BlockHealth>().IsBlockDead)
                     {
-                        placedObject.IsThisBlockWasSelected = true;
-                        placedObject.ChangeSelectedMaterial();
+                        placedObject.IsThisBlockIsSelected = true;
+                        //placedObject.ChangeSelectedMaterial();
+                        placedObject.GetComponent<MyRaycast>().SetOutline(true);
                         UIManager.Instance.ShowPanels();
                         UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
                         UIManager.Instance.LocalSetupUIIcons();

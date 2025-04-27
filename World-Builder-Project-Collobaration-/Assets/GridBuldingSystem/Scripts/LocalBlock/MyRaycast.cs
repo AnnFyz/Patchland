@@ -29,11 +29,11 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             block = hit.collider.GetComponentInParent<BlockPrefab>();
             if (localPrefabBlock == block)
             {
-                localPrefabBlock.IsThisBlockWasHighlighted = true;
-                localPrefabBlock.ChangeHighlightedColorl();
-                if (localPrefabBlock.IsThisBlockWasSelected)
+                localPrefabBlock.IsThisBlockIsHighlighted = true;
+                SetOutline(true);
+                if (localPrefabBlock.IsThisBlockIsSelected)
                 {
-                    localPrefabBlock.ChangeSelectedMaterial();
+                    //localPrefabBlock.ChangeSelectedMaterial();
                     if (BuildingManager.Instance.placedObjectTypeSO == null)
                     {
                         BuildingManager.Instance.placedObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
@@ -43,7 +43,6 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                         BuildingManager.blockPrefab = localPrefabBlock;
                         BuildingManager.Instance.RefreshSelectedObjectType();
 
-                        localPrefabBlock.blockInside.gameObject.SetActive(false);
 
                 }
                 else
@@ -54,22 +53,21 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             else
             {
                
-                localPrefabBlock.IsThisBlockWasHighlighted = false;
-              
-                if (!localPrefabBlock.IsThisBlockWasSelected)
+                localPrefabBlock.IsThisBlockIsHighlighted = false;
+                SetOutline(false);
+
+                if (!localPrefabBlock.IsThisBlockIsSelected)
                 {
            
-                    localPrefabBlock.ChangeColorBack();
-                    localPrefabBlock.ChangeMaterialBack();
+                    //localPrefabBlock.ChangeColorBack();
+                   // localPrefabBlock.ChangeMaterialBack();
                     if(localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
                     {
-                        localPrefabBlock.blockInside.gameObject.SetActive(true);
                     }
                 }
                 else
                 {
-                    localPrefabBlock.ChangeSelectedMaterial();
-                    localPrefabBlock.blockInside.gameObject.SetActive(false);
+                  //  localPrefabBlock.ChangeSelectedMaterial();
                 }
                 
             }
@@ -79,34 +77,41 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
         {
             if (Input.GetMouseButtonDown(0))
             {
-                localPrefabBlock.IsThisBlockWasHighlighted = false;
-                localPrefabBlock.IsThisBlockWasSelected = false;
-                localPrefabBlock.ChangeColorBack();
-                localPrefabBlock.ChangeMaterialBack();
-                if (localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
-                {
-                    localPrefabBlock.blockInside.gameObject.SetActive(true);
-                }
+                localPrefabBlock.IsThisBlockIsHighlighted = false;
+                //SetOutline(false);
+                localPrefabBlock.IsThisBlockIsSelected = false;
+               // localPrefabBlock.ChangeColorBack();
+               // localPrefabBlock.ChangeMaterialBack();
                 BuildingManager.Instance.DeselectObjectType();
                 UIManager.Instance.LocalSetupUIIcons();
             }
            
 
-            if (!localPrefabBlock.IsThisBlockWasSelected)
-            {
-                localPrefabBlock.ChangeColorBack();
-                localPrefabBlock.ChangeMaterialBack();
-                if (localPrefabBlock.GetComponent<LocalLevelState>().GetCurrentLevelState() == LevelState.Forest)
-                {
-                    localPrefabBlock.blockInside.gameObject.SetActive(true);
-                }
-                BuildingManager.Instance.DeselectObjectType();
-            }
-            else
-            {
-                localPrefabBlock.ChangeSelectedMaterial();
-                localPrefabBlock.blockInside.gameObject.SetActive(false);
-            }
+            //if (!localPrefabBlock.IsThisBlockIsSelected)
+            //{
+            //    localPrefabBlock.ChangeColorBack();
+            //    localPrefabBlock.ChangeMaterialBack();
+            //    BuildingManager.Instance.DeselectObjectType();
+            //}
+            //else
+            //{
+            //    localPrefabBlock.ChangeSelectedMaterial();
+            //}
+        } 
+    }
+
+    public void SetOutline(bool isSelected)
+    {
+        if (isSelected)
+        {
+            GetComponent<Outline>().enabled = true;
+            GetComponent<Outline>().OutlineColor = Color.white;
+            GetComponent<Outline>().OutlineWidth = 3.5f;
+        }
+        else
+        {
+            if(!localPrefabBlock.IsThisBlockIsSelected)
+            GetComponent<Outline>().enabled = false;
         }
     }
 }

@@ -58,7 +58,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Pond;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.reflectionBlock.SetActive(false);
         }
 
         if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
@@ -81,8 +80,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Desert;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            //Debug.Log(" blockPrefab.transform.localRotation.z " + blockPrefab.transform.localRotation.z);
 
         }
         if (newHeight < 5 && newHeight > 1) // Desert
@@ -106,8 +103,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Desert;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            blockPrefab.reflectionBlock.SetActive(true);
         }
 
         if (newHeight >= 5 && newHeight <= 8) // Forest
@@ -130,8 +125,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Forest;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(true);
-            blockPrefab.reflectionBlock.SetActive(true);
         }
 
         if (newHeight > 8  && newHeight < 11) // Hill
@@ -154,8 +147,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Hill;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            blockPrefab.reflectionBlock.SetActive(true);
         }
 
         if (newHeight >= 11 && newHeight < 15) // Montain
@@ -178,8 +169,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.Mountain;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            blockPrefab.reflectionBlock.SetActive(true);
         }
 
         if (newHeight >= 15) //Snow mountain
@@ -202,8 +191,6 @@ public class LocalLevelState : MonoBehaviour
             currentLevelState = LevelState.SnowMountain;
             blHealth.SetDyingColor();
             UIManager.Instance.LocalSetupUIIcons();
-            blockPrefab.blockInside.gameObject.SetActive(false);
-            blockPrefab.reflectionBlock.SetActive(true);
         }
 
     }
