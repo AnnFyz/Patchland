@@ -24,7 +24,6 @@ public class BlockPrefab : MonoBehaviour
     float t;
     public Transform blockInside;
     public Renderer blockInsiderenderer;
-    public GameObject reflectionBlock;
     private void Start()
     {
         blockInside = gameObject.transform.GetChild(0).GetChild(0);
