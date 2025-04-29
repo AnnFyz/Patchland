@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
     {  if(amountOfGems > 0 && !BuildingManager.blockPrefab.GetComponent<BlockHealth>().IsBlockDead)
         {
             // Block Settings 
-            BuildingManager.blockPrefab.ChangeHeight(addedV);
+            BuildingManager.blockPrefab.ChangeAmount(addedV);
             OnChangedGrid?.Invoke();
             // Gems Settings 
             amountOfGems -= 1;
@@ -130,7 +130,7 @@ public class UIManager : MonoBehaviour
     {
         if (amountOfGems > 0 && BuildingManager.blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond && !BuildingManager.blockPrefab.GetComponent<BlockHealth>().IsBlockDead)
         {
-            BuildingManager.blockPrefab.ChangeHeight(subtractedV);
+            BuildingManager.blockPrefab.ChangeAmount(subtractedV);
             OnChangedGrid?.Invoke();
             amountOfGems -= 0.5f;
             amountOfGems = Mathf.Clamp(amountOfGems, 0, 100);

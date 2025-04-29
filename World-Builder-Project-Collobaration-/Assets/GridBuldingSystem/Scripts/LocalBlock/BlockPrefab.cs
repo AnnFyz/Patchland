@@ -41,9 +41,9 @@ public class BlockPrefab : MonoBehaviour
         startTime = Time.deltaTime;
         t = UnityEngine.Random.Range(2f, 7f);
     }
-    public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab)
+    public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab, Quaternion rotation)
     {
-        GameObject placedBlockPrefabObj = Instantiate(blockPrefab, worldPosition + offset, Quaternion.identity);
+        GameObject placedBlockPrefabObj = Instantiate(blockPrefab, worldPosition + offset, rotation);
         BlockPrefab placedBlockPrefab = placedBlockPrefabObj.GetComponent<BlockPrefab>();
         return placedBlockPrefab;
     }
@@ -63,9 +63,9 @@ public class BlockPrefab : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    public void ChangeHeight(int addedHeight)
+    public void ChangeAmount(int addedAmount)
     {
-        if (addedHeight < 0 && transform.localScale.y <= 1 && transform.localRotation.z >= 0) // flip from desert to pond 
+        if (addedAmount < 0 && transform.localScale.y <= 1 && transform.localRotation.z >= 0) // flip from desert to pond 
         {
             transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
             newHeight = Mathf.RoundToInt(transform.localScale.y);
@@ -75,7 +75,7 @@ public class BlockPrefab : MonoBehaviour
             return;
         }
 
-        if (addedHeight > 0 && transform.localScale.y == 1 && transform.localRotation.z <= -0.1) //flip from pond to desert 
+        if (addedAmount > 0 && transform.localScale.y == 1 && transform.localRotation.z <= -0.1) //flip from pond to desert 
         {
             transform.localRotation = Quaternion.identity;
             newHeight = Mathf.RoundToInt(transform.localScale.y);
@@ -85,10 +85,10 @@ public class BlockPrefab : MonoBehaviour
             return;
         }
 
-        if (addedHeight > 0 && transform.localScale.y >= 1 && transform.localRotation.z >= 0)  // from desert  to forest
+        if (addedAmount > 0 && transform.localScale.y >= 1 && transform.localRotation.z >= 0)  // from desert  to forest
         {
             transform.localRotation = Quaternion.identity;
-            transform.localScale += new Vector3(0, addedHeight, 0);
+            transform.localScale += new Vector3(0, addedAmount, 0);
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
@@ -97,10 +97,10 @@ public class BlockPrefab : MonoBehaviour
 
         }
 
-        if (addedHeight < 0 && transform.localScale.y > 1)
+        if (addedAmount < 0 && transform.localScale.y > 1)
         {
             transform.localRotation = Quaternion.identity;
-            transform.localScale += new Vector3(0, addedHeight, 0);
+            transform.localScale += new Vector3(0, addedAmount, 0);
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);
@@ -108,9 +108,9 @@ public class BlockPrefab : MonoBehaviour
             return;
         }
 
-        if (addedHeight == 0) //setup at the start
+        if (addedAmount == 0) //setup at the start
         {
-            transform.localScale += new Vector3(0, addedHeight, 0);
+            transform.localScale += new Vector3(0, addedAmount, 0);
             newHeight = Mathf.RoundToInt(transform.localScale.y);
             UIManager.Instance.LocalSetupUIIcons();
             OnHeightChanged?.Invoke(newHeight);

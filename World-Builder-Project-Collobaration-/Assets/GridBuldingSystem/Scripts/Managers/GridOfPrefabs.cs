@@ -9,7 +9,9 @@ using UnityEngine.EventSystems;
 
 public class GridOfPrefabs : MonoBehaviour
 {
-    [SerializeField] GameObject blockPrefabObj;
+    [SerializeField] GameObject blockPrefabMain;
+    [SerializeField] GameObject blockPrefabForCorners;
+    GameObject prefabToCreate;
     public int width = 3;
     public int height = 5;
     [SerializeField] Color colorOfHighlightedOblock = new Color();
@@ -40,7 +42,19 @@ public class GridOfPrefabs : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), blockPrefabObj);
+                if(x == 0 && y == 0)
+                {
+                    prefabToCreate = blockPrefabForCorners;
+                }
+                else
+                {
+                    prefabToCreate = blockPrefabMain;
+                }
+                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, Quaternion.Euler(new Vector3(0, 180, 0)));
+                //blockPrefab.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                blockPrefab.gameObject.transform.parent = gameObject.transform;
+                globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
+                blockPrefab.ChangeAmount(0);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
                 float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
@@ -50,7 +64,7 @@ public class GridOfPrefabs : MonoBehaviour
                 {
                     blockPrefab.transform.localScale = new Vector3(1, 1, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-                    blockPrefab.ChangeHeight(0);
+                    blockPrefab.ChangeAmount(0);
 
                 }
 
@@ -58,12 +72,12 @@ public class GridOfPrefabs : MonoBehaviour
                 {
                     blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
-                    blockPrefab.ChangeHeight(0);
+                    blockPrefab.ChangeAmount(0);
                 }
 
                 else
                 {
-                    blockPrefab.ChangeHeight(0);
+                    blockPrefab.ChangeAmount(0);
                     blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
 
                 }
