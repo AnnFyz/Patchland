@@ -2747,7 +2747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -771.00006, y: 78}
+  m_AnchoredPosition: {x: -771.0001, y: 78}
   m_SizeDelta: {x: -1690.08, y: -692.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500968342
@@ -5398,7 +5398,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 471
+    m_Bits: 983
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8991,7 +8991,7 @@ MonoBehaviour:
   colorOfHighlightedOblock: {r: 0.72781426, g: 0.6745283, b: 1, a: 0}
   materialOfSelectedOblock: {fileID: 2100000, guid: b0e5a39190902e1499df9d170684a036,
     type: 2}
-  heightScale: 10
+  amountScale: 10
   xScale: 0.25
   horizontalSurfaces: []
 --- !u!114 &2056276496
@@ -9008,7 +9008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: -1372625422
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -9040,7 +9040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: -334000983
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -9104,7 +9104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: -1923039037
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -9136,12 +9136,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: -902729914
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.33333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c666dec6b9692044cbe91ee8796f1a1d, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2106086886
 GameObject:
@@ -9263,9 +9263,9 @@ MonoBehaviour:
   dir: 0
   levelsMaterials:
   - {fileID: 2100000, guid: 5ccc32755082c4643a93671598b74989, type: 2}
+  - {fileID: 2100000, guid: da23306f3891e044bae50b9131effb1c, type: 2}
   - {fileID: 2100000, guid: 2ac291799b0c64948a24c88508ffaacc, type: 2}
-  - {fileID: 2100000, guid: 2ac291799b0c64948a24c88508ffaacc, type: 2}
-  - {fileID: 2100000, guid: 2ac291799b0c64948a24c88508ffaacc, type: 2}
+  - {fileID: 2100000, guid: 245094edcde155b478fa23061c88c794, type: 2}
   - {fileID: 2100000, guid: 2ac291799b0c64948a24c88508ffaacc, type: 2}
   - {fileID: 2100000, guid: 2ac291799b0c64948a24c88508ffaacc, type: 2}
 --- !u!82 &2110376077

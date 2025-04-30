@@ -25,8 +25,8 @@ public class MyGridBuildingSystem : MonoBehaviour
         origin = transform.position;
         blockPrefab = GetComponent<BlockPrefab>();
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
-        blockPrefab.OnHeightChanged += UpdateGrid;
-        blockPrefab.OnHeightChanged += DeleteOldObjectsAndWaypoints;
+        blockPrefab.OnAmountChanged += UpdateGrid;
+        blockPrefab.OnAmountChanged += DeleteOldObjectsAndWaypoints;
        
         //blockPrefab.OnHeightChanged += DeleteAgain;
     }

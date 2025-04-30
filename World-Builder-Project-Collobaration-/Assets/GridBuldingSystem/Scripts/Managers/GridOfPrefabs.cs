@@ -17,7 +17,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] Color colorOfHighlightedOblock = new Color();
     //[SerializeField] Color materialOfSelectedOblock = new Color();
     [SerializeField] Material materialOfSelectedOblock;
-    [SerializeField] float heightScale = 40.0f;
+    [SerializeField] float amountScale = 40.0f;
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
@@ -50,37 +50,42 @@ public class GridOfPrefabs : MonoBehaviour
                 {
                     prefabToCreate = blockPrefabMain;
                 }
-                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, Quaternion.Euler(new Vector3(0, 180, 0)));
+                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, Quaternion.identity);
+                blockPrefab.blocksAmount = 1;
+                blockPrefab.DeactivateStackOfBlocks();
                 //blockPrefab.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
-                blockPrefab.ChangeAmount(0);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
-                float height = heightScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
-                blockPrefab.transform.localScale = new Vector3(1, Mathf.RoundToInt(height), 1);
-                int newHeight = Mathf.FloorToInt(height);
-                if (blockPrefab.transform.localScale.y <= 4) //Water
+                float amount = amountScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
+                //blockPrefab.blocksAmount =Mathf.RoundToInt(amount);
+                for (int i = 0; i < Mathf.RoundToInt(amount); i++)
                 {
-                    blockPrefab.transform.localScale = new Vector3(1, 1, 1);
-                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-                    blockPrefab.ChangeAmount(0);
-
+                    blockPrefab.ChangeAmount(1);
                 }
+                //int newHeight = Mathf.FloorToInt(amount);
+                //if (blockPrefab.transform.localScale.y <= 4) //Water
+                //{
+                //    blockPrefab.transform.localScale = new Vector3(1, 1, 1);
+                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
+                //    blockPrefab.ChangeAmount(0);
 
-                else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 6)
-                {
-                    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
-                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
-                    blockPrefab.ChangeAmount(0);
-                }
+                //}
 
-                else
-                {
-                    blockPrefab.ChangeAmount(0);
-                    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
+                //else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 6)
+                //{
+                //    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
+                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
+                //    blockPrefab.ChangeAmount(0);
+                //}
 
-                }
+                //else
+                //{
+                //    blockPrefab.ChangeAmount(0);
+                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
+
+                //}
             }
         }
 

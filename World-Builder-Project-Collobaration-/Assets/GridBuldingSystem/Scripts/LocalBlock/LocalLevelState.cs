@@ -30,23 +30,24 @@ public class LocalLevelState : MonoBehaviour
     }
     private void OnEnable()
     {
-        blockPrefab.OnHeightChanged += ChangeLevel;
+        blockPrefab.OnAmountChanged += ChangeState;
     }
     public LevelState GetCurrentLevelState()
     {
         return currentLevelState;
     }
 
-    public void ChangeLevel(int newHeight)
+    public void ChangeState(int newAmount)
     {
-        if (newHeight <= 1 && blockPrefab.transform.localRotation.z <= -1)
+        if (newAmount <= 1) //Pond
         {
             if (currentLevelState != LevelState.Pond)
             {
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[0];
-            blockPrefab.defaultMaterial = renderer.material;
+            //blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
@@ -60,7 +61,7 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        if (newHeight >= 1 && blockPrefab.transform.localRotation.z >= 0)
+        if (newAmount == 2) // Desert
         {
             if (currentLevelState != LevelState.Desert)
             {
@@ -69,7 +70,8 @@ public class LocalLevelState : MonoBehaviour
             //if (currentLevelState != LevelState.Desert)
             //{ Debug.Log("State was changed"); }
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
-            blockPrefab.defaultMaterial = renderer.material;
+            //blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
@@ -82,37 +84,15 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
 
         }
-        if (newHeight < 5 && newHeight > 1) // Desert
-        {
-            if (currentLevelState != LevelState.Desert)
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[1];
-            blockPrefab.defaultMaterial = renderer.material;
-            if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
-            if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
-            {
-                blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
-                blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
-                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
-            }
-
-            
-            currentLevelState = LevelState.Desert;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
-
-        if (newHeight >= 5 && newHeight <= 8) // Forest
+        if (newAmount > 2 && newAmount <= 6) // Forest
         {
             if (currentLevelState != LevelState.Forest)
             {
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
-            blockPrefab.defaultMaterial = renderer.material;
+            //blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
@@ -127,14 +107,15 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        if (newHeight > 8  && newHeight < 11) // Hill
+        if (newAmount > 6  && newAmount <= 10) // Hill => MAX for now
         {
             if (currentLevelState != LevelState.Hill)
             {
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[3];
-            blockPrefab.defaultMaterial = renderer.material;
+            //blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
@@ -149,14 +130,15 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        if (newHeight >= 11 && newHeight < 15) // Montain
+        if (newAmount >= 11 && newAmount < 15) // Montain
         {
             if (currentLevelState != LevelState.Mountain)
             {
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[4];
-            blockPrefab.defaultMaterial = renderer.material;
+            //blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
@@ -171,14 +153,15 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        if (newHeight >= 15) //Snow mountain
+        if (newAmount >= 15) //Snow mountain
         {
             if (currentLevelState != LevelState.SnowMountain)
             {
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[5];
-            blockPrefab.defaultMaterial = renderer.material;
+           // blockPrefab.defaultMaterial = renderer.material;
+            blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
