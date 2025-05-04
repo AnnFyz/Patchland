@@ -214,6 +214,9 @@ public class BuildingManager : MonoBehaviour
         Vector3 mousePosition = GetMouseWorldPosition();
         if (localGrid == null) return mousePosition;
         localGrid.GetXZ(mousePosition, out int x, out int z);
+        x = Math.Clamp(x, 0, localGrid.GetWidth() - 1);
+        z = Math.Clamp(z, 0, localGrid.GetHeight() - 1);
+        Debug.Log("x: " + x + " z: " + z);
 
         if (placedObjectTypeSO != null)
         {

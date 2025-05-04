@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2608708882569115102}
   - component: {fileID: 2608708882569115103}
   - component: {fileID: 2608708882569115096}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Pf1Pawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608708882569115097}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 2237452263831861341}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2608708882569115103
 MonoBehaviour:
@@ -89,22 +89,28 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2608708882569115102}
     m_Modifications:
     - target: {fileID: 284312670277836371, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: adbc225c8925736449fbef93d09f8aad, type: 2}
     - target: {fileID: 284312670277836373, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 284312670277836373, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 465296344474196318, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1596457177620258293, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
@@ -163,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2122863381097724043, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1692cb0b0b7ed846b7409817628f54e, type: 2}
     - target: {fileID: 2359718211770491562, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
@@ -174,19 +180,35 @@ PrefabInstance:
     - target: {fileID: 2359718211770491562, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359718211770491562, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6148856052099649751, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8358024156136924470, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 465296344474196318, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5677117830502271194}
+    - targetCorrespondingSourceObject: {fileID: 284312670277836373, guid: 6124d1ed9799ecc48bfd16ea882c08ec,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6249793976263961336}
   m_SourcePrefab: {fileID: 100100000, guid: 6124d1ed9799ecc48bfd16ea882c08ec, type: 3}
 --- !u!1 &781607067121581053 stripped
 GameObject:
@@ -202,9 +224,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781607067121581053}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 24.987906, y: 46.70065, z: 27.068352}
   m_Center: {x: -0.8378332, y: 23.338594, z: -0.107164815}
 --- !u!1 &1107840625372757238 stripped

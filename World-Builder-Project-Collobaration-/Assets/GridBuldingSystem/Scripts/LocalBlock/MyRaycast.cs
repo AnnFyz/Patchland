@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             {
                 localPrefabBlock.IsThisBlockIsHighlighted = true;
                 SetOutline(true);
-                if (localPrefabBlock.IsThisBlockIsSelected)
+                if (localPrefabBlock.IsThisBlockIsSelected && localPrefabBlock.IsThisBlockIsHighlighted)
                 {
                     //localPrefabBlock.ChangeSelectedMaterial();
                     if (BuildingManager.Instance.placedObjectTypeSO == null)
@@ -55,6 +56,7 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                
                 localPrefabBlock.IsThisBlockIsHighlighted = false;
                 SetOutline(false);
+                //BuildingManager.Instance.DeselectObjectType();
 
                 if (!localPrefabBlock.IsThisBlockIsSelected)
                 {
