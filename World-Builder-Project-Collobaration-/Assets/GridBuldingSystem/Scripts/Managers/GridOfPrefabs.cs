@@ -12,6 +12,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabMain;
     [SerializeField] GameObject blockPrefabForCorners;
     GameObject prefabToCreate;
+    Quaternion prefabRotation;
     public int width = 3;
     public int height = 5;
     [SerializeField] Color colorOfHighlightedOblock = new Color();
@@ -42,15 +43,32 @@ public class GridOfPrefabs : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if(x == 0 && y == 0)
+                if (x == 0 && y == 0)
                 {
                     prefabToCreate = blockPrefabForCorners;
+                    prefabRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                }
+                else if (x == 0 && y == height - 1)
+                {
+                    prefabToCreate = blockPrefabForCorners;
+                    prefabRotation = Quaternion.Euler(new Vector3(0, -90, 0));
+                }
+                else if (x == width - 1 && y == height - 1)
+                {
+                    prefabToCreate = blockPrefabForCorners;
+                    prefabRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
+                else if (x == width - 1 && y == 0)
+                {
+                    prefabToCreate = blockPrefabForCorners;
+                    prefabRotation = Quaternion.Euler(new Vector3(0, 90, 0));
                 }
                 else
                 {
                     prefabToCreate = blockPrefabMain;
+                    prefabRotation = Quaternion.identity;
                 }
-                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, Quaternion.identity);
+                BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
                 blockPrefab.blocksAmount = 1;
                 blockPrefab.DeactivateStackOfBlocks();
                 //blockPrefab.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -99,7 +117,7 @@ public class GridOfPrefabs : MonoBehaviour
         {
             horizontalSurfaces[i].BuildNavMesh();
         }
-        
+
     }
 
     float RandomRotation()
@@ -179,7 +197,7 @@ public class GridOfPrefabs : MonoBehaviour
                     {
                         Bubble.Instance.CreatePopupText(GetMouseWorldPosition(), " I am dead.. ☹ ");
                     }
-                    
+
                 }
             }
         }
