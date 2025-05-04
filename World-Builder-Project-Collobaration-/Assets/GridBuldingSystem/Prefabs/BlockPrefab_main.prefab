@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983df629b18c5b741b4afbaf8a1cb6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cornerBlock: 0
   IsThisBlockIsHighlighted: 0
   IsThisBlockIsSelected: 0
   renderers: []
@@ -637,9 +638,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd6b9865a71d446a1423cf49f5ab6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGridOnCorner: 0
   gridWidth: 2
   gridHeight: 2
-  cellSize: 6
+  cellSize: 5
   origin: {x: 0, y: 0, z: 0}
 --- !u!114 &-1446097718899038186
 MonoBehaviour:
