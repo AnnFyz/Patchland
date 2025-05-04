@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class MyGridBuildingSystem : MonoBehaviour
 {
     public MyGridXZ<MyGridObject> grid;
+    public bool isGridOnCorner = false;
     public MyGridXZ<MyGridObject> oldGrid;
     [SerializeField] int gridWidth = 2;
     [SerializeField] int gridHeight = 2;
@@ -24,22 +25,26 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         origin = transform.position;
         blockPrefab = GetComponent<BlockPrefab>();
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
         blockPrefab.OnAmountChanged += UpdateGrid;
         blockPrefab.OnAmountChanged += DeleteOldObjectsAndWaypoints;
        
         //blockPrefab.OnHeightChanged += DeleteAgain;
     }
 
-    //private void Start()
-    //{
-    //    OnChangedWaypoints?.Invoke();
-    //}
+    private void Start()
+    {
+        //OnChangedWaypoints?.Invoke();
+    }
+
+    public void SetBlockGrid()
+    {
+        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
+    }
     public void UpdateGrid(int newHeight)
     {
         this.newHeight = newHeight;
         oldGrid = grid;
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y));
+        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
     }
 
     public Vector3 GetOriginOfGrid()

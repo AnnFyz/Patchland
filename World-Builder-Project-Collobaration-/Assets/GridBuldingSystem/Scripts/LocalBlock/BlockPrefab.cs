@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+    public enum CornerBlock
+{
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
+    None
+}
+
+
 public class BlockPrefab : MonoBehaviour
 {
     public static Vector3 offset = new Vector3(5f, -5f, 5f);
+    public CornerBlock cornerBlock;
     private int newAmount;
     private int startScale;
     public event Action<int> OnAmountChanged;

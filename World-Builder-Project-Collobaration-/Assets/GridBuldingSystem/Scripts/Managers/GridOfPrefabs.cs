@@ -37,7 +37,7 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Start()
     {
-        globalGrid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y));
+        globalGrid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
 
         for (int x = 0; x < width; x++)
         {
@@ -47,21 +47,25 @@ public class GridOfPrefabs : MonoBehaviour
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomLeft;
                 }
                 else if (x == 0 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, -90, 0));
+                    prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopLeft;
                 }
                 else if (x == width - 1 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopRight;
                 }
                 else if (x == width - 1 && y == 0)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                    prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomRight;
                 }
                 else
                 {
@@ -69,6 +73,7 @@ public class GridOfPrefabs : MonoBehaviour
                     prefabRotation = Quaternion.identity;
                 }
                 BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
+                blockPrefab.GetComponent<MyGridBuildingSystem>().SetBlockGrid();
                 blockPrefab.blocksAmount = 1;
                 blockPrefab.DeactivateStackOfBlocks();
                 //blockPrefab.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -76,6 +81,7 @@ public class GridOfPrefabs : MonoBehaviour
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
+                //blockPrefab.gameObject.transform.rotation = prefabRotation;
                 float amount = amountScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
                 //blockPrefab.blocksAmount =Mathf.RoundToInt(amount);
                 for (int i = 0; i < Mathf.RoundToInt(amount); i++)
