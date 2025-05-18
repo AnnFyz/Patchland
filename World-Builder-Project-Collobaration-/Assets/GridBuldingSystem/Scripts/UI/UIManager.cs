@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
                     {
                         icon.SetActive(false);
                     }
+                    icons[0].SetActive(true);
                     break;
 
                 case LevelState.Desert:
@@ -61,11 +62,10 @@ public class UIManager : MonoBehaviour
                     {
                         icon.SetActive(false);
                     }
-                    icons[0].SetActive(true);
+                    icons[1].SetActive(true);
                     break;
 
                 case LevelState.Forest:
-                    icons[0].SetActive(true);
                     icons[1].SetActive(true);
                     icons[2].SetActive(true);
                     break;
@@ -75,13 +75,20 @@ public class UIManager : MonoBehaviour
                     {
                         icon.SetActive(false);
                     }
+                    icons[1].SetActive(true);
+                    icons[2].SetActive(true);
+                    icons[3].SetActive(true);
                     break;
 
                 case LevelState.Mountain:
                     foreach (var icon in icons)
                     {
-                        icon.SetActive(true);
+                        icon.SetActive(false);
                     }
+                    icons[1].SetActive(true);
+                    icons[2].SetActive(true);
+                    icons[3].SetActive(true);
+                    icons[4].SetActive(true);
                     break;
 
                 case LevelState.SnowMountain:
@@ -89,6 +96,7 @@ public class UIManager : MonoBehaviour
                     {
                         icon.SetActive(true);
                     }
+                    icons[0].SetActive(true);
                     break;
                 default:
                     Debug.Log("NOTHING");
