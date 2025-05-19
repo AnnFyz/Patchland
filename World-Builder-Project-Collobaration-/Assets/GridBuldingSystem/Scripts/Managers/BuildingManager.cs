@@ -123,8 +123,9 @@ public class BuildingManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            DeselectObjectType();
-            lastSelectedObjToPlaceTypeSO = null;
+            DeselectObjectTypeOnSelectedAnotherBlockType();
+            //DeselectObjectType();
+            //lastSelectedObjToPlaceTypeSO = null;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -185,6 +186,13 @@ public class BuildingManager : MonoBehaviour
     {
         placedObjectTypeSO = null;
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void DeselectObjectTypeOnSelectedAnotherBlockType()
+    {
+        placedObjectTypeSO = null;
+        OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+        lastSelectedObjToPlaceTypeSO = null;
     }
 
     public void RefreshSelectedObjectType()

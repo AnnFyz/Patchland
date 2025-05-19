@@ -18,8 +18,6 @@ public class MyGridBuildingSystem : MonoBehaviour
     public Vector3 origin;
     public event Action<int> OnObjectPlaced;
     public static event Action OnChangedWaypoints;
-    //public event EventHandler OnObjectPlaced; // for sound 
-    //public event EventHandler OnSelectedChanged; // for ghost building
     int newHeight = 0;
     private void Awake()
     {

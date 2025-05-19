@@ -19,7 +19,7 @@ public class UnitsSpawner : MonoBehaviour
     MyGridBuildingSystem localBuildingSystem;
     Transform unitPrefabToSpawn;
     GameObject currentUnit;
-    public LevelState levelState;
+    [SerializeField] LevelState levelState;
     private void Awake()
     {
         localBuildingSystem = GetComponent<MyGridBuildingSystem>();
@@ -33,23 +33,40 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(int placedObjId)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
-        if (levelState == LevelState.Desert || levelState == LevelState.Forest)
+        Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
+        Debug.Log("Level state: " + levelState);
+        if (levelState != LevelState.Pond)
         {
             Spawn(placedObjId);
         }
-        else if (levelState == LevelState.Desert || levelState == LevelState.Forest || levelState == LevelState.Mountain)
+
+        else
         {
-            if (placedObjId == 3 || placedObjId == 4 || placedObjId == 5)
-                Spawn(placedObjId);
-            else 
-            {
-                float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
-                float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
-                Bubble.Instance.CreatePopupText(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), "I won't spawn here the Unit!");
-                Debug.Log("I won't spawn here the Unit!");
-            }
+            float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+            float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+            Bubble.Instance.CreatePopupText(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), "I won't spawn here the Unit!");
+            Debug.Log("I won't spawn here the Unit!");
         }
-       
+        //levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
+        //Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
+        //Debug.Log("Level state: " + levelState);
+        //if (levelState == LevelState.Desert || levelState == LevelState.Forest)
+        //{
+        //    Spawn(placedObjId);
+        //}
+        //else if (levelState == LevelState.Desert || levelState == LevelState.Forest || levelState == LevelState.Mountain)
+        //{
+        //    if (placedObjId == 3 || placedObjId == 4 || placedObjId == 5)
+        //        Spawn(placedObjId);
+        //    else 
+        //    {
+        //        float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
+        //        float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
+        //        Bubble.Instance.CreatePopupText(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), "I won't spawn here the Unit!");
+        //        Debug.Log("I won't spawn here the Unit!");
+        //    }
+        //}
+
     }
 
     void Spawn(int placedObjId)
@@ -95,7 +112,7 @@ public class UnitsSpawner : MonoBehaviour
 
     Transform SelectRightUnitAndAmount(int placedObjId)
     {
-        switch (placedObjId) 
+        switch (placedObjId)
         {
             case 0:
                 unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[0];
@@ -122,7 +139,7 @@ public class UnitsSpawner : MonoBehaviour
         return unitPrefabToSpawn;
     }
 
-  
+
 
     void DestroyUnits()
     {
