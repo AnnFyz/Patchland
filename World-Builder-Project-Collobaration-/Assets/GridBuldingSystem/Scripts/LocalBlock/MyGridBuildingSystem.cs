@@ -164,9 +164,9 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (BuildingManager.blockPrefab != null)
+            if (BuildingManager.Instance.currentBlockPrefab != null)
             {
-                LevelState blockState = BuildingManager.blockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
+                LevelState blockState = BuildingManager.Instance.currentBlockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
                 Vector3 mousePosition = GetMouseWorldPosition();
                 if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted) //&& blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
                 {

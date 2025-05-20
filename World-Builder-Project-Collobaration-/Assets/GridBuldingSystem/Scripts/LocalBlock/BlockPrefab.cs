@@ -16,6 +16,7 @@ using System;
 
 public class BlockPrefab : MonoBehaviour
 {
+    public int[,] blockId = new int [0,0];
     public static Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
     private int newAmount;

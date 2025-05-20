@@ -16,7 +16,8 @@ public class BuildingManager : MonoBehaviour
     public event EventHandler OnSelectedChanged; // for ghost building
     public event EventHandler OnObjectPlaced; // for sound 
     public static MyGridXZ<MyGridBuildingSystem.MyGridObject> localGrid;
-    public static BlockPrefab blockPrefab;
+    public BlockPrefab currentBlockPrefab;
+    public BlockPrefab lastBlockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
     List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
@@ -132,10 +133,10 @@ public class BuildingManager : MonoBehaviour
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState != LevelState.Pond && levelState != LevelState.Desert)
             {
                 placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType();
@@ -143,7 +144,7 @@ public class BuildingManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState != LevelState.Pond && levelState != LevelState.Desert)
             {
                 placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType();
@@ -151,7 +152,7 @@ public class BuildingManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
                 placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); DeselectObjectType();
@@ -159,7 +160,7 @@ public class BuildingManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
                 placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); DeselectObjectType();
@@ -167,7 +168,7 @@ public class BuildingManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            LevelState levelState = blockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
+            LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
                 placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); DeselectObjectType();
