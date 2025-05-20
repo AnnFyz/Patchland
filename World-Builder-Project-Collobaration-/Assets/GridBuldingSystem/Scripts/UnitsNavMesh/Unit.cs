@@ -17,6 +17,12 @@ public enum UnitsState // to add weight
     Dead,
     Zombi
 }
+
+[Serializable]
+public class WaypointsList
+{
+   public List<Transform> localOrder = new List<Transform>();
+}
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
@@ -29,14 +35,14 @@ public class Unit : MonoBehaviour
     public Transform target;
     public Transform startPoint;
     public Transform currentPoint;
-    List<Transform> localOrder = new List<Transform>();
+    //List<Transform> localOrder = new List<Transform>();
+    [SerializeField] WaypointsList waypointsList = new WaypointsList();
     private NavMeshPath path;
     private float elapsed = 0.0f;
     public int placedObjTypeId;
-    int waypointIndex = 0;
+    [SerializeField] int waypointIndex = 0;
     public UnitsMovementState currentMovemenetState;
     public UnitsState currentUnitsState;
-    public GameObject Pointer;
     public bool isWaypointApproached = false;
     BlockHealth occupiedBlockHealth;
     Zombi zombi;
@@ -58,7 +64,6 @@ public class Unit : MonoBehaviour
         currentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-        Pointer = GameObject.Find("Pointer");
         MoveAutomaticallyToWayPoint();
     }
 
@@ -71,7 +76,6 @@ public class Unit : MonoBehaviour
 
     private void LateUpdate()
     {
-        //Pointer.transform.position = target.position;
         if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
             MoveAutomaticallyToWayPoint();
@@ -183,17 +187,17 @@ public class Unit : MonoBehaviour
     {
         if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
-            localOrder.Clear();
+            waypointsList.localOrder.Clear();
             if (target == null) // it means the unit was just created
             {
-                localOrder.Add(startPoint);
+                waypointsList.localOrder.Add(startPoint);
                 currentPoint = startPoint;
                 target = startPoint;
             }
             else
             {
                 currentPoint = target;
-                localOrder.Add(currentPoint);
+                waypointsList.localOrder.Add(currentPoint);
             }
             if(UnitsManager.Instance.waypoints != null)
             {
@@ -201,7 +205,7 @@ public class Unit : MonoBehaviour
                 {
                     List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
                     reversedList.Reverse();
-                    localOrder.AddRange(reversedList);
+                    waypointsList.localOrder.AddRange(reversedList);
                    
                 }
             }
@@ -220,7 +224,7 @@ public class Unit : MonoBehaviour
                 // Update the way to the goal every second.
                 elapsed += Time.deltaTime;
                 IterateWaypointIndex();
-                target = localOrder[waypointIndex];
+                target = waypointsList.localOrder[waypointIndex];
                 if (target != null)
                 {
                     if (elapsed > 1.5f)
@@ -228,7 +232,7 @@ public class Unit : MonoBehaviour
                         elapsed -= 1.5f;
                         if (agent.SetDestination(target.transform.position))
                         {
-                            if (Vector3.Distance(transform.position, target.transform.position) < 1f)
+                            if (Vector3.Distance(transform.position, target.transform.position) < 1.5f)
                             {
                                 MoveAutomaticallyToWayPoint();
                             }
@@ -249,13 +253,13 @@ public class Unit : MonoBehaviour
     }
     void IterateWaypointIndex()
     {
-        if(localOrder != null)
+        if(waypointsList.localOrder != null)
         {
-            if (waypointIndex < localOrder.Count)
+            if (waypointIndex < waypointsList.localOrder.Count-1)
             {
                 waypointIndex++;
             }
-            if (waypointIndex == localOrder.Count)
+            if (waypointIndex == waypointsList.localOrder.Count)
             {
                 waypointIndex = 0;
             }

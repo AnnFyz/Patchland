@@ -58,8 +58,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                 if (oldGrid != null && oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
                 {
 
-
-
                     int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
                     if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
                     {

@@ -2747,7 +2747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -771.00006, y: 78}
+  m_AnchoredPosition: {x: -771, y: 78}
   m_SizeDelta: {x: -1690.08, y: -692.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500968342
@@ -5943,79 +5943,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159473677}
   m_CullTransparentMesh: 1
---- !u!1001 &1161067509
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2675644380505310728, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_Name
-      value: Mushroom
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310728, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 83bc91a7ffa94904188e25d90439e0fe, type: 3}
 --- !u!1 &1205011651
 GameObject:
   m_ObjectHideFlags: 0
@@ -8346,8 +8273,8 @@ MonoBehaviour:
   - {fileID: 2675644380505310733, guid: 91c22208e2dc9774bbfaf188537c9a50, type: 3}
   - {fileID: 2675644380505310733, guid: 0788915d9d3af2d40a5f6b68ddf3fd11, type: 3}
   numberOfPoints: 0
-  maxUnits_0: 5
-  maxUnits_1: 4
+  maxUnits_0: 1
+  maxUnits_1: 1
   maxUnits_2: 3
   maxUnits_3: 5
   maxUnits_4: 4
@@ -9322,6 +9249,8 @@ MonoBehaviour:
   placedObjectTypeSO: {fileID: 0}
   lastSelectedObjToPlaceTypeSO: {fileID: 0}
   dir: 0
+  currentBlockPrefab: {fileID: 0}
+  lastBlockPrefab: {fileID: 0}
   levelsMaterials:
   - {fileID: 2100000, guid: 5ccc32755082c4643a93671598b74989, type: 2}
   - {fileID: 2100000, guid: da23306f3891e044bae50b9131effb1c, type: 2}
@@ -15877,4 +15806,3 @@ SceneRoots:
   - {fileID: 2110376075}
   - {fileID: 2056276493}
   - {fileID: 660079252}
-  - {fileID: 1161067509}

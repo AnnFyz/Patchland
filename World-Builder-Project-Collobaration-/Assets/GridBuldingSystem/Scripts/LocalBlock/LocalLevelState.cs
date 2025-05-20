@@ -107,7 +107,7 @@ public class LocalLevelState : MonoBehaviour
             UIManager.Instance.LocalSetupUIIcons();
         }
 
-        else if (newAmount > 3  && newAmount <= 6) 
+        else if (newAmount > 3  && newAmount <= 6) // Hill
         {
             if (currentLevelState != LevelState.Hill)  //condition to not call the event if the state is not changed
             {

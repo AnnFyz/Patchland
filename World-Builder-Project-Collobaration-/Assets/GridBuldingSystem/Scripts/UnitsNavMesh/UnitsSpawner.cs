@@ -11,13 +11,10 @@ public class UnitsSpawner : MonoBehaviour
     public List<Unit> selectedUnits = new List<Unit>();
     public LayerMask unitMask;
     public LayerMask groundMask;
-    //[SerializeField] MazeSpawner mazeSpawner;
-    [SerializeField] GameObject unitPrefab;
     [SerializeField] int numberOfUnits = 1;
-    //NavMeshTriangulation triangulation;
     List<GameObject> units = new List<GameObject>();
     MyGridBuildingSystem localBuildingSystem;
-    Transform unitPrefabToSpawn;
+    Transform unitToSpawn;
     GameObject currentUnit;
     [SerializeField] LevelState levelState;
     private void Awake()
@@ -81,7 +78,13 @@ public class UnitsSpawner : MonoBehaviour
                 //int vertexIndex = UnityEngine.Random.Range(transform.position, );
                 if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
                 {
-                    currentUnit = Instantiate(SelectRightUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
+                    currentUnit = Instantiate(SelectUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
+                    if (currentUnit == null)
+                    {
+                        Debug.Log("currentUnit is null");
+                        return;
+                    }
+
                     if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
                     {
                         currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
@@ -110,33 +113,34 @@ public class UnitsSpawner : MonoBehaviour
         }
     }
 
-    Transform SelectRightUnitAndAmount(int placedObjId)
+    Transform SelectUnitAndAmount(int placedObjId)
     {
         switch (placedObjId)
         {
-            case 0:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[0];
+            case 0: // Pond - no unit 
+                unitToSpawn = null;
                 break;
-            case 1:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[1];
+            case 1: // Desert
+                unitToSpawn = UnitsManager.Instance.GetListOfUnits()[1];
                 break;
-            case 2:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[2];
+            case 2: // Forest
+                unitToSpawn = UnitsManager.Instance.GetListOfUnits()[2];
                 break;
-            case 3:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[3];
+            case 3: // Hill
+                unitToSpawn = UnitsManager.Instance.GetListOfUnits()[3];
                 break;
-            case 4:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[4];
+            case 4: // Mountain
+                unitToSpawn = UnitsManager.Instance.GetListOfUnits()[4];
                 break;
-            case 5:
-                unitPrefabToSpawn = UnitsManager.Instance.GetListOfUnits()[5];
+            case 5: // Snow Mountain
+                unitToSpawn = UnitsManager.Instance.GetListOfUnits()[5];
                 break;
             default:
+                unitToSpawn = null;
                 Debug.Log("ERROR");
                 break;
         }
-        return unitPrefabToSpawn;
+        return unitToSpawn;
     }
 
 
