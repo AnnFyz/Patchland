@@ -38,7 +38,8 @@ public class Unit : MonoBehaviour
     //List<Transform> localOrder = new List<Transform>();
     [SerializeField] WaypointsList waypointsList = new WaypointsList();
     private NavMeshPath path;
-    private float elapsed = 0.0f;
+    [SerializeField] float elapsed = 0.0f;
+    [SerializeField] float movingToPointTimer = 3f;
     public int placedObjTypeId;
     [SerializeField] int waypointIndex = 0;
     public UnitsMovementState currentMovemenetState;
@@ -64,7 +65,7 @@ public class Unit : MonoBehaviour
         currentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-        MoveAutomaticallyToWayPoint();
+        //MoveAutomaticallyToWayPoint();
     }
 
     public void OnEnable()
@@ -221,19 +222,19 @@ public class Unit : MonoBehaviour
         {
             if (currentMovemenetState == UnitsMovementState.Autopilot)
             {
-                // Update the way to the goal every second.
+                // Update the way to the goal every amount of sec in movingToPointTimer.
                 elapsed += Time.deltaTime;
-                IterateWaypointIndex();
                 target = waypointsList.localOrder[waypointIndex];
                 if (target != null)
                 {
-                    if (elapsed > 1.5f)
+                    if (elapsed > movingToPointTimer)
                     {
-                        elapsed -= 1.5f;
+                        elapsed = 0;
                         if (agent.SetDestination(target.transform.position))
                         {
-                            if (Vector3.Distance(transform.position, target.transform.position) < 1.5f)
+                            if (Vector3.Distance(transform.position, target.transform.position) < 3f)
                             {
+                                IterateWaypointIndex();
                                 MoveAutomaticallyToWayPoint();
                             }
                             else
@@ -259,7 +260,7 @@ public class Unit : MonoBehaviour
             {
                 waypointIndex++;
             }
-            if (waypointIndex == waypointsList.localOrder.Count)
+            else
             {
                 waypointIndex = 0;
             }
