@@ -299,7 +299,10 @@ public class Unit : MonoBehaviour
             {
                 if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
                 {
-                    GetComponentInChildren<UnitsHealth>().FillHealth(50);
+                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+                    GetComponentInChildren<UnitsHealth>().isHealthLosing = false;
+                    //GetComponentInChildren<UnitsHealth>().FillHealth(50);
+                    StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 }
 
             }
@@ -309,28 +312,29 @@ public class Unit : MonoBehaviour
         {
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
+
         CheckIntersectedBlock(other);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() && other.gameObject.GetComponentInParent<PlacedObject_Done>() != null)
-        {
-            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
-            {
-                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
-                {
-                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                    StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-                }
-            }
-        }
-        else
-        {
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.GetComponentInParent<PlacedObject_Done>() && other.gameObject.GetComponentInParent<PlacedObject_Done>() != null)
+    //    {
+    //        if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
+    //        {
+    //            if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+    //            {
+    //                GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+    //                StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
 
-            GetComponentInChildren<UnitsHealth>().isFoodAround = false;
-        }
-    }
+    //        GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+    //    }
+    //}
 
 
     private void OnTriggerExit(Collider other)
@@ -339,8 +343,11 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+                //StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+                GetComponentInChildren<UnitsHealth>().LoseHealth();
+
+
             }
         }
     }

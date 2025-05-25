@@ -5335,7 +5335,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5385,7 +5385,12 @@ MonoBehaviour:
   target: {fileID: 0}
   startPoint: {fileID: 0}
   currentPoint: {fileID: 0}
+  waypointsList:
+    localOrder: []
+  elapsed: 0
+  movingToPointTimer: 3
   placedObjTypeId: 0
+  waypointIndex: 0
   currentMovemenetState: 0
   currentUnitsState: 0
   isWaypointApproached: 0
@@ -5496,14 +5501,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startValue: 100
+  startValue: 300
   curretValue: 0
   isFoodAround: 0
+  damageToUnit: 0
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
   whenAttacked_Particles: {fileID: 663237409304151850}

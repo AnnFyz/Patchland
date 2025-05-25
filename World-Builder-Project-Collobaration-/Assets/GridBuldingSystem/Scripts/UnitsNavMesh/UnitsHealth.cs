@@ -14,13 +14,12 @@ public enum UIState
 }
 public class UnitsHealth : MonoBehaviour
 {
-    [SerializeField] float startValue = 100f;
+    [SerializeField] float maxValue = 100f;
     [SerializeField] float curretValue;
-    const float maxValue = 100f;
     public bool isFoodAround = false;
     public Action OnUnitDeath;
     Unit unit;
-    float damageToUnit;
+    [SerializeField] float damageToUnit;
     [SerializeField] UIState currentUIState = UIState.healthy;
     public GameObject stateFire;
     [SerializeField] GameObject whenAttacked_Particles;
@@ -31,6 +30,8 @@ public class UnitsHealth : MonoBehaviour
     string[] angryLines = new string[3];
     bool WasHungryBubbleCreated = false;
     bool WasAngryBubbleCreated = false;
+    bool isHealthFilling = false;
+    public bool isHealthLosing = false;
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
@@ -87,7 +88,7 @@ public class UnitsHealth : MonoBehaviour
     }
     private void Start()
     {
-        curretValue = startValue;
+        curretValue = maxValue;
         whenAttacked_Particles.SetActive(false);
         CreateOpenLines();
         CreateHungryLines();
@@ -100,10 +101,10 @@ public class UnitsHealth : MonoBehaviour
     {
        
         SwitchUIState();
-        if (!isFoodAround && curretValue > 0)
-        {
-            LoseHealth();
-        }
+        //if (!isFoodAround && curretValue > 0)
+        //{
+        //    LoseHealth();
+        //}
         if(currentUIState == UIState.hungry)
         {
             Debug.Log("Hungry");
@@ -150,9 +151,12 @@ public class UnitsHealth : MonoBehaviour
         angryLines[1] = " ☹ ";  // (._.)
 
     }
-    private void LoseHealth()
+    public void LoseHealth()
     {
+        if (isHealthLosing)
+            return;
         StartCoroutine(SubstractHealthGradually());
+        isHealthLosing = true;
         if (curretValue <= 0)
         {
             unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
@@ -165,10 +169,13 @@ public class UnitsHealth : MonoBehaviour
 
     IEnumerator SubstractHealthGradually()
     {
-        curretValue -= damageToUnit;
-        curretValue = Mathf.Clamp(curretValue, 0, maxValue);
-   
-        yield return new WaitForSeconds(1f);
+        while (curretValue >= 0)
+        {
+            Debug.Log("SubstractHealthGradually");
+            curretValue -= damageToUnit;
+            curretValue = Mathf.Clamp(curretValue, 0, maxValue);
+            yield return new WaitForSeconds(1f);
+        } 
     }
     public void FillHealth(float value)
     {
@@ -179,8 +186,14 @@ public class UnitsHealth : MonoBehaviour
 
     public IEnumerator FillHealthGradually()
     {
-        FillHealth(0.5f);
-        yield return new WaitForSeconds(1f);
+        while (curretValue < maxValue)
+        {
+            Debug.Log("SubstractHealthGradually");
+            curretValue += damageToUnit * 2;
+            curretValue = Mathf.Clamp(curretValue, 0, maxValue);
+            yield return new WaitForSeconds(1f);
+        }
+
     }
 
     private void OnCollisionStay(Collision other)
