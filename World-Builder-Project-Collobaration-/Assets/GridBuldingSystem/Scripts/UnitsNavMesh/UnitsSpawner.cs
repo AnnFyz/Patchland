@@ -30,8 +30,8 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(int placedObjId)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
-        Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
-        Debug.Log("Level state: " + levelState);
+        //Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
+        //Debug.Log("Level state: " + levelState);
         if (levelState != LevelState.Pond)
         {
             Spawn(placedObjId);

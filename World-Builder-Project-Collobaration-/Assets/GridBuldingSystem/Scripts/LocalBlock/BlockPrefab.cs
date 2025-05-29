@@ -104,7 +104,6 @@ public class BlockPrefab : MonoBehaviour
             blocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
             OnAmountChanged?.Invoke(blocksAmount);
-            Debug.Log("addedAmount " + addedAmount);
         }
         else if (addedAmount < 0 && (blocksAmount + addedAmount) >= minAmount)
         {
@@ -113,7 +112,6 @@ public class BlockPrefab : MonoBehaviour
             blocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
             OnAmountChanged?.Invoke(blocksAmount);
-            Debug.Log("subtructed amount " + addedAmount);
         } 
     }
 

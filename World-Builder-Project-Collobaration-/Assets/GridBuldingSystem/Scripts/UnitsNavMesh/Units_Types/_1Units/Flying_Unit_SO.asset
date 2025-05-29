@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Flying_Unit_SO
   m_EditorClassIdentifier: 
   unitId: 2
-  damageToUnitWithoutFood: 20
+  damageToUnitWithoutFood: 10
+  healthPointsFromFood: 10
   death_Particles: {fileID: 1370348035730281900, guid: 55de213987c9fcf429b9854405faf7c4,
     type: 3}
   chanceToBecomeZombi: 70

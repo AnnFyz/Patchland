@@ -227,7 +227,7 @@ public class Unit : MonoBehaviour
                 target = waypointsList.localOrder[waypointIndex];
                 if (target != null)
                 {
-                    if (elapsed > movingToPointTimer)
+                    if (elapsed > movingToPointTimer && GetComponent<UnitsHealth>().curretValue >= GetComponent<UnitsHealth>().maxValue)
                     {
                         elapsed = 0;
                         if (agent.SetDestination(target.transform.position))
@@ -297,11 +297,10 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
+                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi && !GetComponentInChildren<UnitsHealth>().isFoodAround)
                 {
                     GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                    GetComponentInChildren<UnitsHealth>().isHealthLosing = false;
-                    //GetComponentInChildren<UnitsHealth>().FillHealth(50);
+                    //GetComponentInChildren<UnitsHealth>().isHealthLosing = false;
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 }
 
@@ -341,7 +340,7 @@ public class Unit : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
-            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
+            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId && GetComponentInChildren<UnitsHealth>().isFoodAround)
             {
                 GetComponentInChildren<UnitsHealth>().isFoodAround = false;
                 //StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());

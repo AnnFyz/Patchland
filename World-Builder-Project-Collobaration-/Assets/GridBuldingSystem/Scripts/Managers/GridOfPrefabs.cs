@@ -74,7 +74,6 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
                 //Replace the invalid collection expression with proper array initialization.
                 blockPrefab.blockId = new int[,] { { x, y } };
-                Debug.Log("blockId: " + blockPrefab.blockId[0, 0] + " " + blockPrefab.blockId[0, 1]);
                 blockPrefab.GetComponent<MyGridBuildingSystem>().SetBlockGrid();
                 blockPrefab.blocksAmount = 1;
                 blockPrefab.DeactivateStackOfBlocks();
