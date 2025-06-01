@@ -1,15 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable] 
+public class BlockList
+{
+    public List<GameObject> healthyBlocks = new List<GameObject>();
+    public List<GameObject> deadBlocks = new List<GameObject>();
+}
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] LayerMask blockLayer;
+    public BlockList blockList; // MAKE IT READ ONLY to keep track of healthy and dead blocks
     public AudioClip placedSound;
     public AudioSource audio;
     public static BuildingManager Instance { get; private set; }
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
+    public Material deadBlockMaterial; // TO DO READ ONLY
     public PlacedObjectTypeSO placedObjectTypeSO;
     public PlacedObjectTypeSO lastSelectedObjToPlaceTypeSO;
     public PlacedObjectTypeSO.Dir dir;
@@ -23,6 +32,23 @@ public class BuildingManager : MonoBehaviour
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
     public static bool CanBuildSelected = false;
 
+    public void AddCreateHealtyBlock(GameObject block)
+    {
+        if (!blockList.healthyBlocks.Contains(block))
+        {
+            blockList.healthyBlocks.Add(block);
+        }
+    }
+    public void TransferBlockToDeadList(GameObject block){
+       if(blockList.healthyBlocks.Contains(block))
+        {
+            blockList.healthyBlocks.Remove(block);
+        }
+        if (!blockList.deadBlocks.Contains(block))
+        {
+            blockList.deadBlocks.Add(block);
+        }      
+    }
     private void Awake()
     {
         Instance = this;

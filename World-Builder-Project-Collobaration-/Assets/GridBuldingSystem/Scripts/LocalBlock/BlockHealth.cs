@@ -20,7 +20,7 @@ public class BlockHealth : MonoBehaviour
     BlockPrefab block;
     public bool IsBlockInjuring = false;
     public bool HasDayingColor = false;
-    public bool IsAttacking = false;
+    public bool IsAttacked = false;
     public float ind_Vdif_1;
     public float ind_Sdif_1;
     public float ind_Vdif_2;
@@ -81,6 +81,8 @@ public class BlockHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             IsBlockDead = true;
+            BuildingManager.Instance.TransferBlockToDeadList(this.gameObject);
+            GetComponent<BlockPrefab>().SetStateMaterial(BuildingManager.Instance.deadBlockMaterial);
             gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
             GameManager.Instance.amountOfDeadBlocks++;
             GameManager.Instance.CheckIfAllBlocksAreDead();
@@ -90,7 +92,7 @@ public class BlockHealth : MonoBehaviour
         {
             IsBlockInjuring = true;
             HasDayingColor = false;
-            IsAttacking = true;
+            IsAttacked = true;
         }
 
         ind_Vdif_1 += 0.005f;

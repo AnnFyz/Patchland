@@ -26,7 +26,7 @@ public class ZombiCollector : MonoBehaviour
                 //    Debug.Log("SetDyingColor!!!");
                 //}
                 GetComponentInParent<BlockHealth>().IsBlockInjuring = false;
-                GetComponentInParent<BlockHealth>().IsAttacking = false;
+                GetComponentInParent<BlockHealth>().IsAttacked = false;
                 GetComponentInParent<BlockHealth>().IsBeingDamaged = false;
                 zombi.DestroyZombi();
             }

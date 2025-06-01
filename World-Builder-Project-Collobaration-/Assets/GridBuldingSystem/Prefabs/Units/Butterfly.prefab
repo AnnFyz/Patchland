@@ -5384,7 +5384,6 @@ MonoBehaviour:
   agentVel: 0
   target: {fileID: 0}
   startPoint: {fileID: 0}
-  currentPoint: {fileID: 0}
   waypointsList:
     localOrder: []
   elapsed: 0
@@ -5394,6 +5393,8 @@ MonoBehaviour:
   currentMovemenetState: 0
   currentUnitsState: 0
   isWaypointApproached: 0
+  intersectedWithUnitBlocks:
+    blocks: []
   animator: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &-629676016913631631
@@ -5482,16 +5483,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  occupiedBlockHealth: {fileID: 0}
-  occupiedBlock: {fileID: 0}
+  targetBlockHealth: {fileID: 0}
+  targetBlock: {fileID: 0}
+  isOnTargetBlock: 0
   possibleNextOccupiedBlocks: []
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
-  modelRenderer: {fileID: 2104063565369224189}
+  damageToBlock: 0
+  attackDelay: 0
+  modelRenderers:
+  - {fileID: 3005487593618482775}
+  - {fileID: 1653557632959564593}
+  - {fileID: 7948360524744381612}
   zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
+  zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
   messageFroomZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
@@ -5506,15 +5513,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startValue: 300
+  maxValue: 100
   curretValue: 0
   isFoodAround: 0
   damageToUnit: 0
+  healthToUnit: 0
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
   whenAttacked_Particles: {fileID: 663237409304151850}
   whenDead_Particles: {fileID: 0}
   isAttacked: 0
+  isHealthLosing: 0
 --- !u!82 &5374270308236697826
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5899,8 +5908,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 0.5
+      scalar: 0.5
+      minScalar: 0.025
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10392,7 +10401,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b007d753137a1b44b866d9af7fd014ff, type: 2}
+  - {fileID: 2100000, guid: ff776406f913a4948a9e41a4a6b1c8d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35165,7 +35174,7 @@ Transform:
   m_GameObject: {fileID: 4687464588843334752}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5430389, y: 0.23276234, z: 0.63855034}
+  m_LocalPosition: {x: 0.5430389, y: 3.37, z: 0.63855034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45157,6 +45166,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SCharacter_Butterfly_ (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79c2511799a05394eacdeda576d89295, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45165,6 +45179,12 @@ PrefabInstance:
 --- !u!4 &137923772566678086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 639822573477998345, guid: de49abe230c207b4dbd81a13c1fef310,
+    type: 3}
+  m_PrefabInstance: {fileID: 651645139013698895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1653557632959564593 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
     type: 3}
   m_PrefabInstance: {fileID: 651645139013698895}
   m_PrefabAsset: {fileID: 0}
@@ -45241,12 +45261,6 @@ PrefabInstance:
 --- !u!4 &2073311080187582171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4637222678936992, guid: 22e82e37709fde34fb65a2fd28fbfb05,
-    type: 3}
-  m_PrefabInstance: {fileID: 2077734988684716923}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &2104063565369224189 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137001747131351174, guid: 22e82e37709fde34fb65a2fd28fbfb05,
     type: 3}
   m_PrefabInstance: {fileID: 2077734988684716923}
   m_PrefabAsset: {fileID: 0}
@@ -45328,11 +45342,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SCharacter_Butterfly_
       objectReference: {fileID: 0}
+    - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79c2511799a05394eacdeda576d89295, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de49abe230c207b4dbd81a13c1fef310, type: 3}
+--- !u!137 &3005487593618482775 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
+    type: 3}
+  m_PrefabInstance: {fileID: 3912543063507757097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4516334249823094560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 639822573477998345, guid: de49abe230c207b4dbd81a13c1fef310,
@@ -45417,11 +45442,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SCharacter_Butterfly_ (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 79c2511799a05394eacdeda576d89295, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de49abe230c207b4dbd81a13c1fef310, type: 3}
+--- !u!137 &7948360524744381612 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
+    type: 3}
+  m_PrefabInstance: {fileID: 8194222478316608210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8743354741997417947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 639822573477998345, guid: de49abe230c207b4dbd81a13c1fef310,

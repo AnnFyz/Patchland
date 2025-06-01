@@ -17,8 +17,9 @@ public class Zombi : MonoBehaviour
 {
     public ZombiState currentState;
     Unit unit;
-    public BlockHealth occupiedBlockHealth;
-    public BlockPrefab occupiedBlock;
+    public BlockHealth targetBlockHealth;
+    public BlockPrefab targetBlock;
+    public bool isOnTargetBlock = false; // if zombi is on the target block, it can attack it -> the Attack Coroutine will be started
     [SerializeField] BlockPrefab[] possibleNextOccupiedBlocks;
     private int waypointIndex = 0;
     private float elapsed = 0.0f;
@@ -26,10 +27,12 @@ public class Zombi : MonoBehaviour
     public NavMeshAgent agent;
     public NavMeshPath path;
     public bool isAttacking = false;
-    [SerializeField] Renderer modelRenderer;
+    [SerializeField] float damageToBlock; // how much damage zombi does to the block
+    [SerializeField] float attackDelay; // how much time zombi needs to attack the block again
+    [SerializeField] Renderer[] modelRenderers;
     [SerializeField] Color zombiTopColor = Color.white;
     [SerializeField] Color zombiBottomColor = Color.grey;
-    [SerializeField] Material newMaterial;
+    [SerializeField] Material zombiMaterial;
     public GameObject attacking_Particles;
     [SerializeField] TMP_Text messageFroomZombi;
     int x = 0;
@@ -44,24 +47,30 @@ public class Zombi : MonoBehaviour
         possibleNextOccupiedBlocks = new BlockPrefab[4];
         path = new NavMeshPath();
         attacking_Particles.gameObject.SetActive(false);
+        damageToBlock = unit.unitScriptableObject.damageToBlock;
+        attackDelay = unit.unitScriptableObject.attackDelay;
     }
     public void HandleZombiTransformation()
     {
-        modelRenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), zombiTopColor);
-        modelRenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), zombiBottomColor);
-        if(newMaterial != null)
+        //modelRenderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), zombiTopColor);
+        //modelRenderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), zombiBottomColor);
+        if (zombiMaterial != null)
         {
-            ChangeMaterial(newMaterial);
+            ChangeMaterial(zombiMaterial);
         }
 
     }
 
     void ChangeMaterial(Material newMat)
     {
-        Renderer[] oldMat;
-        oldMat = modelRenderer.GetComponentsInChildren<Renderer>();
+        Renderer[] oldMat = new Renderer[modelRenderers.Length];
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            oldMat[i] = modelRenderers[i];
+        }
+        // Change the material of all renderers to the new material
         foreach (Renderer rend in oldMat)
-         {
+        {
             var mats = new Material[rend.materials.Length];
             for (var j = 0; j < rend.materials.Length; j++)
             {
@@ -73,29 +82,29 @@ public class Zombi : MonoBehaviour
     private void FixedUpdate()
     {
         HandleZombiMovement();
-        if (currentState == ZombiState.FindAnotherBlock && unit.currentUnitsState == UnitsState.Zombi)
-        {
-            MoveToNextNeighbourAliveBlock();
-        }
-        if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
-        {
-            occupiedBlockHealth.IsBeingDamaged = false;
-            if (occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
-            {
-                currentState = ZombiState.FindAnotherBlock;
-                FindNeighboursBlocks();
-            }
-        }
+        //if (currentState == ZombiState.FindAnotherBlock && unit.currentUnitsState == UnitsState.Zombi)
+        //{
+        //    MoveToNextNeighbourAliveBlock();
+        //}
+        //if (occupiedBlockHealth != null && occupiedBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
+        //{
+        //    occupiedBlockHealth.IsBeingDamaged = false;
+        //    if (occupiedBlockHealth.currentHealth <= 0 && !isAttacking)
+        //    {
+        //        currentState = ZombiState.FindAnotherBlock;
+        //        LocateNearestBlock();
+        //    }
+        //}
     }
 
     public void HandleZombiMovement()
     {
-        if (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null && !occupiedBlockHealth.IsBlockDead)
+        if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead) //currentState == ZombiState.AttackBlock  && 
         {
             // Update the way to the goal every second.
             elapsed += Time.deltaTime;
             IterateWaypointIndex();
-            target = occupiedBlockHealth.generatedWaypoints[waypointIndex];
+            target = targetBlockHealth.generatedWaypoints[waypointIndex];
             if (target != null)
             {
                 if (elapsed > 2f)
@@ -108,7 +117,8 @@ public class Zombi : MonoBehaviour
                     }
                     else
                     {
-                        IterateWaypointIndex();
+                        DestroyZombi();
+                        //IterateWaypointIndex();
                     }
                 }
             }
@@ -119,139 +129,199 @@ public class Zombi : MonoBehaviour
     void IterateWaypointIndex()
     {
         waypointIndex++;
-        if (waypointIndex == occupiedBlockHealth.generatedWaypoints.Length)
+        if (waypointIndex == targetBlockHealth.generatedWaypoints.Length)
         {
             waypointIndex = 0;
         }
     }
 
-    public void SetOccupiedBlock(Collider other)
+    public void SetOccupiedBlock(Collider block) //
     {
-        if (other.GetComponentInParent<BlockHealth>()) 
-        {          
-            if (currentState != ZombiState.None && occupiedBlockHealth.currentHealth <= 0)  //reaasign occupied block only if the current one is dead
-            {
-                occupiedBlockHealth = other.GetComponentInParent<BlockHealth>();
-                occupiedBlock = occupiedBlockHealth.GetComponent<BlockPrefab>();
-            }
+        if (currentState != ZombiState.None) {
+            targetBlockHealth = block.GetComponentInParent<BlockHealth>();
+            targetBlock = targetBlockHealth.GetComponent<BlockPrefab>();
         }
+
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        SetOccupiedBlock(other);
+        if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && !isOnTargetBlock)
+        {
+            isOnTargetBlock = true;
+            Debug.Log("OnTriggerEnter " + other.gameObject.name);
+            //SetOccupiedBlock(other);
+            if (currentState == ZombiState.FindAnotherBlock)
+            {
+                currentState = ZombiState.AttackBlock;
+                StartCoroutine(AttackBlock());
+                //if (!isAttacking)
+                //{
+                //    isAttacking = true;
+                //    StartCoroutine(AttackBlock());
+                //}
+
+            }
+        }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        SetOccupiedBlock(other);
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    SetOccupiedBlock(other);
+    //}
     public IEnumerator AttackBlock()
     {
-        while (currentState == ZombiState.AttackBlock && occupiedBlockHealth != null)
+        Debug.Log("Start Coroutine AttackBlock");
+        while (currentState == ZombiState.AttackBlock && targetBlockHealth != null)
         {
-            if (occupiedBlockHealth.currentHealth > 0)
+            if (targetBlockHealth.currentHealth > 0)
             {
                 isAttacking = true;
-                occupiedBlockHealth.Damage(0.5f);
-                occupiedBlockHealth.IsBeingDamaged = true;
-                yield return new WaitForSeconds(0.1f);
+                targetBlockHealth.Damage(damageToBlock);
+                targetBlockHealth.IsBeingDamaged = true;
+                //Debug.Log("ATTACKIN BLOCK " + occupiedBlockHealth.gameObject.name);
+                yield return new WaitForSeconds(attackDelay);
             }
             else
             {
                 isAttacking = false;
-                occupiedBlockHealth.IsBeingDamaged = false;
-                break;
+                targetBlockHealth.IsBeingDamaged = false;
+                waypointIndex = 0;
+                Debug.Log("MoveToNextNeighbourAliveBlock");
+                MoveToNextNeighbourAliveBlock();
+
+                yield break;
             }
         }
+        yield return new WaitForSeconds(0);
     }
 
-    void FindNeighboursBlocks()
-    {
-   
-        waypointIndex = 0;
-        for (int x = 0; x < GridOfPrefabs.Instance.width; x++)
-        {
-            for (int y = 0; y < GridOfPrefabs.Instance.height; y++)
-            {
-                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y).GetPlacedObject().Equals(occupiedBlock))
-                {
-                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject() != null)
-                    {
-                        possibleNextOccupiedBlocks[0] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject();
-                    }
+    //void FindNeighboursBlocks()
+    //{
 
-                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject() != null)
-                    {
-                        possibleNextOccupiedBlocks[1] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject();
-                    }
-                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject() != null)
-                    {
-                        possibleNextOccupiedBlocks[2] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject();
-                    }
-                    if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject() != null)
-                    {
-                        possibleNextOccupiedBlocks[3] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject();
-                    }
+    //    waypointIndex = 0;
+    //    for (int x = 0; x < GridOfPrefabs.Instance.width; x++)
+    //    {
+    //        for (int y = 0; y < GridOfPrefabs.Instance.height; y++)
+    //        {
+    //            if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y).GetPlacedObject().Equals(occupiedBlock))
+    //            {
+    //                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject() != null)
+    //                {
+    //                    possibleNextOccupiedBlocks[0] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x - 1, y).GetPlacedObject();
+    //                }
+
+    //                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject() != null)
+    //                {
+    //                    possibleNextOccupiedBlocks[1] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x + 1, y).GetPlacedObject();
+    //                }
+    //                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject() != null)
+    //                {
+    //                    possibleNextOccupiedBlocks[2] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y - 1).GetPlacedObject();
+    //                }
+    //                if (GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1) != null && GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject() != null)
+    //                {
+    //                    possibleNextOccupiedBlocks[3] = GridOfPrefabs.Instance.globalGrid.GetGridObject(x, y + 1).GetPlacedObject();
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //}
+    void LocateNearestBlock()
+    {
+        float nearestDistance = Mathf.Infinity;
+
+        if (BuildingManager.Instance.blockList != null)
+        {
+            foreach (GameObject block in BuildingManager.Instance.blockList.healthyBlocks)
+            {
+                float distance = (block.transform.position - transform.position).sqrMagnitude;
+
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    targetBlock = block.GetComponent<BlockPrefab>();
+                    targetBlockHealth = block.GetComponent<BlockHealth>();
+                    //StopCoroutine(AttackBlock());
                 }
             }
         }
-
+        else
+        {
+            Debug.LogWarning("Target objects list is empty.");
+        }
     }
-
-
     void MoveToNextNeighbourAliveBlock()
     {
-      
-        for (int i = 0; i < possibleNextOccupiedBlocks.Length; i++)
+        if (targetBlockHealth != null && targetBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
         {
-            if (possibleNextOccupiedBlocks[i] != null)
+            targetBlockHealth.IsBeingDamaged = false;
+            if (targetBlockHealth.currentHealth <= 0 && !isAttacking)
             {
-                Transform newTarget = possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().generatedWaypoints[1];
-                if (agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
+                currentState = ZombiState.FindAnotherBlock;
+                isOnTargetBlock = false;
+                LocateNearestBlock();
+                if(!isAttacking)
                 {
-                  
-                        Debug.Log("PATH WAS CALCULATED"); // WHY IT WAS CALLED SO MANY TIMES????
-                        currentState = ZombiState.AttackBlock;
-                        agent.SetDestination(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z));
-                        StartCoroutine(AttackBlock());
-                        break;
-                }
-                else if (i == possibleNextOccupiedBlocks.Length -1 && !agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
-                {
-                    DestroyZombi();
-                }
-                else
-                {
-                    x++;
-                    Debug.Log("THERE ARE NO WAY");
-                    if (x > 2000)
-                    {
-                        DestroyZombi();
-                    }
-                    else
-                    {
-                        continue;
-                    }
-
-                }
-            }
-            else
-            {
-                x++;
-                Debug.Log("Block IS NULL");
-                if (x > 2000)
-                {
-                    DestroyZombi();
-                }
-                else
-                {
-                    continue;
+                    isAttacking = true;
+                    //StartCoroutine(AttackBlock());
                 }
             }
         }
     }
+    //void MoveToNextNeighbourAliveBlock()
+    //{
+
+    //    for (int i = 0; i < possibleNextOccupiedBlocks.Length; i++)
+    //    {
+    //        if (possibleNextOccupiedBlocks[i] != null)
+    //        {
+    //            Transform newTarget = possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().generatedWaypoints[1];
+    //            if (agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
+    //            {
+
+    //                    Debug.Log("PATH WAS CALCULATED"); // WHY IT WAS CALLED SO MANY TIMES????
+    //                    currentState = ZombiState.AttackBlock;
+    //                    agent.SetDestination(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z));
+    //                    StartCoroutine(AttackBlock());
+    //                    break;
+    //            }
+    //            else if (i == possibleNextOccupiedBlocks.Length -1 && !agent.CalculatePath(new Vector3(newTarget.transform.position.x, transform.position.y, newTarget.transform.position.z), path) && !(possibleNextOccupiedBlocks[i].GetComponent<BlockHealth>().IsBlockDead))
+    //            {
+    //                DestroyZombi();
+    //            }
+    //            else
+    //            {
+    //                x++;
+    //                Debug.Log("THERE ARE NO WAY");
+    //                if (x > 2000)
+    //                {
+    //                    DestroyZombi();
+    //                }
+    //                else
+    //                {
+    //                    continue;
+    //                }
+
+    //            }
+    //        }
+    //        else
+    //        {
+    //            x++;
+    //            Debug.Log("Block is Dead");
+    //            if (x > 2000)
+    //            {
+    //                DestroyZombi();
+    //            }
+    //            else
+    //            {
+    //                continue;
+    //            }
+    //        }
+    //    }
+    //}
 
     public void DestroyZombi()
     {
@@ -264,5 +334,5 @@ public class Zombi : MonoBehaviour
         particles.Play();
         Destroy(gameObject);
     }
-    
+
 }

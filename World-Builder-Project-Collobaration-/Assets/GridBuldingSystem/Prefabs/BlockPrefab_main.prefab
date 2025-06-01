@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 8877595191525507116}
   - component: {fileID: 5950601933551546208}
   - component: {fileID: -6742777137344980617}
+  - component: {fileID: 829423309997462573}
   m_Layer: 6
   m_Name: BlockPrefab_main
   m_TagString: Untagged
@@ -615,6 +616,7 @@ MonoBehaviour:
   maxAmount: 12
   minAmount: 1
   blockStack:
+  - {fileID: 4308860962922737378}
   - {fileID: 7716076749862706851}
   - {fileID: 7538964074259859533}
   - {fileID: 5174776419108865403}
@@ -690,8 +692,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 383
-  unitPrefab: {fileID: 2675644380505310728, guid: 660428be2dc14244db2002b148112250,
-    type: 3}
   numberOfUnits: 1
   levelState: 0
 --- !u!114 &8877595191525507116
@@ -721,7 +721,7 @@ MonoBehaviour:
   V_2: 0
   IsBlockInjuring: 0
   HasDayingColor: 0
-  IsAttacking: 0
+  IsAttacked: 0
   ind_Vdif_1: 0
   ind_Sdif_1: 0
   ind_Vdif_2: 0
@@ -760,6 +760,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &829423309997462573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.138105, y: 9.788349, z: 15.048822}
+  m_Center: {x: -0.0856266, y: 3.8941736, z: -0.09965706}
 --- !u!1 &6588940745294565027
 GameObject:
   m_ObjectHideFlags: 0

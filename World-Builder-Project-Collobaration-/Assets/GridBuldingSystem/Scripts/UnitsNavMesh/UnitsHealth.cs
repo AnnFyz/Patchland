@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public enum UIState
 {
@@ -40,6 +41,8 @@ public class UnitsHealth : MonoBehaviour
         healthToUnit = unit.unitScriptableObject.healthPointsFromFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
     }
+
+   
 
     void SwitchUIState()
     {
@@ -176,8 +179,6 @@ public class UnitsHealth : MonoBehaviour
     }
     public void LoseHealth()
     {
-        //if (isFoodAround)
-        //    return;
         StartCoroutine(SubstractHealthGradually());
         if (curretValue <= 0)
         {
@@ -191,14 +192,22 @@ public class UnitsHealth : MonoBehaviour
 
     IEnumerator SubstractHealthGradually()
     {
-        while (curretValue >= 0 && !isFoodAround)
+        while (curretValue > 0 && !isFoodAround)
         {
-            Debug.Log("SubstractHealthGradually");
             curretValue -= damageToUnit;
             curretValue = Mathf.Clamp(curretValue, 0, maxValue);
             CheckUIState();
             yield return new WaitForSeconds(1f);
-        } 
+        }
+        if (curretValue <= 0)
+        {
+            unit.currentUnitsState = UnitsState.Dead; 
+            if (unit.currentUnitsState != UnitsState.Zombi)
+            {
+                OnUnitDeath?.Invoke();
+            }
+        }
+        CheckUIState();
     }
     //public void FillHealth(float value)
     //{
@@ -217,12 +226,13 @@ public class UnitsHealth : MonoBehaviour
             CheckUIState();
             yield return new WaitForSeconds(1f);
         }
+        CheckUIState();
 
     }
 
     private void OnCollisionStay(Collision other)
     {
-
+        if (unit.currentUnitsState == UnitsState.Zombi) { return; }
         if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
         {
             Debug.Log("ANOTHER UNIT");
@@ -262,6 +272,7 @@ public class UnitsHealth : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
+        if (unit.currentUnitsState == UnitsState.Zombi) { return; }
         if (other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
 
         {

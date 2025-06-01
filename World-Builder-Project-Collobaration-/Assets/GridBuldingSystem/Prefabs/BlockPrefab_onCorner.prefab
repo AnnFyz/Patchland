@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 8095457313609203249}
   - component: {fileID: 7450040506915623779}
   - component: {fileID: 5631865040396593832}
+  - component: {fileID: 6123430626304202518}
   m_Layer: 6
   m_Name: BlockPrefab_onCorner
   m_TagString: Untagged
@@ -633,6 +634,7 @@ MonoBehaviour:
   maxAmount: 12
   minAmount: 1
   blockStack:
+  - {fileID: 6952173462082135868}
   - {fileID: 6892382086517036291}
   - {fileID: 6815732802434565394}
   - {fileID: 4130034401508776522}
@@ -737,7 +739,7 @@ MonoBehaviour:
   V_2: 0
   IsBlockInjuring: 0
   HasDayingColor: 0
-  IsAttacking: 0
+  IsAttacked: 0
   ind_Vdif_1: 0
   ind_Sdif_1: 0
   ind_Vdif_2: 0
@@ -776,6 +778,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &6123430626304202518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541634431918291856}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.138105, y: 9.788349, z: 15.048822}
+  m_Center: {x: -0.0856266, y: 3.8941736, z: -0.09965706}
 --- !u!1 &6638292260408872654
 GameObject:
   m_ObjectHideFlags: 0

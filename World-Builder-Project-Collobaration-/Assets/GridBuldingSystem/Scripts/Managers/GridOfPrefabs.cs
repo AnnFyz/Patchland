@@ -72,6 +72,7 @@ public class GridOfPrefabs : MonoBehaviour
                     prefabRotation = Quaternion.identity;
                 }
                 BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
+                BuildingManager.Instance.AddCreateHealtyBlock(blockPrefab.gameObject);
                 //Replace the invalid collection expression with proper array initialization.
                 blockPrefab.blockId = new int[,] { { x, y } };
                 blockPrefab.GetComponent<MyGridBuildingSystem>().SetBlockGrid();

@@ -42,7 +42,13 @@ public class BlockPrefab : MonoBehaviour
     private void Start()
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
-        renderers = GetComponentsInChildren<Renderer>();
+        renderers = new Renderer[blockStack.Length];
+        //renderers[0] = GetComponent<Renderer>();
+        for (int i = 0; i < blockStack.Length; i++)
+        {
+            renderers[i] = blockStack[i].GetComponent<Renderer>();
+        }
+        //renderers = GetComponentsInChildren<Renderer>();
         foreach (var renderer in renderers)
         {
             if (renderer.material.HasColor("_BaseColor"))
