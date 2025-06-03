@@ -170,6 +170,7 @@ public class Unit : MonoBehaviour
                     dist = newDist;
                     zombi.targetBlockHealth = block.GetComponentInParent<BlockHealth>();
                     zombi.targetBlock = block;
+                    block.GetComponent<ZombiCollector>().CollectZombi(zombi);
                 }
             }
         }

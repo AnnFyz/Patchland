@@ -2,9 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ZombiList
+{
+    public List<Zombi> zombis = new List<Zombi>();
+    public void AddZombi(Zombi zombi)
+    {
+        if (!zombis.Contains(zombi))
+        {
+            zombis.Add(zombi);
+        }
+    }
+    public void RemoveZombi(Zombi zombi)
+    {
+        if (zombis.Contains(zombi))
+        {
+            zombis.Remove(zombi);
+        }
+    }
+    public void Clear()
+    {
+        zombis.Clear();
+    }
+}
 public class ZombiCollector : MonoBehaviour
 {
-    List<Zombi> zombisOnTheBlock = new List<Zombi>();
+    [SerializeField] ZombiList zombisOnTheBlock;
     LocalLevelState levelState;
     private void Awake()
     {
@@ -16,7 +39,7 @@ public class ZombiCollector : MonoBehaviour
     }
     public void DestroyZombi()
     {
-        foreach (Zombi zombi in zombisOnTheBlock)
+        foreach (Zombi zombi in zombisOnTheBlock.zombis)
         {
             if (zombi != null)
             {
@@ -32,50 +55,24 @@ public class ZombiCollector : MonoBehaviour
             }
         }
     }
-    void CollectZombi(Collider other)
+    public void CollectZombi(Zombi zombi)
     {
-        Zombi zombi;
-        if (other.GetComponentInParent<Zombi>())
+        if (zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
         {
-            zombi = other.GetComponentInParent<Zombi>();
-            if (!zombisOnTheBlock.Contains(zombi))
-            {
-                if (zombi.currentState != ZombiState.None)
-                {
-                    zombisOnTheBlock.Add(zombi);
-                    Debug.Log("ADD Zombi");
-                }
-            }
+            zombisOnTheBlock.AddZombi(zombi);
+            Debug.Log("ADD Zombi");
+        }
+
+    }
+
+    public void RemoveZombiFromTheList(Zombi zombi)
+    {
+
+        if (zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
+        {
+            zombisOnTheBlock.RemoveZombi(zombi);
+            Debug.Log("REMOVE Zombi");
         }
     }
 
-    void RemoveZombiFromTheList(Collider other)
-    {
-        Zombi zombi;
-        if (other.GetComponentInParent<Zombi>())
-        {
-            zombi = other.GetComponentInParent<Zombi>();
-            if (zombisOnTheBlock.Contains(zombi))
-            {
-                if (zombi.currentState != ZombiState.None)
-                {
-                    zombisOnTheBlock.Remove(zombi);
-                    Debug.Log("REMOVE Zombi");
-                }
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        CollectZombi(other);
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        CollectZombi(other);
-    }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    RemoveZombiFromTheList(other);
-    //}
 }

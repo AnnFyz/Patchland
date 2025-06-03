@@ -111,16 +111,21 @@ public class Zombi : MonoBehaviour
                 {
                     elapsed -= 2f;
                     agent.SetDestination(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-                    if (Vector3.Distance(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), target.transform.position) < 10f)
+                    if (Vector3.Distance(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), target.transform.position) < 3f)
                     {
-                        HandleZombiMovement();
+                        IterateWaypointIndex();
                     }
-                    else
-                    {
-                        DestroyZombi();
-                        //IterateWaypointIndex();
-                    }
+                    //else
+                    //{
+                    //    DestroyZombi();
+                    //    //IterateWaypointIndex();
+                    //}
                 }
+            }
+            else
+            {
+                Debug.Log("Target is null, zombi will be destroyed");
+                DestroyZombi();
             }
 
         }
@@ -150,7 +155,8 @@ public class Zombi : MonoBehaviour
         if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && !isOnTargetBlock)
         {
             isOnTargetBlock = true;
-            Debug.Log("OnTriggerEnter " + other.gameObject.name);
+
+            //Debug.Log("OnTriggerEnter " + other.gameObject.name);
             //SetOccupiedBlock(other);
             if (currentState == ZombiState.FindAnotherBlock)
             {
@@ -163,6 +169,17 @@ public class Zombi : MonoBehaviour
                 //}
 
             }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && isOnTargetBlock)
+        {
+            //isOnTargetBlock = false;
+            other.GetComponent<ZombiCollector>().RemoveZombiFromTheList(this);
+            Debug.Log("RemoveZombiFromTheList " + this.gameObject.name);
+
         }
     }
 

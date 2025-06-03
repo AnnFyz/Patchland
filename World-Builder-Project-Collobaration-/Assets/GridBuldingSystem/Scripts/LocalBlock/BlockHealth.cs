@@ -81,7 +81,7 @@ public class BlockHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             IsBlockDead = true;
-            BuildingManager.Instance.TransferBlockToDeadList(this.gameObject);
+            BuildingManager.Instance.blockList.TransferBlockToDeadList(this.gameObject);
             GetComponent<BlockPrefab>().SetStateMaterial(BuildingManager.Instance.deadBlockMaterial);
             gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
             GameManager.Instance.amountOfDeadBlocks++;

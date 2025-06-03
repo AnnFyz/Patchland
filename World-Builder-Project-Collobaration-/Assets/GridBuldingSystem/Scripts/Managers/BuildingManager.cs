@@ -3,12 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 [Serializable] 
 public class BlockList
 {
     public List<GameObject> healthyBlocks = new List<GameObject>();
     public List<GameObject> deadBlocks = new List<GameObject>();
+
+    public void AddCreatedHealtyBlock(GameObject block)
+    {
+        if (!healthyBlocks.Contains(block))
+        {
+            healthyBlocks.Add(block);
+        }
+    }
+    public void TransferBlockToDeadList(GameObject block)
+    {
+        if (healthyBlocks.Contains(block))
+        {
+            healthyBlocks.Remove(block);
+        }
+        if (!deadBlocks.Contains(block))
+        {
+            deadBlocks.Add(block);
+        }
+    }
 }
 public class BuildingManager : MonoBehaviour
 {
@@ -31,24 +51,6 @@ public class BuildingManager : MonoBehaviour
     List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
     public static bool CanBuildSelected = false;
-
-    public void AddCreateHealtyBlock(GameObject block)
-    {
-        if (!blockList.healthyBlocks.Contains(block))
-        {
-            blockList.healthyBlocks.Add(block);
-        }
-    }
-    public void TransferBlockToDeadList(GameObject block){
-       if(blockList.healthyBlocks.Contains(block))
-        {
-            blockList.healthyBlocks.Remove(block);
-        }
-        if (!blockList.deadBlocks.Contains(block))
-        {
-            blockList.deadBlocks.Add(block);
-        }      
-    }
     private void Awake()
     {
         Instance = this;
