@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using static Unity.Collections.AllocatorManager;
 public enum UnitsMovementState
 {
     Autopilot,
@@ -54,7 +55,8 @@ public class Unit : MonoBehaviour
     public bool isWaypointApproached = false;
     BlockHealth occupiedBlockHealth;
     Zombi zombi;
-    [SerializeField] BlocksList intersectedWithUnitBlocks = new BlocksList();
+    [SerializeField] BlockPrefab intersectedWithUnitBlock;
+    //[SerializeField] BlocksList intersectedWithUnitBlocks = new BlocksList();
     //List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
     [SerializeField] Animator animator;
     public AudioSource audioSource;
@@ -144,6 +146,7 @@ public class Unit : MonoBehaviour
             currentUnitsState = UnitsState.Zombi;
             SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
+            intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
             Debug.Log("UseChanceToBecomeZombi");
@@ -162,17 +165,16 @@ public class Unit : MonoBehaviour
         float dist = Mathf.Infinity;
         if (zombi.currentState == ZombiState.None) // first assignment
         {
-            foreach (var block in intersectedWithUnitBlocks.blocks)
-            {
-                float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, block.transform.position + block.transform.position * 0.5f);
+            //foreach (var block in intersectedWithUnitBlocks.blocks)
+            //{
+                float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, intersectedWithUnitBlock.transform.position + intersectedWithUnitBlock.transform.position * 0.5f);
                 if (newDist < dist)
                 {
                     dist = newDist;
-                    zombi.targetBlockHealth = block.GetComponentInParent<BlockHealth>();
-                    zombi.targetBlock = block;
-                    block.GetComponent<ZombiCollector>().CollectZombi(zombi);
+                    zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
+                    zombi.targetBlock = intersectedWithUnitBlock;
                 }
-            }
+           // }
         }
     }
     void CheckBlock(Collider other)
@@ -181,11 +183,12 @@ public class Unit : MonoBehaviour
         if (other.GetComponentInParent<BlockPrefab>())
         {
             block = other.GetComponentInParent<BlockPrefab>();
-            if (!intersectedWithUnitBlocks.blocks.Contains(block))
-            {
-                intersectedWithUnitBlocks.blocks.Add(block);
+            intersectedWithUnitBlock = block;
+            //if (!intersectedWithUnitBlocks.blocks.Contains(block))
+            //{
+            //    intersectedWithUnitBlocks.blocks.Add(block);
 
-            }
+            //}
         }
     }
     void DestroyUnit()
@@ -329,6 +332,7 @@ public class Unit : MonoBehaviour
                     GetComponentInChildren<UnitsHealth>().isFoodAround = true;
                     //GetComponentInChildren<UnitsHealth>().isHealthLosing = false;
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+
                 }
 
             }

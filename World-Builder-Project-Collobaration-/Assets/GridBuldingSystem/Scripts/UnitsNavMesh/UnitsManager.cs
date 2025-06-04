@@ -25,7 +25,11 @@ public class UnitsManager : MonoBehaviour
     public List<int> amountOfUnits;
     private void Awake()
     {
-        Instance = this;
+        // Singleton pattern to ensure only one instance of UnitsManager exists
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
     }
     private void OnEnable()
     {

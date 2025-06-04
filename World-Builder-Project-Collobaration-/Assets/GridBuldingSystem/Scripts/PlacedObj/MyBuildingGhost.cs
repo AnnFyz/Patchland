@@ -50,7 +50,7 @@ public class MyBuildingGhost : MonoBehaviour
 
         if (placedObjectTypeSO != null)
         {
-            visual = Instantiate(placedObjectTypeSO.visual, Vector3.zero, Quaternion.identity);
+            visual = Instantiate(placedObjectTypeSO.visualForGhostPlacedObject, Vector3.zero, Quaternion.identity);
             visual.parent = transform;
             //visual.localPosition = GhostBildingPosition();
             //float newGhostBuldingsPos = (visual.localPosition.y * BuildingManager.blockPrefab.GetNewHeight() * BuildingManager.blockPrefab.GetStartScale() * -1f - visual.localScale.y) - BuildingManager.blockPrefab.GetStartScale();

@@ -26,7 +26,12 @@ public class GridOfPrefabs : MonoBehaviour
     public NavMeshSurface[] horizontalSurfaces; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
     private void Awake()
     {
-        Instance = this;
+        // Singleton pattern to ensure only one instance of GridOfPrefabs exists
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
+
         horizontalSurfaces = GetComponents<NavMeshSurface>();
     }
     private void OnEnable()

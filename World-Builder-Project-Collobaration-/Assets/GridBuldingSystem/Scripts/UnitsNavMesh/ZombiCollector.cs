@@ -35,24 +35,17 @@ public class ZombiCollector : MonoBehaviour
     }
     private void OnEnable()
     {
-        levelState.OnChangedState += DestroyZombi;
+        levelState.OnChangedState += RemoveAllZombis;
     }
-    public void DestroyZombi()
+    public void RemoveAllZombis()
     {
-        foreach (Zombi zombi in zombisOnTheBlock.zombis)
+        GetComponentInParent<BlockHealth>().IsBlockInjuring = false;
+        GetComponentInParent<BlockHealth>().IsAttacked = false;
+        GetComponentInParent<BlockHealth>().IsBeingDamaged = false;
+        for (int i = zombisOnTheBlock.zombis.Count - 1; i >= 0; i--)
         {
-            if (zombi != null)
-            {
-                //if (GetComponentInParent<BlockHealth>().IsBlockInjuring)
-                //{
-                //    GetComponentInParent<BlockHealth>().SetDyingColor();
-                //    Debug.Log("SetDyingColor!!!");
-                //}
-                GetComponentInParent<BlockHealth>().IsBlockInjuring = false;
-                GetComponentInParent<BlockHealth>().IsAttacked = false;
-                GetComponentInParent<BlockHealth>().IsBeingDamaged = false;
-                zombi.DestroyZombi();
-            }
+            zombisOnTheBlock.zombis[i].DestroyZombi(); // Destroy the zombi object
+            zombisOnTheBlock.zombis.RemoveAt(i);
         }
     }
     public void CollectZombi(Zombi zombi)
@@ -67,7 +60,6 @@ public class ZombiCollector : MonoBehaviour
 
     public void RemoveZombiFromTheList(Zombi zombi)
     {
-
         if (zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
         {
             zombisOnTheBlock.RemoveZombi(zombi);

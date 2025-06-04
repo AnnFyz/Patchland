@@ -155,7 +155,7 @@ public class Zombi : MonoBehaviour
         if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && !isOnTargetBlock)
         {
             isOnTargetBlock = true;
-
+            other.GetComponent<ZombiCollector>().CollectZombi(this);
             //Debug.Log("OnTriggerEnter " + other.gameObject.name);
             //SetOccupiedBlock(other);
             if (currentState == ZombiState.FindAnotherBlock)
@@ -177,7 +177,7 @@ public class Zombi : MonoBehaviour
         if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && isOnTargetBlock)
         {
             //isOnTargetBlock = false;
-            other.GetComponent<ZombiCollector>().RemoveZombiFromTheList(this);
+            //other.GetComponent<ZombiCollector>().RemoveZombiFromTheList(this);
             Debug.Log("RemoveZombiFromTheList " + this.gameObject.name);
 
         }

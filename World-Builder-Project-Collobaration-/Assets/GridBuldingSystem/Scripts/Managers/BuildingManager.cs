@@ -53,7 +53,12 @@ public class BuildingManager : MonoBehaviour
     public static bool CanBuildSelected = false;
     private void Awake()
     {
-        Instance = this;
+        // Singleton pattern to ensure only one instance of BuildingManager exists
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
+
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
         audio = GetComponent<AudioSource>();
     }

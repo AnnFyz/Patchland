@@ -22,13 +22,29 @@ public class PlacedObjectTypeSO : ScriptableObject {
         Right,
     }
 
-    public string nameString;
-    public Transform prefab;
-    public Transform visual;
+    public enum PlacedObjectType
+    {
+        WaterLily,
+        Bush,
+        Mushroom,
+        Tree_1,
+        Tree_2,
+        Tree_3
+
+    }
+
+    [Header("General")] 
+    public PlacedObjectType placedObject;
+    public int placedObjId;
+    public Transform placedObjectPrefab;
+    public Transform visualForGhostPlacedObject;
+    public Material materialForDeadObj;
+    [Header("Grid Size")] 
     public int width;
     public int height;
-    public int placedObjId;
-    public Material materialForDeadObj;
+    [Header("Unit Creation")] 
+    public Transform unitToCreate;
+    public int amountOfUnitsToCreate;
 
     public int GetRotationAngle(Dir dir) {
         switch (dir) {

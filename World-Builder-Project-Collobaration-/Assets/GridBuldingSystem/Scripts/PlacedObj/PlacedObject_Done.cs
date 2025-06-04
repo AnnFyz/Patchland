@@ -8,10 +8,10 @@ public class PlacedObject_Done : MonoBehaviour {
    static Transform visual;
    public Action onDestroyedPlacedObject;
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO) {
-        Transform placedObjectTransform = Instantiate(placedObjectTypeSO.prefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
+        Transform placedObjectTransform = Instantiate(placedObjectTypeSO.placedObjectPrefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
         placedObject.Setup(placedObjectTypeSO, origin, dir);
-        visual = placedObjectTypeSO.visual;
+        visual = placedObjectTypeSO.visualForGhostPlacedObject;
         return placedObject;
     }
 
@@ -36,11 +36,6 @@ public class PlacedObject_Done : MonoBehaviour {
     public void DestroySelf() {
         onDestroyedPlacedObject?.Invoke();
         Destroy(gameObject);
-    }
-
-    public override string ToString()
-    {
-        return placedObjectTypeSO.nameString;
     }
 
     public void ChangeMaterialOfObject()
