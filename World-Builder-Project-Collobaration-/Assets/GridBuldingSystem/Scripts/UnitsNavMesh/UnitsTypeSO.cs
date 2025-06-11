@@ -6,6 +6,10 @@ using UnityEngine.AI;
 [CreateAssetMenu()] //fileName = "Unit Configuration", menuName = "ScriptableObject/Unit Configuration")]
 public class UnitsTypeSO : ScriptableObject
 {
+    [Header("Generall Settings")]
+
+    // To controll max Units in PlacedObjectTypeSO
+    public int maxUnits = 3; // max number of units that can be spawned for this type of unit
     [Header("Health Settings")]
     public int unitId;
     public float damageToUnitWithoutFood = 1f;
