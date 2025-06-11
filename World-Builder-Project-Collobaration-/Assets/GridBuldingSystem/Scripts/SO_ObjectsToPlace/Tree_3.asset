@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: Tree_3
   m_EditorClassIdentifier: 
-  placedObject: 0
+  placedObject: 5
   placedObjId: 5
-  placedObjectPrefab: {fileID: 0}
-  visualForGhostPlacedObject: {fileID: 0}
+  placedObjectPrefab: {fileID: 2608708882569115102, guid: c376908af8746164d94b7bb417d55f89,
+    type: 3}
+  visualForGhostPlacedObject: {fileID: 1596457177620258293, guid: 5f3972d6cd9ed684c8a00451e937b49a,
+    type: 3}
   materialForDeadObj: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
+  maxAmountOPlacedObjects: 4
   width: 1
   height: 1
   unitToCreate: {fileID: 2675644380505310733, guid: 91c22208e2dc9774bbfaf188537c9a50,
     type: 3}
-  amountOfUnitsToCreate: 5
+  maxAmountOfUnits: 2

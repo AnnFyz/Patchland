@@ -75,9 +75,14 @@ public class BuildingManager : MonoBehaviour
 
 
     }
-    public void DestroySurplusPlacedObjects()
+    public void DestroySurplusPlacedObjects( PlacedObjectTypeSO objectToPlace)
     {
-        if (placedObjects[0].Count >= 5)
+        //if(objectToPlace == null) return;
+        //if (placedObjects[placedObjectId] >= objectToPlace.maxAmountOPlacedObjects)
+        //{
+
+        //}
+        if (placedObjects[0].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
@@ -89,7 +94,7 @@ public class BuildingManager : MonoBehaviour
             placedObjects[0].RemoveAt(0);
         }
 
-        if (placedObjects[1].Count >= 4)
+        if (placedObjects[1].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
@@ -101,7 +106,7 @@ public class BuildingManager : MonoBehaviour
             placedObjects[1].RemoveAt(0);
         }
 
-        if (placedObjects[2].Count >= 3)
+        if (placedObjects[2].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
@@ -113,7 +118,7 @@ public class BuildingManager : MonoBehaviour
             placedObjects[2].RemoveAt(0);
         }
 
-        if (placedObjects[3].Count >= 5)
+        if (placedObjects[3].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
@@ -124,7 +129,7 @@ public class BuildingManager : MonoBehaviour
             placedObjects[3][0].DestroySelf();
             placedObjects[3].RemoveAt(0);
         }
-        if (placedObjects[4].Count >= 5)
+        if (placedObjects[4].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
@@ -135,7 +140,7 @@ public class BuildingManager : MonoBehaviour
             placedObjects[4][0].DestroySelf();
             placedObjects[3].RemoveAt(0);
         }
-        if (placedObjects[5].Count >= 5)
+        if (placedObjects[5].Count > objectToPlace.maxAmountOPlacedObjects)
         {
 
             if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))

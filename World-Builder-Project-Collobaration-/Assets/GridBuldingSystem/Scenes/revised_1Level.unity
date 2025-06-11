@@ -9322,7 +9322,7 @@ GameObject:
   - component: {fileID: 2110376076}
   - component: {fileID: 2110376077}
   m_Layer: 0
-  m_Name: AssetBuildingManager
+  m_Name: BuildingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

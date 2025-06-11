@@ -16,7 +16,7 @@ public class MyGridBuildingSystem : MonoBehaviour
     [SerializeField] float cellSize = 5f;
     BlockPrefab blockPrefab;
     public Vector3 origin;
-    public event Action<Transform> OnObjectPlaced;
+    public event Action<Transform, int> OnObjectPlaced;
     public static event Action OnChangedWaypoints;
     int newHeight = 0;
     private void Awake()
@@ -216,13 +216,14 @@ public class MyGridBuildingSystem : MonoBehaviour
                         //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
                         BuildingManager.Instance.audio.PlayOneShot(BuildingManager.Instance.placedSound);
                         Transform unitToCreate = BuildingManager.Instance.placedObjectTypeSO.unitToCreate; // to know which unit should be spawned
+                        int placedObjectId = BuildingManager.Instance.placedObjectTypeSO.placedObjId;
                         UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
 
 
                         BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                        BuildingManager.Instance.DestroySurplusPlacedObjects();
+                        BuildingManager.Instance.DestroySurplusPlacedObjects(BuildingManager.Instance.placedObjectTypeSO);
 
-                        OnObjectPlaced?.Invoke(placedObjectId);
+                        OnObjectPlaced?.Invoke(unitToCreate, placedObjectId);
                         OnChangedWaypoints?.Invoke();
                         BuildingManager.Instance.DeselectObjectType();
                     }

@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: WaterLily
   m_EditorClassIdentifier: 
-  nameString: WaterLily
-  prefab: {fileID: 2608708882569115102, guid: f2060df214e2c2a45b1c857a1dede188, type: 3}
-  visual: {fileID: 1596457177620258293, guid: 7355ac3312aedb34c8e6bce7f073c842, type: 3}
+  placedObject: 0
+  placedObjId: 0
+  placedObjectPrefab: {fileID: 2608708882569115102, guid: f2060df214e2c2a45b1c857a1dede188,
+    type: 3}
+  visualForGhostPlacedObject: {fileID: 1596457177620258293, guid: 7355ac3312aedb34c8e6bce7f073c842,
+    type: 3}
+  materialForDeadObj: {fileID: 2100000, guid: 6f43e4594e93cc743bb8de634e4afd8d, type: 2}
+  maxAmountOPlacedObjects: 0
   width: 1
   height: 1
-  placedObjId: 0
-  materialForDeadObj: {fileID: 2100000, guid: 6f43e4594e93cc743bb8de634e4afd8d, type: 2}
+  unitToCreate: {fileID: 0}
+  maxAmountOfUnits: 0

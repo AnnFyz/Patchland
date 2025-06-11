@@ -27,14 +27,14 @@ public class UnitsSpawner : MonoBehaviour
         localBuildingSystem.OnObjectPlaced += SpawnUnits;
     }
 
-    void SpawnUnits(int placedObjId)
+    void SpawnUnits(Transform unitToSpawn, int placedObjId)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
         //Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
         //Debug.Log("Level state: " + levelState);
         if (levelState != LevelState.Pond)
         {
-            Spawn(placedObjId);
+            Spawn(unitToSpawn, placedObjId);
         }
 
         else
@@ -66,7 +66,7 @@ public class UnitsSpawner : MonoBehaviour
 
     }
 
-    void Spawn(int placedObjId)
+    void Spawn(Transform unitToSpawn, int placedObjId)
     {
         if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
         {
@@ -78,7 +78,7 @@ public class UnitsSpawner : MonoBehaviour
                 //int vertexIndex = UnityEngine.Random.Range(transform.position, );
                 if (NavMesh.SamplePosition(new Vector3(randomPosX, localBuildingSystem.GetOriginOfGrid().y, randomPosZ), out hit, 10f, groundMask))
                 {
-                    currentUnit = Instantiate(SelectUnitAndAmount(placedObjId).gameObject, Vector3.zero, Quaternion.identity);
+                    currentUnit = Instantiate(unitToSpawn.gameObject, Vector3.zero, Quaternion.identity);
                     if (currentUnit == null)
                     {
                         Debug.Log("currentUnit is null");

@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: Mushroom
   m_EditorClassIdentifier: 
-  placedObject: 0
+  placedObject: 2
   placedObjId: 2
-  placedObjectPrefab: {fileID: 0}
-  visualForGhostPlacedObject: {fileID: 0}
+  placedObjectPrefab: {fileID: 8519390558105600893, guid: c1929760470132648bc42e31651af904,
+    type: 3}
+  visualForGhostPlacedObject: {fileID: 5930813321850338921, guid: 2c4c0ca6b71dc444592be78007f10cb7,
+    type: 3}
   materialForDeadObj: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
+  maxAmountOPlacedObjects: 4
   width: 2
   height: 1
   unitToCreate: {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe,
     type: 3}
-  amountOfUnitsToCreate: 2
+  maxAmountOfUnits: 2

@@ -39,12 +39,13 @@ public class PlacedObjectTypeSO : ScriptableObject {
     public Transform placedObjectPrefab;
     public Transform visualForGhostPlacedObject;
     public Material materialForDeadObj;
+    public int maxAmountOPlacedObjects; // maximum amount of placed objects of this type that can be created in the scene
     [Header("Grid Size")] 
     public int width;
     public int height;
     [Header("Unit Creation")] 
     public Transform unitToCreate;
-    public int amountOfUnitsToCreate;
+    public int maxAmountOfUnits; // maximum amount of units that can be created for this placed object type
 
     public int GetRotationAngle(Dir dir) {
         switch (dir) {

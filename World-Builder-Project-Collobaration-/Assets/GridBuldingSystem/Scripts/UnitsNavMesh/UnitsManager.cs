@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static PlacedObjectTypeSO;
 
 public class UnitsManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class UnitsManager : MonoBehaviour
     public int maxUnits_3 = 5;
     public int maxUnits_4 = 4;
     public int maxUnits_5 = 3;
-    int maxUnits;
+    //int maxUnits;
     public List<int> amountOfUnits;
     private void Awake()
     {
@@ -60,31 +61,36 @@ public class UnitsManager : MonoBehaviour
     }
      public int GetMaxUnits(int placedObjId)
     {
-        switch (placedObjId)
+        //switch (placedObjId)
+        //{
+        //    case 0:
+        //        maxUnits = maxUnits_0;
+        //        break;
+        //    case 1:
+        //        maxUnits = maxUnits_1;
+        //        break;
+        //    case 2:
+        //        maxUnits = maxUnits_2;
+        //        break;
+        //    case 3:
+        //        maxUnits = maxUnits_3;
+        //        break;
+        //    case 4:
+        //        maxUnits = maxUnits_4;
+        //        break;
+        //    case 5:
+        //        maxUnits = maxUnits_5;
+        //        break;
+        //    default:
+        //        Debug.Log("ERROR");
+        //        break;
+        //}
+        if(BuildingManager.Instance.placedObjectTypeSO == null)
         {
-            case 0:
-                maxUnits = maxUnits_0;
-                break;
-            case 1:
-                maxUnits = maxUnits_1;
-                break;
-            case 2:
-                maxUnits = maxUnits_2;
-                break;
-            case 3:
-                maxUnits = maxUnits_3;
-                break;
-            case 4:
-                maxUnits = maxUnits_4;
-                break;
-            case 5:
-                maxUnits = maxUnits_5;
-                break;
-            default:
-                Debug.Log("ERROR");
-                break;
+            Debug.LogError("PlacedObjectTypeSO is not set in BuildingManager.");
+            return 0;
         }
-        return maxUnits;
+        return BuildingManager.Instance.placedObjectTypeSO.maxAmountOfUnits;
     }
     void ToControlUnitsManually()
     {
