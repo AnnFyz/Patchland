@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: Bush
   m_EditorClassIdentifier: 
-  placedObject: 1
+  placedObjectName: 1
   placedObjId: 1
   placedObjectPrefab: {fileID: 2608708882569115102, guid: 6beffb95310746045afd9d9caf84239e,
     type: 3}

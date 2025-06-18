@@ -35,9 +35,9 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                 if (localPrefabBlock.IsThisBlockIsSelected && localPrefabBlock.IsThisBlockIsHighlighted)
                 {
                     //localPrefabBlock.ChangeSelectedMaterial();
-                    if (BuildingManager.Instance.placedObjectTypeSO == null)
+                    if (BuildingManager.Instance.currentObjectTypeSO == null)
                     {
-                        BuildingManager.Instance.placedObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
+                        BuildingManager.Instance.currentObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
                     }
 
                         BuildingManager.localGrid = localGrid.grid;

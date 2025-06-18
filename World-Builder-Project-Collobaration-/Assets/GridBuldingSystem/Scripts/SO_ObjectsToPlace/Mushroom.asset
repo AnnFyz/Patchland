@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: Mushroom
   m_EditorClassIdentifier: 
-  placedObject: 2
+  placedObjectName: 2
   placedObjId: 2
   placedObjectPrefab: {fileID: 8519390558105600893, guid: c1929760470132648bc42e31651af904,
     type: 3}

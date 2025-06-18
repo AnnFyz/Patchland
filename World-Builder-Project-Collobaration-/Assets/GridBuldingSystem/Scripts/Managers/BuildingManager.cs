@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static PlacedObjectTypeSO;
 using static Unity.Collections.AllocatorManager;
 
 [Serializable] 
@@ -30,6 +31,10 @@ public class BlockList
         }
     }
 }
+
+[Serializable]
+
+
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] LayerMask blockLayer;
@@ -39,7 +44,7 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager Instance { get; private set; }
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     public Material deadBlockMaterial; // TO DO READ ONLY
-    public PlacedObjectTypeSO placedObjectTypeSO;
+    public PlacedObjectTypeSO currentObjectTypeSO;
     public PlacedObjectTypeSO lastSelectedObjToPlaceTypeSO;
     public PlacedObjectTypeSO.Dir dir;
     public event EventHandler OnSelectedChanged; // for ghost building
@@ -59,7 +64,7 @@ public class BuildingManager : MonoBehaviour
         else
             Instance = this;
 
-        placedObjectTypeSO = null;// placedObjectTypeSOList[0];
+        currentObjectTypeSO = null;// placedObjectTypeSOList[0];
         audio = GetComponent<AudioSource>();
     }
 
@@ -75,82 +80,108 @@ public class BuildingManager : MonoBehaviour
 
 
     }
-    public void DestroySurplusPlacedObjects( PlacedObjectTypeSO objectToPlace)
+
+    public List<PlacedObjectTypeSO> GetPlacedObjectTypeSOList()
     {
-        //if(objectToPlace == null) return;
-        //if (placedObjects[placedObjectId] >= objectToPlace.maxAmountOPlacedObjects)
+        return placedObjectTypeSOList;
+    }
+    public void DestroySurplusPlacedObjects(PlacedObjectTypeSO objectToPlace)
+    {
+        if (objectToPlace == null) return;
+
+        // NEW  
+        PlacedObjectName placedObjectName = objectToPlace.placedObjectName;
+        for (int i = 0; i < placedObjects.Count; i++)
+        {
+            foreach (var placedObject in placedObjects[i])
+            {
+                if (placedObject.placedObjectTypeSO.placedObjectName == placedObjectName)
+                {
+                    if (placedObjects[i].Count > objectToPlace.maxAmountOPlacedObjects)
+                    {
+                        if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObjects[0][0].transform))
+                        {
+                            Debug.Log("Removing " + placedObjects[0][0].transform.name + " from waypointsForPlacedObjects[" + placedObjectName + "]");
+                            UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(placedObjects[0][0].transform);
+                            return;
+                            //OnChangedWaypoints?.Invoke();
+                        }
+                    }
+                }
+            }
+        }
+        // OLD  
+        //if (placedObjects[0].Count > objectToPlace.maxAmountOPlacedObjects)
         //{
+        //    if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
+        //    }
 
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[0][0].DestroySelf();
+        //    placedObjects[0].RemoveAt(0);
         //}
-        if (placedObjects[0].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
 
-            if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
-            {
-                UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[0][0].DestroySelf();
-            placedObjects[0].RemoveAt(0);
-        }
+        //if (placedObjects[1].Count > objectToPlace.maxAmountOPlacedObjects)
+        //{
+        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
+        //    }
 
-        if (placedObjects[1].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[1][0].DestroySelf();
+        //    placedObjects[1].RemoveAt(0);
+        //}
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[1][0].DestroySelf();
-            placedObjects[1].RemoveAt(0);
-        }
+        //if (placedObjects[2].Count > objectToPlace.maxAmountOPlacedObjects)
+        //{
+        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+        //    }
 
-        if (placedObjects[2].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[2][0].DestroySelf();
+        //    placedObjects[2].RemoveAt(0);
+        //}
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[2][0].DestroySelf();
-            placedObjects[2].RemoveAt(0);
-        }
+        //if (placedObjects[3].Count > objectToPlace.maxAmountOPlacedObjects)
+        //{
+        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+        //    }
 
-        if (placedObjects[3].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[3][0].DestroySelf();
+        //    placedObjects[3].RemoveAt(0);
+        //}
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[3][0].DestroySelf();
-            placedObjects[3].RemoveAt(0);
-        }
-        if (placedObjects[4].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
+        //if (placedObjects[4].Count > objectToPlace.maxAmountOPlacedObjects)
+        //{
+        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+        //    }
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[4][0].DestroySelf();
-            placedObjects[3].RemoveAt(0);
-        }
-        if (placedObjects[5].Count > objectToPlace.maxAmountOPlacedObjects)
-        {
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[4][0].DestroySelf();
+        //    placedObjects[3].RemoveAt(0);
+        //}
 
-            if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-            {
-                UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-            }
-            // ADD PARTICLES IN DESTROYSELF
-            placedObjects[4][0].DestroySelf();
-            placedObjects[3].RemoveAt(0);
-        }
+        //if (placedObjects[5].Count > objectToPlace.maxAmountOPlacedObjects)
+        //{
+        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
+        //    {
+        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
+        //    }
+
+        //    // ADD PARTICLES IN DESTROYSELF  
+        //    placedObjects[4][0].DestroySelf();
+        //    placedObjects[3].RemoveAt(0);
+        //}
     }
 
 
@@ -171,13 +202,13 @@ public class BuildingManager : MonoBehaviour
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() != LevelState.Pond) { currentObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); DeselectObjectType(); }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState != LevelState.Pond && levelState != LevelState.Desert)
             {
-                placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType();
+                currentObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); DeselectObjectType();
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -185,7 +216,7 @@ public class BuildingManager : MonoBehaviour
             LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState != LevelState.Pond && levelState != LevelState.Desert)
             {
-                placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType();
+                currentObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); DeselectObjectType();
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -193,7 +224,7 @@ public class BuildingManager : MonoBehaviour
             LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
-                placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); DeselectObjectType();
+                currentObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); DeselectObjectType();
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -201,7 +232,7 @@ public class BuildingManager : MonoBehaviour
             LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
-                placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); DeselectObjectType();
+                currentObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); DeselectObjectType();
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -209,7 +240,7 @@ public class BuildingManager : MonoBehaviour
             LevelState levelState = currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState();
             if (levelState == LevelState.Mountain || levelState == LevelState.SnowMountain)
             {
-                placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); DeselectObjectType();
+                currentObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); DeselectObjectType();
             }
         }
 
@@ -217,33 +248,33 @@ public class BuildingManager : MonoBehaviour
 
     public void SelectResource(int resourceId)
     {
-        placedObjectTypeSO = placedObjectTypeSOList[resourceId];
+        currentObjectTypeSO = placedObjectTypeSOList[resourceId];
         RefreshSelectedObjectType();
         DeselectObjectType();
     }
     public void DeselectObjectType()
     {
-        placedObjectTypeSO = null;
+        currentObjectTypeSO = null;
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void DeselectObjectTypeOnSelectedAnotherBlockType()
     {
-        placedObjectTypeSO = null;
+        currentObjectTypeSO = null;
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
         lastSelectedObjToPlaceTypeSO = null;
     }
 
     public void RefreshSelectedObjectType()
     {
-        if (placedObjectTypeSO == null)
+        if (currentObjectTypeSO == null)
         {
-            placedObjectTypeSO = lastSelectedObjToPlaceTypeSO;
+            currentObjectTypeSO = lastSelectedObjToPlaceTypeSO;
         }
 
-        else if (placedObjectTypeSO != null)
+        else if (currentObjectTypeSO != null)
         {
-            lastSelectedObjToPlaceTypeSO = placedObjectTypeSO;
+            lastSelectedObjToPlaceTypeSO = currentObjectTypeSO;
         }
 
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
@@ -264,9 +295,9 @@ public class BuildingManager : MonoBehaviour
         x = Math.Clamp(x, 0, localGrid.GetWidth() - 1);
         z = Math.Clamp(z, 0, localGrid.GetHeight() - 1);
 
-        if (placedObjectTypeSO != null)
+        if (currentObjectTypeSO != null)
         {
-            Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
+            Vector2Int rotationOffset = currentObjectTypeSO.GetRotationOffset(dir);
             Vector3 placedObjectWorldPosition = localGrid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * localGrid.GetCellSize();
             return placedObjectWorldPosition;
         }
@@ -278,9 +309,9 @@ public class BuildingManager : MonoBehaviour
 
     public Quaternion GetPlacedObjectRotation()
     {
-        if (placedObjectTypeSO != null)
+        if (currentObjectTypeSO != null)
         {
-            return Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0);
+            return Quaternion.Euler(0, currentObjectTypeSO.GetRotationAngle(dir), 0);
         }
         else
         {
@@ -290,7 +321,7 @@ public class BuildingManager : MonoBehaviour
 
     public PlacedObjectTypeSO GetPlacedObjectTypeSO()
     {
-        return placedObjectTypeSO;
+        return currentObjectTypeSO;
     }
 
     private Vector3 GetMouseWorldPosition()

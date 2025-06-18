@@ -27,14 +27,14 @@ public class UnitsSpawner : MonoBehaviour
         localBuildingSystem.OnObjectPlaced += SpawnUnits;
     }
 
-    void SpawnUnits(Transform unitToSpawn, int placedObjId)
+    void SpawnUnits(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)
     {
         levelState = GetComponent<LocalLevelState>().GetCurrentLevelState();
         //Debug.Log("GetCurrentLevelState: " + GetComponent<LocalLevelState>().GetCurrentLevelState());
         //Debug.Log("Level state: " + levelState);
         if (levelState != LevelState.Pond)
         {
-            Spawn(unitToSpawn, placedObjId);
+            Spawn(unitToSpawn, placedObjId, placedObjectName);
         }
 
         else
@@ -66,7 +66,7 @@ public class UnitsSpawner : MonoBehaviour
 
     }
 
-    void Spawn(Transform unitToSpawn, int placedObjId)
+    void Spawn(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)
     {
         if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
         {
@@ -85,10 +85,14 @@ public class UnitsSpawner : MonoBehaviour
                         return;
                     }
 
-                    if (UnitsManager.Instance.waypoints[placedObjId].Last() != null)
+                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last() != null)
                     {
-                        currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
+                        //OLD
+                        //currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
+                        //NEW
+                        currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last();
                         currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
+                        currentUnit.GetComponent<Unit>().placedObjectName = placedObjectName;
                         //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
 
                     }

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static PlacedObjectTypeSO;
+using UnityEngine.Rendering;
+using AYellowpaper.SerializedCollections;
+using System.Linq;
+
 
 public class UnitsManager : MonoBehaviour
 {
@@ -11,7 +15,11 @@ public class UnitsManager : MonoBehaviour
     //List<GameObject> units = new List<GameObject>();
     public LayerMask unitMask;
     public LayerMask groundMask;
-    public List<List<Transform>> waypoints = new List<List<Transform>>(); // to make them for each type of building and unit
+    //NEW to make them for each type of building and unit
+    [SerializedDictionary("PlacedObjects", "Waypoints")]
+    public AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, List<Transform>> waypointsForPlacedObjects = new AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, List<Transform>>();
+    //OLD
+    public List<List<Transform>> waypoints = new List<List<Transform>>();
     public Action TimeToMoveAutomatically;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     public int numberOfPoints;
@@ -23,6 +31,9 @@ public class UnitsManager : MonoBehaviour
     public int maxUnits_4 = 4;
     public int maxUnits_5 = 3;
     //int maxUnits;
+    //NEW
+    public AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, int> amountOfUnitsForPlacedObject = new AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, int>();
+    //OLD
     public List<int> amountOfUnits;
     private void Awake()
     {
@@ -38,11 +49,26 @@ public class UnitsManager : MonoBehaviour
     }
     private void Start()
     {
-
-        for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj
+        var placedObjectTypeSOList = BuildingManager.Instance.GetPlacedObjectTypeSOList(); // Assuming GetPlacedObjectTypeSOList() returns a list of PlacedObjectTypeSO objects.  
+        //NEW
+        if (placedObjectTypeSOList != null)
         {
-           waypoints.Insert(i, new List<Transform>());
-           amountOfUnits.Insert(i, 0);
+            foreach (var placedObjectTypeSO in placedObjectTypeSOList)
+            {
+                waypointsForPlacedObjects.Add(placedObjectTypeSO.placedObjectName, new List<Transform>());
+                amountOfUnitsForPlacedObject.Add(placedObjectTypeSO.placedObjectName, 0);
+            }
+        }
+        else
+        {
+            Debug.LogError("PlacedObjectTypeSO list is null in BuildingManager.");
+        }
+
+        //OLD
+        for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj  
+        {
+           // waypoints.Insert(i, new List<Transform>());
+            amountOfUnits.Insert(i, 0);
         }
     }
     void Update()
@@ -59,7 +85,7 @@ public class UnitsManager : MonoBehaviour
     {
         return amountOfUnits[placedObjId];
     }
-     public int GetMaxUnits(int placedObjId)
+    public int GetMaxUnits(int placedObjId)
     {
         //switch (placedObjId)
         //{
@@ -85,12 +111,12 @@ public class UnitsManager : MonoBehaviour
         //        Debug.Log("ERROR");
         //        break;
         //}
-        if(BuildingManager.Instance.placedObjectTypeSO == null)
+        if (BuildingManager.Instance.currentObjectTypeSO == null)
         {
             Debug.LogError("PlacedObjectTypeSO is not set in BuildingManager.");
             return 0;
         }
-        return BuildingManager.Instance.placedObjectTypeSO.maxAmountOfUnits;
+        return BuildingManager.Instance.currentObjectTypeSO.maxAmountOfUnits;
     }
     void ToControlUnitsManually()
     {
@@ -105,7 +131,7 @@ public class UnitsManager : MonoBehaviour
 
                     if (unit != null)
                     {
-                        if(unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi )
+                        if (unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
                         {
                             selectedUnits.Add(unit);
                             unit.OnSelected();
@@ -121,7 +147,7 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                         unit.OnDeselected();
-                        unit.currentMovemenetState = UnitsMovementState.Autopilot;
+                    unit.currentMovemenetState = UnitsMovementState.Autopilot;
                 }
 
                 selectedUnits.Clear();
@@ -136,13 +162,13 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                     {
-                        if(unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
+                        if (unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
                         {
                             unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
                         }
-                        
+
                     }
-                      
+
                 }
             }
         }
@@ -155,15 +181,31 @@ public class UnitsManager : MonoBehaviour
     void OnChangedGlobalOrderM()
     {
         OnChangedGlobalOrder?.Invoke();
-        foreach(var item in waypoints[0])
-        {
-            GameObject generatedWaypoint = new GameObject();
-            if (generatedWaypoint.transform != null && item != null)
-            {
-                generatedWaypoint.transform.position = item.position;
-                generatedWaypoint.transform.SetParent(transform);
-            }
-      
-        }
+        Debug.Log("OnChangedGlobalOrderM called in UnitsManager");
+
+        // NEW  
+        //foreach (var waypointList in waypointsForPlacedObjects.Values)
+        //{
+        //    foreach (var waypoint in waypointList)
+        //    {
+        //        GameObject generatedWaypoint = new GameObject();
+        //        if (generatedWaypoint.transform != null && waypoint != null)
+        //        {
+        //            generatedWaypoint.transform.position = waypoint.position;
+        //            generatedWaypoint.transform.SetParent(transform);
+        //        }
+        //    }
+        //}
+
+        // OLD  
+        // foreach (var waypoint in waypoints[0])  
+        // {  
+        //     GameObject generatedWaypoint = new GameObject();  
+        //     if (generatedWaypoint.transform != null && waypoint != null)  
+        //     {  
+        //         generatedWaypoint.transform.position = waypoint.position;  
+        //         generatedWaypoint.transform.SetParent(transform);  
+        //     }  
+        // }  
     }
 }

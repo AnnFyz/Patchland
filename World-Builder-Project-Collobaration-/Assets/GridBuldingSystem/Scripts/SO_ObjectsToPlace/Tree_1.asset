@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7747bdf78fa6141a2f81d16ff91e5f, type: 3}
   m_Name: Tree_1
   m_EditorClassIdentifier: 
-  placedObject: 3
+  placedObjectName: 3
   placedObjId: 3
   placedObjectPrefab: {fileID: 8000281925568123889, guid: fddfce1fe51ac1641b8639201545af13,
     type: 3}

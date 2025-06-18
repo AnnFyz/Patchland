@@ -22,7 +22,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
         Right,
     }
 
-    public enum PlacedObjectType
+    public enum PlacedObjectName
     {
         WaterLily,
         Bush,
@@ -34,7 +34,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
     }
 
     [Header("General")] 
-    public PlacedObjectType placedObject;
+    public PlacedObjectName placedObjectName;
     public int placedObjId;
     public Transform placedObjectPrefab;
     public Transform visualForGhostPlacedObject;

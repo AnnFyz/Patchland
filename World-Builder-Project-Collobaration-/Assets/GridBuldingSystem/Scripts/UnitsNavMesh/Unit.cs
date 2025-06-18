@@ -49,6 +49,7 @@ public class Unit : MonoBehaviour
     [SerializeField] float elapsed = 0.0f;
     [SerializeField] float movingToPointTimer = 3f;
     public int placedObjTypeId;
+    public PlacedObjectTypeSO.PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
     [SerializeField] int waypointIndex = 0;
     public UnitsMovementState currentMovemenetState;
     public UnitsState currentUnitsState;
@@ -222,16 +223,30 @@ public class Unit : MonoBehaviour
             //    currentPoint = target;
             //    waypointsList.localOrder.Add(currentPoint);
             //}
-            if (UnitsManager.Instance.waypoints != null)
+
+            //OLD
+            //if (UnitsManager.Instance.waypoints != null)
+            //{
+            //    if (UnitsManager.Instance.waypoints[placedObjTypeId] != null)
+            //    {
+            //        List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
+            //        reversedList.Reverse();
+            //        waypointsList.localOrder.AddRange(reversedList);
+
+            //    }
+            //}
+            //NEW
+            if (UnitsManager.Instance.waypointsForPlacedObjects != null)
             {
-                if (UnitsManager.Instance.waypoints[placedObjTypeId] != null)
+                if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName] != null)
                 {
-                    List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
+                    List<Transform> reversedList = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName];
                     reversedList.Reverse();
                     waypointsList.localOrder.AddRange(reversedList);
 
                 }
             }
+
             waypointIndex = 0; // to reset the path and start from zero point again
 
         }

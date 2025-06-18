@@ -8385,6 +8385,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  waypointsForPlacedObjects:
+    _serializedList: []
   unitsPrefabs:
   - {fileID: 2675644380505310733, guid: 2439f2e2e949026439f50ea44f4a4cdc, type: 3}
   - {fileID: 2675644380505310733, guid: d9d3c3e08b669c942a830f5086d71ddc, type: 3}
@@ -9371,7 +9373,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c875c6f8844c0d4ab10a8fce5df75ec, type: 2}
   - {fileID: 11400000, guid: 8af6e11d8ecafb94d8ee6693345af106, type: 2}
   deadBlockMaterial: {fileID: 2100000, guid: 7792b107bd4205e47a561de63d4f2a89, type: 2}
-  placedObjectTypeSO: {fileID: 0}
+  currentObjectTypeSO: {fileID: 0}
   lastSelectedObjToPlaceTypeSO: {fileID: 0}
   dir: 0
   currentBlockPrefab: {fileID: 0}
