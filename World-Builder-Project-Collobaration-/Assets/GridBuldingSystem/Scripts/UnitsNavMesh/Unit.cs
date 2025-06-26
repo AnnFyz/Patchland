@@ -28,7 +28,7 @@ public class WaypointsList
 [Serializable]
 public class BlocksList
 {
-   public List<BlockPrefab> blocks = new List<BlockPrefab>();
+    public List<BlockPrefab> blocks = new List<BlockPrefab>();
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour
     [SerializeField] int waypointIndex = 0;
     public UnitsMovementState currentMovemenetState;
     public UnitsState currentUnitsState;
-    public bool isWaypointApproached = false;
+    public bool isStartingAppriachingWaypoint = false;
     BlockHealth occupiedBlockHealth;
     Zombi zombi;
     [SerializeField] BlockPrefab intersectedWithUnitBlock;
@@ -126,7 +126,7 @@ public class Unit : MonoBehaviour
 
     void UseChanceToBecomeZombi()
     {
-        if(currentUnitsState == UnitsState.Zombi)
+        if (currentUnitsState == UnitsState.Zombi)
         {
             return; // if the unit is already a zombie or in the process of becoming one, do nothing
         }
@@ -168,14 +168,14 @@ public class Unit : MonoBehaviour
         {
             //foreach (var block in intersectedWithUnitBlocks.blocks)
             //{
-                float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, intersectedWithUnitBlock.transform.position + intersectedWithUnitBlock.transform.position * 0.5f);
-                if (newDist < dist)
-                {
-                    dist = newDist;
-                    zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
-                    zombi.targetBlock = intersectedWithUnitBlock;
-                }
-           // }
+            float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, intersectedWithUnitBlock.transform.position + intersectedWithUnitBlock.transform.position * 0.5f);
+            if (newDist < dist)
+            {
+                dist = newDist;
+                zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
+                zombi.targetBlock = intersectedWithUnitBlock;
+            }
+            // }
         }
     }
     void CheckBlock(Collider other)
@@ -194,7 +194,7 @@ public class Unit : MonoBehaviour
     }
     void DestroyUnit()
     {
-        UnitsManager.Instance.SetAmountOfUnits(unitScriptableObject.unitId, -1);
+        UnitsManager.Instance.SetAmountOfUnits(placedObjectName, -1);
         ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
         particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
         particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
@@ -216,7 +216,7 @@ public class Unit : MonoBehaviour
             {
                 waypointsList.localOrder.Add(startPoint);
                 //currentPoint = startPoint;
-                target = startPoint; 
+                target = startPoint;
             }
             //else
             //{
@@ -261,7 +261,7 @@ public class Unit : MonoBehaviour
             {
                 // Update the way to the goal every amount of sec in movingToPointTimer.
                 elapsed += Time.deltaTime;
-                if(waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
+                if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
                 {
                     return;
                 }
@@ -271,30 +271,52 @@ public class Unit : MonoBehaviour
                     if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().curretValue >= GetComponent<UnitsHealth>().maxValue || currentPlacedObject == null))
                     {
                         elapsed = 0;
-                        if (agent.SetDestination(target.transform.position))
+                        agent.CalculatePath(target.transform.position, path);
+                        if (path.status == NavMeshPathStatus.PathComplete)
                         {
-                            if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+                            if (agent.SetDestination(target.transform.position))
                             {
-                                Debug.Log("Waypoint approached: " + target.name);
-                                IterateWaypointIndex();
-                                //MoveAutomaticallyToWayPoint();
+                                if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+                                {
+                                    Debug.Log("Waypoint approached: " + target.name);
+                                    IterateWaypointIndex();
+                                }
                             }
-                            //else
-                            //{
-                            //    IterateWaypointIndex();
-                            //}
+                            else
+                            {
+                                Debug.Log("Failed to set destination to: " + target.name);
+                                IterateWaypointIndex();
+                            }
                         }
                         else
                         {
-                            Debug.Log("Failed to set destination to: " + target.name);
+                            Debug.Log("Path is not complete to: " + target.name);
                             IterateWaypointIndex();
                         }
                     }
-                }
 
+                }
             }
         }
     }
+
+    IEnumerator StartAproachingWaypoint()
+    {
+        yield return new WaitForSeconds(3f);
+        if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+        {
+            Debug.Log("Waypoint approached: " + target.name);
+            IterateWaypointIndex();
+            //MoveAutomaticallyToWayPoint();
+        }
+        else
+        {
+            Debug.Log("Waypoint is to far away" + target.name);
+            IterateWaypointIndex();
+        }
+        isStartingAppriachingWaypoint = false;
+    }
+
     void IterateWaypointIndex()
     {
         if (waypointsList.localOrder != null)
@@ -324,7 +346,7 @@ public class Unit : MonoBehaviour
         agent.acceleration = unitScriptableObject.acceleration;
         agent.angularSpeed = unitScriptableObject.angularSpeed;
         agent.areaMask = unitScriptableObject.areaMask;
-        agent.avoidancePriority = unitScriptableObject.avoidancePriority;
+        agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority/4, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
         agent.baseOffset = unitScriptableObject.baseOffset;
         agent.height = unitScriptableObject.height;
         agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;

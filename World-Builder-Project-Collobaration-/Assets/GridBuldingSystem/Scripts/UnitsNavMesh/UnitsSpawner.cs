@@ -68,7 +68,7 @@ public class UnitsSpawner : MonoBehaviour
 
     void Spawn(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)
     {
-        if (UnitsManager.Instance.GetAmountOfUnits(placedObjId) < UnitsManager.Instance.GetMaxUnits(placedObjId))
+        if (UnitsManager.Instance.GetAmountOfUnits(placedObjectName) < UnitsManager.Instance.GetMaxUnits())
         {
             NavMeshHit hit;
             for (int i = 0; i < numberOfUnits; i++)
@@ -103,7 +103,7 @@ public class UnitsSpawner : MonoBehaviour
                         currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
                         currentUnit.GetComponent<Unit>().agent.enabled = true;
                         UnitsManager.Instance.numberOfPoints++;
-                        UnitsManager.Instance.SetAmountOfUnits(placedObjId, 1);
+                        UnitsManager.Instance.SetAmountOfUnits(placedObjectName, 1);
                     }
                 }
             }

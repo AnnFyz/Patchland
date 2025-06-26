@@ -68,7 +68,7 @@ public class UnitsManager : MonoBehaviour
         for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj  
         {
            // waypoints.Insert(i, new List<Transform>());
-            amountOfUnits.Insert(i, 0);
+           // amountOfUnits.Insert(i, 0);
         }
     }
     void Update()
@@ -76,16 +76,19 @@ public class UnitsManager : MonoBehaviour
         ToControlUnitsManually();
     }
 
-    public void SetAmountOfUnits(int placedObjId, int a)
+    public void SetAmountOfUnits(PlacedObjectName placedObjectName, int a)
     {
-
-        amountOfUnits[placedObjId] += a;
+        //OLD
+        //amountOfUnits[placedObjId] += a;
+        //NEW
+        amountOfUnitsForPlacedObject[placedObjectName] += a;
     }
-    public int GetAmountOfUnits(int placedObjId)
+    public int GetAmountOfUnits(PlacedObjectName placedObjectName)
     {
-        return amountOfUnits[placedObjId];
+        //return amountOfUnits[placedObjId];
+        return amountOfUnitsForPlacedObject[placedObjectName];
     }
-    public int GetMaxUnits(int placedObjId)
+    public int GetMaxUnits()
     {
         //switch (placedObjId)
         //{
@@ -117,6 +120,7 @@ public class UnitsManager : MonoBehaviour
             return 0;
         }
         return BuildingManager.Instance.currentObjectTypeSO.maxAmountOfUnits;
+
     }
     void ToControlUnitsManually()
     {

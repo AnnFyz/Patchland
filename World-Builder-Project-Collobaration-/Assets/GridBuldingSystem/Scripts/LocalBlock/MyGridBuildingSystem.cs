@@ -117,11 +117,11 @@ public class MyGridBuildingSystem : MonoBehaviour
                     int placedObjectId = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
 
                     //NEW
-                    PlacedObjectName placedObjectName = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
+                    PlacedObjectName placedObjectName = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
 
-                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
+                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
                     {
-                        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
+                        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
                         OnChangedWaypoints?.Invoke();
                     }
 
@@ -258,6 +258,7 @@ public class MyGridBuildingSystem : MonoBehaviour
                         BuildingManager.placedObjects[placedObjectId].Add(placedObject);
                         Debug.Log("Placed object added: " + placedObjectId + " - " + placedObjectName);
                         BuildingManager.Instance.DestroySurplusPlacedObjects(BuildingManager.Instance.currentObjectTypeSO);
+
 
                         OnObjectPlaced?.Invoke(unitToCreate, placedObjectId, placedObjectName);
                         OnChangedWaypoints?.Invoke();

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 
-    public enum CornerBlock
+public enum CornerBlock
 {
     TopLeft,
     TopRight,
@@ -16,7 +16,7 @@ using System;
 
 public class BlockPrefab : MonoBehaviour
 {
-    public int[,] blockId = new int [0,0];
+    public int[,] blockId = new int[0, 0];
     public static Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
     private int newAmount;
@@ -37,6 +37,7 @@ public class BlockPrefab : MonoBehaviour
     public int blocksAmount = 0;
     public int maxAmount = 10;
     public int minAmount = 1;
+    [SerializeField] Transform mainBlock;
     [SerializeField] Transform[] blockStack;
 
     private void Start()
@@ -63,7 +64,7 @@ public class BlockPrefab : MonoBehaviour
             }
         }
         minOrigin = 0f;
-        maxOrigin =  0.95f;
+        maxOrigin = 0.95f;
         startTime = Time.deltaTime;
         t = UnityEngine.Random.Range(2f, 7f);
     }
@@ -118,7 +119,7 @@ public class BlockPrefab : MonoBehaviour
             blocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
             OnAmountChanged?.Invoke(blocksAmount);
-        } 
+        }
     }
 
     void SetFirstBlockPos(bool isAdded)
@@ -170,10 +171,13 @@ public class BlockPrefab : MonoBehaviour
     public void SetStateMaterial(Material stateMaterial)
     {
         defaultMaterial = stateMaterial;
-         foreach (var block in blockStack)
+        foreach (var block in blockStack)
         {
+            // Change the material of each block in the stack
             block.gameObject.GetComponent<Renderer>().material = stateMaterial;
         }
+        // Change the material of the main block
+        mainBlock.gameObject.GetComponent<Renderer>().material = stateMaterial;
     }
 
     //public void ChangeAmount(int addedAmount)
@@ -251,7 +255,7 @@ public class BlockPrefab : MonoBehaviour
     //    if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
     //    {
     //        renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
-          
+
     //    }
 
     //}
@@ -266,7 +270,7 @@ public class BlockPrefab : MonoBehaviour
     //    {
     //        renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
     //        renderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
-         
+
     //    }
     //}
 
@@ -275,9 +279,9 @@ public class BlockPrefab : MonoBehaviour
     //    renderer.material = defaultMaterial;
     //    //ChangeColorBack();
     //}
-//    public void ChangeSelectedMaterial()
-//    {
-//        renderer.material = GridOfPrefabs.Instance.GetMaterialOfSelectedBlocks();
-//        //ChangeColorBack();
-//    }
+    //    public void ChangeSelectedMaterial()
+    //    {
+    //        renderer.material = GridOfPrefabs.Instance.GetMaterialOfSelectedBlocks();
+    //        //ChangeColorBack();
+    //    }
 }

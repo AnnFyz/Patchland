@@ -634,8 +634,8 @@ MonoBehaviour:
   blocksAmount: 0
   maxAmount: 12
   minAmount: 1
+  mainBlock: {fileID: 6952173462082135868}
   blockStack:
-  - {fileID: 6952173462082135868}
   - {fileID: 6892382086517036291}
   - {fileID: 6815732802434565394}
   - {fileID: 4130034401508776522}

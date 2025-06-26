@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static PlacedObjectTypeSO;
@@ -97,15 +98,16 @@ public class BuildingManager : MonoBehaviour
             {
                 if (placedObject.placedObjectTypeSO.placedObjectName == placedObjectName)
                 {
-                    if (placedObjects[i].Count > objectToPlace.maxAmountOPlacedObjects)
+                    if (placedObjects[i].Count > objectToPlace.maxAmountOfPlacedObjects)
                     {
-                        if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObjects[0][0].transform))
+                        Debug.Log(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First());
+                        if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First() != null) 
                         {
-                            Debug.Log("Removing " + placedObjects[0][0].transform.name + " from waypointsForPlacedObjects[" + placedObjectName + "]");
-                            UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(placedObjects[0][0].transform);
+                            //Debug.Log("Removing " + placedObjects[0][0].transform.name + " from waypointsForPlacedObjects[" + placedObjectName + "]");
+                            UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First());
+                            //UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First();
                             return;
-                            //OnChangedWaypoints?.Invoke();
-                        }
+                       }
                     }
                 }
             }
