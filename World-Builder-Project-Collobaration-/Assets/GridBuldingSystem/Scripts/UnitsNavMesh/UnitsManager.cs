@@ -22,14 +22,7 @@ public class UnitsManager : MonoBehaviour
     public List<List<Transform>> waypoints = new List<List<Transform>>();
     public Action TimeToMoveAutomatically;
     [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
-    public int numberOfPoints;
     public event Action OnChangedGlobalOrder;
-    public int maxUnits_0 = 5;
-    public int maxUnits_1 = 4;
-    public int maxUnits_2 = 3;
-    public int maxUnits_3 = 5;
-    public int maxUnits_4 = 4;
-    public int maxUnits_5 = 3;
     //int maxUnits;
     //NEW
     public AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, int> amountOfUnitsForPlacedObject = new AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, int>();
@@ -126,9 +119,10 @@ public class UnitsManager : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            // if the player clicks on the unit, then select it
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, unitMask))
             {
-
+                // if the unit is already selected, then deselect it
                 Unit unit = hit.collider.transform.GetComponentInParent<Unit>();
                 if (!selectedUnits.Contains(unit))
                 {

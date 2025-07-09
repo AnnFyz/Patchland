@@ -5336,8 +5336,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5013824, y: 9.66786, z: 3.188401}
-  m_Center: {x: -0.21313405, y: 4.106427, z: 0.17172956}
+  m_Size: {x: 3.5013824, y: 9.66786, z: 2.9176483}
+  m_Center: {x: -0.21313405, y: 4.106427, z: -0.42392725}
 --- !u!195 &2675644380505310729
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5381,12 +5381,17 @@ MonoBehaviour:
   agentVel: 0
   target: {fileID: 0}
   startPoint: {fileID: 0}
-  currentPoint: {fileID: 0}
+  waypointsList:
+    localOrder: []
+  elapsed: 0
+  movingToPointTimer: 3
   placedObjTypeId: 0
+  placedObjectName: 0
+  waypointIndex: 0
   currentMovemenetState: 0
   currentUnitsState: 0
-  Pointer: {fileID: 0}
-  isWaypointApproached: 0
+  isStartingAppriachingWaypoint: 0
+  intersectedWithUnitBlock: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &-629676016913631631
@@ -5475,16 +5480,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  occupiedBlockHealth: {fileID: 0}
-  occupiedBlock: {fileID: 0}
+  targetBlockHealth: {fileID: 0}
+  targetBlock: {fileID: 0}
+  isOnTargetBlock: 0
   possibleNextOccupiedBlocks: []
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
-  modelRenderer: {fileID: 2104063565369224189}
+  damageToBlock: 0
+  attackDelay: 0
+  modelRenderers: []
   zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
   zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  newMaterial: {fileID: 2100000, guid: 7195de02813355a44b6606bfac91b84b, type: 2}
+  zombiMaterial: {fileID: 0}
   attacking_Particles: {fileID: 4687464588843334752}
   messageFroomZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
@@ -5499,14 +5507,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startValue: 100
+  maxValue: 100
   curretValue: 0
   isFoodAround: 0
+  damageToUnit: 0
+  healthToUnit: 0
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
   whenAttacked_Particles: {fileID: 663237409304151850}
   whenDead_Particles: {fileID: 0}
   isAttacked: 0
+  isHealthLosing: 0
 --- !u!82 &5374270308236697826
 AudioSource:
   m_ObjectHideFlags: 0
@@ -45054,8 +45065,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 12.286256, z: 5}
-  m_Center: {x: 0, y: -3.6431289, z: 0}
+  m_Size: {x: 5, y: 12.286256, z: 5.191293}
+  m_Center: {x: 0, y: -3.6431289, z: -0.3663994}
 --- !u!114 &4079159686357829978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45140,12 +45151,6 @@ PrefabInstance:
 --- !u!4 &2073311080187582171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4637222678936992, guid: 22e82e37709fde34fb65a2fd28fbfb05,
-    type: 3}
-  m_PrefabInstance: {fileID: 2077734988684716923}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &2104063565369224189 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137001747131351174, guid: 22e82e37709fde34fb65a2fd28fbfb05,
     type: 3}
   m_PrefabInstance: {fileID: 2077734988684716923}
   m_PrefabAsset: {fileID: 0}

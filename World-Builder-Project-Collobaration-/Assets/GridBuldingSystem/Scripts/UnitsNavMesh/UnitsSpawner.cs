@@ -102,7 +102,6 @@ public class UnitsSpawner : MonoBehaviour
                     {
                         currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
                         currentUnit.GetComponent<Unit>().agent.enabled = true;
-                        UnitsManager.Instance.numberOfPoints++;
                         UnitsManager.Instance.SetAmountOfUnits(placedObjectName, 1);
                     }
                 }
