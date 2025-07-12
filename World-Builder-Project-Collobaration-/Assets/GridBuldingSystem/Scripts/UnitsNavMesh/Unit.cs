@@ -61,7 +61,7 @@ public class Unit : MonoBehaviour
     //List<BlockPrefab> intersectedWithUnitBlocks = new List<BlockPrefab>();
     [SerializeField] Animator animator;
     public AudioSource audioSource;
-    PlacedObject_Done currentPlacedObject = null;
+    public PlacedObject_Done currentPlacedObject = null;
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -85,6 +85,7 @@ public class Unit : MonoBehaviour
         SetupAgentFromConfiguration();
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
+        //GetComponentInChildren<UnitsHealth>().isFoodAround = true; // to start with food around
     }
 
     private void LateUpdate()
@@ -421,8 +422,6 @@ public class Unit : MonoBehaviour
                 GetComponentInChildren<UnitsHealth>().isFoodAround = false;
                 //StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 GetComponentInChildren<UnitsHealth>().LoseHealth();
-
-
             }
         }
     }

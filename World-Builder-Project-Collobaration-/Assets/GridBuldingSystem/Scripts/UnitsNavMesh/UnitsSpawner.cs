@@ -84,8 +84,8 @@ public class UnitsSpawner : MonoBehaviour
                         Debug.Log("currentUnit is null");
                         return;
                     }
-
-                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last() != null)
+                    //currentUnit.GetComponent<Unit>().currentPlacedObject = BuildingManager.Instance.
+                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last() != null) //  // Check if the last waypoint is not null
                     {
                         //OLD
                         //currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
