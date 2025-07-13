@@ -90,7 +90,7 @@ public class UnitsSpawner : MonoBehaviour
                         //OLD
                         //currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
                         //NEW
-                        currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last();
+                        currentUnit.GetComponent<Unit>().StartPoint = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last();
                         currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
                         currentUnit.GetComponent<Unit>().placedObjectName = placedObjectName;
                         //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
@@ -100,8 +100,8 @@ public class UnitsSpawner : MonoBehaviour
                     //units.Add(currentUnit);
                     if (currentUnit.GetComponent<Unit>())
                     {
-                        currentUnit.GetComponent<Unit>().agent.Warp(hit.position);
-                        currentUnit.GetComponent<Unit>().agent.enabled = true;
+                        currentUnit.GetComponent<Unit>().GetComponent<NavMeshAgent>().Warp(hit.position);
+                        currentUnit.GetComponent<Unit>().GetComponent<NavMeshAgent>().enabled = true;
                         UnitsManager.Instance.SetAmountOfUnits(placedObjectName, 1);
                     }
                 }

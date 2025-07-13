@@ -31,19 +31,24 @@ public class BlocksList
     public List<BlockPrefab> blocks = new List<BlockPrefab>();
 }
 
+// This class represents a unit in the game, which can be controlled by the player or move automatically.
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {
+    [Header("Unit Scriptable Object")]
+    [SerializeField] UnitsTypeSO unitScriptableObject;
+    public UnitsTypeSO UnitScriptableObject => unitScriptableObject;
+    [Header("Unit Sounds")]
     [SerializeField] AudioClip zombieSound;
-    public AudioClip glassBreaking;
-    public UnitsTypeSO unitScriptableObject;
-    public GameObject selectedFigur;
-    public NavMeshAgent agent;
-    public float agentVel;
-    public Transform target;
-    public Transform startPoint;
-    //public Transform currentPoint;
-    //List<Transform> localOrder = new List<Transform>();
+    public AudioClip ZombieSound => zombieSound;
+    [SerializeField] AudioClip glassBreaking;
+    public AudioClip GlassBreaking => glassBreaking;
+
+    GameObject selectedFigur; // to show that the unit is selected
+    NavMeshAgent Agent { get; set; }
+    float agentVel;
+    Transform target;
+    public Transform StartPoint { get; set; }
     [SerializeField] WaypointsList waypointsList = new WaypointsList();
     private NavMeshPath path;
     [SerializeField] float elapsed = 0.0f;
@@ -65,7 +70,7 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
         zombi = GetComponent<Zombi>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -77,7 +82,6 @@ public class Unit : MonoBehaviour
         currentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-        //MoveAutomaticallyToWayPoint();
     }
 
     public void OnEnable()
@@ -85,7 +89,6 @@ public class Unit : MonoBehaviour
         SetupAgentFromConfiguration();
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
-        //GetComponentInChildren<UnitsHealth>().isFoodAround = true; // to start with food around
     }
 
     private void LateUpdate()
@@ -97,8 +100,8 @@ public class Unit : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetBool("IsRunning", agent.velocity.magnitude > 0.01f);
-            if (agent.velocity.magnitude < 0.01f && currentUnitsState != UnitsState.Zombi)
+            animator.SetBool("IsRunning", Agent.velocity.magnitude > 0.01f);
+            if (Agent.velocity.magnitude < 0.01f && currentUnitsState != UnitsState.Zombi)
             {
                 audioSource.volume = 0;
             }
@@ -122,7 +125,7 @@ public class Unit : MonoBehaviour
             }
         }
 
-        agentVel = agent.velocity.magnitude;
+        agentVel = Agent.velocity.magnitude;
     }
 
     void UseChanceToBecomeZombi()
@@ -149,7 +152,6 @@ public class Unit : MonoBehaviour
             SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
-            zombi.HandleZombiTransformation();
             zombi.HandleZombiMovement();
             Debug.Log("UseChanceToBecomeZombi");
             StartCoroutine(zombi.AttackBlock());
@@ -167,8 +169,6 @@ public class Unit : MonoBehaviour
         float dist = Mathf.Infinity;
         if (zombi.currentState == ZombiState.None) // first assignment
         {
-            //foreach (var block in intersectedWithUnitBlocks.blocks)
-            //{
             float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, intersectedWithUnitBlock.transform.position + intersectedWithUnitBlock.transform.position * 0.5f);
             if (newDist < dist)
             {
@@ -176,7 +176,6 @@ public class Unit : MonoBehaviour
                 zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
                 zombi.targetBlock = intersectedWithUnitBlock;
             }
-            // }
         }
     }
     void CheckBlock(Collider other)
@@ -186,11 +185,6 @@ public class Unit : MonoBehaviour
         {
             block = other.GetComponentInParent<BlockPrefab>();
             intersectedWithUnitBlock = block;
-            //if (!intersectedWithUnitBlocks.blocks.Contains(block))
-            //{
-            //    intersectedWithUnitBlocks.blocks.Add(block);
-
-            //}
         }
     }
     void DestroyUnit()
@@ -209,34 +203,11 @@ public class Unit : MonoBehaviour
         if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
         {
             waypointsList.localOrder.Clear();
-            //if (startPoint == null)
-            //{
-            //    startPoint = UnitsManager.Instance.startPoint;
-            //}
-            if (target == null && startPoint != null) // it means the unit was just created
+            if (target == null && StartPoint != null) // it means the unit was just created
             {
-                waypointsList.localOrder.Add(startPoint);
-                //currentPoint = startPoint;
-                target = startPoint;
+                waypointsList.localOrder.Add(StartPoint);
+                target = StartPoint;
             }
-            //else
-            //{
-            //    currentPoint = target;
-            //    waypointsList.localOrder.Add(currentPoint);
-            //}
-
-            //OLD
-            //if (UnitsManager.Instance.waypoints != null)
-            //{
-            //    if (UnitsManager.Instance.waypoints[placedObjTypeId] != null)
-            //    {
-            //        List<Transform> reversedList = UnitsManager.Instance.waypoints[placedObjTypeId];
-            //        reversedList.Reverse();
-            //        waypointsList.localOrder.AddRange(reversedList);
-
-            //    }
-            //}
-            //NEW
             if (UnitsManager.Instance.waypointsForPlacedObjects != null)
             {
                 if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName] != null)
@@ -272,10 +243,10 @@ public class Unit : MonoBehaviour
                     if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().curretValue >= GetComponent<UnitsHealth>().maxValue || currentPlacedObject == null))
                     {
                         elapsed = 0;
-                        agent.CalculatePath(target.transform.position, path);
+                        Agent.CalculatePath(target.transform.position, path);
                         if (path.status == NavMeshPathStatus.PathComplete)
                         {
-                            if (agent.SetDestination(target.transform.position))
+                            if (Agent.SetDestination(target.transform.position))
                             {
                                 if (Vector3.Distance(transform.position, target.transform.position) < 3f)
                                 {
@@ -299,23 +270,6 @@ public class Unit : MonoBehaviour
                 }
             }
         }
-    }
-
-    IEnumerator StartAproachingWaypoint()
-    {
-        yield return new WaitForSeconds(3f);
-        if (Vector3.Distance(transform.position, target.transform.position) < 3f)
-        {
-            Debug.Log("Waypoint approached: " + target.name);
-            IterateWaypointIndex();
-            //MoveAutomaticallyToWayPoint();
-        }
-        else
-        {
-            Debug.Log("Waypoint is to far away" + target.name);
-            IterateWaypointIndex();
-        }
-        isStartingAppriachingWaypoint = false;
     }
 
     void IterateWaypointIndex()
@@ -344,16 +298,16 @@ public class Unit : MonoBehaviour
 
     public virtual void SetupAgentFromConfiguration()
     {
-        agent.acceleration = unitScriptableObject.acceleration;
-        agent.angularSpeed = unitScriptableObject.angularSpeed;
-        agent.areaMask = unitScriptableObject.areaMask;
-        agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority/4, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
-        agent.baseOffset = unitScriptableObject.baseOffset;
-        agent.height = unitScriptableObject.height;
-        agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
-        agent.radius = unitScriptableObject.radius;
-        agent.speed = unitScriptableObject.speed;
-        agent.stoppingDistance = unitScriptableObject.stoppingDistance;
+        Agent.acceleration = unitScriptableObject.acceleration;
+        Agent.angularSpeed = unitScriptableObject.angularSpeed;
+        Agent.areaMask = unitScriptableObject.areaMask;
+        Agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority/4, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
+        Agent.baseOffset = unitScriptableObject.baseOffset;
+        Agent.height = unitScriptableObject.height;
+        Agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
+        Agent.radius = unitScriptableObject.radius;
+        Agent.speed = unitScriptableObject.speed;
+        Agent.stoppingDistance = unitScriptableObject.stoppingDistance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -368,7 +322,6 @@ public class Unit : MonoBehaviour
                     currentPlacedObject = other.gameObject.GetComponentInParent<PlacedObject_Done>();
                     currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
                     GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                    //GetComponentInChildren<UnitsHealth>().isHealthLosing = false;
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
 
                 }
@@ -384,43 +337,21 @@ public class Unit : MonoBehaviour
         CheckBlock(other);
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
-    //    {
-    //        if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
-    //        {
-    //            if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi && !GetComponentInChildren<UnitsHealth>().isFoodAround)
-    //            {
-    //                Debug.Log("There is a food around");
-    //                GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-    //                StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-    //                CheckIntersectedBlock(other);
-    //            }
-    //        }
-
-    //        else if(currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi && GetComponentInChildren<UnitsHealth>().isFoodAround)
-    //        {
-    //            Debug.Log("There is no food around");
-    //            GetComponentInChildren<UnitsHealth>().isFoodAround = false;
-    //            GetComponentInChildren<UnitsHealth>().LoseHealth();
-
-
-    //        }
-    //    }
-    //}
-
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
+            
+            //if (currentPlacedObject == null && GetComponentInChildren<UnitsHealth>().isFoodAround)
+            //{
+            //    GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+            //}
+
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId && GetComponentInChildren<UnitsHealth>().isFoodAround)
             {
                 currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
                 currentPlacedObject = null;
                 GetComponentInChildren<UnitsHealth>().isFoodAround = false;
-                //StopCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
                 GetComponentInChildren<UnitsHealth>().LoseHealth();
             }
         }
@@ -433,10 +364,8 @@ public class Unit : MonoBehaviour
         {
             GetComponentInChildren<UnitsHealth>().isFoodAround = false;
             GetComponentInChildren<UnitsHealth>().LoseHealth();
-            agent.ResetPath();
+            Agent.ResetPath();
             UpdateListOfWaypoints();
-            //agent.SetDestination(target.transform.position);
-            //MoveAutomaticallyToWayPoint();
         }
     }
 

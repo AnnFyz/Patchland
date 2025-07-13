@@ -27,14 +27,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         blockPrefab.OnAmountChanged += UpdateGrid;
         blockPrefab.OnAmountChanged += DeleteOldObjectsAndWaypoints;
 
-        //blockPrefab.OnHeightChanged += DeleteAgain;
     }
-
-    private void Start()
-    {
-        //OnChangedWaypoints?.Invoke();
-    }
-
     public void SetBlockGrid()
     {
         grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
@@ -61,7 +54,6 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                     int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
 
-                    //NEW
                     PlacedObjectName placedObjectName = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
                     if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
                     {
@@ -69,13 +61,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                         UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
                         OnChangedWaypoints?.Invoke();
                     }
-                    //OLD
-                    //if (UnitsManager.Instance.waypoints[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
-                    //{
-                    //    UnitsManager.Instance.waypoints[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
-                    //    OnChangedWaypoints?.Invoke();
-                    //}
-
                     if (BuildingManager.placedObjects[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject()))
                     {
                         BuildingManager.placedObjects[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject());
@@ -89,21 +74,7 @@ public class MyGridBuildingSystem : MonoBehaviour
         }
 
     }
-    //void DeleteAgain(int newHeight)
-    //{
-    //    for (int x = 0; x < gridWidth; x++)
-    //    {
-    //        for (int z = 0; z < gridHeight; z++)
-    //        {
-    //            if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
-    //            {
-    //                grid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
-    //                grid.GetGridObject(x, z).ClearPlacedObject();
 
-    //            }
-    //        }
-    //    }
-    //}
     public void GetAllPlacedObjectsOnTheBlock()
     {
         for (int x = 0; x < gridWidth; x++)
@@ -116,7 +87,6 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                     int placedObjectId = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
 
-                    //NEW
                     PlacedObjectName placedObjectName = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
 
                     if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
@@ -124,13 +94,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                         UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
                         OnChangedWaypoints?.Invoke();
                     }
-
-                    //OLD
-                    //if (UnitsManager.Instance.waypoints[placedObjectId].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
-                    //{
-                    //    UnitsManager.Instance.waypoints[placedObjectId].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
-                    //    OnChangedWaypoints?.Invoke();
-                    //}
                 }
             }
         }
@@ -235,17 +198,13 @@ public class MyGridBuildingSystem : MonoBehaviour
                             grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                         }
 
-                        //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound //
+                        //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound 
                         BuildingManager.Instance.audio.PlayOneShot(BuildingManager.Instance.placedSound);
                         Transform unitToCreate = BuildingManager.Instance.currentObjectTypeSO.unitToCreate; // to know which unit should be spawned
 
 
                         int placedObjectId = BuildingManager.Instance.currentObjectTypeSO.placedObjId;
 
-                        // OLD
-                        //UnitsManager.Instance.waypoints[placedObjectId].Add(placedObject.transform);
-
-                        // NEW
                         PlacedObjectName placedObjectName = placedObject.placedObjectTypeSO.placedObjectName;
 
                         if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObject.transform))
@@ -267,9 +226,6 @@ public class MyGridBuildingSystem : MonoBehaviour
 
                     else
                     {
-                        // Cannot build here
-                        //UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
-                        //Debug.Log("Cannot Build Here!");
                         Bubble.Instance.CreatePopupText(mousePosition, "Cannot build here!");
                     }
                 }
@@ -287,32 +243,6 @@ public class MyGridBuildingSystem : MonoBehaviour
             }
         }
     }
-
-    bool CheckIfFitBlock(LevelState blockState, Vector3 mousePosition)
-    {
-        //if (BuildingManager.Instance.placedObjectTypeSO != null)
-        //{
-        //    if (blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Desert && BuildingManager.Instance.placedObjectTypeSO.placedObjId != 0)
-        //    {
-        //        Bubble.Instance.CreatePopupText(mousePosition, "Noway");
-        //        return false;
-        //    }
-
-
-        //}
-
-        //if (BuildingManager.Instance.placedObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Forest)
-        //{
-        //    if (BuildingManager.Instance.placedObjectTypeSO.placedObjId == 3 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 4 || BuildingManager.Instance.placedObjectTypeSO.placedObjId == 5)
-        //    {
-        //        Bubble.Instance.CreatePopupText(mousePosition, "Noway");
-        //        return false;
-        //    }
-        //}
-
-        return true;
-    }
-
 
     private Vector3 GetMouseWorldPosition()
     {

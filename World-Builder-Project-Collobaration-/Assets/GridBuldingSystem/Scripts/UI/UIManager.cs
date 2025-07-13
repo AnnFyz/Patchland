@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
                     {
                         icon.SetActive(true);
                     }
-                    icons[0].SetActive(true);
+                    icons[0].SetActive(false);
                     break;
                 default:
                     Debug.Log("NOTHING");

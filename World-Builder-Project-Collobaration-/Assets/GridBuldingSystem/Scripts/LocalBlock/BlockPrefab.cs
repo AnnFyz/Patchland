@@ -44,12 +44,10 @@ public class BlockPrefab : MonoBehaviour
     {
         startScale = Mathf.FloorToInt(this.gameObject.transform.GetChild(0).localScale.y + 4.0f);
         renderers = new Renderer[blockStack.Length];
-        //renderers[0] = GetComponent<Renderer>();
         for (int i = 0; i < blockStack.Length; i++)
         {
             renderers[i] = blockStack[i].GetComponent<Renderer>();
         }
-        //renderers = GetComponentsInChildren<Renderer>();
         foreach (var renderer in renderers)
         {
             if (renderer.material.HasColor("_BaseColor"))
@@ -180,61 +178,6 @@ public class BlockPrefab : MonoBehaviour
         mainBlock.gameObject.GetComponent<Renderer>().material = stateMaterial;
     }
 
-    //public void ChangeAmount(int addedAmount)
-    //{
-    //    if (addedAmount < 0 && transform.localScale.y <= 1 && transform.localRotation.z >= 0) // flip from desert to pond 
-    //    {
-    //        //transform.localRotation = Quaternion.Euler(transform.localRotation.x, transform.localRotation.y, -180);
-    //        newAmount = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnAmountChanged?.Invoke(newAmount);
-    //        //Debug.Log("flip from desert to pond  " + transform.localRotation.z);
-    //        return;
-    //    }
-
-    //    if (addedAmount > 0 && transform.localScale.y == 1 && transform.localRotation.z <= -0.1) //flip from pond to desert 
-    //    {
-    //        transform.localRotation = Quaternion.identity;
-    //        newAmount = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnAmountChanged?.Invoke(newAmount);
-    //        //Debug.Log("flip from pond to desert  " + transform.localRotation.z);
-    //        return;
-    //    }
-
-    //    if (addedAmount > 0 && transform.localScale.y >= 1 && transform.localRotation.z >= 0)  // from desert  to forest
-    //    {
-    //        transform.localRotation = Quaternion.identity;
-    //        transform.localScale += new Vector3(0, addedAmount, 0);
-    //        newAmount = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnAmountChanged?.Invoke(newAmount);
-    //        //Debug.Log("from desert  to forest " + transform.localRotation.z);
-    //        return;
-
-    //    }
-
-    //    if (addedAmount < 0 && transform.localScale.y > 1)
-    //    {
-    //        transform.localRotation = Quaternion.identity;
-    //        transform.localScale += new Vector3(0, addedAmount, 0);
-    //        newAmount = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnAmountChanged?.Invoke(newAmount);
-    //        //Debug.Log("from forest or desert to desert or to pond  " + transform.localRotation.z);
-    //        return;
-    //    }
-
-    //    if (addedAmount == 0) //setup at the start
-    //    {
-    //        transform.localScale += new Vector3(0, addedAmount, 0);
-    //        newAmount = Mathf.RoundToInt(transform.localScale.y);
-    //        UIManager.Instance.LocalSetupUIIcons();
-    //        OnAmountChanged?.Invoke(newAmount);
-    //        return;
-
-    //    }
-    //}
 
     public int GetNewHeight()
     {
@@ -245,43 +188,4 @@ public class BlockPrefab : MonoBehaviour
     {
         return startScale;
     }
-
-    //public void ChangeHighlightedColorl()
-    //{
-    //    if (renderer.material.HasColor("_BaseColor"))
-    //    {
-    //        renderer.material.color = GridOfPrefabs.Instance.GetColorOfHighlightedBlocks();
-    //    }
-    //    if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
-    //    {
-    //        renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), GridOfPrefabs.Instance.GetColorOfHighlightedBlocks());
-
-    //    }
-
-    //}
-
-    //public void ChangeColorBack()
-    //{
-    //    if (renderer.material.HasColor("_BaseColor"))
-    //    {
-    //        renderer.material.color = defaultColor;
-    //    }
-    //    if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6") )
-    //    {
-    //        renderer.material.SetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"), defaultColor);
-    //        renderer.material.SetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"), defaultBottomColor);
-
-    //    }
-    //}
-
-    //public void ChangeMaterialBack()
-    //{
-    //    renderer.material = defaultMaterial;
-    //    //ChangeColorBack();
-    //}
-    //    public void ChangeSelectedMaterial()
-    //    {
-    //        renderer.material = GridOfPrefabs.Instance.GetMaterialOfSelectedBlocks();
-    //        //ChangeColorBack();
-    //    }
 }

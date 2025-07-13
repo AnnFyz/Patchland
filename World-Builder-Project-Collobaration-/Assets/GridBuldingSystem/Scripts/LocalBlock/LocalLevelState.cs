@@ -67,10 +67,7 @@ public class LocalLevelState : MonoBehaviour
             {
                 OnChangedState?.Invoke();
             }
-            //if (currentLevelState != LevelState.Desert)
-            //{ Debug.Log("State was changed"); }
             renderer.material = BuildingManager.Instance.levelsMaterials[1];
-            //blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             else if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
@@ -91,7 +88,6 @@ public class LocalLevelState : MonoBehaviour
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[2];
-            //blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
@@ -121,8 +117,6 @@ public class LocalLevelState : MonoBehaviour
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
-                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
             }
            
             currentLevelState = LevelState.Hill;
@@ -137,15 +131,12 @@ public class LocalLevelState : MonoBehaviour
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[4];
-            //blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
-                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
             }
 
             currentLevelState = LevelState.Mountain;
@@ -160,15 +151,12 @@ public class LocalLevelState : MonoBehaviour
                 OnChangedState?.Invoke();
             }
             renderer.material = BuildingManager.Instance.levelsMaterials[5];
-           // blockPrefab.defaultMaterial = renderer.material;
             blockPrefab.SetStateMaterial(renderer.material);
             if (renderer.material.HasColor("_BaseColor")) { blockPrefab.defaultColor = renderer.material.color; }
             if (renderer.material.HasColor("Color_d3f90b46fa4040c48d4031973961bef6"))
             {
                 blockPrefab.defaultColor = renderer.material.GetColor(Shader.PropertyToID("Color_d3f90b46fa4040c48d4031973961bef6"));
                 blockPrefab.defaultBottomColor = renderer.material.GetColor(Shader.PropertyToID("Color_64d861fce71044349695d1bac7f2ea98"));
-                //blockPrefab.defaultColor = Color.HSVToRGB(blHealth.H_1, blHealth.S_1, blHealth.V_1);
-                //blockPrefab.defaultBottomColor = Color.HSVToRGB(blHealth.H_2, blHealth.S_2, blHealth.V_2);
             }
          
             currentLevelState = LevelState.SnowMountain;

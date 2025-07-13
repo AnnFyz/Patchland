@@ -15,7 +15,7 @@ public enum UIState
 }
 public class UnitsHealth : MonoBehaviour
 {
-   public float maxValue = 100f; //{ get;} TO MAKE IT READ ONLY
+    public float maxValue = 100f; //{ get;} TO MAKE IT READ ONLY
     public float curretValue;  //{ get;} TO MAKE IT READ ONLY
     public bool isFoodAround = false;
     public Action OnUnitDeath;
@@ -37,9 +37,10 @@ public class UnitsHealth : MonoBehaviour
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
-        damageToUnit = unit.unitScriptableObject.damageToUnitWithoutFood;
-        healthToUnit = unit.unitScriptableObject.healthPointsFromFood;
+        damageToUnit = unit.UnitScriptableObject.damageToUnitWithoutFood;
+        healthToUnit = unit.UnitScriptableObject.healthPointsFromFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
+        //isFoodAround = true;
     }
 
    
@@ -127,30 +128,6 @@ public class UnitsHealth : MonoBehaviour
     }
 
 
-    //private void FixedUpdate()
-    //{
-       
-    //    SwitchUIState();
-    //    if(currentUIState == UIState.hungry)
-    //    {
-    //        Debug.Log("Hungry");
-    //        if (!WasHungryBubbleCreated)
-    //        {
-    //            Bubble.Instance.CreateBubble(transform.position, hungryLines[UnityEngine.Random.Range(0, hungryLines.Length -1)]);
-    //            WasHungryBubbleCreated = true;
-    //        }
-    //    }
-    //    if (currentUIState == UIState.veryHungry)
-    //    {
-    //        Debug.Log("Very Hungry");
-    //        if (!WasAngryBubbleCreated)
-    //        {
-    //            Bubble.Instance.CreateBubble(transform.position, angryLines[UnityEngine.Random.Range(0, angryLines.Length -1)]);
-    //            WasAngryBubbleCreated = true;
-    //        }
-    //    }
-    //}
-
     void CreateOpenLines()
     {
         openLines[0] = "  (•̤̀ᵕ•̤́)  "; 
@@ -209,12 +186,6 @@ public class UnitsHealth : MonoBehaviour
         }
         CheckUIState();
     }
-    //public void FillHealth(float value)
-    //{
-    //    curretValue += value;
-    //    curretValue = Mathf.Clamp(curretValue, 0, maxValue);
-    //    SwitchUIState();
-    //}
 
     public IEnumerator FillHealthGradually()
     {

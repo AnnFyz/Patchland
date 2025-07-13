@@ -38,7 +38,6 @@ public class BlockList
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] LayerMask blockLayer;
     public BlockList blockList; // MAKE IT READ ONLY to keep track of healthy and dead blocks
     public AudioClip placedSound;
     public AudioSource audio;
@@ -54,7 +53,6 @@ public class BuildingManager : MonoBehaviour
     public BlockPrefab currentBlockPrefab;
     public BlockPrefab lastBlockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
-    List<List<GridOfPrefabs.PrefabGridObject>> prefabGridObjects;
     public static List<List<PlacedObject_Done>> placedObjects = new List<List<PlacedObject_Done>>();
     public static bool CanBuildSelected = false;
     private void Awake()
@@ -65,7 +63,7 @@ public class BuildingManager : MonoBehaviour
         else
             Instance = this;
 
-        currentObjectTypeSO = null;// placedObjectTypeSOList[0];
+        currentObjectTypeSO = null;
         audio = GetComponent<AudioSource>();
     }
 
@@ -103,87 +101,13 @@ public class BuildingManager : MonoBehaviour
                         Debug.Log(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First());
                         if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First() != null) 
                         {
-                            //Debug.Log("Removing " + placedObjects[0][0].transform.name + " from waypointsForPlacedObjects[" + placedObjectName + "]");
                             UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First());
-                            //UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].First();
                             return;
                        }
                     }
                 }
             }
         }
-        // OLD  
-        //if (placedObjects[0].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[0].Contains(placedObjects[0][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[0].Remove(placedObjects[0][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[0][0].DestroySelf();
-        //    placedObjects[0].RemoveAt(0);
-        //}
-
-        //if (placedObjects[1].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[1][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[1][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[1][0].DestroySelf();
-        //    placedObjects[1].RemoveAt(0);
-        //}
-
-        //if (placedObjects[2].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[2][0].DestroySelf();
-        //    placedObjects[2].RemoveAt(0);
-        //}
-
-        //if (placedObjects[3].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[3][0].DestroySelf();
-        //    placedObjects[3].RemoveAt(0);
-        //}
-
-        //if (placedObjects[4].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[4][0].DestroySelf();
-        //    placedObjects[3].RemoveAt(0);
-        //}
-
-        //if (placedObjects[5].Count > objectToPlace.maxAmountOPlacedObjects)
-        //{
-        //    if (UnitsManager.Instance.waypoints[1].Contains(placedObjects[2][0].transform))
-        //    {
-        //        UnitsManager.Instance.waypoints[1].Remove(placedObjects[2][0].transform);
-        //    }
-
-        //    // ADD PARTICLES IN DESTROYSELF  
-        //    placedObjects[4][0].DestroySelf();
-        //    placedObjects[3].RemoveAt(0);
-        //}
     }
 
 
@@ -196,8 +120,6 @@ public class BuildingManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             DeselectObjectTypeOnSelectedAnotherBlockType();
-            //DeselectObjectType();
-            //lastSelectedObjToPlaceTypeSO = null;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -331,7 +253,6 @@ public class BuildingManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
-            //Debug.Log(raycastHit.collider.name);
             return raycastHit.point;
         }
         else
