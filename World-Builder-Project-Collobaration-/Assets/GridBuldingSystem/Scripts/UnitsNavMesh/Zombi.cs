@@ -53,7 +53,6 @@ public class Zombi : MonoBehaviour
         HandleZombiMovement();
 
     }
-    // NEW
     public void HandleZombiMovement()
     {
         if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead)
@@ -95,42 +94,6 @@ public class Zombi : MonoBehaviour
         }
     }
 
-
-        // OLD
-        //public void HandleZombiMovement()
-        //{
-        //    if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead) //currentState == ZombiState.AttackBlock  && 
-        //    {
-        //        // Update the way to the goal every second.
-        //        elapsed += Time.deltaTime;
-        //        IterateWaypointIndex();
-        //        target = targetBlockHealth.generatedWaypoints[waypointIndex];
-        //        if (target != null)
-        //        {
-        //            if (elapsed > 2f)
-        //            {
-        //                elapsed -= 2f;
-        //                agent.SetDestination(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
-        //                if (Vector3.Distance(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), target.transform.position) < 3f)
-        //                {
-        //                    IterateWaypointIndex();
-        //                }
-        //                //else
-        //                //{
-        //                //    DestroyZombi();
-        //                //    //IterateWaypointIndex();
-        //                //}
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("Target is null, zombi will be destroyed");
-        //            DestroyZombi();
-        //        }
-
-        //    }
-        //}
-
         void IterateWaypointIndex()
         {
             waypointIndex++;
@@ -140,7 +103,33 @@ public class Zombi : MonoBehaviour
             }
         }
 
-    public void SetOccupiedBlock(Collider block) //
+    public void HandleZombiTransformation()
+    {  
+        if (zombiMaterial != null)
+        {
+            ChangeMaterial(zombiMaterial);
+        }
+    }
+    void ChangeMaterial(Material newMat)
+    {
+        Renderer[] oldMat = new Renderer[modelRenderers.Length];
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            oldMat[i] = modelRenderers[i];
+        }
+        // Change the material of all renderers to the new material
+        foreach (Renderer rend in oldMat)
+        {
+            var mats = new Material[rend.materials.Length];
+            for (var j = 0; j < rend.materials.Length; j++)
+            {
+                mats[j] = newMat;
+            }
+            rend.materials = mats;
+        }
+    }
+
+    public void SetOccupiedBlock(Collider block) 
     {
         if (currentState != ZombiState.None)
         {
@@ -245,5 +234,6 @@ public class Zombi : MonoBehaviour
         particles.Play();
         Destroy(gameObject);
     }
+
 
 }

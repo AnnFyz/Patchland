@@ -153,6 +153,7 @@ public class Unit : MonoBehaviour
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             zombi.HandleZombiMovement();
+            zombi.HandleZombiTransformation();
             Debug.Log("UseChanceToBecomeZombi");
             StartCoroutine(zombi.AttackBlock());
 
@@ -317,13 +318,15 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId)
             {
-                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi && !GetComponentInChildren<UnitsHealth>().isFoodAround)
+                if (currentUnitsState != UnitsState.Dead && currentUnitsState != UnitsState.Zombi)
                 {
                     currentPlacedObject = other.gameObject.GetComponentInParent<PlacedObject_Done>();
                     currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
-                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
-                    StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-
+                    //if(!GetComponentInChildren<UnitsHealth>().isFoodAround)
+                    //{
+                        GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+                        StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
+                   // }
                 }
 
             }
@@ -341,11 +344,6 @@ public class Unit : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
-            
-            //if (currentPlacedObject == null && GetComponentInChildren<UnitsHealth>().isFoodAround)
-            //{
-            //    GetComponentInChildren<UnitsHealth>().isFoodAround = false;
-            //}
 
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == placedObjTypeId && GetComponentInChildren<UnitsHealth>().isFoodAround)
             {

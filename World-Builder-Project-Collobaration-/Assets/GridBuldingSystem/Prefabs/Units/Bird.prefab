@@ -5247,15 +5247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieSound: {fileID: 0}
-  glassBreaking: {fileID: 0}
   unitScriptableObject: {fileID: 11400000, guid: af7d1ec7410fc1b43955dbf608fd2a88,
     type: 2}
-  selectedFigur: {fileID: 0}
-  agent: {fileID: 0}
-  agentVel: 0
-  target: {fileID: 0}
-  startPoint: {fileID: 0}
+  zombieSound: {fileID: 0}
+  glassBreaking: {fileID: 0}
   waypointsList:
     localOrder: []
   elapsed: 0
@@ -5328,11 +5323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingToPointTimer: 3
   currentState: 0
   targetBlockHealth: {fileID: 0}
   targetBlock: {fileID: 0}
   isOnTargetBlock: 0
-  possibleNextOccupiedBlocks: []
   target: {fileID: 0}
   agent: {fileID: 0}
   isAttacking: 0
@@ -5340,8 +5335,6 @@ MonoBehaviour:
   attackDelay: 0
   modelRenderers:
   - {fileID: 2104063565369224189}
-  zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
-  zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
   messageFroomZombi: {fileID: 0}
@@ -5474,7 +5467,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2675644380505310728}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 20
   m_Acceleration: 18
   avoidancePriority: 50

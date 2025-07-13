@@ -40,7 +40,7 @@ public class UnitsHealth : MonoBehaviour
         damageToUnit = unit.UnitScriptableObject.damageToUnitWithoutFood;
         healthToUnit = unit.UnitScriptableObject.healthPointsFromFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
-        //isFoodAround = true;
+        isFoodAround = true;
     }
 
    
