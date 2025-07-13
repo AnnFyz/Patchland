@@ -91,7 +91,7 @@ public class UnitsSpawner : MonoBehaviour
                         //currentUnit.GetComponent<Unit>().startPoint = UnitsManager.Instance.waypoints[placedObjId].Last();
                         //NEW
                         currentUnit.GetComponent<Unit>().StartPoint = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Last();
-                        currentUnit.GetComponent<Unit>().placedObjTypeId = placedObjId;
+                        currentUnit.GetComponent<Unit>().PlacedObjTypeId = placedObjId;
                         currentUnit.GetComponent<Unit>().placedObjectName = placedObjectName;
                         //currentUnit.GetComponent<Unit>().UpdateListOfWaypoints();
 

@@ -208,7 +208,7 @@ public class Zombi : MonoBehaviour
     }
     void MoveToNextNeighbourAliveBlock()
     {
-        if (targetBlockHealth != null && targetBlockHealth.IsBlockDead && unit.currentUnitsState == UnitsState.Zombi)
+        if (targetBlockHealth != null && targetBlockHealth.IsBlockDead && unit.CurrentUnitsState == UnitsState.Zombi)
         {
             targetBlockHealth.IsBeingDamaged = false;
             if (targetBlockHealth.currentHealth <= 0 && !isAttacking)

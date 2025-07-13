@@ -129,11 +129,11 @@ public class UnitsManager : MonoBehaviour
 
                     if (unit != null)
                     {
-                        if (unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
+                        if (unit.CurrentUnitsState != UnitsState.Dead && unit.CurrentUnitsState != UnitsState.Zombi)
                         {
                             selectedUnits.Add(unit);
                             unit.OnSelected();
-                            unit.currentMovemenetState = UnitsMovementState.ControlledFromPlayer;
+                            unit.CurrentMovemenetState = UnitsMovementState.ControlledFromPlayer;
                         }
                     }
                 }
@@ -145,7 +145,7 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                         unit.OnDeselected();
-                    unit.currentMovemenetState = UnitsMovementState.Autopilot;
+                    unit.CurrentMovemenetState = UnitsMovementState.Autopilot;
                 }
 
                 selectedUnits.Clear();
@@ -160,7 +160,7 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                     {
-                        if (unit.currentUnitsState != UnitsState.Dead && unit.currentUnitsState != UnitsState.Zombi)
+                        if (unit.CurrentUnitsState != UnitsState.Dead && unit.CurrentUnitsState != UnitsState.Zombi)
                         {
                             unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
                         }

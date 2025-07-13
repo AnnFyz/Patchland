@@ -79,7 +79,7 @@ public class UnitsHealth : MonoBehaviour
         }
         else if (curretValue <= 0)
         {
-            if (unit.currentUnitsState == UnitsState.Zombi)
+            if (unit.CurrentUnitsState == UnitsState.Zombi)
             {
                 currentUIState = UIState.zombi;
                 stateFire.SetActive(false);
@@ -159,8 +159,8 @@ public class UnitsHealth : MonoBehaviour
         StartCoroutine(SubstractHealthGradually());
         if (curretValue <= 0)
         {
-            unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-            if (unit.currentUnitsState != UnitsState.Zombi)
+            unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+            if (unit.CurrentUnitsState != UnitsState.Zombi)
             {
                 OnUnitDeath?.Invoke();
             }
@@ -178,8 +178,8 @@ public class UnitsHealth : MonoBehaviour
         }
         if (curretValue <= 0)
         {
-            unit.currentUnitsState = UnitsState.Dead; 
-            if (unit.currentUnitsState != UnitsState.Zombi)
+            unit.CurrentUnitsState = UnitsState.Dead; 
+            if (unit.CurrentUnitsState != UnitsState.Zombi)
             {
                 OnUnitDeath?.Invoke();
             }
@@ -203,8 +203,8 @@ public class UnitsHealth : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (unit.currentUnitsState == UnitsState.Zombi) { return; }
-        if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
+        if (unit.CurrentUnitsState == UnitsState.Zombi) { return; }
+        if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
         {
             Debug.Log("ANOTHER UNIT");
             //StartCoroutine(SubstractHealthGradually());
@@ -212,15 +212,15 @@ public class UnitsHealth : MonoBehaviour
             isAttacked = true;
             if (curretValue <= 0)
             {
-                unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                if (unit.currentUnitsState != UnitsState.Zombi)
+                unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                if (unit.CurrentUnitsState != UnitsState.Zombi)
                 {
                     OnUnitDeath?.Invoke();
                 }
             }
         }
     
-        else if (unit.currentUnitsState != UnitsState.Zombi && other.gameObject.GetComponentInParent<BlockHealth>())
+        else if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponentInParent<BlockHealth>())
         {
             if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
             {
@@ -230,8 +230,8 @@ public class UnitsHealth : MonoBehaviour
                 isAttacked = true;
                 if (curretValue <= 0)
                 {
-                    unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                    if (unit.currentUnitsState != UnitsState.Zombi)
+                    unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                    if (unit.CurrentUnitsState != UnitsState.Zombi)
                     {
                         OnUnitDeath?.Invoke();
                     }
@@ -243,7 +243,7 @@ public class UnitsHealth : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (unit.currentUnitsState == UnitsState.Zombi) { return; }
+        if (unit.CurrentUnitsState == UnitsState.Zombi) { return; }
         if (other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
 
         {
@@ -252,8 +252,8 @@ public class UnitsHealth : MonoBehaviour
             isAttacked = false;
             if (curretValue <= 0)
             {
-                unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                if (unit.currentUnitsState != UnitsState.Zombi)
+                unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                if (unit.CurrentUnitsState != UnitsState.Zombi)
                 {
                     OnUnitDeath?.Invoke();
                 }
@@ -270,8 +270,8 @@ public class UnitsHealth : MonoBehaviour
                 isAttacked = false;
                 if (curretValue <= 0)
                 {
-                    unit.currentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                    if (unit.currentUnitsState != UnitsState.Zombi)
+                    unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
+                    if (unit.CurrentUnitsState != UnitsState.Zombi)
                     {
                         OnUnitDeath?.Invoke();
                     }
