@@ -5629,15 +5629,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2675644380505310733}
   - component: {fileID: 2675644380505310732}
-  - component: {fileID: 2675644380505310731}
-  - component: {fileID: 2675644380505310730}
-  - component: {fileID: 2675644380505310729}
   - component: {fileID: 1289161497042541120}
-  - component: {fileID: -629676016913631631}
-  - component: {fileID: 3460686141523518379}
-  - component: {fileID: -4459645292068650433}
   - component: {fileID: 8004646403549274946}
+  - component: {fileID: -4459645292068650433}
   - component: {fileID: 726027282905428560}
+  - component: {fileID: 2675644380505310729}
+  - component: {fileID: 3460686141523518379}
+  - component: {fileID: 2675644380505310730}
   m_Layer: 7
   m_Name: Fox_1
   m_TagString: Untagged
@@ -5674,94 +5672,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675644380505310728}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2675644380505310731
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b0467b38803c363408aeebada8622392, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2675644380505310730
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.4201331, y: 4.2760916, z: 2.1092536}
-  m_Center: {x: 0.06256628, y: 1.6519762, z: 0.44422233}
---- !u!195 &2675644380505310729
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 1
-  m_AgentTypeID: -1923039037
-  m_Radius: 1.75
-  m_Speed: 20
-  m_Acceleration: 15
-  avoidancePriority: 50
-  m_AngularSpeed: 150
-  m_StoppingDistance: 1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 9
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &1289161497042541120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5774,131 +5684,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdbe04be05fa184186228546bd26913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieSound: {fileID: 0}
-  glassBreaking: {fileID: 0}
   unitScriptableObject: {fileID: 11400000, guid: 254d6a93b24b7574ba3c38c564f4ba8d,
     type: 2}
-  selectedFigur: {fileID: 0}
-  agent: {fileID: 0}
-  agentVel: 0
-  target: {fileID: 0}
-  startPoint: {fileID: 0}
-  waypointsList:
-    localOrder: []
-  elapsed: 0
-  movingToPointTimer: 3
-  placedObjTypeId: 0
-  placedObjectName: 3
-  waypointIndex: 0
-  currentMovemenetState: 0
-  currentUnitsState: 0
-  isStartingAppriachingWaypoint: 0
-  intersectedWithUnitBlock: {fileID: 0}
+  zombieSound: {fileID: 0}
+  glassBreaking: {fileID: 0}
   animator: {fileID: 5220167712569795103}
-  audioSource: {fileID: 0}
+  placedObjectName: 3
   currentPlacedObject: {fileID: 0}
---- !u!114 &-629676016913631631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325054c090246344693aaf9b60bf25ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Method: 3
-  m_Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0045871558
-      value: -0.0027502403
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5299695
-      value: 0.88375133
-      inSlope: 0.017270261
-      outSlope: 0.017270261
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0550601
-      value: 0.0027740002
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!54 &3460686141523518379
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &-4459645292068650433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  targetBlockHealth: {fileID: 0}
-  targetBlock: {fileID: 0}
-  isOnTargetBlock: 0
-  possibleNextOccupiedBlocks: []
-  target: {fileID: 0}
-  agent: {fileID: 0}
-  isAttacking: 0
-  damageToBlock: 0
-  attackDelay: 0
-  modelRenderers:
-  - {fileID: 8103757828934625184}
-  zombiTopColor: {r: 1, g: 1, b: 1, a: 1}
-  zombiBottomColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
-  attacking_Particles: {fileID: 4687464588843334752}
-  messageFroomZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5922,6 +5714,33 @@ MonoBehaviour:
   whenDead_Particles: {fileID: 0}
   isAttacked: 0
   isHealthLosing: 0
+--- !u!114 &-4459645292068650433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675644380505310728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingToPointTimer: 3
+  currentState: 0
+  targetBlockHealth: {fileID: 0}
+  targetBlock: {fileID: 0}
+  isOnTargetBlock: 0
+  target: {fileID: 0}
+  agent: {fileID: 0}
+  isAttacking: 0
+  damageToBlock: 0
+  attackDelay: 0
+  modelRenderers:
+  - {fileID: 8103757828934625184}
+  zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
+  attacking_Particles: {fileID: 4687464588843334752}
+  messageFroomZombi: {fileID: 0}
 --- !u!82 &726027282905428560
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6019,6 +5838,76 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &2675644380505310729
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675644380505310728}
+  m_Enabled: 1
+  m_AgentTypeID: -1923039037
+  m_Radius: 1.75
+  m_Speed: 20
+  m_Acceleration: 15
+  avoidancePriority: 50
+  m_AngularSpeed: 150
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 9
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!54 &3460686141523518379
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675644380505310728}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2675644380505310730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675644380505310728}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4201331, y: 4.2760916, z: 2.1092536}
+  m_Center: {x: 0.06256628, y: 1.6519762, z: 0.44422233}
 --- !u!1 &2909201250027484335
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,5 +29,8 @@ public class UnitsTypeSO : ScriptableObject
     public float speed = 13f;
     public float stoppingDistance = 0.5f;
     public float triggerRadius = 0.15f;  // currently not in use
+    [Header("Unit Settings")]
+    public float minMovingToPointTimer = 2f;
+    public float maxMovingToPointTimer = 5f;
 
 }

@@ -5193,9 +5193,8 @@ GameObject:
   - component: {fileID: 2675644380505310733}
   - component: {fileID: 2675644380505310732}
   - component: {fileID: 1289161497042541120}
-  - component: {fileID: -629676016913631631}
-  - component: {fileID: -4459645292068650433}
   - component: {fileID: 8004646403549274946}
+  - component: {fileID: -4459645292068650433}
   - component: {fileID: 5374270308236697826}
   - component: {fileID: 2675644380505310729}
   - component: {fileID: 3460686141523518379}
@@ -5251,21 +5250,10 @@ MonoBehaviour:
     type: 2}
   zombieSound: {fileID: 0}
   glassBreaking: {fileID: 0}
-  waypointsList:
-    localOrder: []
-  elapsed: 0
-  movingToPointTimer: 3
-  placedObjTypeId: 0
+  animator: {fileID: 2126051368098338189}
   placedObjectName: 4
-  waypointIndex: 0
-  currentMovemenetState: 0
-  currentUnitsState: 0
-  isStartingAppriachingWaypoint: 0
-  intersectedWithUnitBlock: {fileID: 0}
-  animator: {fileID: 0}
-  audioSource: {fileID: 0}
   currentPlacedObject: {fileID: 0}
---- !u!114 &-629676016913631631
+--- !u!114 &8004646403549274946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5274,43 +5262,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2675644380505310728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325054c090246344693aaf9b60bf25ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Method: 3
-  m_Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0045871558
-      value: -0.0027502403
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5299695
-      value: 0.88375133
-      inSlope: 0.017270261
-      outSlope: 0.017270261
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0550601
-      value: 0.0027740002
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  maxValue: 100
+  curretValue: 0
+  isFoodAround: 0
+  damageToUnit: 0
+  healthToUnit: 0
+  currentUIState: 0
+  stateFire: {fileID: 6925052249818451001}
+  whenAttacked_Particles: {fileID: 3710551122255435247}
+  whenDead_Particles: {fileID: 0}
+  isAttacked: 0
+  isHealthLosing: 0
 --- !u!114 &-4459645292068650433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5338,29 +5303,6 @@ MonoBehaviour:
   zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
   attacking_Particles: {fileID: 4687464588843334752}
   messageFroomZombi: {fileID: 0}
---- !u!114 &8004646403549274946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675644380505310728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxValue: 100
-  curretValue: 0
-  isFoodAround: 0
-  damageToUnit: 0
-  healthToUnit: 0
-  currentUIState: 0
-  stateFire: {fileID: 6925052249818451001}
-  whenAttacked_Particles: {fileID: 3710551122255435247}
-  whenDead_Particles: {fileID: 0}
-  isAttacked: 0
-  isHealthLosing: 0
 --- !u!82 &5374270308236697826
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30258,6 +30200,12 @@ Transform:
 --- !u!137 &2104063565369224189 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 137001747131351174, guid: 22e82e37709fde34fb65a2fd28fbfb05,
+    type: 3}
+  m_PrefabInstance: {fileID: 2077734988684716923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2126051368098338189 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95939548031221494, guid: 22e82e37709fde34fb65a2fd28fbfb05,
     type: 3}
   m_PrefabInstance: {fileID: 2077734988684716923}
   m_PrefabAsset: {fileID: 0}

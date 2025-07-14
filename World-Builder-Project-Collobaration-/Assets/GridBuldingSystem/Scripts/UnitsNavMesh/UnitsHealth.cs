@@ -15,13 +15,16 @@ public enum UIState
 }
 public class UnitsHealth : MonoBehaviour
 {
-    public float maxValue = 100f; //{ get;} TO MAKE IT READ ONLY
-    public float curretValue;  //{ get;} TO MAKE IT READ ONLY
-    public bool isFoodAround = false;
+    private float maxValue = 100f;
+    public float MaxValue => maxValue;
+    private float curretValue;
+    public float CurretValue => curretValue;
+
+    public  bool IsFoodAround { get; set; }
     public Action OnUnitDeath;
     Unit unit;
-    [SerializeField] float damageToUnit;
-    [SerializeField] float healthToUnit;
+    private float damageToUnit;
+    private float healthToUnit;
     [SerializeField] UIState currentUIState = UIState.healthy;
     public GameObject stateFire;
     [SerializeField] GameObject whenAttacked_Particles;
@@ -40,7 +43,7 @@ public class UnitsHealth : MonoBehaviour
         damageToUnit = unit.UnitScriptableObject.damageToUnitWithoutFood;
         healthToUnit = unit.UnitScriptableObject.healthPointsFromFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
-        isFoodAround = true;
+        IsFoodAround = true;
     }
 
    
@@ -86,10 +89,6 @@ public class UnitsHealth : MonoBehaviour
                 stateFire = gameObject.transform.GetChild(1).GetChild(3).gameObject;
                 stateFire.SetActive(true); 
             }
-            else
-            {
-                stateFire.SetActive(false);
-            }
         }
     }
 
@@ -99,7 +98,6 @@ public class UnitsHealth : MonoBehaviour
 
         if (currentUIState == UIState.hungry)
         {
-            //Debug.Log("Hungry");
             if (!WasHungryBubbleCreated)
             {
                 Bubble.Instance.CreateBubble(transform.position, hungryLines[UnityEngine.Random.Range(0, hungryLines.Length - 1)]);
@@ -108,7 +106,6 @@ public class UnitsHealth : MonoBehaviour
         }
         if (currentUIState == UIState.veryHungry)
         {
-            //Debug.Log("Very Hungry");
             if (!WasAngryBubbleCreated)
             {
                 Bubble.Instance.CreateBubble(transform.position, angryLines[UnityEngine.Random.Range(0, angryLines.Length - 1)]);
@@ -157,19 +154,11 @@ public class UnitsHealth : MonoBehaviour
     public void LoseHealth()
     {
         StartCoroutine(SubstractHealthGradually());
-        if (curretValue <= 0)
-        {
-            unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-            if (unit.CurrentUnitsState != UnitsState.Zombi)
-            {
-                OnUnitDeath?.Invoke();
-            }
-        }
     }
 
     IEnumerator SubstractHealthGradually()
     {
-        while (curretValue > 0 && !isFoodAround)
+        while (curretValue > 0 && !IsFoodAround)
         {
             curretValue -= damageToUnit;
             curretValue = Mathf.Clamp(curretValue, 0, maxValue);
@@ -189,16 +178,13 @@ public class UnitsHealth : MonoBehaviour
 
     public IEnumerator FillHealthGradually()
     {
-        while (curretValue < maxValue && isFoodAround)
+        while (curretValue < maxValue && IsFoodAround)
         {
-            Debug.Log("FillHealthGradually");
             curretValue += healthToUnit;
             curretValue = Mathf.Clamp(curretValue, 0, maxValue);
             CheckUIState();
             yield return new WaitForSeconds(1f);
         }
-        CheckUIState();
-
     }
 
     private void OnCollisionStay(Collision other)
@@ -206,8 +192,6 @@ public class UnitsHealth : MonoBehaviour
         if (unit.CurrentUnitsState == UnitsState.Zombi) { return; }
         if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
         {
-            Debug.Log("ANOTHER UNIT");
-            //StartCoroutine(SubstractHealthGradually());
             whenAttacked_Particles.SetActive(true);
             isAttacked = true;
             if (curretValue <= 0)
@@ -220,12 +204,11 @@ public class UnitsHealth : MonoBehaviour
             }
         }
     
+        
         else if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponentInParent<BlockHealth>())
         {
             if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
             {
-                Debug.Log("DeadBlock!");
-                //StartCoroutine(SubstractHealthGradually());
                 whenAttacked_Particles.SetActive(true);
                 isAttacked = true;
                 if (curretValue <= 0)

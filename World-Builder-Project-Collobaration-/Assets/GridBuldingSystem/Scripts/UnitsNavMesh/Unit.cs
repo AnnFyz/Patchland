@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
+using static PlacedObjectTypeSO;
 using static Unity.Collections.AllocatorManager;
 
 
@@ -37,36 +38,36 @@ public class Unit : MonoBehaviour
     [Header("Unit Scriptable Object")]
     [SerializeField] UnitsTypeSO unitScriptableObject;
     public UnitsTypeSO UnitScriptableObject => unitScriptableObject;
-    [Header("Unit Sounds")]
+    [Header("Unit Sounds")] //TO DO Sound logic
     [SerializeField] AudioClip zombieSound;
     public AudioClip ZombieSound => zombieSound;
     [SerializeField] AudioClip glassBreaking;
     public AudioClip GlassBreaking => glassBreaking;
-    public AudioSource audioSource;
+    AudioSource audioSource;
+
+    [Header("Unit Animation")]
+    [SerializeField] Animator animator; // to handle the animations of the unit
 
     private GameObject selectedFigur; // to show that the unit is selected
 
     [Header("Unit Movement")]
-    NavMeshAgent Agent { get; set; }
+    private NavMeshAgent Agent { get; set; }
     private NavMeshPath path;
     public Transform StartPoint { get; set; }
     private Transform target; // the target to which the unit is moving
     int waypointIndex = 0;
     private WaypointsList waypointsList = new WaypointsList();
-    [SerializeField] float minMovingToPointTimer = 2f;
-    [SerializeField] float maxMovingToPointTimer = 5f;
     float movingToPointTimer;
     float elapsed = 0.0f;
 
     [Header("Related Placed Object")]
-    public PlacedObjectTypeSO.PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
+    public PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
     public int PlacedObjTypeId { get; set; }
     public UnitsMovementState CurrentMovemenetState { get; set; } // to track the state of the unit movement (autopilot, controlled by player)
     public UnitsState CurrentUnitsState { get; set; } // to track the state of the unit (alive, dead, zombi, etc.)
     private Zombi zombi; // to handle the zombi state of the unit
     private BlockPrefab intersectedWithUnitBlock; // to handle the block that the unit is currently intersecting with
     public PlacedObject_Done currentPlacedObject = null; // to handle the placed object that the unit is currently interacting with
-    private Animator animator; // to handle the animations of the unit
     private void Awake()
     {
         selectedFigur = gameObject.transform.GetChild(0).gameObject;
@@ -82,12 +83,13 @@ public class Unit : MonoBehaviour
         CurrentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-        movingToPointTimer = UnityEngine.Random.Range(minMovingToPointTimer, maxMovingToPointTimer);
+      
     }
 
     public void OnEnable()
     {
         SetupAgentFromConfiguration();
+        SetupUnitFromConfiguration();
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
     }
@@ -102,28 +104,6 @@ public class Unit : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("IsRunning", Agent.velocity.magnitude > 0.01f);
-            if (Agent.velocity.magnitude < 0.01f && CurrentUnitsState != UnitsState.Zombi)
-            {
-                audioSource.volume = 0;
-            }
-            else
-            {
-                if (unitScriptableObject.unitId == 0 || unitScriptableObject.unitId == 3)
-                {
-                    audioSource.volume = 0.95f;
-                }
-                else if (CurrentUnitsState != UnitsState.Zombi)
-                {
-                    audioSource.volume = 0.25f;
-                }
-                else
-                {
-                    audioSource.volume = 0.95f;
-                }
-
-
-
-            }
         }
     }
 
@@ -151,6 +131,7 @@ public class Unit : MonoBehaviour
             SetOccupiedBlock();
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
+            selectedFigur.SetActive(false);
             zombi.HandleZombiMovement();
             zombi.HandleZombiTransformation();
             Debug.Log("UseChanceToBecomeZombi");
@@ -240,7 +221,7 @@ public class Unit : MonoBehaviour
                 target = waypointsList.localOrder[waypointIndex];
                 if (target != null)
                 {
-                    if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().curretValue >= GetComponent<UnitsHealth>().maxValue || currentPlacedObject == null))
+                    if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().CurretValue >= GetComponent<UnitsHealth>().MaxValue || currentPlacedObject == null))
                     {
                         elapsed = 0;
                         Agent.CalculatePath(target.transform.position, path);
@@ -296,7 +277,12 @@ public class Unit : MonoBehaviour
         selectedFigur.SetActive(false);
     }
 
-    public virtual void SetupAgentFromConfiguration()
+
+    public  void SetupUnitFromConfiguration()
+    {
+        movingToPointTimer = UnityEngine.Random.Range(unitScriptableObject.minMovingToPointTimer, unitScriptableObject.maxMovingToPointTimer);
+    }
+    public  void SetupAgentFromConfiguration()
     {
         Agent.acceleration = unitScriptableObject.acceleration;
         Agent.angularSpeed = unitScriptableObject.angularSpeed;
@@ -321,11 +307,8 @@ public class Unit : MonoBehaviour
                 {
                     currentPlacedObject = other.gameObject.GetComponentInParent<PlacedObject_Done>();
                     currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
-                    //if(!GetComponentInChildren<UnitsHealth>().isFoodAround)
-                    //{
-                    GetComponentInChildren<UnitsHealth>().isFoodAround = true;
+                    GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
                     StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-                    // }
                 }
 
             }
@@ -344,11 +327,11 @@ public class Unit : MonoBehaviour
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
 
-            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>().isFoodAround)
+            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>().IsFoodAround)
             {
                 currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
                 currentPlacedObject = null;
-                GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+                GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
                 GetComponentInChildren<UnitsHealth>().LoseHealth();
             }
         }
@@ -357,9 +340,9 @@ public class Unit : MonoBehaviour
     void OnDestroyedPlacedObject()
     {
         currentPlacedObject = null;
-        if (GetComponentInChildren<UnitsHealth>().isFoodAround)
+        if (GetComponentInChildren<UnitsHealth>().IsFoodAround)
         {
-            GetComponentInChildren<UnitsHealth>().isFoodAround = false;
+            GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
             GetComponentInChildren<UnitsHealth>().LoseHealth();
             Agent.ResetPath();
             UpdateListOfWaypoints();
