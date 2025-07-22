@@ -15,142 +15,145 @@ public enum UIState
 }
 public class UnitsHealth : MonoBehaviour
 {
-    private float maxValue = 100f;
-    public float MaxValue => maxValue;
-    private float curretValue;
-    public float CurretValue => curretValue;
-
-    public  bool IsFoodAround { get; set; }
-    public Action OnUnitDeath;
-    Unit unit;
+    [SerializeField] UIState currentUIState = UIState.healthy; // Current UI state of the unit
+    public GameObject stateFire; // UI element that represents the health state of the unit
+    private float currentHealth;
+    public float CurrentHealth => currentHealth;
+    private float maxHealth;
+    public float MaxHealth => maxHealth;
     private float damageToUnit;
     private float healthToUnit;
-    [SerializeField] UIState currentUIState = UIState.healthy;
-    public GameObject stateFire;
-    [SerializeField] GameObject whenAttacked_Particles;
-    public GameObject whenDead_Particles;
-    public bool isAttacked = false;
+    public bool IsFoodAround { get; set; }
+    public Action OnUnitDeath;
+    Unit unit;
     string[] openLines = new string[7];
-    string[] hungryLines = new string[3];
-    string[] angryLines = new string[3];
-    bool WasHungryBubbleCreated = false;
-    bool WasAngryBubbleCreated = false;
-    bool isHealthFilling = false;
+    string[] linesForHungryState = new string[3];
+    string[] linesForVeryHungryState = new string[3];
+    bool wasBubbleForHungryStateCreated = false;
+    bool wasBubbleForVeryHungryStateCreated = false;
     public bool isHealthLosing = false;
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
-        damageToUnit = unit.UnitScriptableObject.damageToUnitWithoutFood;
-        healthToUnit = unit.UnitScriptableObject.healthPointsFromFood;
         stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
         IsFoodAround = true;
+        SetupUnitHealthFromConfiguration();
     }
 
-   
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        CreateOpenLines();
+        CreateLinesForHungryState();
+        CreateLinesForVeryHungryState();
+        Bubble.Instance.CreateBubble(transform.position, openLines[UnityEngine.Random.Range(0, openLines.Length - 1)]);
+    }
 
+    void SetupUnitHealthFromConfiguration()
+    {
+        maxHealth = unit.UnitScriptableObject.maxHealth;
+        damageToUnit = unit.UnitScriptableObject.damageToUnitWithoutFood;
+        healthToUnit = unit.UnitScriptableObject.healthPointsFromFood;
+    }
+
+    // This method is called to switch the UI state based on the current health of the unit.
     void SwitchUIState()
     {
-        if (curretValue > 80)
+        if (currentHealth > 80)
         {
-
             currentUIState = UIState.healthy;
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
             stateFire.SetActive(true);
-
         }
-        else if (curretValue <= 80 && curretValue >= 50)
+        else if (currentHealth <= 80 && currentHealth >= 50)
         {
-           
             currentUIState = UIState.hungry;
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(1).gameObject;
             stateFire.SetActive(true);
-          
-           
-
         }
-        else if (curretValue < 50 && curretValue > 0)
+        else if (currentHealth < 50 && currentHealth > 0)
         {
-            
             currentUIState = UIState.veryHungry;
             stateFire.SetActive(false);
             stateFire = gameObject.transform.GetChild(1).GetChild(2).gameObject;
             stateFire.SetActive(true);
-           
-
         }
-        else if (curretValue <= 0)
+        else if (currentHealth <= 0)
         {
             if (unit.CurrentUnitsState == UnitsState.Zombi)
             {
                 currentUIState = UIState.zombi;
                 stateFire.SetActive(false);
                 stateFire = gameObject.transform.GetChild(1).GetChild(3).gameObject;
-                stateFire.SetActive(true); 
+                stateFire.SetActive(true);
             }
         }
     }
 
+    // This method is called to check the current UI state of the unit and create appropriate bubbles.
     void CheckUIState()
     {
         SwitchUIState();
 
+        if (currentUIState == UIState.healthy)
+        {
+            wasBubbleForHungryStateCreated = false;
+            wasBubbleForVeryHungryStateCreated = false;
+        }
+
         if (currentUIState == UIState.hungry)
         {
-            if (!WasHungryBubbleCreated)
+            if (!wasBubbleForHungryStateCreated)
             {
-                Bubble.Instance.CreateBubble(transform.position, hungryLines[UnityEngine.Random.Range(0, hungryLines.Length - 1)]);
-                WasHungryBubbleCreated = true;
+                Bubble.Instance.CreateBubble(transform.position, linesForHungryState[UnityEngine.Random.Range(0, linesForHungryState.Length - 1)]);
+                wasBubbleForHungryStateCreated = true;
+                wasBubbleForVeryHungryStateCreated = false;
             }
         }
         if (currentUIState == UIState.veryHungry)
         {
-            if (!WasAngryBubbleCreated)
+            if (!wasBubbleForVeryHungryStateCreated)
             {
-                Bubble.Instance.CreateBubble(transform.position, angryLines[UnityEngine.Random.Range(0, angryLines.Length - 1)]);
-                WasAngryBubbleCreated = true;
+                Bubble.Instance.CreateBubble(transform.position, linesForVeryHungryState[UnityEngine.Random.Range(0, linesForVeryHungryState.Length - 1)]);
+                wasBubbleForVeryHungryStateCreated = true;
+                wasBubbleForHungryStateCreated = false;
             }
         }
     }
 
-    private void Start()
-    {
-        curretValue = maxValue;
-        whenAttacked_Particles.SetActive(false);
-        CreateOpenLines();
-        CreateHungryLines();
-        CreateAngryLines();
-        Bubble.Instance.CreateBubble(transform.position, openLines[UnityEngine.Random.Range(0, openLines.Length -1)]);
-    }
-
-
+    // This method is called to create the initial open lines for the unit's health UI.
     void CreateOpenLines()
     {
-        openLines[0] = "  (•̤̀ᵕ•̤́)  "; 
+        openLines[0] = "  (•̤̀ᵕ•̤́)  ";
         openLines[1] = " 😊 ";
-        openLines[2] = "  ( ˙˘˙) "; 
+        openLines[2] = "  ( ˙˘˙) ";
         openLines[3] = "  ʕ•ᴥ•ʔ ";
-        openLines[4] = "  ♥ ";  
+        openLines[4] = "  ♥ ";
         openLines[5] = "(• ε •)";
 
     }
 
-    void CreateHungryLines()
+    // This method is called to create the lines for the hungry state of the unit's health UI.
+    void CreateLinesForHungryState()
     {
-        hungryLines[0] = " (╥ _ ╥) "; // (.•́ _•̀.)
-        hungryLines[1] = " (.•́ _•̀.) ";  // (._.)#
-        hungryLines[1] = " (._.) ";  // (._.)
+        linesForHungryState[0] = " (╥ _ ╥) "; // (.•́ _•̀.)
+        linesForHungryState[1] = " (.•́ _•̀.) ";  // (._.)#
+        linesForHungryState[1] = " (._.) ";  // (._.)
 
     }
 
-    void CreateAngryLines()
+    // This method is called to create the lines for the very hungry state of the unit's health UI.
+    void CreateLinesForVeryHungryState()
     {
-        angryLines[0] = " (Ο_Ο) "; // (.•́ _•̀.)
-        angryLines[1] = " (°0°) ";  // (._.)#
-        angryLines[1] = " ☹ ";  // (._.)
+        linesForVeryHungryState[0] = " (Ο_Ο) "; // (.•́ _•̀.)
+        linesForVeryHungryState[1] = " (°0°) ";  // (._.)#
+        linesForVeryHungryState[1] = " ☹ ";  // (._.)
 
     }
+
+    // This method is called to lose health gradually when the unit is not near food.
     public void LoseHealth()
     {
         StartCoroutine(SubstractHealthGradually());
@@ -158,109 +161,33 @@ public class UnitsHealth : MonoBehaviour
 
     IEnumerator SubstractHealthGradually()
     {
-        while (curretValue > 0 && !IsFoodAround)
+        while (currentHealth > 0 && !IsFoodAround)
         {
-            curretValue -= damageToUnit;
-            curretValue = Mathf.Clamp(curretValue, 0, maxValue);
+            currentHealth -= damageToUnit;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             CheckUIState();
             yield return new WaitForSeconds(1f);
         }
-        if (curretValue <= 0)
+        if (currentHealth <= 0)
         {
-            unit.CurrentUnitsState = UnitsState.Dead; 
+            unit.CurrentUnitsState = UnitsState.Dead;
             if (unit.CurrentUnitsState != UnitsState.Zombi)
             {
                 OnUnitDeath?.Invoke();
             }
         }
+
         CheckUIState();
     }
 
     public IEnumerator FillHealthGradually()
     {
-        while (curretValue < maxValue && IsFoodAround)
+        while (currentHealth < maxHealth && IsFoodAround)
         {
-            curretValue += healthToUnit;
-            curretValue = Mathf.Clamp(curretValue, 0, maxValue);
+            currentHealth += healthToUnit;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             CheckUIState();
             yield return new WaitForSeconds(1f);
-        }
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        if (unit.CurrentUnitsState == UnitsState.Zombi) { return; }
-        if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
-        {
-            whenAttacked_Particles.SetActive(true);
-            isAttacked = true;
-            if (curretValue <= 0)
-            {
-                unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                if (unit.CurrentUnitsState != UnitsState.Zombi)
-                {
-                    OnUnitDeath?.Invoke();
-                }
-            }
-        }
-    
-        
-        else if (unit.CurrentUnitsState != UnitsState.Zombi && other.gameObject.GetComponentInParent<BlockHealth>())
-        {
-            if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
-            {
-                whenAttacked_Particles.SetActive(true);
-                isAttacked = true;
-                if (curretValue <= 0)
-                {
-                    unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                    if (unit.CurrentUnitsState != UnitsState.Zombi)
-                    {
-                        OnUnitDeath?.Invoke();
-                    }
-                }
-            }
-        }
-  
-    }
-
-    void OnCollisionExit(Collision other)
-    {
-        if (unit.CurrentUnitsState == UnitsState.Zombi) { return; }
-        if (other.gameObject.GetComponent<Zombi>() && other.gameObject.GetComponent<Zombi>().currentState != ZombiState.None)
-
-        {
-            //StopCoroutine(SubstractHealthGradually());
-            whenAttacked_Particles.SetActive(false);
-            isAttacked = false;
-            if (curretValue <= 0)
-            {
-                unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                if (unit.CurrentUnitsState != UnitsState.Zombi)
-                {
-                    OnUnitDeath?.Invoke();
-                }
-            }
-        }
-
-       else if (other.gameObject.GetComponentInParent<BlockHealth>())
-        {
-
-            if (other.gameObject.GetComponentInParent<BlockHealth>().IsBlockDead)
-            {
-                //StopCoroutine(SubstractHealthGradually());
-                whenAttacked_Particles.SetActive(false);
-                isAttacked = false;
-                if (curretValue <= 0)
-                {
-                    unit.CurrentUnitsState = UnitsState.Dead; // then the dead unit have a change to comeback as a zombi, to write Zombi class
-                    if (unit.CurrentUnitsState != UnitsState.Zombi)
-                    {
-                        OnUnitDeath?.Invoke();
-                    }
-                }
-            }
-    
         }
     }
 }

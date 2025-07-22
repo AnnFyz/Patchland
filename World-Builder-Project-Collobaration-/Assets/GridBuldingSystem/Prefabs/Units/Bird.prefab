@@ -5265,16 +5265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 100
-  curretValue: 0
-  isFoodAround: 0
-  damageToUnit: 0
-  healthToUnit: 0
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
-  whenAttacked_Particles: {fileID: 3710551122255435247}
-  whenDead_Particles: {fileID: 0}
-  isAttacked: 0
   isHealthLosing: 0
 --- !u!114 &-4459645292068650433
 MonoBehaviour:
@@ -5288,7 +5280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d82e37ed5c21b145a674fec4d69c13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingToPointTimer: 3
+  movingToPointTimer: 1
   currentState: 0
   targetBlockHealth: {fileID: 0}
   targetBlock: {fileID: 0}
@@ -15299,7 +15291,7 @@ GameObject:
   - component: {fileID: 3125591786447035199}
   - component: {fileID: 5895296428448198334}
   m_Layer: 7
-  m_Name: AttackedFire
+  m_Name: AttackedFire_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20264,7 +20256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2385278206295672030}
   m_Layer: 0
-  m_Name: AttackingFire
+  m_Name: AttackingFire_ZombiState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,7 @@ public class UnitsTypeSO : ScriptableObject
 {
     [Header("Health Settings")]
     public int unitId;
+    public float maxHealth = 100f;
     public float damageToUnitWithoutFood = 1f;
     public float healthPointsFromFood = 1f;
     public ParticleSystem death_Particles;

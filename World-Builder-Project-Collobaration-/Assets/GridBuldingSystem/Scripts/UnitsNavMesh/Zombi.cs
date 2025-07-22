@@ -15,7 +15,7 @@ public enum ZombiState
 }
 public class Zombi : MonoBehaviour
 {
-    [SerializeField] float movingToPointTimer = 3f;
+    [SerializeField] float movingToPointTime = 3f;
     public ZombiState currentState;
     Unit unit;
     public BlockHealth targetBlockHealth;
@@ -50,51 +50,99 @@ public class Zombi : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleZombiMovement();
-
-    }
-    public void HandleZombiMovement()
-    {
-        if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead)
+        if(currentState != ZombiState.None)
         {
-            // Update the way to the goal every amount of sec in movingToPointTimer.
-            elapsed += Time.deltaTime;
-            target = targetBlockHealth.generatedWaypoints[waypointIndex];
-            if (target != null)
-            {
-                if (elapsed > movingToPointTimer)
-                {
-                    elapsed = 0f;
-                    agent.CalculatePath(target.transform.position, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
-                    {
-                        if (agent.SetDestination(target.transform.position))
-                        {
-                            if (Vector3.Distance(transform.position, target.transform.position) < 3f)
-                            {
-                                Debug.Log("Waypoint approached: " + target.name);
-                                IterateWaypointIndex();
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("Failed to set destination to: " + target.name);
-                            DestroyZombi();
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("Path is not complete to: " + target.name);
-                        DestroyZombi();
-                    }
-                }
-
-            }
-
+            HandleZombiMovement();
         }
     }
 
-        void IterateWaypointIndex()
+
+    //REVISE IT AGAIN
+    public void HandleZombiMovement()
+    {
+        //if (targetBlockHealth == null || targetBlockHealth.IsBlockDead || targetBlockHealth.generatedWaypoints == null || targetBlockHealth.generatedWaypoints.Length == 0)
+        //    return;
+
+        elapsed += Time.fixedDeltaTime;
+
+        if (elapsed >= movingToPointTime)
+        {
+            elapsed = 0f;
+
+            // Get current waypoint
+            target = targetBlockHealth.generatedWaypoints[waypointIndex];
+            if (target == null)
+            {
+                DestroyZombi();
+                return;
+            }
+
+            // Calculate path
+            agent.CalculatePath(target.position, path);
+            if (path.status != NavMeshPathStatus.PathComplete)
+            {
+                DestroyZombi();
+                return;
+            }
+
+            // Set destination
+            if (!agent.SetDestination(target.position))
+            {
+                DestroyZombi();
+                return;
+            }
+        }
+
+        // Check if reached waypoint
+        if (target != null && Vector3.Distance(transform.position, target.position) < 1.5f)
+        {
+            IterateWaypointIndex();
+        }
+    }
+
+    // This method handles the movement of the zombi towards the target block.
+    //public void HandleZombiMovement()
+    //{
+    //    if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead)
+    //    {
+    //        Update the way to the goal every amount of sec in movingToPointTimer.
+    //       elapsed += Time.deltaTime;
+    //        target = targetBlockHealth.generatedWaypoints[waypointIndex];
+    //        if (target != null)
+    //        {
+    //            if (elapsed > movingToPointTimer)
+    //            {
+    //                elapsed = 0f;
+    //                agent.CalculatePath(target.transform.position, path);
+    //                if (path.status == NavMeshPathStatus.PathComplete)
+    //                {
+    //                    if (agent.SetDestination(target.transform.position))
+    //                    {
+    //                        if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+    //                        {
+    //                            Debug.Log("Waypoint approached: " + target.name);
+    //                            IterateWaypointIndex();
+    //                        }
+    //                    }
+    //                    else
+    //                    {
+    //                        Debug.Log("Failed to set destination to: " + target.name);
+    //                        DestroyZombi();
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    Debug.Log("Path is not complete to: " + target.name);
+    //                    DestroyZombi();
+    //                }
+    //            }
+
+    //        }
+
+    //    }
+    //}
+
+    void IterateWaypointIndex()
         {
             waypointIndex++;
             if (waypointIndex == targetBlockHealth.generatedWaypoints.Length)
@@ -229,6 +277,10 @@ public class Zombi : MonoBehaviour
     }
     public void DestroyZombi()
     {
+        if(this == null || unit == null)
+        {
+            return;
+        }
         UnitsManager.Instance.SetAmountOfUnits(unit.placedObjectName, -1);
         ParticleSystem particles = Instantiate(unit.UnitScriptableObject.death_Particles, transform.position, Quaternion.identity);
         particles.gameObject.AddComponent<AudioSource>().clip = unit.GlassBreaking;

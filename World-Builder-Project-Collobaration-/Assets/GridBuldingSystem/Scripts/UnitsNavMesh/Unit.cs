@@ -132,7 +132,7 @@ public class Unit : MonoBehaviour
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             selectedFigur.SetActive(false);
-            zombi.HandleZombiMovement();
+           // zombi.HandleZombiMovement();
             zombi.HandleZombiTransformation();
             Debug.Log("UseChanceToBecomeZombi");
             StartCoroutine(zombi.AttackBlock());
@@ -221,7 +221,7 @@ public class Unit : MonoBehaviour
                 target = waypointsList.localOrder[waypointIndex];
                 if (target != null)
                 {
-                    if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().CurretValue >= GetComponent<UnitsHealth>().MaxValue || currentPlacedObject == null))
+                    if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().CurrentHealth >= GetComponent<UnitsHealth>().MaxHealth || currentPlacedObject == null))
                     {
                         elapsed = 0;
                         Agent.CalculatePath(target.transform.position, path);

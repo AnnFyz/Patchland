@@ -5265,16 +5265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74649545fcbe4cc48a42d38d1d272424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 100
-  curretValue: 0
-  isFoodAround: 0
-  damageToUnit: 0
-  healthToUnit: 0
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
-  whenAttacked_Particles: {fileID: 0}
-  whenDead_Particles: {fileID: 0}
-  isAttacked: 0
   isHealthLosing: 0
 --- !u!114 &-4459645292068650433
 MonoBehaviour:
@@ -25100,7 +25092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2385278206295672030}
   m_Layer: 0
-  m_Name: Attacking_P
+  m_Name: AttackingFire_ZombiState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30237,7 +30229,7 @@ PrefabInstance:
     - target: {fileID: 1357938618002930579, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
       propertyPath: m_Name
-      value: SCharacter_Butterfly_ (1)
+      value: SCharacter_Butterfly_2
       objectReference: {fileID: 0}
     - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
@@ -30337,7 +30329,7 @@ PrefabInstance:
     - target: {fileID: 1357938618002930579, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
       propertyPath: m_Name
-      value: SCharacter_Butterfly_
+      value: SCharacter_Butterfly_1
       objectReference: {fileID: 0}
     - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
@@ -30443,7 +30435,7 @@ PrefabInstance:
     - target: {fileID: 1357938618002930579, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
       propertyPath: m_Name
-      value: SCharacter_Butterfly_ (2)
+      value: SCharacter_Butterfly_3
       objectReference: {fileID: 0}
     - target: {fileID: 2304020178498047614, guid: de49abe230c207b4dbd81a13c1fef310,
         type: 3}
