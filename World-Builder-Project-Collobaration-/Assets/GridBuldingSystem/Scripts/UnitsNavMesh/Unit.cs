@@ -205,51 +205,62 @@ public class Unit : MonoBehaviour
         }
 
     }
-
-    void MoveAutomaticallyToWayPoint() //ELAPSED 
+    private void MoveAutomaticallyToWayPoint()
     {
-        if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
-        {
-            if (CurrentMovemenetState == UnitsMovementState.Autopilot)
-            {
-                // Update the way to the goal every amount of sec in movingToPointTimer.
-                elapsed += Time.deltaTime;
-                if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
-                {
-                    return;
-                }
-                target = waypointsList.localOrder[waypointIndex];
-                if (target != null)
-                {
-                    if (elapsed > movingToPointTimer && (GetComponent<UnitsHealth>().CurrentHealth >= GetComponent<UnitsHealth>().MaxHealth || currentPlacedObject == null))
-                    {
-                        elapsed = 0;
-                        Agent.CalculatePath(target.transform.position, path);
-                        if (path.status == NavMeshPathStatus.PathComplete)
-                        {
-                            if (Agent.SetDestination(target.transform.position))
-                            {
-                                if (Vector3.Distance(transform.position, target.transform.position) < 3f)
-                                {
-                                    Debug.Log("Waypoint approached: " + target.name);
-                                    IterateWaypointIndex();
-                                }
-                            }
-                            else
-                            {
-                                Debug.Log("Failed to set destination to: " + target.name);
-                                IterateWaypointIndex();
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("Path is not complete to: " + target.name);
-                            IterateWaypointIndex();
-                        }
-                    }
+        // Only when unit lives
+        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
+            return;
 
-                }
-            }
+        // Only on autopilot
+        if (CurrentMovemenetState != UnitsMovementState.Autopilot)
+            return;
+
+        // No waypoints available
+        if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
+            return;
+
+        // Count up timer
+        elapsed += Time.deltaTime;
+
+        // Only move when enough time has passed
+        if (elapsed < movingToPointTimer)
+            return;
+        elapsed = 0;
+
+        // Determine next waypoint
+        var target = waypointsList.localOrder[waypointIndex];
+        if (target == null)
+        {
+            IterateWaypointIndex();
+            return;
+        }
+
+        // Check health (only if no object is set or HP is full)
+        var health = GetComponent<UnitsHealth>();
+        if (health.CurrentHealth < health.MaxHealth && currentPlacedObject != null)
+            return;
+
+        // Calculate path
+        if (!Agent.CalculatePath(target.transform.position, path) || path.status != NavMeshPathStatus.PathComplete)
+        {
+            Debug.LogWarning($"Path is not complete to {target.name}");
+            IterateWaypointIndex();
+            return;
+        }
+
+        // Set a goal
+        if (!Agent.SetDestination(target.transform.position))
+        {
+            Debug.LogWarning($"Failed to set destination to {target.name}");
+            IterateWaypointIndex();
+            return;
+        }
+
+        // Check if target reached
+        if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+        {
+            Debug.Log($"Waypoint approached: {target.name}");
+            IterateWaypointIndex();
         }
     }
 

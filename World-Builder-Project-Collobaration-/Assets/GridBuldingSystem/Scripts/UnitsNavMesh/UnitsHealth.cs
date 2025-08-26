@@ -17,7 +17,7 @@ public class UnitsHealth : MonoBehaviour
 {
     [SerializeField] UIState currentUIState = UIState.healthy; // Current UI state of the unit
     public GameObject stateFire; // UI element that represents the health state of the unit
-    private float currentHealth;
+    [SerializeField] float currentHealth;
     public float CurrentHealth => currentHealth;
     private float maxHealth;
     public float MaxHealth => maxHealth;

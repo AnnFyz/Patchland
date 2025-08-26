@@ -197,7 +197,7 @@ public class Zombi : MonoBehaviour
         if (other.GetComponentInParent<BlockHealth>() && targetBlockHealth == other.GetComponentInParent<BlockHealth>() && !isOnTargetBlock)
         {
             isOnTargetBlock = true;
-            if (this == null || other == null)
+            if (this == null || other.GetComponent<ZombiCollector>() == null)
             {
                 return;
             }
