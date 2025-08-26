@@ -30,7 +30,7 @@ public class LocalLevelState : MonoBehaviour
     }
     private void OnEnable()
     {
-        blockPrefab.OnAmountChanged += ChangeState;
+        blockPrefab.OnBlockHeightChanged += ChangeState;
     }
     public LevelState GetCurrentLevelState()
     {

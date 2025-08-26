@@ -93,7 +93,7 @@ public class GridOfPrefabs : MonoBehaviour
                 //blockPrefab.blocksAmount =Mathf.RoundToInt(amount);
                 for (int i = 0; i < Mathf.RoundToInt(amount); i++)
                 {
-                    blockPrefab.ChangeAmount(1);
+                    blockPrefab.ChangeBlockHeight(1);
                 }
                 //int newHeight = Mathf.FloorToInt(amount);
                 //if (blockPrefab.transform.localScale.y <= 4) //Water

@@ -21,7 +21,7 @@ public class BlockPrefab : MonoBehaviour
     public CornerBlock cornerBlock;
     private int newAmount;
     private int startScale;
-    public event Action<int> OnAmountChanged;
+    public event Action<int> OnBlockHeightChanged;
     public bool IsThisBlockIsHighlighted = false;
     public bool IsThisBlockIsSelected = false;
     public Renderer[] renderers;
@@ -100,7 +100,7 @@ public class BlockPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void ChangeAmount(int addedAmount)
+    public void ChangeBlockHeight(int addedAmount)
     {
         if (addedAmount > 0 && (blocksAmount + addedAmount) <= maxAmount)
         {
@@ -108,7 +108,7 @@ public class BlockPrefab : MonoBehaviour
             ToggleNextBlock(true);
             blocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
-            OnAmountChanged?.Invoke(blocksAmount);
+            OnBlockHeightChanged?.Invoke(blocksAmount);
         }
         else if (addedAmount < 0 && (blocksAmount + addedAmount) >= minAmount)
         {
@@ -116,7 +116,7 @@ public class BlockPrefab : MonoBehaviour
             ToggleNextBlock(false);
             blocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
-            OnAmountChanged?.Invoke(blocksAmount);
+            OnBlockHeightChanged?.Invoke(blocksAmount);
         }
     }
 

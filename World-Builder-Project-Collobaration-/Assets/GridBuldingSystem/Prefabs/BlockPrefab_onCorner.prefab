@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 8095457313609203249}
   - component: {fileID: 7450040506915623779}
   - component: {fileID: 5631865040396593832}
+  - component: {fileID: 1875274776752494370}
   - component: {fileID: 6123430626304202518}
   - component: {fileID: 8771333300075248221}
   m_Layer: 6
@@ -779,6 +780,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &1875274776752494370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541634431918291856}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 13.22869, y: 5, z: 12.999996}
+  m_Center: {x: -0.14065456, y: 2.5, z: 0.00000047683716}
 --- !u!65 &6123430626304202518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1707,7 +1729,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2.0000005, y: 2.000001, z: 2.0000005}
   m_Center: {x: 0, y: 1.0661847e-14, z: 1.0003479}

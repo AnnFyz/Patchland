@@ -33,10 +33,10 @@ public class BlockHealth : MonoBehaviour
         generatedWaypoints = new Transform[step];
         block = GetComponent<BlockPrefab>();
     }
-
     private void Start()
     {
         FillTheListOfWaypints();
+        UpdateWaypointsPosition(0);
         currentHealth = startHealth;
         Color.RGBToHSV(block.defaultColor, out H_1, out S_1, out V_1);
         Color.RGBToHSV(block.defaultBottomColor, out H_2, out S_2, out V_2);
@@ -47,6 +47,8 @@ public class BlockHealth : MonoBehaviour
         difH_2 = H_2;
         difS_2 = S_2;
         difV_1 = V_1;
+
+        block.OnBlockHeightChanged += UpdateWaypointsPosition;
     }
 
     public void FillTheListOfWaypints()
@@ -58,9 +60,18 @@ public class BlockHealth : MonoBehaviour
             GameObject generatedWaypoint = new GameObject();
             generatedWaypoint.transform.RotateAround(transform.position, Vector3.up, angleStep * i);
             Vector3 dir = (generatedWaypoint.transform.position - transform.position).normalized;
-            generatedWaypoint.transform.position = transform.position + dir * 4;
+            Vector3 position = transform.position + dir * 4;
+            generatedWaypoint.transform.position = new Vector3(position.x, block.transform.position.y - BlockPrefab.offset.y, position.z);
             generatedWaypoints[i - 1] = generatedWaypoint.transform;
             generatedWaypoint.transform.SetParent(transform);
+        }
+    }
+
+    private void UpdateWaypointsPosition(int addedAmount)
+    {
+        foreach (var waypoint in generatedWaypoints)
+        {
+            waypoint.transform.position = new Vector3(waypoint.transform.position.x, block.transform.position.y - BlockPrefab.offset.y, waypoint.transform.position.z);
         }
     }
 

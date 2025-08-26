@@ -24,8 +24,8 @@ public class MyGridBuildingSystem : MonoBehaviour
     {
         origin = transform.position;
         blockPrefab = GetComponent<BlockPrefab>();
-        blockPrefab.OnAmountChanged += UpdateGrid;
-        blockPrefab.OnAmountChanged += DeleteOldObjectsAndWaypoints;
+        blockPrefab.OnBlockHeightChanged += UpdateGrid;
+        blockPrefab.OnBlockHeightChanged += DeleteOldObjectsAndWaypoints;
 
     }
     public void SetBlockGrid()
