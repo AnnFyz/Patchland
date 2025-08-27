@@ -1,20 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using static PlacedObjectTypeSO;
+using static Unity.VisualScripting.Member;
 public class PlacedObject_Done : MonoBehaviour
 {
 
     [SerializeField] Material material;
     static Transform visual;
     public Action onDestroyedPlacedObject;
+    static int index;
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO)
     {
         Transform placedObjectTransform = Instantiate(placedObjectTypeSO.placedObjectPrefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
+        placedObjectTransform.name += "_" + index.ToString();
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
         placedObject.Setup(placedObjectTypeSO, origin, dir);
         visual = placedObjectTypeSO.visualForGhostPlacedObject;
+        index++;    
         return placedObject;
     }
 

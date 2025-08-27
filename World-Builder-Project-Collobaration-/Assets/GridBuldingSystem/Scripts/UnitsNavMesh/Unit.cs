@@ -54,10 +54,10 @@ public class Unit : MonoBehaviour
     private NavMeshAgent Agent { get; set; }
     private NavMeshPath path;
     public Transform StartPoint { get; set; }
-    private Transform target; // the target to which the unit is moving
-    int waypointIndex = 0;
-    private WaypointsList waypointsList = new WaypointsList();
-    float movingToPointTimer;
+    [SerializeField] Transform target; // the target to which the unit is moving
+    [SerializeField] int waypointIndex = 0;
+    [SerializeField] WaypointsList waypointsList = new WaypointsList();
+    [SerializeField] float movingToPointTimer;
     float elapsed = 0.0f;
 
     [Header("Related Placed Object")]
@@ -193,9 +193,9 @@ public class Unit : MonoBehaviour
             {
                 if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName] != null)
                 {
-                    List<Transform> reversedList = UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName];
-                    reversedList.Reverse();
-                    waypointsList.localOrder.AddRange(reversedList);
+                    var listCopy = new List<Transform>(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName]);
+                    listCopy.Reverse();
+                    waypointsList.localOrder.AddRange(listCopy);
 
                 }
             }
@@ -207,59 +207,86 @@ public class Unit : MonoBehaviour
     }
     private void MoveAutomaticallyToWayPoint()
     {
-        // Only when unit lives
+        // --- BASIC GUARDS ---
+        // Stop immediately if the unit is dead or has become a zombie
         if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
             return;
 
-        // Only on autopilot
+        // Stop if the unit is not in autopilot mode (e.g. being controlled by the player)
         if (CurrentMovemenetState != UnitsMovementState.Autopilot)
             return;
 
-        // No waypoints available
+        // Stop if there are no waypoints defined
         if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
             return;
 
-        // Count up timer
+
+        // --- MOVEMENT TIMER ---
+        // Count time since last movement decision
         elapsed += Time.deltaTime;
 
-        // Only move when enough time has passed
+        // Only move if enough time has passed (acts as a pacing mechanic)
         if (elapsed < movingToPointTimer)
             return;
+
+        // Reset the timer so we can count again for the next movement step
         elapsed = 0;
 
-        // Determine next waypoint
-        var target = waypointsList.localOrder[waypointIndex];
-        if (target == null)
+
+        // --- SELECT NEXT WAYPOINT ---
+        // Get the current target waypoint by index
+        var next = waypointsList.localOrder[waypointIndex];
+
+        // If the waypoint is missing, skip to the next one
+        if (next == null)
         {
             IterateWaypointIndex();
             return;
         }
 
-        // Check health (only if no object is set or HP is full)
+        // Optional: keep track of the current target in Inspector (debug only)
+        target = next;
+
+
+        // --- HEALTH / HEALING LOGIC ---
+        // Pause movement if:
+        //   - The unit is inside a placed object (e.g. food source)
+        //   - AND it is not yet at full health
         var health = GetComponent<UnitsHealth>();
-        if (health.CurrentHealth < health.MaxHealth && currentPlacedObject != null)
-            return;
+        bool atFoodAndHealing =
+            currentPlacedObject != null &&
+            Vector3.Distance(transform.position, currentPlacedObject.transform.position)
+                <= Agent.stoppingDistance + 0.5f &&
+            health.CurrentHealth < health.MaxHealth;
 
-        // Calculate path
-        if (!Agent.CalculatePath(target.transform.position, path) || path.status != NavMeshPathStatus.PathComplete)
+        if (atFoodAndHealing)
         {
-            Debug.LogWarning($"Path is not complete to {target.name}");
+            Debug.Log($"atFoodAndHealing");
+            return; // stay here and heal
+        }
+          
+
+
+        // --- PATHFINDING ---
+        // Try to calculate a valid path to the target waypoint
+        if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+        {
+            // If path is invalid, skip to the next waypoint
+            Debug.LogWarning($"Path is not complete to {next.name}");
             IterateWaypointIndex();
             return;
         }
 
-        // Set a goal
-        if (!Agent.SetDestination(target.transform.position))
-        {
-            Debug.LogWarning($"Failed to set destination to {target.name}");
-            IterateWaypointIndex();
-            return;
-        }
+        // Assign the calculated destination to the NavMeshAgent
+        Agent.SetDestination(next.position);
+        Debug.Log($"Agent.SetDestination");
 
-        // Check if target reached
-        if (Vector3.Distance(transform.position, target.transform.position) < 3f)
+
+        // --- ARRIVAL CHECK ---
+        // If the agent is close enough to the current waypoint, move to the next one
+        if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance + 0.5f)
         {
-            Debug.Log($"Waypoint approached: {target.name}");
+            Debug.Log($"Waypoint approached: {next.name}");
             IterateWaypointIndex();
         }
     }

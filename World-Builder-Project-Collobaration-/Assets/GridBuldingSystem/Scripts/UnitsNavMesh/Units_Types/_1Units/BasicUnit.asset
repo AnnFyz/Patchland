@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicUnit
   m_EditorClassIdentifier: 
   unitId: 0
+  maxHealth: 100
   damageToUnitWithoutFood: 10
   healthPointsFromFood: 1
   death_Particles: {fileID: 0}
@@ -32,3 +33,5 @@ MonoBehaviour:
   speed: 13
   stoppingDistance: 1.5
   triggerRadius: 0.15
+  minMovingToPointTimer: 3
+  maxMovingToPointTimer: 5

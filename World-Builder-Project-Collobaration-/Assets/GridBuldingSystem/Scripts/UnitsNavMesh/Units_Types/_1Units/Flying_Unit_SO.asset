@@ -34,5 +34,5 @@ MonoBehaviour:
   speed: 11
   stoppingDistance: 1.5
   triggerRadius: 0.15
-  minMovingToPointTimer: 1
-  maxMovingToPointTimer: 1
+  minMovingToPointTimer: 3
+  maxMovingToPointTimer: 5
