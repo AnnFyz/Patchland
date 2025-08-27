@@ -132,7 +132,6 @@ public class Unit : MonoBehaviour
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             selectedFigur.SetActive(false);
-           // zombi.HandleZombiMovement();
             zombi.HandleZombiTransformation();
             Debug.Log("UseChanceToBecomeZombi");
             StartCoroutine(zombi.AttackBlock());
@@ -401,8 +400,8 @@ public class Unit : MonoBehaviour
         Agent.speed = unitScriptableObject.speed;
         Agent.stoppingDistance = unitScriptableObject.stoppingDistance;
 
-        //Agent.autoRepath = true;       
-        //Agent.autoBraking = true;       // smoother arrivals
+        Agent.autoRepath = true;       
+        Agent.autoBraking = true;       // smoother arrivals
     }
 
     private void OnTriggerEnter(Collider other)

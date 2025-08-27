@@ -574,9 +574,9 @@ GameObject:
   - component: {fileID: 8095457313609203249}
   - component: {fileID: 7450040506915623779}
   - component: {fileID: 5631865040396593832}
-  - component: {fileID: 1875274776752494370}
-  - component: {fileID: 6123430626304202518}
   - component: {fileID: 8771333300075248221}
+  - component: {fileID: 6123430626304202518}
+  - component: {fileID: 1875274776752494370}
   m_Layer: 6
   m_Name: BlockPrefab_onCorner
   m_TagString: Untagged
@@ -780,27 +780,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!65 &1875274776752494370
-BoxCollider:
+--- !u!114 &8771333300075248221
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6541634431918291856}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 13.22869, y: 5, z: 12.999996}
-  m_Center: {x: -0.14065456, y: 2.5, z: 0.00000047683716}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd6fbbcac83d5b458508e8485c8ab2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombisOnTheBlock:
+    zombis: []
 --- !u!65 &6123430626304202518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -822,20 +815,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.138105, y: 9.788349, z: 15.048822}
   m_Center: {x: -0.0856266, y: 3.8941736, z: -0.09965706}
---- !u!114 &8771333300075248221
-MonoBehaviour:
+--- !u!65 &1875274776752494370
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6541634431918291856}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd6fbbcac83d5b458508e8485c8ab2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombisOnTheBlock:
-    zombis: []
+  serializedVersion: 3
+  m_Size: {x: 13.22869, y: 5, z: 12.999996}
+  m_Center: {x: -0.14065456, y: 2.5, z: 0.00000047683716}
 --- !u!1 &6638292260408872654
 GameObject:
   m_ObjectHideFlags: 0

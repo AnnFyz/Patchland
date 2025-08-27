@@ -557,8 +557,8 @@ GameObject:
   - component: {fileID: 8877595191525507116}
   - component: {fileID: 5950601933551546208}
   - component: {fileID: -6742777137344980617}
-  - component: {fileID: 829423309997462573}
   - component: {fileID: 8998082256806927317}
+  - component: {fileID: 829423309997462573}
   - component: {fileID: 6735333741427231289}
   m_Layer: 6
   m_Name: BlockPrefab_main
@@ -612,7 +612,7 @@ MonoBehaviour:
   renderers: []
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
-  origin: 0
+  origin: 0.03
   defaultMaterial: {fileID: 0}
   blocksAmount: 0
   maxAmount: 12
@@ -762,6 +762,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8998082256806927317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254500726256895673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd6fbbcac83d5b458508e8485c8ab2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombisOnTheBlock:
+    zombis: []
 --- !u!65 &829423309997462573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -783,20 +797,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.138105, y: 9.788349, z: 15.048822}
   m_Center: {x: -0.0856266, y: 3.8941736, z: -0.09965706}
---- !u!114 &8998082256806927317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254500726256895673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd6fbbcac83d5b458508e8485c8ab2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombisOnTheBlock:
-    zombis: []
 --- !u!65 &6735333741427231289
 BoxCollider:
   m_ObjectHideFlags: 0
