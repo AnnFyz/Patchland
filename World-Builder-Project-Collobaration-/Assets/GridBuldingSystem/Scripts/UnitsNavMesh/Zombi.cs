@@ -220,10 +220,10 @@ public class Zombi : MonoBehaviour
             rend.materials = mats;
         }
     }
-    
 
-      private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
+
         if (other == null) return;
 
         var blockHealth = other.gameObject.GetComponentInParent<BlockHealth>();

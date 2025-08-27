@@ -5251,6 +5251,7 @@ MonoBehaviour:
   zombieSound: {fileID: 0}
   glassBreaking: {fileID: 0}
   animator: {fileID: 9026659771766509867}
+  target: {fileID: 0}
   waypointIndex: 0
   waypointsList:
     localOrder: []
@@ -5272,6 +5273,7 @@ MonoBehaviour:
   currentUIState: 0
   stateFire: {fileID: 6925052249818451001}
   currentHealth: 0
+  IsFoodAround: 0
   isHealthLosing: 0
 --- !u!114 &-4459645292068650433
 MonoBehaviour:
@@ -30015,7 +30017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3023858976421538474
 Transform:
   m_ObjectHideFlags: 0
