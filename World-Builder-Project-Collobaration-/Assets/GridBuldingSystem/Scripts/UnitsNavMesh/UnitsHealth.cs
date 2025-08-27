@@ -23,7 +23,7 @@ public class UnitsHealth : MonoBehaviour
     public float MaxHealth => maxHealth;
     private float damageToUnit;
     private float healthToUnit;
-    public bool IsFoodAround { get; set; }
+    public bool IsFoodAround;
     public Action OnUnitDeath;
     Unit unit;
     string[] openLines = new string[7];

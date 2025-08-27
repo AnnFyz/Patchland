@@ -162,6 +162,7 @@ public class UnitsManager : MonoBehaviour
                     {
                         if (unit.CurrentUnitsState != UnitsState.Dead && unit.CurrentUnitsState != UnitsState.Zombi)
                         {
+                            Debug.Log("Moving unit to: " + hit.point);
                             unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
                         }
 

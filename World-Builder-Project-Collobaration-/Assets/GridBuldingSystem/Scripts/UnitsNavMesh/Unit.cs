@@ -181,29 +181,57 @@ public class Unit : MonoBehaviour
     }
     public void UpdateListOfWaypoints()
     {
+        Debug.Log($"UpdateListOfWaypoints fired at {Time.frameCount}");
+
         if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
         {
             waypointsList.localOrder.Clear();
-            if (target == null && StartPoint != null) // it means the unit was just created
+
+            // Add StartPoint only if it is not already included
+            if (StartPoint != null &&
+                (UnitsManager.Instance.waypointsForPlacedObjects == null ||
+                 !UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(StartPoint)))
             {
                 waypointsList.localOrder.Add(StartPoint);
                 target = StartPoint;
             }
-            if (UnitsManager.Instance.waypointsForPlacedObjects != null)
-            {
-                if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName] != null)
-                {
-                    var listCopy = new List<Transform>(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName]);
-                    listCopy.Reverse();
-                    waypointsList.localOrder.AddRange(listCopy);
 
-                }
+            // Add the global waypoints in reverse order (copy before reversing!)
+            if (UnitsManager.Instance.waypointsForPlacedObjects != null &&
+                UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName] != null)
+            {
+                var listCopy = new List<Transform>(UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName]);
+                listCopy.Reverse();
+                waypointsList.localOrder.AddRange(listCopy);
             }
 
-            waypointIndex = 0; // to reset the path and start from zero point again
-
+            waypointIndex = 0;
+            SanitizeWaypoints();
         }
 
+    }
+
+    // this called after (re)building the list to purge nulls and clamp the index
+    private void SanitizeWaypoints()
+    {
+        // Remove any destroyed/null entries Unity left behind
+        waypointsList.localOrder.RemoveAll(t => t == null);
+
+        // Clamp/rewind the index if it points past the end
+        if (waypointIndex >= waypointsList.localOrder.Count)
+            waypointIndex = Mathf.Max(0, waypointsList.localOrder.Count - 1);
+
+        // If the list is empty, clear the agent’s path
+        if (waypointsList.localOrder.Count == 0)
+        {
+            Agent.ResetPath();
+            target = null;
+            waypointIndex = 0;
+            return;
+        }
+
+        // Keep the inspector target in sync with the current index
+        target = waypointsList.localOrder[waypointIndex];
     }
     private void MoveAutomaticallyToWayPoint()
     {
@@ -220,17 +248,26 @@ public class Unit : MonoBehaviour
         if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
             return;
 
+        // Before using 'next'
+        while (waypointsList.localOrder.Count > 0 && waypointsList.localOrder[waypointIndex] == null)
+        {
+            waypointsList.localOrder.RemoveAt(waypointIndex);
+            if (waypointIndex >= waypointsList.localOrder.Count)
+                waypointIndex = 0;
+        }
+        if (waypointsList.localOrder.Count == 0) { Agent.ResetPath(); return; }
+
+
+
 
         // --- MOVEMENT TIMER ---
-        // Count time since last movement decision
-        elapsed += Time.deltaTime;
-
-        // Only move if enough time has passed (acts as a pacing mechanic)
-        if (elapsed < movingToPointTimer)
-            return;
-
-        // Reset the timer so we can count again for the next movement step
-        elapsed = 0;
+        // Throttle ONLY when patrolling (2+ waypoints). With 1 waypoint, never delay.
+        if (waypointsList.localOrder.Count > 1)
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed < movingToPointTimer) return;
+            elapsed = 0;
+        }
 
 
         // --- SELECT NEXT WAYPOINT ---
@@ -248,15 +285,24 @@ public class Unit : MonoBehaviour
         target = next;
 
 
-        // --- HEALTH / HEALING LOGIC ---
-        // Pause movement if:
-        //   - The unit is inside a placed object (e.g. food source)
-        //   - AND it is not yet at full health
+        // --- HEALING / STALE TRIGGER SAFETY ---
+        // If we were yanked away but trigger exit didn't fire, clear the stale placed object.
+        if (currentPlacedObject != null)
+        {
+            float distFromFood = Vector3.Distance(transform.position, currentPlacedObject.transform.position);
+            if (distFromFood > Agent.stoppingDistance + 2f) // clearly away from it
+            {
+                currentPlacedObject = null;
+                //var uh = GetComponentInChildren<UnitsHealth>();
+                //if (uh != null) uh.IsFoodAround = false;
+            }
+        }
+
+        // Only pause for healing if we are actually close enough to the food/source
         var health = GetComponent<UnitsHealth>();
         bool atFoodAndHealing =
             currentPlacedObject != null &&
-            Vector3.Distance(transform.position, currentPlacedObject.transform.position)
-                <= Agent.stoppingDistance + 0.5f &&
+            Vector3.Distance(transform.position, currentPlacedObject.transform.position) <= Agent.stoppingDistance + 0.5f &&
             health.CurrentHealth < health.MaxHealth;
 
         if (atFoodAndHealing)
@@ -264,30 +310,52 @@ public class Unit : MonoBehaviour
             Debug.Log($"atFoodAndHealing");
             return; // stay here and heal
         }
-          
 
 
-        // --- PATHFINDING ---
-        // Try to calculate a valid path to the target waypoint
-        if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+
+        // --- PATHFINDING / RECOVERY ---
+        // If we lost our path (manual drag/teleport or nav change), recompute immediately.
+        if (!Agent.hasPath && !Agent.pathPending)
         {
-            // If path is invalid, skip to the next waypoint
-            Debug.LogWarning($"Path is not complete to {next.name}");
-            IterateWaypointIndex();
-            return;
+            if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+            {
+                Debug.LogWarning($"Path is not complete to {next.name}");
+                IterateWaypointIndex();
+                return;
+            }
+            Agent.SetDestination(next.position);
+            // do not early-return; allow arrival check below to run this frame too
         }
-
-        // Assign the calculated destination to the NavMeshAgent
-        Agent.SetDestination(next.position);
-        Debug.Log($"Agent.SetDestination");
+        else
+        {
+            // Normal case: validate and set destination as usual
+            if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+            {
+                Debug.LogWarning($"Path is not complete to {next.name}");
+                IterateWaypointIndex();
+                return;
+            }
+            Agent.SetDestination(next.position);
+        }
 
 
         // --- ARRIVAL CHECK ---
-        // If the agent is close enough to the current waypoint, move to the next one
+        // Use agent metrics rather than raw Vector3 distance.
         if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance + 0.5f)
         {
             Debug.Log($"Waypoint approached: {next.name}");
             IterateWaypointIndex();
+
+            // Immediately set the next destination (don’t wait for the next timer tick)
+            if (waypointsList.localOrder != null && waypointsList.localOrder.Count > 0)
+            {
+               
+                if (next != null)
+                {
+                    if (Agent.CalculatePath(next.position, path) && path.status == NavMeshPathStatus.PathComplete)
+                        Agent.SetDestination(next.position);
+                }
+            }
         }
     }
 
@@ -332,6 +400,9 @@ public class Unit : MonoBehaviour
         Agent.radius = unitScriptableObject.radius;
         Agent.speed = unitScriptableObject.speed;
         Agent.stoppingDistance = unitScriptableObject.stoppingDistance;
+
+        //Agent.autoRepath = true;       
+        //Agent.autoBraking = true;       // smoother arrivals
     }
 
     private void OnTriggerEnter(Collider other)
@@ -367,7 +438,8 @@ public class Unit : MonoBehaviour
 
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>().IsFoodAround)
             {
-                currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
+                if (currentPlacedObject != null)
+                    currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
                 currentPlacedObject = null;
                 GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
                 GetComponentInChildren<UnitsHealth>().LoseHealth();
