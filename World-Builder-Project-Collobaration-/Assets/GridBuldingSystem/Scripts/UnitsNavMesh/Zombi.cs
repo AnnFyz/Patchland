@@ -71,70 +71,52 @@ public class Zombi : MonoBehaviour
 
     public void HandleZombiMovement()
     {
-        // If no target block or it's dead, try finding another block
+        // If no target block or it's dead → find another
         if (targetBlockHealth == null || targetBlockHealth.IsBlockDead)
         {
             MoveToNextNeighbourAliveBlock();
-            if (targetBlockHealth == null || targetBlockHealth.IsBlockDead)
-            {
-                //if (agent != null && agent.hasPath) agent.ResetPath();
-                //return;
-                DestroyZombi();
-                return;
-            }
+            return; // Either reassigned target, or zombie destroyed
         }
 
-        // Ensure we have valid/cached waypoints for the current target block
+        // Ensure waypoints exist
         if (validWaypoints == null || validWaypoints.Count == 0)
         {
-            ValidateWaypoints(); // fills validWaypoints from targetBlockHealth
-            if (validWaypoints.Count == 0)
-            {
-                Debug.LogWarning("[Zombie] No valid waypoints on block " + targetBlockHealth.name);
-                //MoveToNextNeighbourAliveBlock();
-                DestroyZombi();
-                return;
-            }
-        }
-
-        // Clamp waypointIndex and find the next reachable waypoint index
-        waypointIndex = Mathf.Clamp(waypointIndex, 0, Mathf.Max(0, validWaypoints.Count - 1));
-        int nextIndex = GetNextReachableWaypointIndex(waypointIndex, validWaypoints);
-        if (nextIndex == -1)
-        {
-            // no reachable waypoint found — try neighboring block or fallback
-            Debug.LogWarning("[Zombie] No reachable waypoint found on block " + targetBlockHealth.name);
-            //MoveToNextNeighbourAliveBlock();
-            DestroyZombi();
+            MoveToNextNeighbourAliveBlock();
             return;
         }
 
-        // Set target transform
-        target = validWaypoints[nextIndex];
-        waypointIndex = nextIndex; // use that index
+        // Clamp index
+        waypointIndex = Mathf.Clamp(waypointIndex, 0, validWaypoints.Count - 1);
 
-        // Repath occasionally or when destination changed
+        // Get current waypoint
+        target = validWaypoints[waypointIndex];
+
+        // Try path
+        NavMeshPath tempPath = new NavMeshPath();
+        if (!agent.CalculatePath(target.position, tempPath) || tempPath.status != NavMeshPathStatus.PathComplete)
+        {
+            Debug.LogWarning("[Zombie] Current waypoint unreachable. Searching another block...");
+            MoveToNextNeighbourAliveBlock();
+            return;
+        }
+
+        // Set destination (repath if needed)
         repathTimer += Time.deltaTime;
-        bool destinationChanged = !agent.hasPath || (agent.destination - target.position).sqrMagnitude > 0.01f;
+        bool needsRepath = !agent.hasPath || (agent.destination - target.position).sqrMagnitude > 0.01f;
 
-        if (destinationChanged || repathTimer >= repathInterval)
+        if (needsRepath || repathTimer >= repathInterval)
         {
             repathTimer = 0f;
-
-            // Calculate path and set destination; we've already tested reachability in GetNextReachableWaypointIndex
-            if (agent != null)
+            if (!agent.SetDestination(target.position))
             {
-                if (!agent.SetDestination(target.position))
-                {
-                    Debug.LogWarning("[Zombie] Failed to SetDestination to " + target.name + ". Destroying zombie.");
-                    DestroyZombi();
-                    return;
-                }
+                Debug.LogWarning("[Zombie] Failed to set destination. Searching another block...");
+                MoveToNextNeighbourAliveBlock();
+                return;
             }
         }
 
-        // Arrival check using agent.remainingDistance (more reliable)
-        if (agent != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.05f)
+        // Check arrival
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.05f)
         {
             IterateWaypointIndex();
         }
@@ -345,49 +327,70 @@ public class Zombi : MonoBehaviour
     }
     void MoveToNextNeighbourAliveBlock()
     {
-        // Only proceed if the current target block is dead
-        if (targetBlockHealth == null || !targetBlockHealth.IsBlockDead)
-            return;
+        // Clear current target
+        targetBlock = null;
+        targetBlockHealth = null;
+        validWaypoints.Clear();
+        waypointIndex = 0;
 
-        targetBlockHealth.IsBeingDamaged = false;
+        float nearestDistance = Mathf.Infinity;
+        BlockHealth bestBlock = null;
+        List<Transform> bestWaypoints = null;
 
-        // Try to locate the nearest alive block
-        LocateNearestBlock();
-
-        if (targetBlockHealth != null && !targetBlockHealth.IsBlockDead)
+        // Search all healthy blocks
+        if (BuildingManager.Instance.blockList != null)
         {
-            // Found a new valid block
-            waypointIndex = 0;
-            ValidateWaypoints(); // Fill validWaypoints for new target
-            if (validWaypoints.Count > 0)
+            foreach (GameObject block in BuildingManager.Instance.blockList.healthyBlocks)
             {
-                currentState = ZombiState.AttackBlock;
-                isOnTargetBlock = false;
-                repathTimer = 0f;
+                var bh = block.GetComponent<BlockHealth>();
+                if (bh == null || bh.IsBlockDead) continue;
 
-                // Set initial destination
-                target = validWaypoints[waypointIndex];
-                if (agent != null)
+                // Validate its waypoints
+                List<Transform> candidates = new List<Transform>();
+                foreach (var t in bh.generatedWaypoints)
                 {
-                    agent.ResetPath();
-                    agent.SetDestination(target.position);
+                    if (t == null) continue;
+                    if (!t.gameObject.activeInHierarchy) continue;
+
+                    NavMeshPath testPath = new NavMeshPath();
+                    if (agent.CalculatePath(t.position, testPath) && testPath.status == NavMeshPathStatus.PathComplete)
+                    {
+                        candidates.Add(t);
+                    }
+                }
+
+                if (candidates.Count == 0) continue; // skip unreachable block
+
+                // Pick nearest block
+                float dist = (block.transform.position - transform.position).sqrMagnitude;
+                if (dist < nearestDistance)
+                {
+                    nearestDistance = dist;
+                    bestBlock = bh;
+                    bestWaypoints = candidates;
                 }
             }
-            else
-            {
-                // No valid waypoints on the new block
-                Debug.LogWarning("[Zombie] New target block has no valid waypoints.");
-                currentState = ZombiState.FindAnotherBlock; // optionally keep searching next frame
-            }
+        }
+
+        // Did we find a valid block?
+        if (bestBlock != null && bestWaypoints != null && bestWaypoints.Count > 0)
+        {
+            targetBlockHealth = bestBlock;
+            targetBlock = bestBlock.GetComponent<BlockPrefab>();
+            validWaypoints = bestWaypoints;
+            waypointIndex = 0;
+            target = validWaypoints[waypointIndex];
+            currentState = ZombiState.AttackBlock;
+
+            agent.ResetPath();
+            agent.SetDestination(target.position);
+
+            Debug.Log($"[Zombie] Found new target block {targetBlock.name} with {validWaypoints.Count} reachable waypoints.");
         }
         else
         {
-            // No valid block found anywhere
-            Debug.LogWarning("[Zombie] No alive block found. Zombie will idle or be destroyed.");
-            currentState = ZombiState.None; // stop movement
-            agent.ResetPath();
-            targetBlockHealth = null;
-            targetBlock = null;
+            Debug.LogWarning("[Zombie] No reachable blocks left. Destroying zombie.");
+            DestroyZombi();
         }
     }
 

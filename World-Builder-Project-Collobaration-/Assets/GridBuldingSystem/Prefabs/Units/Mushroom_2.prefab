@@ -5375,6 +5375,10 @@ MonoBehaviour:
   zombieSound: {fileID: 0}
   glassBreaking: {fileID: 0}
   animator: {fileID: 2667640163126942527}
+  waypointIndex: 0
+  waypointsList:
+    localOrder: []
+  movingToPointTimer: 1
   placedObjectName: 5
   currentPlacedObject: {fileID: 0}
 --- !u!114 &8004646403549274946

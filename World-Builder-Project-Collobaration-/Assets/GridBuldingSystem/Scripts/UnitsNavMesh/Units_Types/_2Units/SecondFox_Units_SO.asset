@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SecondFox_Units_SO
   m_EditorClassIdentifier: 
   unitId: 3
+  maxHealth: 100
   damageToUnitWithoutFood: 10
   healthPointsFromFood: 1
   death_Particles: {fileID: 1370348035730281900, guid: 55de213987c9fcf429b9854405faf7c4,
@@ -33,3 +34,5 @@ MonoBehaviour:
   speed: 15
   stoppingDistance: 1
   triggerRadius: 0.15
+  minMovingToPointTimer: 1
+  maxMovingToPointTimer: 1
