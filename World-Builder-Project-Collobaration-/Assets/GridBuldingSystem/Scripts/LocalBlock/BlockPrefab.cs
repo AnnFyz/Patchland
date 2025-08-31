@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -14,21 +14,47 @@ public enum CornerBlock
 }
 
 
+[System.Serializable]
+public class BlockInGrid
+{
+    public int[] row;
+}
+
 public class BlockPrefab : MonoBehaviour
 {
-    public int[,] blockId = new int[0, 0];
+    [Header("📍 Grid Position")]
+
+    [Tooltip("Grid coordinates of this block (row, column)")]
+    public Vector2 blockId = new Vector2(0,0); // array of rows and columns to store the block ID
     public static Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
-    public event Action<int> OnBlockHeightChanged;
+
+
+    [Header("🖱️ Interaction")]
+
     public bool IsThisBlockIsHighlighted = false;
     public bool IsThisBlockIsSelected = false;
     public Material defaultMaterial;
-    public int blocksAmount = 0;
+
+
+    [Header("📦 Block State")]
+
+    public int currentBlocksAmount = 0;
     public int maxAmount = 10;
     public int minAmount = 1;
+    public event Action<int> OnBlockHeightChanged;
+
+
+    [Header("🏗️ Block Prefabs")]
+
+    [Tooltip("The main block prefab")]
     [SerializeField] Transform mainBlock;
+
+    [Tooltip("Additional stacked block prefabs")]
     [SerializeField] Transform[] blockStack;
 
+
+    // Factory method to create and initialize a BlockPrefab instance
     public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab, Quaternion rotation)
     {
         GameObject placedBlockPrefabObj = Instantiate(blockPrefab, worldPosition + offset, rotation);
@@ -50,21 +76,21 @@ public class BlockPrefab : MonoBehaviour
 
     public void ChangeBlockHeight(int addedAmount)
     {
-        if (addedAmount > 0 && (blocksAmount + addedAmount) <= maxAmount)
+        if (addedAmount > 0 && (currentBlocksAmount + addedAmount) <= maxAmount)
         {
             SetFirstBlockPos(true);
             ToggleNextBlock(true);
-            blocksAmount += addedAmount;
+            currentBlocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
-            OnBlockHeightChanged?.Invoke(blocksAmount);
+            OnBlockHeightChanged?.Invoke(currentBlocksAmount);
         }
-        else if (addedAmount < 0 && (blocksAmount + addedAmount) >= minAmount)
+        else if (addedAmount < 0 && (currentBlocksAmount + addedAmount) >= minAmount)
         {
             SetFirstBlockPos(false);
             ToggleNextBlock(false);
-            blocksAmount += addedAmount;
+            currentBlocksAmount += addedAmount;
             UIManager.Instance.LocalSetupUIIcons();
-            OnBlockHeightChanged?.Invoke(blocksAmount);
+            OnBlockHeightChanged?.Invoke(currentBlocksAmount);
         }
     }
 
@@ -114,6 +140,7 @@ public class BlockPrefab : MonoBehaviour
         }
     }
 
+    // Change the material of all blocks
     public void SetStateMaterial(Material stateMaterial)
     {
         defaultMaterial = stateMaterial;

@@ -31,7 +31,7 @@ public class WaypointsList
 }
 
 //This class represents a unit in the game, which can be controlled by the player or move automatically.
-//The unit can interact with placed objects, has chance to become a zombie, if it dies, and has various properties defined in a scriptable object. 
+//The unit can interact with placed objects and has chance to become a zombie, if it dies
 [RequireComponent(typeof(NavMeshAgent))]
 public class Unit : MonoBehaviour
 {

@@ -78,45 +78,19 @@ public class GridOfPrefabs : MonoBehaviour
                 }
                 BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
                 BuildingManager.Instance.blockList.AddCreatedHealtyBlock(blockPrefab.gameObject);
-                //Replace the invalid collection expression with proper array initialization.
-                blockPrefab.blockId = new int[,] { { x, y } };
+                blockPrefab.blockId = new Vector2(x, y);
                 blockPrefab.GetComponent<MyGridBuildingSystem>().SetBlockGrid();
-                blockPrefab.blocksAmount = 1;
+                blockPrefab.currentBlocksAmount = 1;
                 blockPrefab.DeactivateStackOfBlocks();
-                //blockPrefab.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
                 blockPrefab.gameObject.transform.parent = gameObject.transform;
                 globalGrid.GetGridObject(x, y).SetPlacedObject(blockPrefab);
-                //blockPrefab.gameObject.transform.rotation = prefabRotation;
                 float amount = amountScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
-                //blockPrefab.blocksAmount =Mathf.RoundToInt(amount);
                 for (int i = 0; i < Mathf.RoundToInt(amount); i++)
                 {
                     blockPrefab.ChangeBlockHeight(1);
                 }
-                //int newHeight = Mathf.FloorToInt(amount);
-                //if (blockPrefab.transform.localScale.y <= 4) //Water
-                //{
-                //    blockPrefab.transform.localScale = new Vector3(1, 1, 1);
-                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
-                //    blockPrefab.ChangeAmount(0);
-
-                //}
-
-                //else if (blockPrefab.transform.localScale.y > 5 && blockPrefab.transform.localScale.y <= 6)
-                //{
-                //    blockPrefab.transform.localScale = new Vector3(1, blockPrefab.transform.localScale.y - 2, 1);
-                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
-                //    blockPrefab.ChangeAmount(0);
-                //}
-
-                //else
-                //{
-                //    blockPrefab.ChangeAmount(0);
-                //    blockPrefab.transform.localRotation = Quaternion.Euler(new Vector3(0, RandomRotation(), 0));
-
-                //}
             }
         }
 
@@ -131,28 +105,6 @@ public class GridOfPrefabs : MonoBehaviour
             horizontalSurfaces[i].BuildNavMesh();
         }
 
-    }
-
-    float RandomRotation()
-    {
-        int randomAngle = UnityEngine.Random.Range(1, 4);
-        float angle = 0;
-        switch (randomAngle)
-        {
-            case 1:
-                angle = 90;
-                break;
-            case 2:
-                angle = 180;
-                break;
-            case 3:
-                angle = 270;
-                break;
-            default:
-                angle = 0;
-                break;
-        }
-        return angle;
     }
     public Transform GetCenterObjInGrid()
     {
@@ -191,8 +143,6 @@ public class GridOfPrefabs : MonoBehaviour
                         for (int z = 0; z < height; z++)
                         {
                             globalGrid.GetGridObject(x, z).GetPlacedObject().IsThisBlockIsSelected = false;
-                            //placedObject.ChangeColorBack();
-                            //placedObject.ChangeMaterialBack();
                             UIManager.Instance.HidePanels();
                             placedObject.GetComponent<MyRaycast>().SetOutline(false);
                         }
@@ -200,7 +150,6 @@ public class GridOfPrefabs : MonoBehaviour
                     if (!placedObject.GetComponent<BlockHealth>().IsBlockDead)
                     {
                         placedObject.IsThisBlockIsSelected = true;
-                        //placedObject.ChangeSelectedMaterial();
                         placedObject.GetComponent<MyRaycast>().SetOutline(true);
                         UIManager.Instance.ShowPanels();
                         UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();

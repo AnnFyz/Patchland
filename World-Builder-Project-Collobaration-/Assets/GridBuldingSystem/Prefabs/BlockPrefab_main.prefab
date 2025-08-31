@@ -606,13 +606,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983df629b18c5b741b4afbaf8a1cb6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockId:
+  - row: 
   cornerBlock: 0
   IsThisBlockIsHighlighted: 0
   IsThisBlockIsSelected: 0
-  renderers: []
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
-  origin: 0.03
   defaultMaterial: {fileID: 0}
   blocksAmount: 0
   maxAmount: 12
@@ -713,14 +711,6 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
-  H_1: 0
-  S_1: 0
-  difS_1: 0
-  V_1: 0
-  difV_1: 0
-  H_2: 0
-  S_2: 0
-  V_2: 0
   IsBlockInjuring: 0
   HasDayingColor: 0
   IsAttacked: 0
