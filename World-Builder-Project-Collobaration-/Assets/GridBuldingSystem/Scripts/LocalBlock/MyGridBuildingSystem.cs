@@ -151,7 +151,7 @@ public class MyGridBuildingSystem : MonoBehaviour
             {
                 LevelState blockState = BuildingManager.Instance.currentBlockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
                 Vector3 mousePosition = GetMouseWorldPosition();
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted) //&& blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
+                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted) //&& blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
                 {
 
                     if (EventSystem.current.IsPointerOverGameObject())
@@ -230,12 +230,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                     }
                 }
 
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Pond)
+                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted && blockState == LevelState.Pond)
                 {
                     Bubble.Instance.CreatePopupText(mousePosition, "You can't build on a river...");
                 }
 
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.IsThisBlockIsHighlighted && blockState == LevelState.Hill)
+                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted && blockState == LevelState.Hill)
                 {
                     Bubble.Instance.CreatePopupText(mousePosition, "Noway");
                 }

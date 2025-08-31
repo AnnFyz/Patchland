@@ -30,9 +30,9 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             block = hit.collider.GetComponentInParent<BlockPrefab>();
             if (localPrefabBlock == block)
             {
-                localPrefabBlock.IsThisBlockIsHighlighted = true;
+                localPrefabBlock.isHighlighted = true;
                 SetOutline(true);
-                if (localPrefabBlock.IsThisBlockIsSelected && localPrefabBlock.IsThisBlockIsHighlighted)
+                if (localPrefabBlock.isSelected && localPrefabBlock.isHighlighted)
                 {
                     //localPrefabBlock.ChangeSelectedMaterial();
                     if (BuildingManager.Instance.currentObjectTypeSO == null)
@@ -63,11 +63,11 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
             else
             {
                
-                localPrefabBlock.IsThisBlockIsHighlighted = false;
+                localPrefabBlock.isHighlighted = false;
                 SetOutline(false);
                 //BuildingManager.Instance.DeselectObjectType();
 
-                if (!localPrefabBlock.IsThisBlockIsSelected)
+                if (!localPrefabBlock.isSelected)
                 {
            
                     //localPrefabBlock.ChangeColorBack();
@@ -88,9 +88,9 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
         {
             if (Input.GetMouseButtonDown(0))
             {
-                localPrefabBlock.IsThisBlockIsHighlighted = false;
+                localPrefabBlock.isHighlighted = false;
                 //SetOutline(false);
-                localPrefabBlock.IsThisBlockIsSelected = false;
+                localPrefabBlock.isSelected = false;
                // localPrefabBlock.ChangeColorBack();
                // localPrefabBlock.ChangeMaterialBack();
                 BuildingManager.Instance.DeselectObjectType();
@@ -121,7 +121,7 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
         }
         else
         {
-            if(!localPrefabBlock.IsThisBlockIsSelected)
+            if(!localPrefabBlock.isSelected)
             GetComponent<Outline>().enabled = false;
         }
     }

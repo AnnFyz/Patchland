@@ -25,15 +25,15 @@ public class BlockPrefab : MonoBehaviour
     [Header("📍 Grid Position")]
 
     [Tooltip("Grid coordinates of this block (row, column)")]
-    public Vector2 blockId = new Vector2(0,0); // array of rows and columns to store the block ID
-    public static Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
+    public Vector2 blockId = Vector2.zero; // array of rows and columns to store the block ID
+    public static readonly Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
 
 
     [Header("🖱️ Interaction")]
 
-    public bool IsThisBlockIsHighlighted = false;
-    public bool IsThisBlockIsSelected = false;
+    public bool isHighlighted = false;
+    public bool isSelected = false;
     public Material defaultMaterial;
 
 
@@ -55,12 +55,13 @@ public class BlockPrefab : MonoBehaviour
 
 
     // Factory method to create and initialize a BlockPrefab instance
-    public static BlockPrefab Create(Vector3 worldPosition, GameObject blockPrefab, Quaternion rotation)
+    public static BlockPrefab Create(Vector3 worldPosition, GameObject prefab, Quaternion rotation)
     {
-        GameObject placedBlockPrefabObj = Instantiate(blockPrefab, worldPosition + offset, rotation);
-        BlockPrefab placedBlockPrefab = placedBlockPrefabObj.GetComponent<BlockPrefab>();
+        GameObject obj = Instantiate(prefab, worldPosition + offset, rotation);
+        BlockPrefab placedBlockPrefab = obj.GetComponent<BlockPrefab>();
         return placedBlockPrefab;
     }
+
 
     public void DeactivateStackOfBlocks()
     {
@@ -69,29 +70,20 @@ public class BlockPrefab : MonoBehaviour
             block.gameObject.SetActive(false);
         }
     }
-    public void DestroySelf()
-    {
-        Destroy(gameObject);
-    }
+    public void DestroySelf() => Destroy(gameObject);
 
-    public void ChangeBlockHeight(int addedAmount)
+    public void ChangeBlockHeight(int delta)
     {
-        if (addedAmount > 0 && (currentBlocksAmount + addedAmount) <= maxAmount)
-        {
-            SetFirstBlockPos(true);
-            ToggleNextBlock(true);
-            currentBlocksAmount += addedAmount;
-            UIManager.Instance.LocalSetupUIIcons();
-            OnBlockHeightChanged?.Invoke(currentBlocksAmount);
-        }
-        else if (addedAmount < 0 && (currentBlocksAmount + addedAmount) >= minAmount)
-        {
-            SetFirstBlockPos(false);
-            ToggleNextBlock(false);
-            currentBlocksAmount += addedAmount;
-            UIManager.Instance.LocalSetupUIIcons();
-            OnBlockHeightChanged?.Invoke(currentBlocksAmount);
-        }
+        int newAmount = Mathf.Clamp(currentBlocksAmount + delta, minAmount, maxAmount);
+        if (newAmount == currentBlocksAmount) return; // No valid change
+        bool isAdded = delta > 0;
+        SetFirstBlockPos(isAdded);
+        ToggleNextBlock(isAdded);
+
+        currentBlocksAmount = newAmount;
+
+        UIManager.Instance.LocalSetupUIIcons();
+        OnBlockHeightChanged?.Invoke(currentBlocksAmount);
     }
 
     void SetFirstBlockPos(bool isAdded)
