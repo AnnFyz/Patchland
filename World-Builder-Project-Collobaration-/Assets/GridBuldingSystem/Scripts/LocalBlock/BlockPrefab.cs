@@ -26,7 +26,7 @@ public class BlockPrefab : MonoBehaviour
 
     [Tooltip("Grid coordinates of this block (row, column)")]
     public Vector2 blockId = Vector2.zero; // array of rows and columns to store the block ID
-    public static readonly Vector3 offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
+    public static readonly Vector3 Offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
 
 
@@ -57,7 +57,7 @@ public class BlockPrefab : MonoBehaviour
     // Factory method to create and initialize a BlockPrefab instance
     public static BlockPrefab Create(Vector3 worldPosition, GameObject prefab, Quaternion rotation)
     {
-        GameObject obj = Instantiate(prefab, worldPosition + offset, rotation);
+        GameObject obj = Instantiate(prefab, worldPosition + Offset, rotation);
         BlockPrefab placedBlockPrefab = obj.GetComponent<BlockPrefab>();
         return placedBlockPrefab;
     }
@@ -88,16 +88,8 @@ public class BlockPrefab : MonoBehaviour
 
     void SetFirstBlockPos(bool isAdded)
     {
-        if (isAdded)
-        {
-            float yPos = transform.position.y - offset.y;
-            transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
-        }
-        else
-        {
-            float yPos = transform.position.y + offset.y;
-            transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
-        }
+        float yDelta = Offset.y * (isAdded ? -1 : 1);
+        transform.position = new Vector3(transform.position.x, transform.position.y + yDelta, transform.position.z);
     }
 
     void ToggleNextBlock(bool isAdded)
@@ -106,7 +98,7 @@ public class BlockPrefab : MonoBehaviour
         {
             foreach (var block in blockStack)
             {
-                if (!block.gameObject.activeSelf)
+                if (block != null && !block.gameObject.activeSelf)
                 {
                     block.gameObject.SetActive(true);
                     break;

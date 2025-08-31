@@ -44,7 +44,7 @@ public class BlockHealth : MonoBehaviour
             generatedWaypoint.transform.RotateAround(transform.position, Vector3.up, angleStep * i);
             Vector3 dir = (generatedWaypoint.transform.position - transform.position).normalized;
             Vector3 position = transform.position + dir * 4;
-            generatedWaypoint.transform.position = new Vector3(position.x, block.transform.position.y - BlockPrefab.offset.y, position.z);
+            generatedWaypoint.transform.position = new Vector3(position.x, block.transform.position.y - BlockPrefab.Offset.y, position.z);
             generatedWaypoints[i - 1] = generatedWaypoint.transform;
             generatedWaypoint.transform.SetParent(transform);
         }
@@ -54,7 +54,7 @@ public class BlockHealth : MonoBehaviour
     {
         foreach (var waypoint in generatedWaypoints)
         {
-            waypoint.transform.position = new Vector3(waypoint.transform.position.x, block.transform.position.y - BlockPrefab.offset.y, waypoint.transform.position.z);
+            waypoint.transform.position = new Vector3(waypoint.transform.position.x, block.transform.position.y - BlockPrefab.Offset.y, waypoint.transform.position.z);
         }
     }
 

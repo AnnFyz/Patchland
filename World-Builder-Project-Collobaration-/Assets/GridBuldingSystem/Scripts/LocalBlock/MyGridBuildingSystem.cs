@@ -30,18 +30,18 @@ public class MyGridBuildingSystem : MonoBehaviour
     }
     public void SetBlockGrid()
     {
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
+        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.Offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
     }
     public void UpdateGrid(int newHeight)
     {
         this.newHeight = newHeight;
         oldGrid = grid;
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
+        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.Offset.x, (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, origin.z - BlockPrefab.Offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
     }
 
     public Vector3 GetOriginOfGrid()
     {
-        return new Vector3(origin.x - BlockPrefab.offset.x, (-newHeight * BlockPrefab.offset.y) + BlockPrefab.offset.y, origin.z - BlockPrefab.offset.z);
+        return new Vector3(origin.x - BlockPrefab.Offset.x, (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, origin.z - BlockPrefab.Offset.z);
     }
     public void DeleteOldObjectsAndWaypoints(int newHeight)
     {

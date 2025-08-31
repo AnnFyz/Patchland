@@ -54,7 +54,7 @@ public class MyBuildingGhost : MonoBehaviour
             visual.parent = transform;
             //visual.localPosition = GhostBildingPosition();
             //float newGhostBuldingsPos = (visual.localPosition.y * BuildingManager.blockPrefab.GetNewHeight() * BuildingManager.blockPrefab.GetStartScale() * -1f - visual.localScale.y) - BuildingManager.blockPrefab.GetStartScale();
-            visual.localPosition = new Vector3(0, BuildingManager.Instance.currentBlockPrefab.transform.position.y - BlockPrefab.offset.y -1, 0);
+            visual.localPosition = new Vector3(0, BuildingManager.Instance.currentBlockPrefab.transform.position.y - BlockPrefab.Offset.y -1, 0);
             //if(BuildingManager.blockPrefab.GetNewHeight() == 0)
             //{
             //    visual.localPosition = Vector3.zero;
