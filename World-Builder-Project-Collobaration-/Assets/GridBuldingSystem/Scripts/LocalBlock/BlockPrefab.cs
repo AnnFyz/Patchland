@@ -107,35 +107,37 @@ public class BlockPrefab : MonoBehaviour
         }
         else
         {
-            // Reverse the array without assigning the result to a variable
-            System.Array.Reverse(blockStack);
-
-            foreach (var block in blockStack)
+            for (int i = blockStack.Length - 1; i >= 0; i--)
             {
-                if (block.gameObject.activeSelf)
+                if (blockStack[i] != null && blockStack[i].gameObject.activeSelf)
                 {
-                    block.gameObject.SetActive(false);
+                    blockStack[i].gameObject.SetActive(false);
                     break;
                 }
             }
-
-            // Reverse the array back to its original order
-            System.Array.Reverse(blockStack);
         }
     }
 
     // Change the material of all blocks
     public void SetStateMaterial(Material stateMaterial)
     {
+        if (stateMaterial == null) return;
         defaultMaterial = stateMaterial;
+        ApplyMaterial(mainBlock, stateMaterial);
+
         foreach (var block in blockStack)
         {
-            // Change the material of each block in the stack
-            block.gameObject.GetComponent<Renderer>().material = stateMaterial;
+            ApplyMaterial(block, stateMaterial);
         }
-        // Change the material of the main block
-        mainBlock.gameObject.GetComponent<Renderer>().material = stateMaterial;
     }
+    private void ApplyMaterial(Transform block, Material material)
+    {
+        if (block == null) return;
 
-
+        var renderer = block.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = material;
+        }
+    }
 }
