@@ -34,12 +34,12 @@ public class MyGridBuildingSystem : MonoBehaviour
     public void SetBlockGrid()
     {
         Grid = new MyGridXZ<MyGridObject>(
-            gridWidth, 
-            gridHeight, 
-            cellSize, 
-            origin - BlockPrefab.Offset, 
-            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), 
-            isGridOnCorner, 
+            gridWidth,
+            gridHeight,
+            cellSize,
+            origin - BlockPrefab.Offset,
+            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
+            isGridOnCorner,
             blockPrefab.cornerBlock
             );
     }
@@ -48,15 +48,15 @@ public class MyGridBuildingSystem : MonoBehaviour
         currentHeight = newHeight;
         OldGrid = Grid;
         Grid = new MyGridXZ<MyGridObject>(
-            gridWidth, 
-            gridHeight, 
-            cellSize, 
+            gridWidth,
+            gridHeight,
+            cellSize,
             new Vector3(
-                origin.x - BlockPrefab.Offset.x, 
-                (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, 
-                origin.z - BlockPrefab.Offset.z), 
-            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), 
-            isGridOnCorner, 
+                origin.x - BlockPrefab.Offset.x,
+                (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y,
+                origin.z - BlockPrefab.Offset.z),
+            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
+            isGridOnCorner,
             blockPrefab.cornerBlock
             );
     }
@@ -64,8 +64,8 @@ public class MyGridBuildingSystem : MonoBehaviour
     public Vector3 GetOriginOfGrid()
     {
         return new Vector3(
-            origin.x - BlockPrefab.Offset.x, 
-            (-currentHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, 
+            origin.x - BlockPrefab.Offset.x,
+            (-currentHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y,
             origin.z - BlockPrefab.Offset.z
             );
     }
@@ -119,20 +119,6 @@ public class MyGridBuildingSystem : MonoBehaviour
                     UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(placedObj.transform);
                     OnChangedWaypoints?.Invoke();
                 }
-                //if (Grid.GetGridObject(x, z) != null && Grid.GetGridObject(x, z).GetPlacedObject() != null)
-                //{
-                //    Grid.GetGridObject(x, z).GetPlacedObject().ChangeMaterialOfObject();
-
-                //    int placedObjectId = Grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
-
-                //    PlacedObjectName placedObjectName = Grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
-
-                //    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(Grid.GetGridObject(x, z).GetPlacedObject().transform))
-                //    {
-                //        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(Grid.GetGridObject(x, z).GetPlacedObject().transform);
-                //        OnChangedWaypoints?.Invoke();
-                //    }
-                //}
             }
         }
     }
@@ -172,115 +158,98 @@ public class MyGridBuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+        if (BuildingManager.Instance.currentBlockPrefab == null) return;
+
+
+        LevelState blockState = BuildingManager.Instance.currentBlockPrefab
+            .gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
+
+
+        Vector3 mousePosition = GetMouseWorldPosition();
+
+
+        if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted)
         {
-            if (BuildingManager.Instance.currentBlockPrefab != null)
+
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+            
+            Grid.GetXZ(mousePosition, out int x, out int z);
+
+            Vector2Int placedObjectOrigin = new Vector2Int(x, z);
+            placedObjectOrigin = Grid.ValidateGridPosition(placedObjectOrigin);
+
+            // Test Can Build
+            List<Vector2Int> gridPositionList = 
+                BuildingManager.Instance.currentObjectTypeSO.GetGridPositionList(
+                    placedObjectOrigin, BuildingManager.Instance.dir);
+
+            bool canBuild = true;
+
+            foreach (Vector2Int gridPosition in gridPositionList)
             {
-                LevelState blockState = BuildingManager.Instance.currentBlockPrefab.gameObject.GetComponent<LocalLevelState>().GetCurrentLevelState();
-                Vector3 mousePosition = GetMouseWorldPosition();
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted) //&& blockState != LevelState.Pond && blockState != LevelState.Hill && CheckIfFitBlock(blockState, mousePosition))
+                if (Grid == null || Grid.GetGridObject(gridPosition.x, gridPosition.y) == null ||
+                     !Grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
                 {
-
-                    if (EventSystem.current.IsPointerOverGameObject())
-                    {
-                        return;
-                    }
-                    //Vector3 mousePosition = GetMouseWorldPosition();
-                    Grid.GetXZ(mousePosition, out int x, out int z);
-
-                    Vector2Int placedObjectOrigin = new Vector2Int(x, z);
-                    placedObjectOrigin = Grid.ValidateGridPosition(placedObjectOrigin);
-
-                    // Test Can Build
-                    List<Vector2Int> gridPositionList = BuildingManager.Instance.currentObjectTypeSO.GetGridPositionList(placedObjectOrigin, BuildingManager.Instance.dir);
-
-                    bool canBuild = true;
-                    foreach (Vector2Int gridPosition in gridPositionList)
-                    {
-                        if (Grid == null)
-                        {
-                            canBuild = false;
-                            break;
-                        }
-                        else if (Grid.GetGridObject(gridPosition.x, gridPosition.y) == null)
-                        {
-                            canBuild = false;
-                            break;
-                        }
-                        else if (!Grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && Grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
-                        {
-                            canBuild = false;
-                            break;
-                        }
-                    }
-
-                    if (canBuild)
-                    {
-                        Vector2Int rotationOffset = BuildingManager.Instance.currentObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
-                        Vector3 placedObjectWorldPosition = Grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * Grid.GetCellSize();
-                        PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.currentObjectTypeSO);
-
-                        foreach (Vector2Int gridPosition in gridPositionList)
-                        {
-                            Grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
-                        }
-
-                        //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound 
-                        BuildingManager.Instance.audio.PlayOneShot(BuildingManager.Instance.placedSound);
-                        Transform unitToCreate = BuildingManager.Instance.currentObjectTypeSO.unitToCreate; // to know which unit should be spawned
-
-
-                        int placedObjectId = BuildingManager.Instance.currentObjectTypeSO.placedObjId;
-
-                        PlacedObjectName placedObjectName = placedObject.placedObjectTypeSO.placedObjectName;
-
-                        if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObject.transform))
-                        {
-                            UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Add(placedObject.transform);
-                            Debug.Log("Waypoint added for " + placedObjectName + ": " + placedObject.transform.position);
-                        }
-
-
-                        BuildingManager.placedObjects[placedObjectId].Add(placedObject);
-                        Debug.Log("Placed object added: " + placedObjectId + " - " + placedObjectName);
-                        BuildingManager.Instance.DestroySurplusPlacedObjects(BuildingManager.Instance.currentObjectTypeSO);
-
-
-                        OnObjectPlaced?.Invoke(unitToCreate, placedObjectId, placedObjectName);
-                        OnChangedWaypoints?.Invoke();
-                        BuildingManager.Instance.DeselectObjectType();
-                    }
-
-                    else
-                    {
-                        Bubble.Instance.CreatePopupText(mousePosition, "Cannot build here!");
-                    }
+                    canBuild = false;
+                    break;
                 }
-
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted && blockState == LevelState.Pond)
-                {
-                    Bubble.Instance.CreatePopupText(mousePosition, "You can't build on a river...");
-                }
-
-                if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted && blockState == LevelState.Hill)
-                {
-                    Bubble.Instance.CreatePopupText(mousePosition, "Noway");
-                }
-
             }
-        }
+
+            if (canBuild)
+            {
+                Vector2Int rotationOffset = 
+                    BuildingManager.Instance.currentObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
+
+                Vector3 placedObjectWorldPosition = 
+                    Grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + 
+                    new Vector3(rotationOffset.x, 0, rotationOffset.y) * Grid.GetCellSize();
+
+                PlacedObject_Done placedObject = PlacedObject_Done.Create(
+                    placedObjectWorldPosition,
+                    placedObjectOrigin, 
+                    BuildingManager.Instance.dir, 
+                    BuildingManager.Instance.currentObjectTypeSO);
+
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
+                    Grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                }
+
+                BuildingManager.Instance.audio.PlayOneShot(BuildingManager.Instance.placedSound);
+                Transform unitToCreate = BuildingManager.Instance.currentObjectTypeSO.unitToCreate; // to know which unit should be spawned
+
+
+                int placedObjectId = BuildingManager.Instance.currentObjectTypeSO.placedObjId;
+                PlacedObjectName placedObjectName = placedObject.placedObjectTypeSO.placedObjectName;
+
+                if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObject.transform))
+                {
+                    UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Add(placedObject.transform);
+                    Debug.Log($"Waypoint added for {placedObjectName}: {placedObject.transform.position}");
+                }
+
+
+                BuildingManager.placedObjects[placedObjectId].Add(placedObject);
+                Debug.Log($"Placed object added: {placedObjectId} - {placedObjectName}");
+                BuildingManager.Instance.DestroySurplusPlacedObjects(BuildingManager.Instance.currentObjectTypeSO);
+
+
+                OnObjectPlaced?.Invoke(unitToCreate, placedObjectId, placedObjectName);
+                OnChangedWaypoints?.Invoke();
+                BuildingManager.Instance.DeselectObjectType();
+            }
+
+            else
+            {
+                Bubble.Instance.CreatePopupText(mousePosition, "Cannot build here!");
+            }
+        }   
     }
 
     private Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
-        {
-            return raycastHit.point;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
+        return Physics.Raycast(ray, out RaycastHit hit, 999f) ? hit.point : Vector3.zero;
     }
 }
