@@ -79,7 +79,7 @@ public class GridOfPrefabs : MonoBehaviour
                 BlockPrefab blockPrefab = BlockPrefab.Create(globalGrid.GetWorldPosition(x, y), prefabToCreate, prefabRotation);
                 BuildingManager.Instance.blockList.AddCreatedHealtyBlock(blockPrefab.gameObject);
                 blockPrefab.blockId = new Vector2(x, y);
-                blockPrefab.GetComponent<MyGridBuildingSystem>().SetBlockGrid();
+                blockPrefab.GetComponent<GridBuildingSystem>().SetBlockGrid();
                 blockPrefab.currentBlocksAmount = 1;
                 blockPrefab.DeactivateStackOfBlocks();
                 blockPrefab.gameObject.transform.parent = gameObject.transform;

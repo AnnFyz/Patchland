@@ -38,7 +38,7 @@ public class UnitsManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        MyGridBuildingSystem.OnChangedWaypoints += OnChangedGlobalOrderM;
+        GridBuildingSystem.OnChangedWaypoints += OnChangedGlobalOrderM;
     }
     private void Start()
     {

@@ -13,13 +13,13 @@ public class UnitsSpawner : MonoBehaviour
     public LayerMask groundMask;
     [SerializeField] int numberOfUnits = 1;
     List<GameObject> units = new List<GameObject>();
-    MyGridBuildingSystem localBuildingSystem;
+    GridBuildingSystem localBuildingSystem;
     Transform unitToSpawn;
     GameObject currentUnit;
     [SerializeField] LevelState levelState;
     private void Awake()
     {
-        localBuildingSystem = GetComponent<MyGridBuildingSystem>();
+        localBuildingSystem = GetComponent<GridBuildingSystem>();
     }
 
     void OnEnable()

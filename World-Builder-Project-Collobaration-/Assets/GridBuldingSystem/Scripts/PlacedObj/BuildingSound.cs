@@ -2,7 +2,7 @@
 
 public class BuildingSound : MonoBehaviour {
 
-    [SerializeField] private MyGridBuildingSystem myGridBuildingSystem = null;
+    [SerializeField] private GridBuildingSystem myGridBuildingSystem = null;
     [SerializeField] private Transform pfBuildingSound = null;
 
     //private void Start() {

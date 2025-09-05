@@ -56,7 +56,7 @@ public class SpecialGemSpawner : MonoBehaviour
         UnityEngine.AI.NavMeshHit hit;
         float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
         float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
-        if (NavMesh.SamplePosition(new Vector3(randomPosX, GetComponent<MyGridBuildingSystem>().GetOriginOfGrid().y, randomPosZ), out hit, 10f, -1))
+        if (NavMesh.SamplePosition(new Vector3(randomPosX, GetComponent<GridBuildingSystem>().GetOriginOfGrid().y, randomPosZ), out hit, 10f, -1))
         {
             Transform gem = Instantiate(specialGem.gemPrefab.transform, hit.position, Quaternion.identity, GemManager.Instance.gameObject.transform);
             gem.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(hit.position);

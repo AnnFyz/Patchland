@@ -8,14 +8,14 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
 {
 
     BlockPrefab localPrefabBlock;
-    MyGridBuildingSystem localGrid;
+    GridBuildingSystem localGrid;
     Ray ray;
     RaycastHit hit;
     BlockPrefab block;
     private void Awake()
     {
         localPrefabBlock = GetComponent<BlockPrefab>();
-        localGrid = GetComponent<MyGridBuildingSystem>();
+        localGrid = GetComponent<GridBuildingSystem>();
     }
     private void Update()
     {

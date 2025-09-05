@@ -67,7 +67,7 @@ public class BlockHealth : MonoBehaviour
             IsBlockDead = true;
             BuildingManager.Instance.blockList.TransferBlockToDeadList(this.gameObject);
             GetComponent<BlockPrefab>().SetStateMaterial(BuildingManager.Instance.deadBlockMaterial);
-            gameObject.GetComponent<MyGridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
+            gameObject.GetComponent<GridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
             GameManager.Instance.amountOfDeadBlocks++;
             GameManager.Instance.CheckIfAllBlocksAreDead();
         }

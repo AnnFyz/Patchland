@@ -7,7 +7,7 @@ using static PlacedObjectTypeSO;
 
 
 
-public class MyGridBuildingSystem : MonoBehaviour
+public class GridBuildingSystem : MonoBehaviour
 {
     public MyGridXZ<MyGridObject> Grid { get; private set; }
     public MyGridXZ<MyGridObject> OldGrid { get; private set; }

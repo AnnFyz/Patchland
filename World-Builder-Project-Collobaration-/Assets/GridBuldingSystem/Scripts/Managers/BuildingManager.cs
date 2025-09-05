@@ -49,7 +49,7 @@ public class BuildingManager : MonoBehaviour
     public PlacedObjectTypeSO.Dir dir;
     public event EventHandler OnSelectedChanged; // for ghost building
     public event EventHandler OnObjectPlaced; // for sound 
-    public static MyGridXZ<MyGridBuildingSystem.MyGridObject> localGrid;
+    public static MyGridXZ<GridBuildingSystem.MyGridObject> localGrid;
     public BlockPrefab currentBlockPrefab;
     public BlockPrefab lastBlockPrefab;
     public List<Material> levelsMaterials = new List<Material>();
