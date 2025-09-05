@@ -40,7 +40,7 @@ public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
                         BuildingManager.Instance.currentObjectTypeSO = BuildingManager.Instance.lastSelectedObjToPlaceTypeSO;
                     }
 
-                        BuildingManager.localGrid = localGrid.grid;
+                        BuildingManager.localGrid = localGrid.Grid;
                         BuildingManager.Instance.lastBlockPrefab = BuildingManager.Instance.currentBlockPrefab;
                         BuildingManager.Instance.currentBlockPrefab = localPrefabBlock;     
                        if (BuildingManager.Instance.lastBlockPrefab != null && BuildingManager.Instance.currentBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState() == BuildingManager.Instance.lastBlockPrefab.GetComponent<LocalLevelState>().GetCurrentLevelState())

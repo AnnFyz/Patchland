@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,17 +9,20 @@ using static PlacedObjectTypeSO;
 
 public class MyGridBuildingSystem : MonoBehaviour
 {
-    public MyGridXZ<MyGridObject> grid;
-    public bool isGridOnCorner = false;
-    public MyGridXZ<MyGridObject> oldGrid;
-    [SerializeField] int gridWidth = 2;
-    [SerializeField] int gridHeight = 2;
-    [SerializeField] float cellSize = 5f;
-    BlockPrefab blockPrefab;
-    public Vector3 origin;
+    public MyGridXZ<MyGridObject> Grid { get; private set; }
+    public MyGridXZ<MyGridObject> OldGrid { get; private set; }
+
+    [SerializeField] private int gridWidth = 2;
+    [SerializeField] private int gridHeight = 2;
+    [SerializeField] private float cellSize = 5f;
+    [SerializeField] private bool isGridOnCorner = false;
+
+    private BlockPrefab blockPrefab;
+    private Vector3 origin;
+    private int currentHeight = 0;
+
     public event Action<Transform, int, PlacedObjectName> OnObjectPlaced;
     public static event Action OnChangedWaypoints;
-    int newHeight = 0;
     private void Awake()
     {
         origin = transform.position;
@@ -30,18 +33,41 @@ public class MyGridBuildingSystem : MonoBehaviour
     }
     public void SetBlockGrid()
     {
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, origin - BlockPrefab.Offset, (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
+        Grid = new MyGridXZ<MyGridObject>(
+            gridWidth, 
+            gridHeight, 
+            cellSize, 
+            origin - BlockPrefab.Offset, 
+            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), 
+            isGridOnCorner, 
+            blockPrefab.cornerBlock
+            );
     }
     public void UpdateGrid(int newHeight)
     {
-        this.newHeight = newHeight;
-        oldGrid = grid;
-        grid = new MyGridXZ<MyGridObject>(gridWidth, gridHeight, cellSize, new Vector3(origin.x - BlockPrefab.Offset.x, (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, origin.z - BlockPrefab.Offset.z), (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), isGridOnCorner, blockPrefab.cornerBlock);
+        currentHeight = newHeight;
+        OldGrid = Grid;
+        Grid = new MyGridXZ<MyGridObject>(
+            gridWidth, 
+            gridHeight, 
+            cellSize, 
+            new Vector3(
+                origin.x - BlockPrefab.Offset.x, 
+                (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, 
+                origin.z - BlockPrefab.Offset.z), 
+            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y), 
+            isGridOnCorner, 
+            blockPrefab.cornerBlock
+            );
     }
 
     public Vector3 GetOriginOfGrid()
     {
-        return new Vector3(origin.x - BlockPrefab.Offset.x, (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, origin.z - BlockPrefab.Offset.z);
+        return new Vector3(
+            origin.x - BlockPrefab.Offset.x, 
+            (-currentHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y, 
+            origin.z - BlockPrefab.Offset.z
+            );
     }
     public void DeleteOldObjectsAndWaypoints(int newHeight)
     {
@@ -49,30 +75,29 @@ public class MyGridBuildingSystem : MonoBehaviour
         {
             for (int z = 0; z < gridHeight; z++)
             {
-                if (oldGrid != null && oldGrid.GetGridObject(x, z) != null && oldGrid.GetGridObject(x, z).GetPlacedObject() != null)
+                // 💡 simplified chained null checks using local variable
+                var oldObj = OldGrid?.GetGridObject(x, z)?.GetPlacedObject();
+                if (oldObj == null) continue;
+
+                int placedObjectId = oldObj.placedObjectTypeSO.placedObjId;
+                PlacedObjectName placedObjectName = oldObj.placedObjectTypeSO.placedObjectName;
+
+                if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(oldObj.transform))
                 {
-
-                    int placedObjectId = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
-
-                    PlacedObjectName placedObjectName = oldGrid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
-                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject().transform))
-                    {
-                        Debug.Log("Removing old waypoint for " + placedObjectName + " at " + x + ", " + z);
-                        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject().transform);
-                        OnChangedWaypoints?.Invoke();
-                    }
-                    if (BuildingManager.placedObjects[placedObjectId].Contains(oldGrid.GetGridObject(x, z).GetPlacedObject()))
-                    {
-                        BuildingManager.placedObjects[placedObjectId].Remove(oldGrid.GetGridObject(x, z).GetPlacedObject());
-                    }
-
-                    oldGrid.GetGridObject(x, z).GetPlacedObject().DestroySelf();
-                    grid.GetGridObject(x, z).ClearPlacedObject();
-
+                    Debug.Log($"Removing old waypoint for {placedObjectName} at {x}, {z}"); // 💡 string interpolation
+                    UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(oldObj.transform);
+                    OnChangedWaypoints?.Invoke();
                 }
+
+                if (BuildingManager.placedObjects[placedObjectId].Contains(oldObj))
+                {
+                    BuildingManager.placedObjects[placedObjectId].Remove(oldObj);
+                }
+
+                oldObj.DestroySelf();
+                Grid.GetGridObject(x, z).ClearPlacedObject();
             }
         }
-
     }
 
     public void GetAllPlacedObjectsOnTheBlock()
@@ -81,29 +106,42 @@ public class MyGridBuildingSystem : MonoBehaviour
         {
             for (int z = 0; z < gridHeight; z++)
             {
-                if (grid.GetGridObject(x, z) != null && grid.GetGridObject(x, z).GetPlacedObject() != null)
+                var placedObj = Grid.GetGridObject(x, z)?.GetPlacedObject();
+                if (placedObj == null) continue;
+
+                placedObj.ChangeMaterialOfObject();
+
+                int placedObjectId = placedObj.placedObjectTypeSO.placedObjId;
+                PlacedObjectName placedObjectName = placedObj.placedObjectTypeSO.placedObjectName;
+
+                if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObj.transform))
                 {
-                    grid.GetGridObject(x, z).GetPlacedObject().ChangeMaterialOfObject();
-
-                    int placedObjectId = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
-
-                    PlacedObjectName placedObjectName = grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
-
-                    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(grid.GetGridObject(x, z).GetPlacedObject().transform))
-                    {
-                        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(grid.GetGridObject(x, z).GetPlacedObject().transform);
-                        OnChangedWaypoints?.Invoke();
-                    }
+                    UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(placedObj.transform);
+                    OnChangedWaypoints?.Invoke();
                 }
+                //if (Grid.GetGridObject(x, z) != null && Grid.GetGridObject(x, z).GetPlacedObject() != null)
+                //{
+                //    Grid.GetGridObject(x, z).GetPlacedObject().ChangeMaterialOfObject();
+
+                //    int placedObjectId = Grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjId;
+
+                //    PlacedObjectName placedObjectName = Grid.GetGridObject(x, z).GetPlacedObject().placedObjectTypeSO.placedObjectName;
+
+                //    if (UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(Grid.GetGridObject(x, z).GetPlacedObject().transform))
+                //    {
+                //        UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Remove(Grid.GetGridObject(x, z).GetPlacedObject().transform);
+                //        OnChangedWaypoints?.Invoke();
+                //    }
+                //}
             }
         }
     }
     public class MyGridObject
     {
 
-        private MyGridXZ<MyGridObject> grid;
-        private int x;
-        private int y;
+        private readonly MyGridXZ<MyGridObject> grid;
+        private readonly int x;
+        private readonly int y;
         public PlacedObject_Done placedObject;
 
         public MyGridObject(MyGridXZ<MyGridObject> grid, int x, int y)
@@ -111,13 +149,9 @@ public class MyGridBuildingSystem : MonoBehaviour
             this.grid = grid;
             this.x = x;
             this.y = y;
-            placedObject = null;
         }
 
-        public override string ToString()
-        {
-            return x + ", " + y + "\n" + placedObject;
-        }
+        public override string ToString() => $"{x}, {y}\n{placedObject}";
 
         public void SetPlacedObject(PlacedObject_Done placedObject)
         {
@@ -131,15 +165,8 @@ public class MyGridBuildingSystem : MonoBehaviour
             grid.TriggerGridObjectChanged(x, y);
         }
 
-        public PlacedObject_Done GetPlacedObject()
-        {
-            return placedObject;
-        }
-
-        public bool CanBuild()
-        {
-            return placedObject == null;
-        }
+        public PlacedObject_Done GetPlacedObject() => placedObject;
+        public bool CanBuild() => placedObject == null;
 
     }
 
@@ -159,10 +186,10 @@ public class MyGridBuildingSystem : MonoBehaviour
                         return;
                     }
                     //Vector3 mousePosition = GetMouseWorldPosition();
-                    grid.GetXZ(mousePosition, out int x, out int z);
+                    Grid.GetXZ(mousePosition, out int x, out int z);
 
                     Vector2Int placedObjectOrigin = new Vector2Int(x, z);
-                    placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
+                    placedObjectOrigin = Grid.ValidateGridPosition(placedObjectOrigin);
 
                     // Test Can Build
                     List<Vector2Int> gridPositionList = BuildingManager.Instance.currentObjectTypeSO.GetGridPositionList(placedObjectOrigin, BuildingManager.Instance.dir);
@@ -170,17 +197,17 @@ public class MyGridBuildingSystem : MonoBehaviour
                     bool canBuild = true;
                     foreach (Vector2Int gridPosition in gridPositionList)
                     {
-                        if (grid == null)
+                        if (Grid == null)
                         {
                             canBuild = false;
                             break;
                         }
-                        else if (grid.GetGridObject(gridPosition.x, gridPosition.y) == null)
+                        else if (Grid.GetGridObject(gridPosition.x, gridPosition.y) == null)
                         {
                             canBuild = false;
                             break;
                         }
-                        else if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
+                        else if (!Grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild() && Grid.GetGridObject(gridPosition.x, gridPosition.y) != null)
                         {
                             canBuild = false;
                             break;
@@ -190,12 +217,12 @@ public class MyGridBuildingSystem : MonoBehaviour
                     if (canBuild)
                     {
                         Vector2Int rotationOffset = BuildingManager.Instance.currentObjectTypeSO.GetRotationOffset(BuildingManager.Instance.dir);
-                        Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+                        Vector3 placedObjectWorldPosition = Grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * Grid.GetCellSize();
                         PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, BuildingManager.Instance.dir, BuildingManager.Instance.currentObjectTypeSO);
 
                         foreach (Vector2Int gridPosition in gridPositionList)
                         {
-                            grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                            Grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                         }
 
                         //OnObjectPlaced?.Invoke(this, EventArgs.Empty); // for sound 
