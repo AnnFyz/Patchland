@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * GridBuildingSystem.cs
+ * ----------------------
+ * Manages the grid-based building system.
+ * - Creates and updates the grid when block height changes.
+ * - Handles placement and removal of objects on grid cells.
+ * - Manages waypoints for units linked to placed objects.
+ * - Listens for player input (mouse clicks) to place objects.
+ */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +19,19 @@ using static PlacedObjectTypeSO;
 
 public class GridBuildingSystem : MonoBehaviour
 {
+    // Current active grid and the old one (before height change)
     public GridXZ<MyGridObject> Grid { get; private set; }
     public GridXZ<MyGridObject> OldGrid { get; private set; }
 
+    [Header("📐 Grid Settings")]
+
+    [Tooltip("Number of cells along the X-axis.")]
     [SerializeField] private int gridWidth = 2;
+
+    [Tooltip("Number of cells along the Z-axis.")]
     [SerializeField] private int gridHeight = 2;
+
+    [Tooltip("World size of each grid cell")]
     [SerializeField] private float cellSize = 5f;
     [SerializeField] private bool isGridOnCorner = false;
 
@@ -122,40 +140,6 @@ public class GridBuildingSystem : MonoBehaviour
             }
         }
     }
-    public class MyGridObject
-    {
-
-        private readonly GridXZ<MyGridObject> grid;
-        private readonly int x;
-        private readonly int y;
-        public PlacedObject_Done placedObject;
-
-        public MyGridObject(GridXZ<MyGridObject> grid, int x, int y)
-        {
-            this.grid = grid;
-            this.x = x;
-            this.y = y;
-        }
-
-        public override string ToString() => $"{x}, {y}\n{placedObject}";
-
-        public void SetPlacedObject(PlacedObject_Done placedObject)
-        {
-            this.placedObject = placedObject;
-            grid.TriggerGridObjectChanged(x, y); // 
-        }
-
-        public void ClearPlacedObject()
-        {
-            placedObject = null;
-            grid.TriggerGridObjectChanged(x, y);
-        }
-
-        public PlacedObject_Done GetPlacedObject() => placedObject;
-        public bool CanBuild() => placedObject == null;
-
-    }
-
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0)) return;
@@ -251,5 +235,39 @@ public class GridBuildingSystem : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         return Physics.Raycast(ray, out RaycastHit hit, 999f) ? hit.point : Vector3.zero;
+    }
+
+    public class MyGridObject
+    {
+
+        private readonly GridXZ<MyGridObject> grid;
+        private readonly int x;
+        private readonly int y;
+        public PlacedObject_Done placedObject;
+
+        public MyGridObject(GridXZ<MyGridObject> grid, int x, int y)
+        {
+            this.grid = grid;
+            this.x = x;
+            this.y = y;
+        }
+
+        public override string ToString() => $"{x}, {y}\n{placedObject}";
+
+        public void SetPlacedObject(PlacedObject_Done placedObject)
+        {
+            this.placedObject = placedObject;
+            grid.TriggerGridObjectChanged(x, y); // 
+        }
+
+        public void ClearPlacedObject()
+        {
+            placedObject = null;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public PlacedObject_Done GetPlacedObject() => placedObject;
+        public bool CanBuild() => placedObject == null;
+
     }
 }
