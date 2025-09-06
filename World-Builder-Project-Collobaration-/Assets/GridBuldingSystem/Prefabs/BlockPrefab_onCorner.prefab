@@ -573,10 +573,10 @@ GameObject:
   - component: {fileID: 2211044260347307412}
   - component: {fileID: 8095457313609203249}
   - component: {fileID: 7450040506915623779}
-  - component: {fileID: 5631865040396593832}
   - component: {fileID: 8771333300075248221}
   - component: {fileID: 6123430626304202518}
   - component: {fileID: 1875274776752494370}
+  - component: {fileID: 5631865040396593832}
   m_Layer: 6
   m_Name: BlockPrefab_onCorner
   m_TagString: Untagged
@@ -624,15 +624,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983df629b18c5b741b4afbaf8a1cb6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockId: {x: 0, y: 0}
   cornerBlock: 1
-  IsThisBlockIsHighlighted: 0
-  IsThisBlockIsSelected: 0
-  renderers: []
-  defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  defaultBottomColor: {r: 0, g: 0, b: 0, a: 0}
-  origin: 0
+  isHighlighted: 0
+  isSelected: 0
   defaultMaterial: {fileID: 0}
-  blocksAmount: 0
+  currentBlocksAmount: 0
   maxAmount: 12
   minAmount: 1
   mainBlock: {fileID: 6952173462082135868}
@@ -660,11 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd6b9865a71d446a1423cf49f5ab6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGridOnCorner: 1
   gridWidth: 2
   gridHeight: 2
   cellSize: 5
-  origin: {x: 0, y: 0, z: 0}
+  isGridOnCorner: 1
 --- !u!114 &4328790335130294475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,9 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce388e41e09fbc54e95d5d3800b6e48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLevelState: 0
   currentLevelState: 0
-  heightToChangeLevel: 0
 --- !u!114 &2211044260347307412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,14 +725,6 @@ MonoBehaviour:
   startHealth: 100
   currentHealth: 0
   IsBlockDead: 0
-  H_1: 0
-  S_1: 0
-  difS_1: 0
-  V_1: 0
-  difV_1: 0
-  H_2: 0
-  S_2: 0
-  V_2: 0
   IsBlockInjuring: 0
   HasDayingColor: 0
   IsAttacked: 0
@@ -762,24 +748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialGem: {fileID: 11400000, guid: fc19360f0c68ec14da7f011433a17d52, type: 2}
---- !u!114 &5631865040396593832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541634431918291856}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 3.5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &8771333300075248221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,6 +804,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 13.22869, y: 5, z: 12.999996}
   m_Center: {x: -0.14065456, y: 2.5, z: 0.00000047683716}
+--- !u!114 &5631865040396593832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541634431918291856}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3.5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6638292260408872654
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,6 +92,7 @@ public class Unit : MonoBehaviour
         SetupUnitFromConfiguration();
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
+        //GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
     }
 
     private void LateUpdate()
@@ -411,6 +412,8 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId)
             {
+                Debug.Log($"{gameObject.name} entered trigger with {other.gameObject.name}");
+
                 if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
                 {
                     currentPlacedObject = other.gameObject.GetComponentInParent<PlacedObject_Done>();
@@ -434,6 +437,7 @@ public class Unit : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
+            Debug.Log($"{gameObject.name} exited trigger with {other.gameObject.name}");
 
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>().IsFoodAround)
             {

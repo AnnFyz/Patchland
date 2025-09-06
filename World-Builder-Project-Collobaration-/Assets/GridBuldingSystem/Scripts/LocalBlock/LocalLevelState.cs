@@ -1,3 +1,11 @@
+﻿/*
+ * LocalLevelState.cs
+ * -------------------
+ * Tracks and updates the environmental state of a block (Pond, Desert, Forest, etc.)
+ * based on its height. Updates materials, triggers events, and refreshes UI when the
+ * state changes.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,119 +22,58 @@ public enum LevelState
 }
 public class LocalLevelState : MonoBehaviour
 {
+    [Header("🌍 Level State")]
+    [Tooltip("The current environment state of this block (e.g., Pond, Forest, Hill).")]
+    [SerializeField] private LevelState currentLevelState;
 
-    [SerializeField] LevelState startLevelState;
-    [SerializeField] LevelState currentLevelState;
-    [SerializeField] int heightToChangeLevel;
-    BlockPrefab blockPrefab;
-    Renderer renderer;
+
+    private BlockPrefab blockPrefab;
+    private Renderer renderer;
+    BlockHealth blockHealth;
+
     public Action OnChangedState;
-    BlockHealth blHealth;
     private void Awake()
     {
         blockPrefab = GetComponent<BlockPrefab>();
         renderer = GetComponentInChildren<Renderer>();
-        blHealth = GetComponent<BlockHealth>();
+        blockHealth = GetComponent<BlockHealth>();
     }
     private void OnEnable()
     {
         blockPrefab.OnBlockHeightChanged += ChangeState;
     }
-    public LevelState GetCurrentLevelState()
-    {
-        return currentLevelState;
-    }
+    public LevelState GetCurrentLevelState() => currentLevelState;
 
     public void ChangeState(int newAmount)
     {
-        if (newAmount == 1) //Pond
-        {
-            if (currentLevelState != LevelState.Pond) //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[0];
-            //blockPrefab.defaultMaterial = renderer.material;
-            blockPrefab.SetStateMaterial(renderer.material);
-           
-            currentLevelState = LevelState.Pond;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
+        LevelState newState = GetLevelStateFromHeight(newAmount);
 
-        else if (newAmount == 2) // Desert
-        {
-            if (currentLevelState != LevelState.Desert)  //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[1];
-            blockPrefab.SetStateMaterial(renderer.material);
-           
-            currentLevelState = LevelState.Desert;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
+        if (newState == currentLevelState) return;
+        OnChangedState?.Invoke(); // ⚡ trigger event only when state actually changes
 
-        }
-        else if (newAmount > 2 && newAmount <= 3) // Forest
-        {
-            if (currentLevelState != LevelState.Forest)  //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[2];
-            blockPrefab.SetStateMaterial(renderer.material);
-           
-            currentLevelState = LevelState.Forest;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
+        // ⚡ material index matches enum order (safe because we control both)
+        int materialIndex = (int)newState;
+        Material stateMaterial = BuildingManager.Instance.levelsMaterials[materialIndex];
 
-        else if (newAmount > 3  && newAmount <= 6) // Hill
-        {
-            if (currentLevelState != LevelState.Hill)  //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[3];
-            //blockPrefab.defaultMaterial = renderer.material;
-            blockPrefab.SetStateMaterial(renderer.material);
-            
-           
-            currentLevelState = LevelState.Hill;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
+        renderer.material = stateMaterial;
+        blockPrefab.SetStateMaterial(stateMaterial);
 
-        else if (newAmount > 6 && newAmount <= 8) // Montain
-        {
-            if (currentLevelState != LevelState.Mountain) //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[4];
-            blockPrefab.SetStateMaterial(renderer.material);
-           
-
-            currentLevelState = LevelState.Mountain;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
-
-        else if (newAmount > 8 && newAmount <= 10) //Snow mountain
-        {
-            if (currentLevelState != LevelState.SnowMountain) //condition to not call the event if the state is not changed
-            {
-                OnChangedState?.Invoke();
-            }
-            renderer.material = BuildingManager.Instance.levelsMaterials[5];
-            blockPrefab.SetStateMaterial(renderer.material);
-           
-            currentLevelState = LevelState.SnowMountain;
-            blHealth.SetDyingColor();
-            UIManager.Instance.LocalSetupUIIcons();
-        }
+        currentLevelState = newState;
+        blockHealth.SetDyingColor();
+        UIManager.Instance.LocalSetupUIIcons();
 
     }
 
+    // ⚡ New helper method: maps block height to LevelState
+    private LevelState GetLevelStateFromHeight(int height)
+    {
+        if (height == 1) return LevelState.Pond;
+        if (height == 2) return LevelState.Desert;
+        if (height > 2 && height <= 3) return LevelState.Forest;
+        if (height > 3 && height <= 6) return LevelState.Hill;
+        if (height > 6 && height <= 8) return LevelState.Mountain;
+        if (height > 8 && height <= 10) return LevelState.SnowMountain;
+
+        return currentLevelState; // fallback (shouldn't normally happen)
+    }
 }
