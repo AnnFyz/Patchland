@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MyRaycast : MonoBehaviour // local raycasting for each block prefab
+public class Raycast : MonoBehaviour // local raycasting for each block prefab
 {
 
     BlockPrefab localPrefabBlock;

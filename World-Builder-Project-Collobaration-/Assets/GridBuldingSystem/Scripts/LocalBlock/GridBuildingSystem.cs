@@ -9,8 +9,8 @@ using static PlacedObjectTypeSO;
 
 public class GridBuildingSystem : MonoBehaviour
 {
-    public MyGridXZ<MyGridObject> Grid { get; private set; }
-    public MyGridXZ<MyGridObject> OldGrid { get; private set; }
+    public GridXZ<MyGridObject> Grid { get; private set; }
+    public GridXZ<MyGridObject> OldGrid { get; private set; }
 
     [SerializeField] private int gridWidth = 2;
     [SerializeField] private int gridHeight = 2;
@@ -33,12 +33,12 @@ public class GridBuildingSystem : MonoBehaviour
     }
     public void SetBlockGrid()
     {
-        Grid = new MyGridXZ<MyGridObject>(
+        Grid = new GridXZ<MyGridObject>(
             gridWidth,
             gridHeight,
             cellSize,
             origin - BlockPrefab.Offset,
-            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
+            (GridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
             isGridOnCorner,
             blockPrefab.cornerBlock
             );
@@ -47,7 +47,7 @@ public class GridBuildingSystem : MonoBehaviour
     {
         currentHeight = newHeight;
         OldGrid = Grid;
-        Grid = new MyGridXZ<MyGridObject>(
+        Grid = new GridXZ<MyGridObject>(
             gridWidth,
             gridHeight,
             cellSize,
@@ -55,7 +55,7 @@ public class GridBuildingSystem : MonoBehaviour
                 origin.x - BlockPrefab.Offset.x,
                 (-newHeight * BlockPrefab.Offset.y) + BlockPrefab.Offset.y,
                 origin.z - BlockPrefab.Offset.z),
-            (MyGridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
+            (GridXZ<MyGridObject> g, int x, int y) => new MyGridObject(g, x, y),
             isGridOnCorner,
             blockPrefab.cornerBlock
             );
@@ -125,12 +125,12 @@ public class GridBuildingSystem : MonoBehaviour
     public class MyGridObject
     {
 
-        private readonly MyGridXZ<MyGridObject> grid;
+        private readonly GridXZ<MyGridObject> grid;
         private readonly int x;
         private readonly int y;
         public PlacedObject_Done placedObject;
 
-        public MyGridObject(MyGridXZ<MyGridObject> grid, int x, int y)
+        public MyGridObject(GridXZ<MyGridObject> grid, int x, int y)
         {
             this.grid = grid;
             this.x = x;

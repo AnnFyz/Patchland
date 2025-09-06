@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyBuildingGhost : MonoBehaviour
+public class BuildingGhost : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;
     private Transform visual;
     private PlacedObjectTypeSO placedObjectTypeSO;
-    public static MyBuildingGhost Instance { get; private set; }
+    public static BuildingGhost Instance { get; private set; }
     private void Awake()
     {
         Instance = this;

@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/*
+ * BlockPrefab.cs
+ * ----------------
+ * Represents a block in the grid system.
+ * - Tracks position, corner type, and block state.
+ * - Handles stacking (height increase/decrease).
+ * - Supports highlighting, selection, and material changes.
+ * - Raises events when block height changes.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -11,13 +21,6 @@ public enum CornerBlock
     BottomLeft,
     BottomRight,
     None
-}
-
-
-[System.Serializable]
-public class BlockInGrid
-{
-    public int[] row;
 }
 
 public class BlockPrefab : MonoBehaviour
@@ -86,12 +89,15 @@ public class BlockPrefab : MonoBehaviour
         OnBlockHeightChanged?.Invoke(currentBlocksAmount);
     }
 
+    // Adjust block base position when height changes
     void SetFirstBlockPos(bool isAdded)
     {
         float yDelta = Offset.y * (isAdded ? -1 : 1);
         transform.position = new Vector3(transform.position.x, transform.position.y + yDelta, transform.position.z);
     }
 
+
+    // Enable/disable stacked blocks when height changes
     void ToggleNextBlock(bool isAdded)
     {
         if (isAdded)
@@ -118,7 +124,7 @@ public class BlockPrefab : MonoBehaviour
         }
     }
 
-    // Change the material of all blocks
+    //  // Change the material of the main block and its stack
     public void SetStateMaterial(Material stateMaterial)
     {
         if (stateMaterial == null) return;
@@ -130,6 +136,8 @@ public class BlockPrefab : MonoBehaviour
             ApplyMaterial(block, stateMaterial);
         }
     }
+
+    // Apply material to a single block
     private void ApplyMaterial(Transform block, Material material)
     {
         if (block == null) return;

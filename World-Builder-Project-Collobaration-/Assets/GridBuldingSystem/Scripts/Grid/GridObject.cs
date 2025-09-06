@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyGridObject : MonoBehaviour
+public class GridObject : MonoBehaviour
 {
-    private MyGridXZ<MyGridObject> grid;
+    private GridXZ<GridObject> grid;
     private int x;
     private int y;
     public PlacedObject_Done placedObject;
 
-    public MyGridObject(MyGridXZ<MyGridObject> grid, int x, int y)
+    public GridObject(GridXZ<GridObject> grid, int x, int y)
     {
         this.grid = grid;
         this.x = x;

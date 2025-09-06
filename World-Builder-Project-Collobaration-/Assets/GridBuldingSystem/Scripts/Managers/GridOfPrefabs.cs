@@ -22,7 +22,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
-    public MyGridXZ<PrefabGridObject> globalGrid;
+    public GridXZ<PrefabGridObject> globalGrid;
     public NavMeshSurface[] horizontalSurfaces; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class GridOfPrefabs : MonoBehaviour
 
     private void Start()
     {
-        globalGrid = new MyGridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (MyGridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
+        globalGrid = new GridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (GridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
 
         for (int x = 0; x < width; x++)
         {
@@ -144,13 +144,13 @@ public class GridOfPrefabs : MonoBehaviour
                         {
                             globalGrid.GetGridObject(x, z).GetPlacedObject().isSelected = false;
                             UIManager.Instance.HidePanels();
-                            placedObject.GetComponent<MyRaycast>().SetOutline(false);
+                            placedObject.GetComponent<Raycast>().SetOutline(false);
                         }
                     }
                     if (!placedObject.GetComponent<BlockHealth>().IsBlockDead)
                     {
                         placedObject.isSelected = true;
-                        placedObject.GetComponent<MyRaycast>().SetOutline(true);
+                        placedObject.GetComponent<Raycast>().SetOutline(true);
                         UIManager.Instance.ShowPanels();
                         UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
                         UIManager.Instance.LocalSetupUIIcons();
@@ -192,13 +192,13 @@ public class GridOfPrefabs : MonoBehaviour
         private const int MIN = 0;
         private const int MAX = 255;
 
-        private MyGridXZ<PrefabGridObject> grid;
+        private GridXZ<PrefabGridObject> grid;
         private int x;
         private int y;
         private int value;
 
         private BlockPrefab blockPrefab;
-        public PrefabGridObject(MyGridXZ<PrefabGridObject> grid, int x, int y)
+        public PrefabGridObject(GridXZ<PrefabGridObject> grid, int x, int y)
         {
             this.grid = grid;
             this.x = x;

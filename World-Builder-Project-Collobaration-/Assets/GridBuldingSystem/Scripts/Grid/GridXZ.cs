@@ -1,22 +1,10 @@
-﻿/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
- */
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-public class MyGridXZ<TGridObject> {
+public class GridXZ<TGridObject> {
 
     public event EventHandler<OnGridObjectChangedEventArgs> OnGridObjectChanged;
     public class OnGridObjectChangedEventArgs : EventArgs {
@@ -30,7 +18,7 @@ public class MyGridXZ<TGridObject> {
     private Vector3 originPosition;
     private TGridObject[,] gridArray;
 
-    public MyGridXZ(int width, int height, float cellSize, Vector3 originPosition, Func<MyGridXZ<TGridObject>, int, int, TGridObject> createGridObject, bool isGridOnCorner, CornerBlock cornerBlock) {
+    public GridXZ(int width, int height, float cellSize, Vector3 originPosition, Func<GridXZ<TGridObject>, int, int, TGridObject> createGridObject, bool isGridOnCorner, CornerBlock cornerBlock) {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
