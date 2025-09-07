@@ -92,7 +92,6 @@ public class Unit : MonoBehaviour
         SetupUnitFromConfiguration();
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
-        //GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
     }
 
     private void LateUpdate()
