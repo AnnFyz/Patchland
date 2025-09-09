@@ -51,7 +51,7 @@ public class LocalLevelState : MonoBehaviour
         if (newState == currentLevelState) return;
         OnChangedState?.Invoke(); // ⚡ trigger event only when state actually changes
 
-        // ⚡ material index matches enum order (safe because we control both)
+        // ⚡ material index matches enum order
         int materialIndex = (int)newState;
         Material stateMaterial = BuildingManager.Instance.levelsMaterials[materialIndex];
 
@@ -64,7 +64,7 @@ public class LocalLevelState : MonoBehaviour
 
     }
 
-    // ⚡ New helper method: maps block height to LevelState
+    // ⚡ helper method: maps block height to LevelState
     private LevelState GetLevelStateFromHeight(int height)
     {
         if (height == 1) return LevelState.Pond;

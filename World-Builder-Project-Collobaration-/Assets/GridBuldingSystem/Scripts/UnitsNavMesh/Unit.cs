@@ -342,7 +342,7 @@ public class Unit : MonoBehaviour
         // Use agent metrics rather than raw Vector3 distance.
         if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance + 0.5f)
         {
-            Debug.Log($"Waypoint approached: {next.name}");
+            //Debug.Log($"Waypoint approached: {next.name}");
             IterateWaypointIndex();
 
             // Immediately set the next destination (don’t wait for the next timer tick)
