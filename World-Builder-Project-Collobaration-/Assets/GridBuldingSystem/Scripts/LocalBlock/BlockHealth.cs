@@ -1,25 +1,26 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockHealth : MonoBehaviour
 {
-    public Vector3 CenterOfBlock { get; set; }
-    [SerializeField] int step = 3;
+    [Header("⚙️ Waypoints")]
+    [Tooltip("Number of waypoints to generate around the block.")]
+    [SerializeField] private int step = 3;
+
+    [Tooltip("Number of waypoints to generate around the block.")]
     public Transform[] generatedWaypoints;
-    public float startHealth = 100f;
+
+    [Header("❤️ Health")]
+    public float maxHealth = 100f;
     public float currentHealth;
     public bool IsBlockDead = false;
     BlockPrefab block;
+
+    [Header("🔄 State Flags")]
     public bool IsBlockInjuring = false;
-    public bool HasDayingColor = false;
+    public bool HasDyingColor = false;
     public bool IsAttacked = false;
-    public float ind_Vdif_1;
-    public float ind_Sdif_1;
-    public float ind_Vdif_2;
-    public float ind_Sdif_2;
-    [SerializeField] float lastDamage;
-    [SerializeField] float newDamage;
     public bool IsBeingDamaged;
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class BlockHealth : MonoBehaviour
     {
         FillTheListOfWaypints();
         UpdateWaypointsPosition(0);
-        currentHealth = startHealth;
+        currentHealth = maxHealth;
         block.OnBlockHeightChanged += UpdateWaypointsPosition;
     }
 
@@ -41,6 +42,7 @@ public class BlockHealth : MonoBehaviour
         for (int i = 1; i < step + 1; i++)
         {
             GameObject generatedWaypoint = new GameObject();
+            generatedWaypoint.name = "generated waypoint";
             generatedWaypoint.transform.RotateAround(transform.position, Vector3.up, angleStep * i);
             Vector3 dir = (generatedWaypoint.transform.position - transform.position).normalized;
             Vector3 position = transform.position + dir * 4;
@@ -61,7 +63,7 @@ public class BlockHealth : MonoBehaviour
     public void Damage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, startHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         if (currentHealth <= 0)
         {
             IsBlockDead = true;
@@ -72,19 +74,17 @@ public class BlockHealth : MonoBehaviour
             GameManager.Instance.CheckIfAllBlocksAreDead();
         }
 
-        if (currentHealth < startHealth && !IsBlockDead)
+        if (currentHealth < maxHealth && !IsBlockDead)
         {
             IsBlockInjuring = true;
-            HasDayingColor = false;
+            HasDyingColor = false;
             IsAttacked = true;
-        }
-
-        newDamage -= damage;      
+        }    
     }
 
     public void SetDyingColor()
     {
-        if(!IsBeingDamaged && currentHealth < startHealth) 
+        if(!IsBeingDamaged && currentHealth < maxHealth) 
         {
             ConvertInDyingColor();
         }
@@ -93,6 +93,5 @@ public class BlockHealth : MonoBehaviour
     void ConvertInDyingColor()
     {
         block = GetComponent<BlockPrefab>();
-        lastDamage = newDamage; 
     }
 }
