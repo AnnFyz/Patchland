@@ -285,7 +285,6 @@ public class Zombi : MonoBehaviour
             {
                 isAttacking = true;
                 targetBlockHealth.Damage(damageToBlock);
-                targetBlockHealth.IsBeingDamaged = true;
                 yield return new WaitForSeconds(attackDelay);
             }
             else

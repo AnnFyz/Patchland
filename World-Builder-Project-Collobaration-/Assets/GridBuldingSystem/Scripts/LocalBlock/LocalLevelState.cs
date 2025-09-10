@@ -59,7 +59,6 @@ public class LocalLevelState : MonoBehaviour
         blockPrefab.SetStateMaterial(stateMaterial);
 
         currentLevelState = newState;
-        blockHealth.SetDyingColor();
         UIManager.Instance.LocalSetupUIIcons();
 
     }

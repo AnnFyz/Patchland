@@ -39,8 +39,6 @@ public class ZombiCollector : MonoBehaviour
     }
     public void RemoveAllZombis()
     {
-        GetComponentInParent<BlockHealth>().IsBlockInjuring = false;
-        GetComponentInParent<BlockHealth>().IsAttacked = false;
         GetComponentInParent<BlockHealth>().IsBeingDamaged = false;
         for (int i = zombisOnTheBlock.zombis.Count - 1; i >= 0; i--)
         {
