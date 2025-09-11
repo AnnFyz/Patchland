@@ -5,63 +5,72 @@ using UnityEngine;
 [System.Serializable]
 public class ZombiList
 {
-    public List<Zombi> zombis = new List<Zombi>();
+    public List<Zombi> Zombies = new();
     public void AddZombi(Zombi zombi)
     {
-        if (!zombis.Contains(zombi))
+        if (zombi != null && !Zombies.Contains(zombi))
         {
-            zombis.Add(zombi);
+            Zombies.Add(zombi);
         }
     }
     public void RemoveZombi(Zombi zombi)
     {
-        if (zombis.Contains(zombi))
+        if (zombi != null && Zombies.Contains(zombi))
         {
-            zombis.Remove(zombi);
+            Zombies.Remove(zombi);
         }
     }
     public void Clear()
     {
-        zombis.Clear();
+        Zombies.Clear();
     }
 }
 public class ZombiCollector : MonoBehaviour
 {
-    [SerializeField] ZombiList zombisOnTheBlock;
-    LocalLevelState levelState;
+    [SerializeField] private ZombiList zombisOnTheBlock;
+    private LocalLevelState levelState;
+    private BlockHealth blockHealth;
     private void Awake()
     {
         levelState = GetComponentInParent<LocalLevelState>();
+        blockHealth = GetComponentInParent<BlockHealth>();
     }
     private void OnEnable()
     {
-        levelState.OnChangedState += RemoveAllZombis;
+        if (levelState != null)
+            levelState.OnChangedState += RemoveAllZombis;
+    }
+
+    private void OnDisable()
+    {
+        if (levelState != null) 
+            levelState.OnChangedState -= RemoveAllZombis;
     }
     public void RemoveAllZombis()
     {
-        GetComponentInParent<BlockHealth>().IsBeingDamaged = false;
-        for (int i = zombisOnTheBlock.zombis.Count - 1; i >= 0; i--)
+        if (blockHealth != null) 
+            blockHealth.IsBeingDamaged = false;
+
+        foreach (var zombi in zombisOnTheBlock.Zombies)
         {
-            zombisOnTheBlock.zombis[i].DestroyZombi(); // Destroy the zombi object
-            zombisOnTheBlock.zombis.RemoveAt(i);
+            zombi.DestroyZombi();
         }
+        zombisOnTheBlock.Clear();
     }
     public void CollectZombi(Zombi zombi)
     {
-        if (zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
+        if (zombi != null && zombi.currentState != ZombiState.None)
         {
             zombisOnTheBlock.AddZombi(zombi);
-            Debug.Log("ADD Zombi");
         }
 
     }
 
     public void RemoveZombiFromTheList(Zombi zombi)
     {
-        if (zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
+        if (zombi != null && zombi.currentState != ZombiState.None) // to make sure that unit has already become a zombi
         {
             zombisOnTheBlock.RemoveZombi(zombi);
-            Debug.Log("REMOVE Zombi");
         }
     }
 

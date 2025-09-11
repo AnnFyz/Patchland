@@ -555,7 +555,6 @@ GameObject:
   - component: {fileID: 6780022455924304188}
   - component: {fileID: 8456145508500795584}
   - component: {fileID: 8877595191525507116}
-  - component: {fileID: 5950601933551546208}
   - component: {fileID: 8998082256806927317}
   - component: {fileID: 829423309997462573}
   - component: {fileID: 6735333741427231289}
@@ -680,16 +679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03a86649caa9564fb939619448e78b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedUnits:
-  - {fileID: 0}
-  unitMask:
-    serializedVersion: 2
-    m_Bits: 128
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 383
-  numberOfUnits: 1
-  levelState: 0
 --- !u!114 &8877595191525507116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,32 +693,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 3
   generatedWaypoints: []
-  startHealth: 100
+  maxHealth: 100
   currentHealth: 0
-  IsBlockDead: 0
-  IsBlockInjuring: 0
-  HasDayingColor: 0
-  IsAttacked: 0
-  ind_Vdif_1: 0
-  ind_Sdif_1: 0
-  ind_Vdif_2: 0
-  ind_Sdif_2: 0
-  lastDamage: 0
-  newDamage: 0
   IsBeingDamaged: 0
---- !u!114 &5950601933551546208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254500726256895673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c47ecd51a0da834999011166bcb6832, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specialGem: {fileID: 11400000, guid: fc19360f0c68ec14da7f011433a17d52, type: 2}
+  IsBlockDead: 0
 --- !u!114 &8998082256806927317
 MonoBehaviour:
   m_ObjectHideFlags: 0
