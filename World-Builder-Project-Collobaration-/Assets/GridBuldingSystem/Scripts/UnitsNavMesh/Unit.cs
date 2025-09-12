@@ -404,7 +404,7 @@ public class Unit : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId)
             {
-                Debug.Log($"{gameObject.name} entered trigger with {other.gameObject.name}");
+                //Debug.Log($"{gameObject.name} entered trigger with {other.gameObject.name}");
 
                 if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
                 {
