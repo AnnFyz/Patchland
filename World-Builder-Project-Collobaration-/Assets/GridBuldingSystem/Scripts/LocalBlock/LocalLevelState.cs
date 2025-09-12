@@ -1,12 +1,4 @@
-﻿/*
- * LocalLevelState.cs
- * -------------------
- * Tracks and updates the environmental state of a block (Pond, Desert, Forest, etc.)
- * based on its height. Updates materials, triggers events, and refreshes UI when the
- * state changes.
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -20,6 +12,11 @@ public enum LevelState
     Mountain,
     SnowMountain,
 }
+
+/// <summary>
+/// Tracks and updates the environmental state of a block (Pond, Desert, Forest, etc.)
+/// based on its height. Updates materials, triggers events, and refreshes UI when the state changes.
+/// </summary>
 public class LocalLevelState : MonoBehaviour
 {
     [Header("🌍 Level State")]

@@ -5,6 +5,12 @@ using Unity.AI.Navigation;
 using UnityEngine.AI;
 using System.Linq;
 
+
+/// <summary>
+/// Spawns units when objects are placed in the grid.
+/// Prevents spawning in invalid states, respects unit limits,
+/// and initializes unit data and NavMesh position.
+/// </summary>
 public class UnitsSpawner : MonoBehaviour
 {
     private LevelState levelState;

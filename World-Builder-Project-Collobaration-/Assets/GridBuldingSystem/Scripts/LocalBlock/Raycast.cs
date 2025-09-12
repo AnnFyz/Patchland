@@ -1,9 +1,13 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-// Handles local raycasting interactions for each BlockPrefab
+
+/// <summary>
+/// Handles local raycasting interactions for each BlockPrefab
+/// </summary>
 public class Raycast : MonoBehaviour
 {
 

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Manages a block’s health, death state, and waypoints.
+/// Handles damage, updates visuals, and reacts to height changes.
+/// </summary>
 public class BlockHealth : MonoBehaviour
 {
     [Header("⚙️ Waypoints")]

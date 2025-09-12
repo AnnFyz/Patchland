@@ -25,6 +25,11 @@ public class ZombiList
         Zombies.Clear();
     }
 }
+
+/// <summary>
+/// Manages zombies on a block, including collecting,
+/// removing, and clearing them when the level state changes.
+/// </summary>
 public class ZombiCollector : MonoBehaviour
 {
     [SerializeField] private ZombiList zombisOnTheBlock;

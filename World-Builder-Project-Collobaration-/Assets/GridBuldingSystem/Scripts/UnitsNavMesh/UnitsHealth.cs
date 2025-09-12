@@ -8,15 +8,20 @@ using Unity.VisualScripting;
 
 public enum UIState
 {
-    healthy,
-    hungry,
-    veryHungry,
-    zombi
+    Healthy,
+    Hungry,
+    CriticalHungry,
+    Zombi
 }
+
+/// <summary>
+/// Represents the health system for a unit. 
+/// Handles UI state, bubbles, gradual health gain/loss, and death.
+/// </summary>
 public class UnitsHealth : MonoBehaviour
 {
-    [SerializeField] UIState currentUIState = UIState.healthy; // Current UI state of the unit
-    public GameObject stateFire; // UI element that represents the health state of the unit
+    [SerializeField] private UIState currentUIState = UIState.Healthy; // Current UI state of the unit
+    private GameObject stateFire; // UI element that represents the health state of the unit
     [SerializeField] float currentHealth;
     public float CurrentHealth => currentHealth;
     private float maxHealth;
@@ -26,16 +31,16 @@ public class UnitsHealth : MonoBehaviour
     public bool IsFoodAround;
     public Action OnUnitDeath;
     Unit unit;
-    string[] openLines = new string[7];
-    string[] linesForHungryState = new string[3];
-    string[] linesForVeryHungryState = new string[3];
+    private readonly string[] openLines = new string[6];
+    private readonly string[] linesForHungryState = new string[3];
+    private readonly string[] linesForVeryHungryState = new string[3];
     bool wasBubbleForHungryStateCreated = false;
     bool wasBubbleForVeryHungryStateCreated = false;
     public bool isHealthLosing = false;
     private void Awake()
     {
         unit = GetComponentInParent<Unit>();
-        stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
+        stateFire = transform.GetChild(1).GetChild(0).gameObject;
         IsFoodAround = true;
         SetupUnitHealthFromConfiguration();
     }
@@ -46,7 +51,7 @@ public class UnitsHealth : MonoBehaviour
         CreateOpenLines();
         CreateLinesForHungryState();
         CreateLinesForVeryHungryState();
-        Bubble.Instance.CreateBubble(transform.position, openLines[UnityEngine.Random.Range(0, openLines.Length - 1)]);
+        Bubble.Instance.CreateBubble(transform.position, openLines[UnityEngine.Random.Range(0, openLines.Length)]);
     }
 
     void SetupUnitHealthFromConfiguration()
@@ -59,51 +64,37 @@ public class UnitsHealth : MonoBehaviour
     // This method is called to switch the UI state based on the current health of the unit.
     void SwitchUIState()
     {
+        void SetFire(int childIndex, UIState newState)
+        {
+            stateFire.SetActive(false);
+            stateFire = transform.GetChild(1).GetChild(childIndex).gameObject;
+            stateFire.SetActive(true);
+            currentUIState = newState;
+        }
+
+
         if (currentHealth > 80)
-        {
-            currentUIState = UIState.healthy;
-            stateFire.SetActive(false);
-            stateFire = gameObject.transform.GetChild(1).GetChild(0).gameObject;
-            stateFire.SetActive(true);
-        }
+            SetFire(0, UIState.Healthy);
         else if (currentHealth <= 80 && currentHealth >= 50)
-        {
-            currentUIState = UIState.hungry;
-            stateFire.SetActive(false);
-            stateFire = gameObject.transform.GetChild(1).GetChild(1).gameObject;
-            stateFire.SetActive(true);
-        }
+            SetFire(1, UIState.Hungry);
         else if (currentHealth < 50 && currentHealth > 0)
-        {
-            currentUIState = UIState.veryHungry;
-            stateFire.SetActive(false);
-            stateFire = gameObject.transform.GetChild(1).GetChild(2).gameObject;
-            stateFire.SetActive(true);
-        }
-        else if (currentHealth <= 0)
-        {
-            if (unit.CurrentUnitsState == UnitsState.Zombi)
-            {
-                currentUIState = UIState.zombi;
-                stateFire.SetActive(false);
-                stateFire = gameObject.transform.GetChild(1).GetChild(3).gameObject;
-                stateFire.SetActive(true);
-            }
-        }
+            SetFire(2, UIState.CriticalHungry);
+        else if (currentHealth <= 0 && unit.CurrentUnitsState == UnitsState.Zombi)
+            SetFire(3, UIState.Zombi);
     }
 
-    // This method is called to check the current UI state of the unit and create appropriate bubbles.
+    /// <summary>Checks state and spawns bubbles appropriately.</summary>
     void CheckUIState()
     {
         SwitchUIState();
 
-        if (currentUIState == UIState.healthy)
+        if (currentUIState == UIState.Healthy)
         {
             wasBubbleForHungryStateCreated = false;
             wasBubbleForVeryHungryStateCreated = false;
         }
 
-        if (currentUIState == UIState.hungry)
+        if (currentUIState == UIState.Hungry)
         {
             if (!wasBubbleForHungryStateCreated)
             {
@@ -112,7 +103,7 @@ public class UnitsHealth : MonoBehaviour
                 wasBubbleForVeryHungryStateCreated = false;
             }
         }
-        if (currentUIState == UIState.veryHungry)
+        if (currentUIState == UIState.CriticalHungry)
         {
             if (!wasBubbleForVeryHungryStateCreated)
             {
@@ -140,26 +131,26 @@ public class UnitsHealth : MonoBehaviour
     {
         linesForHungryState[0] = " (╥ _ ╥) "; // (.•́ _•̀.)
         linesForHungryState[1] = " (.•́ _•̀.) ";  // (._.)#
-        linesForHungryState[1] = " (._.) ";  // (._.)
+        linesForHungryState[2] = " (._.) ";  // (._.)
 
     }
 
-    // This method is called to create the lines for the very hungry state of the unit's health UI.
+    // This method is called to create the lines for the critical state of the unit's health UI.
     void CreateLinesForVeryHungryState()
     {
         linesForVeryHungryState[0] = " (Ο_Ο) "; // (.•́ _•̀.)
         linesForVeryHungryState[1] = " (°0°) ";  // (._.)#
-        linesForVeryHungryState[1] = " ☹ ";  // (._.)
+        linesForVeryHungryState[2] = " ☹ ";  // (._.)
 
     }
 
-    // This method is called to lose health gradually when the unit is not near food.
+    /// <summary>Begins gradual health loss coroutine when no food is nearby.</summary>
     public void LoseHealth()
     {
-        StartCoroutine(SubstractHealthGradually());
+        StartCoroutine(SubtractHealthGradually());
     }
 
-    IEnumerator SubstractHealthGradually()
+    IEnumerator SubtractHealthGradually()
     {
         while (currentHealth > 0 && !IsFoodAround)
         {
@@ -171,15 +162,13 @@ public class UnitsHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             unit.CurrentUnitsState = UnitsState.Dead;
-            if (unit.CurrentUnitsState != UnitsState.Zombi)
-            {
-                OnUnitDeath?.Invoke();
-            }
+            OnUnitDeath?.Invoke();
         }
 
         CheckUIState();
     }
 
+    /// <summary>Gradually restores health when food is nearby.</summary>
     public IEnumerator FillHealthGradually()
     {
         while (currentHealth < maxHealth && IsFoodAround)

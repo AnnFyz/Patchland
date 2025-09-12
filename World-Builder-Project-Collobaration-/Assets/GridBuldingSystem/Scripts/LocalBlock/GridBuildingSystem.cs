@@ -1,14 +1,4 @@
-﻿/*
- * GridBuildingSystem.cs
- * ----------------------
- * Manages the grid-based building system.
- * - Creates and updates the grid when block height changes.
- * - Handles placement and removal of objects on grid cells.
- * - Manages waypoints for units linked to placed objects.
- * - Listens for player input (mouse clicks) to place objects.
- */
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +7,13 @@ using static PlacedObjectTypeSO;
 
 
 
+/// <summary>
+/// Manages the grid-based building system.
+/// Creates and updates the grid when block height changes.
+/// Handles placement and removal of objects on grid cells.
+/// Manages waypoints for units linked to placed objects.
+/// Listens for player input (mouse clicks) to place objects.
+/// </summary>
 public class GridBuildingSystem : MonoBehaviour
 {
     // Current active grid and the old one (before height change)

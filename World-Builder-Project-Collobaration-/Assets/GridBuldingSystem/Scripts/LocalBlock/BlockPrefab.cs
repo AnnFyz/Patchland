@@ -1,14 +1,4 @@
-﻿/*
- * BlockPrefab.cs
- * ----------------
- * Represents a block in the grid system.
- * - Tracks position, corner type, and block state.
- * - Handles stacking (height increase/decrease).
- * - Supports highlighting, selection, and material changes.
- * - Raises events when block height changes.
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -23,6 +13,14 @@ public enum CornerBlock
     None
 }
 
+
+/// <summary>
+/// Represents a block in the grid system.
+/// Tracks position, corner type, and block state.
+/// Handles stacking (height increase/decrease).
+/// Supports highlighting, selection, and material changes.
+/// Raises events when block height changes.
+/// </summary>
 public class BlockPrefab : MonoBehaviour
 {
     [Header("📍 Grid Position")]
