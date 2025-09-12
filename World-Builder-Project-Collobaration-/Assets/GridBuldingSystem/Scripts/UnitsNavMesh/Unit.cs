@@ -368,27 +368,12 @@ public class Unit : MonoBehaviour
 
     void IterateWaypointIndex()
     {
-        if (waypointsList.localOrder != null)
-        {
-            if (waypointIndex < waypointsList.localOrder.Count - 1)
-            {
-                waypointIndex++;
-            }
-            else
-            {
-                waypointIndex = 0;
-            }
-        }
-
+        if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0) return;
+        waypointIndex = (waypointIndex + 1) % waypointsList.localOrder.Count;
+      
     }
-    public void OnSelected()
-    {
-        selectedFigur.SetActive(true);
-    }
-    public void OnDeselected()
-    {
-        selectedFigur.SetActive(false);
-    }
+    public void OnSelected() => selectedFigur.SetActive(true);
+    public void OnDeselected() => selectedFigur.SetActive(false);
 
 
     public void SetupUnitFromConfiguration()
