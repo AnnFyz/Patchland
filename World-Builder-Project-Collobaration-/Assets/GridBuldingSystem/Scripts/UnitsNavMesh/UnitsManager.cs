@@ -133,7 +133,7 @@ public class UnitsManager : MonoBehaviour
                         {
                             selectedUnits.Add(unit);
                             unit.OnSelected();
-                            unit.CurrentMovemenetState = UnitsMovementState.ControlledFromPlayer;
+                            unit.CurrentMovementState = UnitsMovementState.ControlledFromPlayer;
                         }
                     }
                 }
@@ -145,7 +145,7 @@ public class UnitsManager : MonoBehaviour
                 {
                     if (unit != null)
                         unit.OnDeselected();
-                    unit.CurrentMovemenetState = UnitsMovementState.Autopilot;
+                    unit.CurrentMovementState = UnitsMovementState.Autopilot;
                 }
 
                 selectedUnits.Clear();

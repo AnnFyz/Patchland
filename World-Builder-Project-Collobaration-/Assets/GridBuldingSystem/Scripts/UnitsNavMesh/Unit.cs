@@ -1,21 +1,20 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static PlacedObjectTypeSO;
-using static Unity.Collections.AllocatorManager;
 
 
-// This enum represents the different movement states of a unit, such as autopilot or controlled by the player.
+/// <summary>Different movement states of a unit.</summary>
 public enum UnitsMovementState
 {
     Autopilot,
     ControlledFromPlayer
 }
 
-// This enum represents the different states a unit can be in, such as alive, hungry, attacked, dead, or zombified.
-public enum UnitsState 
+/// <summary>Different life states of a unit.</summary>
+public enum UnitsState
 {
     Alive,
     Hungry,
@@ -24,116 +23,136 @@ public enum UnitsState
     Zombi
 }
 
+/// <summary>Container for waypoints a unit will follow.</summary>
 [Serializable]
 public class WaypointsList
 {
     public List<Transform> localOrder = new List<Transform>();
 }
 
-//This class represents a unit in the game, which can be controlled by the player or move automatically.
-//The unit can interact with placed objects and has chance to become a zombie, if it dies
+/// <summary>
+/// This class represents a unit in the game, which can be controlled by the player or move automatically.
+/// The unit can interact with placed objects and has chance to become a zombie, if it dies
+/// </summary>
+
+
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AudioSource))]
 public class Unit : MonoBehaviour
 {
-    [Header("Unit Scriptable Object")]
+    [Header("📜 Unit Scriptable Object")]
     [SerializeField] UnitsTypeSO unitScriptableObject;
     public UnitsTypeSO UnitScriptableObject => unitScriptableObject;
-    [Header("Unit Sounds")] //TO DO Sound logic
-    [SerializeField] AudioClip zombieSound;
+
+    [Header("🔊 Unit Sounds")] //TO DO Sound logic
+    [SerializeField] private AudioClip zombieSound;
     public AudioClip ZombieSound => zombieSound;
-    [SerializeField] AudioClip glassBreaking;
+    [SerializeField] private AudioClip glassBreaking;
     public AudioClip GlassBreaking => glassBreaking;
     AudioSource audioSource;
 
-    [Header("Unit Animation")]
-    [SerializeField] Animator animator; // to handle the animations of the unit
+    [Header("🎭 Unit Animation")]
+    [SerializeField] private Animator animator; // to handle the animations of the unit
 
     private GameObject selectedFigur; // to show that the unit is selected
 
-    [Header("Unit Movement")]
+    [Header("🚶 Unit Movement")]
     private NavMeshAgent Agent { get; set; }
     private NavMeshPath path;
     public Transform StartPoint { get; set; }
-    [SerializeField] Transform target; // the target to which the unit is moving
-    [SerializeField] int waypointIndex = 0;
-    [SerializeField] WaypointsList waypointsList = new WaypointsList();
-    [SerializeField] float movingToPointTimer;
-    float elapsed = 0.0f;
+    [SerializeField] private Transform target; // the target to which the unit is moving
+    [SerializeField] private int waypointIndex = 0;
+    [SerializeField] private WaypointsList waypointsList = new WaypointsList();
+    [SerializeField] private float movingToPointTimer;
+    private float elapsed = 0.0f;
 
-    [Header("Related Placed Object")]
+    [Header("🏗️ Related Placed Object")]
     public PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
     public int PlacedObjTypeId { get; set; }
-    public UnitsMovementState CurrentMovemenetState { get; set; } // to track the state of the unit movement (autopilot, controlled by player)
+    public UnitsMovementState CurrentMovementState { get; set; } // to track the state of the unit movement (autopilot, controlled by player)
     public UnitsState CurrentUnitsState { get; set; } // to track the state of the unit (alive, dead, zombi, etc.)
+
+
     private Zombi zombi; // to handle the zombi state of the unit
     private BlockPrefab intersectedWithUnitBlock; // to handle the block that the unit is currently intersecting with
-    public PlacedObject_Done currentPlacedObject = null; // to handle the placed object that the unit is currently interacting with
+    public PlacedObject_Done currentPlacedObject; // to handle the placed object that the unit is currently interacting with
     private void Awake()
     {
-        selectedFigur = gameObject.transform.GetChild(0).gameObject;
+        selectedFigur = transform.GetChild(0).gameObject;
         Agent = GetComponent<NavMeshAgent>();
         zombi = GetComponent<Zombi>();
         audioSource = GetComponent<AudioSource>();
+        path = new NavMeshPath();
     }
 
     void Start()
     {
         OnDeselected();
-        CurrentMovemenetState = UnitsMovementState.Autopilot;
+        CurrentMovementState = UnitsMovementState.Autopilot;
         CurrentUnitsState = UnitsState.Alive;
         path = new NavMeshPath();
         elapsed = 0.0f;
-      
+
     }
 
     public void OnEnable()
     {
         SetupAgentFromConfiguration();
         SetupUnitFromConfiguration();
+
         UnitsManager.Instance.OnChangedGlobalOrder += UpdateListOfWaypoints;
         GetComponentInChildren<UnitsHealth>().OnUnitDeath += UseChanceToBecomeZombi;
     }
 
+    private void OnDisable()
+    {
+        UnitsManager.Instance.OnChangedGlobalOrder -= UpdateListOfWaypoints;
+        var health = GetComponentInChildren<UnitsHealth>();
+        if (health != null)
+            health.OnUnitDeath -= UseChanceToBecomeZombi;
+    }
+
+
     private void LateUpdate()
     {
         if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
-        {
             MoveAutomaticallyToWayPoint();
-        }
 
         if (animator != null)
-        {
-            animator.SetBool("IsRunning", Agent.velocity.magnitude > 0.01f);
-        }
+            animator?.SetBool("IsRunning", Agent.velocity.magnitude > 0.0001f);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip == null || audioSource.isPlaying) return;
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     void UseChanceToBecomeZombi()
     {
         if (CurrentUnitsState == UnitsState.Zombi)
-        {
             return; // if the unit is already a zombie or in the process of becoming one, do nothing
-        }
+
+
         int chance = Mathf.RoundToInt(100 / unitScriptableObject.chanceToBecomeZombi);
         int randomValue = UnityEngine.Random.Range(0, chance);
+
         if (randomValue == 0)
         {
-            if (CurrentUnitsState != UnitsState.Zombi && zombi.currentState == ZombiState.None)
+            if (zombi.currentState == ZombiState.None)
             {
                 Bubble.Instance.CreateBubble(transform.position, "I am a Zombie now!");
-                audioSource.clip = zombieSound;
-                if (!audioSource.isPlaying)
-                {
-                    audioSource.Play();
-                }
+                PlaySound(zombieSound);
             }
             zombi.attacking_Particles.gameObject.SetActive(true);
             CurrentUnitsState = UnitsState.Zombi;
-            SetOccupiedBlock();
+            SetInitialTargetBlock();
             zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
+
             selectedFigur.SetActive(false);
             zombi.HandleZombiTransformation();
-            Debug.Log("UseChanceToBecomeZombi");
             StartCoroutine(zombi.AttackBlock());
 
         }
@@ -144,28 +163,20 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void SetOccupiedBlock()
+    public void SetInitialTargetBlock()
     {
-        float dist = Mathf.Infinity;
-        if (zombi.currentState == ZombiState.None) // first assignment
-        {
-            float newDist = Vector3.Distance(transform.position + transform.position * 0.5f, intersectedWithUnitBlock.transform.position + intersectedWithUnitBlock.transform.position * 0.5f);
-            if (newDist < dist)
-            {
-                dist = newDist;
-                zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
-                zombi.targetBlock = intersectedWithUnitBlock;
-            }
-        }
+        if (zombi.currentState != ZombiState.None) return;
+
+        zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
+        zombi.targetBlock = intersectedWithUnitBlock;
+
     }
     void CheckBlock(Collider other)
     {
-        BlockPrefab block;
-        if (other.GetComponentInParent<BlockPrefab>())
-        {
-            block = other.GetComponentInParent<BlockPrefab>();
+        BlockPrefab block = other.GetComponentInParent<BlockPrefab>();
+        if (block != null)
             intersectedWithUnitBlock = block;
-        }
+    
     }
     void DestroyUnit()
     {
@@ -220,7 +231,7 @@ public class Unit : MonoBehaviour
         if (waypointIndex >= waypointsList.localOrder.Count)
             waypointIndex = Mathf.Max(0, waypointsList.localOrder.Count - 1);
 
-        // If the list is empty, clear the agent�s path
+        // If the list is empty, clear the agent’s path
         if (waypointsList.localOrder.Count == 0)
         {
             Agent.ResetPath();
@@ -236,16 +247,13 @@ public class Unit : MonoBehaviour
     {
         // --- BASIC GUARDS ---
         // Stop immediately if the unit is dead or has become a zombie
-        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
-            return;
+        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)return;
 
         // Stop if the unit is not in autopilot mode (e.g. being controlled by the player)
-        if (CurrentMovemenetState != UnitsMovementState.Autopilot)
-            return;
+        if (CurrentMovementState != UnitsMovementState.Autopilot) return;
 
         // Stop if there are no waypoints defined
-        if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0)
-            return;
+        if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0) return;
 
         // Before using 'next'
         while (waypointsList.localOrder.Count > 0 && waypointsList.localOrder[waypointIndex] == null)
@@ -345,10 +353,10 @@ public class Unit : MonoBehaviour
             //Debug.Log($"Waypoint approached: {next.name}");
             IterateWaypointIndex();
 
-            // Immediately set the next destination (don�t wait for the next timer tick)
+            // Immediately set the next destination (don’t wait for the next timer tick)
             if (waypointsList.localOrder != null && waypointsList.localOrder.Count > 0)
             {
-               
+
                 if (next != null)
                 {
                     if (Agent.CalculatePath(next.position, path) && path.status == NavMeshPathStatus.PathComplete)
@@ -383,11 +391,11 @@ public class Unit : MonoBehaviour
     }
 
 
-    public  void SetupUnitFromConfiguration()
+    public void SetupUnitFromConfiguration()
     {
         movingToPointTimer = UnityEngine.Random.Range(unitScriptableObject.minMovingToPointTimer, unitScriptableObject.maxMovingToPointTimer);
     }
-    public  void SetupAgentFromConfiguration()
+    public void SetupAgentFromConfiguration()
     {
         Agent.acceleration = unitScriptableObject.acceleration;
         Agent.angularSpeed = unitScriptableObject.angularSpeed;
@@ -400,7 +408,7 @@ public class Unit : MonoBehaviour
         Agent.speed = unitScriptableObject.speed;
         Agent.stoppingDistance = unitScriptableObject.stoppingDistance;
 
-        Agent.autoRepath = true;       
+        Agent.autoRepath = true;
         Agent.autoBraking = true;       // smoother arrivals
     }
 
