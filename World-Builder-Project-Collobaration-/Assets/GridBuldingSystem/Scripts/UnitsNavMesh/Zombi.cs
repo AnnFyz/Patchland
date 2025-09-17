@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
 
 
 public enum ZombiState
@@ -17,38 +15,53 @@ public enum ZombiState
 }
 public class Zombi : MonoBehaviour
 {
-    [SerializeField] float waypointReachThreshold = 0.3f;
-    [SerializeField] float repathInterval = 0.35f;
+    [Header("⚙️ Navigation Settings")]
+    [SerializeField] private float waypointReachThreshold = 0.3f;
+    [SerializeField] private float repathInterval = 0.35f;
     private float repathTimer = 0f;
-    [SerializeField] List<Transform> validWaypoints = new List<Transform>(); // local cache of validated waypoints
-    public ZombiState currentState;
+
+
+    [Header("📍 Waypoints")]
+    [SerializeField] private List<Transform> validWaypoints = new();
+
+    public ZombiState currentState {get; private set; }
+
+
     Unit unit;
-    public BlockHealth targetBlockHealth;
-    public BlockPrefab targetBlock;
-    public bool isOnTargetBlock = false; // if zombi is on the target block, it can attack it -> the Attack Coroutine will be started
+    public BlockHealth targetBlockHealth { get; private set; }
+    public BlockPrefab targetBlock { get; private set; }
+    public bool isOnTargetBlock { get; private set; } = false; // if zombi is on the target block, it can attack it -> the Attack Coroutine will be started
+
     private int waypointIndex = 0;
-    private float elapsed = 0.0f;
     public Transform target;
-    public NavMeshAgent agent;
-    public NavMeshPath path;
-    public bool isAttacking = false;
+
+
+    [Header("🧟 Combat")]
+    public bool isAttacking { get; private set; } = false;
     [SerializeField] float damageToBlock; // how much damage zombi does to the block
     [SerializeField] float attackDelay; // how much time zombi needs to attack the block again
-    [SerializeField] Renderer[] modelRenderers;
-    [SerializeField] Material zombiMaterial;
-    public GameObject attacking_Particles;
-    [SerializeField] TMP_Text messageFroomZombi;
-    int x = 0;
+
+
+    [Header("🎨 Visuals")]
+    [SerializeField] private Renderer[] modelRenderers;
+    [SerializeField] private Material zombiMaterial;
+    [SerializeField] private Transform attacking_Particles;
+    [SerializeField] TMP_Text messageFromZombi;
+
+
+    private NavMeshAgent agent;
     private void Awake()
     {
         unit = GetComponent<Unit>();
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
         currentState = ZombiState.None;
-        path = new NavMeshPath();
-        attacking_Particles.gameObject.SetActive(false);
+
+        if (attacking_Particles != null)
+        { attacking_Particles.gameObject.SetActive(false); }
+
         damageToBlock = unit.UnitScriptableObject.damageToBlock;
         attackDelay = unit.UnitScriptableObject.attackDelay;
     }
@@ -130,13 +143,11 @@ public class Zombi : MonoBehaviour
             return;
         }
 
-        waypointIndex++;
-        if (waypointIndex >= validWaypoints.Count)
-            waypointIndex = 0;
+        waypointIndex = (waypointIndex + 1) % validWaypoints.Count;
     }
     private void ValidateWaypoints()
     {
-        validWaypoints = new List<Transform>();
+        validWaypoints.Clear();
 
         if (targetBlockHealth == null) return;
         var src = targetBlockHealth.generatedWaypoints;
@@ -154,32 +165,12 @@ public class Zombi : MonoBehaviour
         Debug.Log($"[Zombie] Validated {validWaypoints.Count} waypoint(s) for block {targetBlockHealth.name}");
     }
 
-    private int GetNextReachableWaypointIndex(int startIndex, List<Transform> candidates)
+    public void SetInitialTargetBlock(BlockPrefab blockPrefab)
     {
-        if (agent == null || candidates == null || candidates.Count == 0) return -1;
+        if (currentState != ZombiState.None) return;
 
-        for (int i = 0; i < candidates.Count; i++)
-        {
-            int idx = (startIndex + i) % candidates.Count;
-            var candidate = candidates[idx];
-            if (candidate == null) continue;
-
-            // Quick check: is candidate active
-            if (!candidate.gameObject.activeInHierarchy) continue;
-
-            // Build a temp path to test reachability
-            NavMeshPath testPath = new NavMeshPath();
-            bool calc = agent.CalculatePath(candidate.position, testPath);
-            if (!calc) continue;
-            if (testPath.status == NavMeshPathStatus.PathComplete)
-            {
-                // Found reachable waypoint
-                return idx;
-            }
-        }
-
-        // nothing reachable
-        return -1;
+        targetBlockHealth = blockPrefab.GetComponentInParent<BlockHealth>();
+        targetBlock = blockPrefab;
     }
 
     public void SetOccupiedBlock(Collider block)
@@ -199,6 +190,7 @@ public class Zombi : MonoBehaviour
     {  
         if (zombiMaterial != null)
         {
+            currentState = ZombiState.AttackBlock;
             ChangeMaterial(zombiMaterial);
         }
     }
@@ -248,35 +240,6 @@ public class Zombi : MonoBehaviour
             }
         }
     }
-
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other == null) return;
-
-    //    var blockHealth = other.GetComponentInParent<BlockHealth>();
-    //    if (blockHealth != null && targetBlockHealth == blockHealth && !isOnTargetBlock)
-    //    {
-    //        isOnTargetBlock = true;
-
-    //        var collector = other.GetComponentInParent<ZombiCollector>();
-    //        if (collector != null)
-    //        {
-    //            collector.CollectZombi(this);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogWarning($"[Zombie] No ZombiCollector found for collider {other.name} (parent: {other.transform.parent?.name})");
-    //        }
-
-    //        if (currentState == ZombiState.FindAnotherBlock)
-    //        {
-    //            currentState = ZombiState.AttackBlock;
-    //            StartCoroutine(AttackBlock());
-    //        }
-    //    }
-    //}
-
     public IEnumerator AttackBlock()
     {
         while (currentState == ZombiState.AttackBlock && targetBlockHealth != null)
@@ -298,31 +261,6 @@ public class Zombi : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0);
-    }
-
-    // // This method finds the nearest block to the zombi and sets it as the target block.
-    void LocateNearestBlock()
-    {
-        float nearestDistance = Mathf.Infinity;
-        targetBlock = null;
-        targetBlockHealth = null;
-
-        if (BuildingManager.Instance.blockList != null)
-        {
-            foreach (GameObject block in BuildingManager.Instance.blockList.healthyBlocks)
-            {
-                var bh = block.GetComponent<BlockHealth>();
-                if (bh == null || bh.IsBlockDead) continue;
-
-                float distance = (block.transform.position - transform.position).sqrMagnitude;
-                if (distance < nearestDistance)
-                {
-                    nearestDistance = distance;
-                    targetBlock = block.GetComponent<BlockPrefab>();
-                    targetBlockHealth = bh;
-                }
-            }
-        }
     }
     void MoveToNextNeighbourAliveBlock()
     {

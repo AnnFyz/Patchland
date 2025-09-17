@@ -82,7 +82,6 @@ public class Unit : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         zombi = GetComponent<Zombi>();
         audioSource = GetComponent<AudioSource>();
-        path = new NavMeshPath();
     }
 
     void Start()
@@ -147,11 +146,9 @@ public class Unit : MonoBehaviour
             }
             zombi.attacking_Particles.gameObject.SetActive(true);
             CurrentUnitsState = UnitsState.Zombi;
-            SetInitialTargetBlock();
-            zombi.currentState = ZombiState.AttackBlock;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
-
             selectedFigur.SetActive(false);
+            zombi.SetInitialTargetBlock(intersectedWithUnitBlock);
             zombi.HandleZombiTransformation();
             StartCoroutine(zombi.AttackBlock());
 
@@ -160,15 +157,6 @@ public class Unit : MonoBehaviour
         {
             DestroyUnit();
         }
-
-    }
-
-    public void SetInitialTargetBlock()
-    {
-        if (zombi.currentState != ZombiState.None) return;
-
-        zombi.targetBlockHealth = intersectedWithUnitBlock.GetComponentInParent<BlockHealth>();
-        zombi.targetBlock = intersectedWithUnitBlock;
 
     }
     void CheckBlock(Collider other)
