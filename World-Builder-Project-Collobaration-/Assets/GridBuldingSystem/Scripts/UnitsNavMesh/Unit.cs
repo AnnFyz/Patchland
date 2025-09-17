@@ -144,7 +144,6 @@ public class Unit : MonoBehaviour
                 Bubble.Instance.CreateBubble(transform.position, "I am a Zombie now!");
                 PlaySound(zombieSound);
             }
-            zombi.attacking_Particles.gameObject.SetActive(true);
             CurrentUnitsState = UnitsState.Zombi;
             intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             selectedFigur.SetActive(false);

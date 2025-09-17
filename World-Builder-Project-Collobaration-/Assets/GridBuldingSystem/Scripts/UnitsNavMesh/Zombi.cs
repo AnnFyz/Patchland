@@ -192,23 +192,18 @@ public class Zombi : MonoBehaviour
         {
             currentState = ZombiState.AttackBlock;
             ChangeMaterial(zombiMaterial);
+            attacking_Particles.gameObject.SetActive(true);
         }
     }
     void ChangeMaterial(Material newMat)
     {
-        Renderer[] oldMat = new Renderer[modelRenderers.Length];
-        for (int i = 0; i < modelRenderers.Length; i++)
+        foreach (Renderer rend in modelRenderers)
         {
-            oldMat[i] = modelRenderers[i];
-        }
-        // Change the material of all renderers to the new material
-        foreach (Renderer rend in oldMat)
-        {
+            if (rend == null) continue;
             var mats = new Material[rend.materials.Length];
-            for (var j = 0; j < rend.materials.Length; j++)
-            {
+            for (int j = 0; j < mats.Length; j++)
                 mats[j] = newMat;
-            }
+
             rend.materials = mats;
         }
     }
@@ -256,11 +251,9 @@ public class Zombi : MonoBehaviour
                 targetBlockHealth.IsBeingDamaged = false;
                 waypointIndex = 0;
                 MoveToNextNeighbourAliveBlock();
-
                 yield break;
             }
-        }
-        yield return new WaitForSeconds(0);
+        } 
     }
     void MoveToNextNeighbourAliveBlock()
     {
@@ -289,7 +282,7 @@ public class Zombi : MonoBehaviour
                     if (t == null) continue;
                     if (!t.gameObject.activeInHierarchy) continue;
 
-                    NavMeshPath testPath = new NavMeshPath();
+                    NavMeshPath testPath = new ();
                     if (agent.CalculatePath(t.position, testPath) && testPath.status == NavMeshPathStatus.PathComplete)
                     {
                         candidates.Add(t);
@@ -339,16 +332,18 @@ public class Zombi : MonoBehaviour
         }
         UnitsManager.Instance.SetAmountOfUnits(unit.placedObjectName, -1);
         ParticleSystem particles = Instantiate(unit.UnitScriptableObject.death_Particles, transform.position, Quaternion.identity);
-        particles.gameObject.AddComponent<AudioSource>().clip = unit.GlassBreaking;
-        particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
-        particles.gameObject.GetComponent<AudioSource>().Play();
-        particles.gameObject.GetComponent<AudioSource>().loop = false;
+        var audio = particles.gameObject.AddComponent<AudioSource>();
+        audio.clip = unit.GlassBreaking;
+        audio.volume = 0.01f;
+        audio.loop = false;
+        audio.Play();
+
         particles.Play();
         Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
-    {
+    { 
         if (validWaypoints != null)
         {
             Gizmos.color = Color.green;

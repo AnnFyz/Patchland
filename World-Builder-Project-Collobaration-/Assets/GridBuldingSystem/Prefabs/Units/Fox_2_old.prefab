@@ -10613,6 +10613,7 @@ MonoBehaviour:
   zombieSound: {fileID: 0}
   glassBreaking: {fileID: 0}
   animator: {fileID: 5220167712569795103}
+  target: {fileID: 0}
   waypointIndex: 0
   waypointsList:
     localOrder: []
@@ -10707,19 +10708,13 @@ MonoBehaviour:
   waypointReachThreshold: 0.3
   repathInterval: 0.35
   validWaypoints: []
-  currentState: 0
-  targetBlockHealth: {fileID: 0}
-  targetBlock: {fileID: 0}
-  isOnTargetBlock: 0
   target: {fileID: 0}
-  agent: {fileID: 0}
-  isAttacking: 0
   damageToBlock: 0
   attackDelay: 0
   modelRenderers: []
   zombiMaterial: {fileID: 2100000, guid: 2de218c34a264c641bc74f55274fc631, type: 2}
-  attacking_Particles: {fileID: 4687464588843334752}
-  messageFroomZombi: {fileID: 0}
+  attacking_Particles: {fileID: 2385278206295672030}
+  messageFromZombi: {fileID: 0}
 --- !u!114 &8004646403549274946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10733,8 +10728,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentUIState: 0
-  stateFire: {fileID: 6925052249818451001}
   currentHealth: 0
+  IsFoodAround: 0
   isHealthLosing: 0
 --- !u!82 &726027282905428560
 AudioSource:
