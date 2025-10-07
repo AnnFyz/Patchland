@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Visuals_Bush
+  m_Name: Tree_2_vis
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _CELPRIMARYMODE_CURVE
+  - DR_RIM_ON
+  - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
@@ -34,7 +35,7 @@ Material:
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3050
   stringTagMap:
     RenderType: Transparent
@@ -94,16 +95,16 @@ Material:
     - _CameraDistanceImpact: 0
     - _CelExtraEnabled: 0
     - _CelNumSteps: 3
-    - _CelPrimaryMode: 3
-    - _Cull: 0
+    - _CelPrimaryMode: 1
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailMapBlendingMode: 0
     - _DetailMapImpact: 0
     - _DstBlend: 10
     - _EnvironmentReflections: 1
-    - _FlatRimEdgeSmoothness: 0.5
-    - _FlatRimLightAlign: 0
-    - _FlatRimSize: 0.5
+    - _FlatRimEdgeSmoothness: 0.77
+    - _FlatRimLightAlign: 0.603
+    - _FlatRimSize: 0.273
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0.77
     - _Flatness: 1
@@ -113,14 +114,14 @@ Material:
     - _GlossyReflections: 0
     - _GradientAngle: 0
     - _GradientCenterX: 0
-    - _GradientCenterY: 0.54
+    - _GradientCenterY: 1.42
     - _GradientEnabled: 0
-    - _GradientSize: -11.87
+    - _GradientSize: -1.46
     - _GradientSpace: 0
     - _LightContribution: 0
     - _LightFalloffSize: 0.0001
-    - _LightmapDirectionPitch: 0
-    - _LightmapDirectionYaw: 0
+    - _LightmapDirectionPitch: 55
+    - _LightmapDirectionYaw: 114
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0
@@ -131,11 +132,11 @@ Material:
     - _OverrideLightmapDir: 0
     - _QueueOffset: 50
     - _ReceiveShadows: 1
-    - _RimEnabled: 0
-    - _SelfShadingSize: 0.733
-    - _SelfShadingSizeExtra: 0.33
-    - _ShadowEdgeSize: 0
-    - _ShadowEdgeSizeExtra: 0.087
+    - _RimEnabled: 1
+    - _SelfShadingSize: 0.784
+    - _SelfShadingSizeExtra: 0.6
+    - _ShadowEdgeSize: 0.389
+    - _ShadowEdgeSizeExtra: 0.05
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularEnabled: 0
@@ -146,25 +147,25 @@ Material:
     - _TextureImpact: 1
     - _UnityShadowMode: 1
     - _UnityShadowOcclusion: 0
-    - _UnityShadowPower: 0.058
+    - _UnityShadowPower: 0.062
     - _UnityShadowSharpness: 10
     - _VertexColorsEnabled: 0
     - _VertexExtrusionSmoothNormals: 0
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.75294125, g: 0.9960785, b: 0.44705886, a: 1}
-    - _Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-    - _ColorDim: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDimCurve: {r: 0.21960786, g: 0.99607843, b: 0.28617123, a: 1}
-    - _ColorDimExtra: {r: 0.24029905, g: 0.45977217, b: 0.6792453, a: 1}
+    - _BaseColor: {r: 0.5365285, g: 0.5647059, b: 0.31764707, a: 1}
+    - _Color: {r: 0.41774526, g: 0.31772876, b: 0.5660378, a: 1}
+    - _ColorDim: {r: 0.5882684, g: 0.6415094, b: 0.36009255, a: 1}
+    - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorGradient: {r: 0.48220006, g: 0.72398776, b: 0.7924528, a: 1}
+    - _ColorGradient: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatRimColor: {r: 0.5647059, g: 0.5420525, b: 0.31764707, a: 1}
     - _FlatSpecularColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
-    - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
+    - _LightmapDirection: {r: 0.7483327, g: 0.57357645, b: -0.33317912, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _UnityShadowColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
