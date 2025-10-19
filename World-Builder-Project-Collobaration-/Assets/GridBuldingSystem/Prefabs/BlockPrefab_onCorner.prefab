@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8813169515423395699}
   - component: {fileID: 3854356307301736655}
   m_Layer: 9
-  m_Name: BlockModel_main (3)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 5434398350668398882}
   - component: {fileID: 5264090182710606180}
   m_Layer: 9
-  m_Name: BlockModel_main (10)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 2381869393641681070}
   - component: {fileID: 4596027003832695123}
   m_Layer: 9
-  m_Name: BlockModel_main (7)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 9160764509386646819}
   - component: {fileID: 4864056731356929115}
   m_Layer: 9
-  m_Name: BlockModel_main (1)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 3390368847913965542}
   - component: {fileID: 547629685659647061}
   m_Layer: 9
-  m_Name: BlockModel_main (8)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 4564430135954439987}
   - component: {fileID: 3365739267520077631}
   m_Layer: 9
-  m_Name: BlockModel_main (5)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 1942582481397412323}
   - component: {fileID: 494003070765504699}
   m_Layer: 9
-  m_Name: BlockModel_main (11)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 7584722946556311102}
   - component: {fileID: 6700540743347750952}
   m_Layer: 9
-  m_Name: BlockModel_main (4)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1234,7 @@ GameObject:
   - component: {fileID: 256230584443271853}
   - component: {fileID: 247266339474413294}
   m_Layer: 9
-  m_Name: BlockModel_main (2)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 7104331278221362045}
   - component: {fileID: 3498463552877583001}
   m_Layer: 9
-  m_Name: BlockModel_main (9)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1450,7 +1450,7 @@ GameObject:
   - component: {fileID: 59645772122993612}
   - component: {fileID: 7470780709672729426}
   m_Layer: 9
-  m_Name: BlockModel_main (6)
+  m_Name: BlockModel_onCorner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

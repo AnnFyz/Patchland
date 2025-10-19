@@ -22,6 +22,5 @@ MonoBehaviour:
   maxAmountOfPlacedObjects: 3
   width: 1
   height: 1
-  unitToCreate: {fileID: 2675644380505310733, guid: 0788915d9d3af2d40a5f6b68ddf3fd11,
-    type: 3}
+  unitToCreate: {fileID: 0}
   maxAmountOfUnits: 0

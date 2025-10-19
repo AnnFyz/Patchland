@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8198805082128102423}
   - component: {fileID: 4155783222180913141}
   m_Layer: 9
-  m_Name: BlockModel_main (3)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7726012161696447578}
   - component: {fileID: 4120712719560827671}
   m_Layer: 9
-  m_Name: BlockModel_main (11)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 1625251121770020807}
   - component: {fileID: 8540494634919206911}
   m_Layer: 9
-  m_Name: BlockModel_main (5)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 3376825035965670077}
   - component: {fileID: 4067530140589471334}
   m_Layer: 9
-  m_Name: BlockModel_main (8)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 1700292980101408618}
   - component: {fileID: 2728212798164616817}
   m_Layer: 9
-  m_Name: BlockModel_main (2)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombisOnTheBlock:
-    zombis: []
+    Zombies: []
 --- !u!65 &829423309997462573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 38132165748762997}
   - component: {fileID: 852358955450618891}
   m_Layer: 9
-  m_Name: BlockModel_main (7)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 541043028243207837}
   - component: {fileID: 597697418137738163}
   m_Layer: 9
-  m_Name: BlockModel_main (10)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 2088632628768547655}
   - component: {fileID: 8704518226617268438}
   m_Layer: 9
-  m_Name: BlockModel_main (9)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 8889593500503926220}
   - component: {fileID: 1639446305212411685}
   m_Layer: 9
-  m_Name: BlockModel_main (1)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,7 +1216,7 @@ GameObject:
   - component: {fileID: 2589895254781081437}
   - component: {fileID: 4652992174566954735}
   m_Layer: 9
-  m_Name: BlockModel_main (6)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1324,7 +1324,7 @@ GameObject:
   - component: {fileID: 8886643244339075444}
   - component: {fileID: 2702942368223635665}
   m_Layer: 9
-  m_Name: BlockModel_main (4)
+  m_Name: BlockModel_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

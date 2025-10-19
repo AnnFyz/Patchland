@@ -25,7 +25,7 @@ public class LocalLevelState : MonoBehaviour
 
 
     private BlockPrefab blockPrefab;
-    private Renderer renderer;
+    private new Renderer renderer;
     BlockHealth blockHealth;
 
     public Action OnChangedState;

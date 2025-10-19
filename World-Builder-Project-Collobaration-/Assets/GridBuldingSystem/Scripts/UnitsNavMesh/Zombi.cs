@@ -13,6 +13,10 @@ public enum ZombiState
     FindAnotherBlock,
     DeadZombi
 }
+
+/// <summary>
+/// Handles zombie movement, targeting, and attacking logic using a NavMeshAgent.
+/// </summary>
 public class Zombi : MonoBehaviour
 {
     [Header("⚙️ Navigation Settings")]
