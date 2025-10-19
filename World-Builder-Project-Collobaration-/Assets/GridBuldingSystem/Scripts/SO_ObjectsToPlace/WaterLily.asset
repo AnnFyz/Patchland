@@ -22,5 +22,6 @@ MonoBehaviour:
   maxAmountOfPlacedObjects: 3
   width: 1
   height: 1
+  canCreateUnit: 0
   unitToCreate: {fileID: 0}
   maxAmountOfUnits: 0

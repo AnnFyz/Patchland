@@ -1,7 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
+
+/// <summary>
+/// Defines data and utility methods for a placeable object type,  
+/// including its prefab, size, orientation, and unit creation settings.
+/// </summary>
 [CreateAssetMenu()]
 public class PlacedObjectTypeSO : ScriptableObject {
 
@@ -38,14 +44,20 @@ public class PlacedObjectTypeSO : ScriptableObject {
     public int placedObjId;
     public Transform placedObjectPrefab;
     public Transform visualForGhostPlacedObject;
-    public Material materialForDeadObj;
+    [Range(1, 10)]
     public int maxAmountOfPlacedObjects; // maximum amount of placed objects of this type that can be created in the scene
     [Header("Grid Size")] 
     public int width;
     public int height;
-    [Header("Unit Creation")] 
+    [Header("Unit Creation")]
+    [SerializeField] bool canCreateUnit = true;
+    [ShowIf(EConditionOperator.Or, "canCreateUnit")]
     public Transform unitToCreate;
+    [ShowIf(EConditionOperator.Or, "canCreateUnit")]
+    [Range(1, 10)]
     public int maxAmountOfUnits; // maximum amount of units that can be created for this placed object type
+
+
 
     public int GetRotationAngle(Dir dir) {
         switch (dir) {

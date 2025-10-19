@@ -2,32 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlacedObjectTypeSO;
-using static Unity.VisualScripting.Member;
 public class PlacedObject_Done : MonoBehaviour
 {
 
     [SerializeField] Material material;
-    static Transform visual;
     public Action onDestroyedPlacedObject;
     static int index;
+    public PlacedObjectTypeSO placedObjectTypeSO { get; private set; }
+    private Vector2Int origin;
+    private PlacedObjectTypeSO.Dir dir;
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO)
     {
         Transform placedObjectTransform = Instantiate(placedObjectTypeSO.placedObjectPrefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
         placedObjectTransform.name += "_" + index.ToString();
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
         placedObject.Setup(placedObjectTypeSO, origin, dir);
-        visual = placedObjectTypeSO.visualForGhostPlacedObject;
-        index++;    
+        index++;
         return placedObject;
     }
-
-
-
-
-    public PlacedObjectTypeSO placedObjectTypeSO;
-    private Vector2Int origin;
-    private PlacedObjectTypeSO.Dir dir;
 
     private void Setup(PlacedObjectTypeSO placedObjectTypeSO, Vector2Int origin, PlacedObjectTypeSO.Dir dir)
     {
@@ -48,21 +40,14 @@ public class PlacedObject_Done : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // when block is dead change material of placed object to dead material
     public void ChangeMaterialOfObject()
     {
-        material = placedObjectTypeSO.materialForDeadObj;
-        transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material = material;
-        transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+
     }
 
     private void FixedUpdate()
     {
-        //OLD
-        //if (!UnitsManager.Instance.waypoints[placedObjectTypeSO.placedObjId].Contains(this.gameObject.transform))
-        //{
-        //    DestroySelf();
-        //}
-        //NEW
         if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectTypeSO.placedObjectName].Contains(this.gameObject.transform))
         {
             DestroySelf();

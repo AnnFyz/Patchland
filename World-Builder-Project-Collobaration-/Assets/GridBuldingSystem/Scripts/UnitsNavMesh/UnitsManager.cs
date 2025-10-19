@@ -21,7 +21,6 @@ public class UnitsManager : MonoBehaviour
     //OLD
     public List<List<Transform>> waypoints = new List<List<Transform>>();
     public Action TimeToMoveAutomatically;
-    [SerializeField] List<Transform> unitsPrefabs = new List<Transform>();
     public event Action OnChangedGlobalOrder;
     //int maxUnits;
     //NEW
@@ -171,10 +170,6 @@ public class UnitsManager : MonoBehaviour
                 }
             }
         }
-    }
-    public List<Transform> GetListOfUnits()
-    {
-        return unitsPrefabs;
     }
 
     void OnChangedGlobalOrderM()

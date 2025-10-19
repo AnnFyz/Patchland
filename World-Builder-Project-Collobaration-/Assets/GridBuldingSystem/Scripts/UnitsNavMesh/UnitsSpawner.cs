@@ -36,19 +36,16 @@ public class UnitsSpawner : MonoBehaviour
     void SpawnUnits(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)
     {
         levelState = localLevelState.GetCurrentLevelState();
-        if (levelState != LevelState.Pond)
-        {
-            Spawn(unitToSpawn, placedObjId, placedObjectName);
-        }
-
-        else
+        if (unitToSpawn == null)
         {
             float y = localBuildingSystem.GetOriginOfGrid().y;
             float randomPosX = Random.Range(transform.position.x, transform.position.x + 0.5f);
             float randomPosZ = Random.Range(transform.position.z, transform.position.z + 0.5f);
             Bubble.Instance.CreatePopupText(new Vector3(randomPosX, y, randomPosZ), "I won't spawn here the Unit!");
-            Debug.Log("I won't spawn here the Unit!");
+            return;
         }
+
+        Spawn(unitToSpawn, placedObjId, placedObjectName);
     }
 
     void Spawn(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)

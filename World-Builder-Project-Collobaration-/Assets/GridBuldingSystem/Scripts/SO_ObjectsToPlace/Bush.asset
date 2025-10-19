@@ -22,6 +22,7 @@ MonoBehaviour:
   maxAmountOfPlacedObjects: 4
   width: 1
   height: 1
+  canCreateUnit: 1
   unitToCreate: {fileID: 2675644380505310733, guid: d9d3c3e08b669c942a830f5086d71ddc,
     type: 3}
   maxAmountOfUnits: 3
