@@ -461,50 +461,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3210393739028711350, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523280288886149943, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3983371601358155993, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557277867641022509, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6757561198451997783, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6894868749953378388, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8351456910303620172, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9158946050383203890, guid: ef33216dad10cd84e962c95f44409526,
         type: 3}
       propertyPath: m_Name
       value: Mushrooms
-      objectReference: {fileID: 0}
-    - target: {fileID: 9158946050383203890, guid: ef33216dad10cd84e962c95f44409526,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8304740309484024901}
   - component: {fileID: 4453777650178983225}
   - component: {fileID: 767183398165877681}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SNature_LiliPad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79c2511799a05394eacdeda576d89295, type: 2}
+  - {fileID: 2100000, guid: 5e397ec135621e94badc95ae6452c6e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8714844175434218367}
   - component: {fileID: 4706458030807740171}
   - component: {fileID: 6220533814801020861}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SNature_LiliBlossom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79c2511799a05394eacdeda576d89295, type: 2}
+  - {fileID: 2100000, guid: 5e397ec135621e94badc95ae6452c6e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442768405674980168}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Lili
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,8 +198,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8714844175434218367}
   - {fileID: 8304740309484024901}
