@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4617843551786760489}
   - component: {fileID: 5610398402241038172}
   - component: {fileID: 5369425235486827781}
-  m_Layer: 0
-  m_Name: Grass_Sprout_Individual01 (27)
+  m_Layer: 2
+  m_Name: Grass_Sprout_Individual_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4617843551786760489
 Transform:
@@ -97,12 +97,12 @@ GameObject:
   - component: {fileID: 4115822453881159441}
   - component: {fileID: 309671410975746341}
   - component: {fileID: 4300359807496028966}
-  m_Layer: 0
-  m_Name: Grass_Sprout_Individual01 (29)
+  m_Layer: 2
+  m_Name: Grass_Sprout_Individual_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4115822453881159441
 Transform:
@@ -183,12 +183,12 @@ GameObject:
   - component: {fileID: 3934977359125933758}
   - component: {fileID: 4287940023616823782}
   - component: {fileID: 5613604941424956143}
-  m_Layer: 0
-  m_Name: Grass_Sprout_Individual01 (28)
+  m_Layer: 2
+  m_Name: Grass_Sprout_Individual_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &3934977359125933758
 Transform:
@@ -267,12 +267,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2737093362461287104}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2737093362461287104
 Transform:
