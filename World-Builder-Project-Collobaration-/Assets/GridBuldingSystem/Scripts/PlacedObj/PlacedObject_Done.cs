@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlacedObject_Done : MonoBehaviour
 {
 
-    [SerializeField] Material material;
+    [SerializeField] MeshRenderer[] materials;
     public Action onDestroyedPlacedObject;
     static int index;
     public PlacedObjectTypeSO placedObjectTypeSO { get; private set; }
@@ -26,7 +26,6 @@ public class PlacedObject_Done : MonoBehaviour
         this.placedObjectTypeSO = placedObjectTypeSO;
         this.origin = origin;
         this.dir = dir;
-        material = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material;
     }
 
     public List<Vector2Int> GetGridPositionList()

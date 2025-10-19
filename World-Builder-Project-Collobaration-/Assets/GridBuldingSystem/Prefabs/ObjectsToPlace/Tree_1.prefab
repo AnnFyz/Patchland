@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
-  placedObjectTypeSO: {fileID: 0}
+  materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &8000281925568123895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +159,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bishob_Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 3073416926437088943, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_2
+      objectReference: {fileID: 0}
     - target: {fileID: 3127568270603804644, guid: f450be2003e04b74eb9ead53e4fd93e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,7 +224,33 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5395758068221448547, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393460156270881841, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633142732877330411, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702373925958107776, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940076709506641437, guid: f450be2003e04b74eb9ead53e4fd93e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree_6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 536914828710434750, guid: f450be2003e04b74eb9ead53e4fd93e7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
