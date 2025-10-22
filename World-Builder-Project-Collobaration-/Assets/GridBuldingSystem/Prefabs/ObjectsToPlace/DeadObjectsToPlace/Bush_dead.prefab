@@ -112,10 +112,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2608708882569115102}
-  - component: {fileID: 2608708882569115103}
-  - component: {fileID: 2608708882569115096}
   m_Layer: 2
-  m_Name: Bush
+  m_Name: Bush_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,59 +135,6 @@ Transform:
   - {fileID: 2237452263831861341}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2608708882569115103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2608708882569115097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 4629257953361447816}
-  - {fileID: 3923787644104530497}
-  - {fileID: 5142527667986512994}
-  deadMaterial: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
---- !u!114 &2608708882569115096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2608708882569115097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc5778545161f8a40b89497a10d2aea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &2996477687119431426
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +293,17 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 7c748ba6b134ea74680118070e4f2fe2, type: 2}
+      objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
+    - target: {fileID: 5369425235486827781, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
+    - target: {fileID: 5613604941424956143, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
     - target: {fileID: 9012775622251890454, guid: 08c5d177453701c49aa8b7401e129c89,
         type: 3}
       propertyPath: m_Name
@@ -362,24 +317,6 @@ PrefabInstance:
 --- !u!4 &2892983927882152871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2737093362461287104, guid: 08c5d177453701c49aa8b7401e129c89,
-    type: 3}
-  m_PrefabInstance: {fileID: 998086521896687975}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &3923787644104530497 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4300359807496028966, guid: 08c5d177453701c49aa8b7401e129c89,
-    type: 3}
-  m_PrefabInstance: {fileID: 998086521896687975}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &4629257953361447816 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5613604941424956143, guid: 08c5d177453701c49aa8b7401e129c89,
-    type: 3}
-  m_PrefabInstance: {fileID: 998086521896687975}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &5142527667986512994 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5369425235486827781, guid: 08c5d177453701c49aa8b7401e129c89,
     type: 3}
   m_PrefabInstance: {fileID: 998086521896687975}
   m_PrefabAsset: {fileID: 0}

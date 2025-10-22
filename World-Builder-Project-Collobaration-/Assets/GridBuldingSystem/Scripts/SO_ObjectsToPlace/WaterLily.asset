@@ -18,6 +18,8 @@ MonoBehaviour:
     type: 3}
   visualForGhostPlacedObject: {fileID: 1596457177620258293, guid: 7355ac3312aedb34c8e6bce7f073c842,
     type: 3}
+  deadVersionOfplacedObject: {fileID: 2608708882569115102, guid: 801a766540525914eba53d28d9d061fb,
+    type: 3}
   maxAmountOfPlacedObjects: 3
   width: 1
   height: 1

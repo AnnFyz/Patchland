@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 public class PlacedObject_Done : MonoBehaviour
 {
 
     [SerializeField] MeshRenderer[] materials;
+    [SerializeField] Material deadMaterial;
     public Action onDestroyedPlacedObject;
     static int index;
     public PlacedObjectTypeSO placedObjectTypeSO { get; private set; }
@@ -39,17 +41,18 @@ public class PlacedObject_Done : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // when block is dead change material of placed object to dead material
-    public void ChangeMaterialOfObject()
+    // when block is dead the dead version of the placed object is created
+    public void CreateDeadCopyOfAnPlacedObject()
     {
-
+        Transform deadCopy = Instantiate(placedObjectTypeSO.deadVersionOfplacedObject, transform.position, transform.rotation);
+        DestroySelf();
     }
 
-    private void FixedUpdate()
-    {
-        if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectTypeSO.placedObjectName].Contains(this.gameObject.transform))
-        {
-            DestroySelf();
-        }
-    }
+    //private void FixedUpdate()
+    //{
+    //    if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectTypeSO.placedObjectName].Contains(this.gameObject.transform))
+    //    {
+    //        DestroySelf();
+    //    }
+    //}
 }

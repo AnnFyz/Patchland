@@ -78,7 +78,7 @@ public class BlockHealth : MonoBehaviour
             IsBeingDamaged = false;
             BuildingManager.Instance.blockList.TransferBlockToDeadList(gameObject);
             block.SetStateMaterial(BuildingManager.Instance.deadBlockMaterial);
-            GetComponent<GridBuildingSystem>().GetAllPlacedObjectsOnTheBlock();
+            GetComponent<GridBuildingSystem>().RemoveAllPlacedObjectsFromBlock();
             GameManager.Instance.amountOfDeadBlocks++;
             GameManager.Instance.CheckIfAllBlocksAreDead();
         }

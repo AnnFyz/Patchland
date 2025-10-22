@@ -44,6 +44,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
     public int placedObjId;
     public Transform placedObjectPrefab;
     public Transform visualForGhostPlacedObject;
+    public Transform deadVersionOfplacedObject;
     [Range(1, 10)]
     public int maxAmountOfPlacedObjects; // maximum amount of placed objects of this type that can be created in the scene
     [Header("Grid Size")] 

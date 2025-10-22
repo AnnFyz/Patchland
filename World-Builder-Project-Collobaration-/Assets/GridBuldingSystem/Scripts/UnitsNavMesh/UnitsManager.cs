@@ -82,30 +82,6 @@ public class UnitsManager : MonoBehaviour
     }
     public int GetMaxUnits()
     {
-        //switch (placedObjId)
-        //{
-        //    case 0:
-        //        maxUnits = maxUnits_0;
-        //        break;
-        //    case 1:
-        //        maxUnits = maxUnits_1;
-        //        break;
-        //    case 2:
-        //        maxUnits = maxUnits_2;
-        //        break;
-        //    case 3:
-        //        maxUnits = maxUnits_3;
-        //        break;
-        //    case 4:
-        //        maxUnits = maxUnits_4;
-        //        break;
-        //    case 5:
-        //        maxUnits = maxUnits_5;
-        //        break;
-        //    default:
-        //        Debug.Log("ERROR");
-        //        break;
-        //}
         if (BuildingManager.Instance.currentObjectTypeSO == null)
         {
             Debug.LogError("PlacedObjectTypeSO is not set in BuildingManager.");
@@ -176,30 +152,5 @@ public class UnitsManager : MonoBehaviour
     {
         OnChangedGlobalOrder?.Invoke();
         Debug.Log("OnChangedGlobalOrderM called in UnitsManager");
-
-        // NEW  
-        //foreach (var waypointList in waypointsForPlacedObjects.Values)
-        //{
-        //    foreach (var waypoint in waypointList)
-        //    {
-        //        GameObject generatedWaypoint = new GameObject();
-        //        if (generatedWaypoint.transform != null && waypoint != null)
-        //        {
-        //            generatedWaypoint.transform.position = waypoint.position;
-        //            generatedWaypoint.transform.SetParent(transform);
-        //        }
-        //    }
-        //}
-
-        // OLD  
-        // foreach (var waypoint in waypoints[0])  
-        // {  
-        //     GameObject generatedWaypoint = new GameObject();  
-        //     if (generatedWaypoint.transform != null && waypoint != null)  
-        //     {  
-        //         generatedWaypoint.transform.position = waypoint.position;  
-        //         generatedWaypoint.transform.SetParent(transform);  
-        //     }  
-        // }  
     }
 }

@@ -115,17 +115,17 @@ public class GridBuildingSystem : MonoBehaviour
         }
     }
 
-    public void GetAllPlacedObjectsOnTheBlock()
+    // the actual placed object will be replaced with its dead copy
+    public void RemoveAllPlacedObjectsFromBlock()
     {
         for (int x = 0; x < gridWidth; x++)
         {
             for (int z = 0; z < gridHeight; z++)
             {
                 var placedObj = Grid.GetGridObject(x, z)?.GetPlacedObject();
-                if (placedObj == null) continue;
-
-                // Re-apply material to apply dead state visuals
-                placedObj.ChangeMaterialOfObject();
+                if (placedObj == null) { continue; }
+ 
+                placedObj.CreateDeadCopyOfAnPlacedObject();
 
 
                 // Remove waypoints linked to this placed object

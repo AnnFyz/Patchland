@@ -68,14 +68,17 @@ public class Unit : MonoBehaviour
 
     [Header("🏗️ Related Placed Object")]
     public PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
+    public PlacedObject_Done currentPlacedObject; // to handle the placed object that the unit is currently interacting with
     public int PlacedObjTypeId { get; set; }
     public UnitsMovementState CurrentMovementState { get; set; } // to track the state of the unit movement (autopilot, controlled by player)
     public UnitsState CurrentUnitsState { get; set; } // to track the state of the unit (alive, dead, zombi, etc.)
 
 
+    // Zombi related
+    private bool isUnitDestroyed = false; // to track if the unit is destroyed
     private Zombi zombi; // to handle the zombi state of the unit
-    private BlockPrefab intersectedWithUnitBlock; // to handle the block that the unit is currently intersecting with
-    public PlacedObject_Done currentPlacedObject; // to handle the placed object that the unit is currently interacting with
+    private BlockPrefab targetBlock; // to handle the block that the unit is targeting
+  
     private void Awake()
     {
         selectedFigur = transform.GetChild(0).gameObject;
@@ -133,6 +136,8 @@ public class Unit : MonoBehaviour
         if (CurrentUnitsState == UnitsState.Zombi)
             return; // if the unit is already a zombie or in the process of becoming one, do nothing
 
+        // remove one unit from the total count for this placed object type
+        UnitsManager.Instance.SetAmountOfUnits(placedObjectName, -1);
 
         int chance = Mathf.RoundToInt(100 / unitScriptableObject.chanceToBecomeZombi);
         int randomValue = UnityEngine.Random.Range(0, chance);
@@ -145,9 +150,9 @@ public class Unit : MonoBehaviour
                 PlaySound(zombieSound);
             }
             CurrentUnitsState = UnitsState.Zombi;
-            intersectedWithUnitBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
+            targetBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             selectedFigur.SetActive(false);
-            zombi.SetInitialTargetBlock(intersectedWithUnitBlock);
+            zombi.SetInitialTargetBlock(targetBlock);
             zombi.HandleZombiTransformation();
             StartCoroutine(zombi.AttackBlock());
 
@@ -162,12 +167,13 @@ public class Unit : MonoBehaviour
     {
         BlockPrefab block = other.GetComponentInParent<BlockPrefab>();
         if (block != null)
-            intersectedWithUnitBlock = block;
+            targetBlock = block;
     
     }
     void DestroyUnit()
     {
-        UnitsManager.Instance.SetAmountOfUnits(placedObjectName, -1);
+        if (isUnitDestroyed) { return; }
+        isUnitDestroyed = true;
         ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
         particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
         particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
@@ -386,7 +392,6 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId)
@@ -425,6 +430,8 @@ public class Unit : MonoBehaviour
                 currentPlacedObject = null;
                 GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
                 GetComponentInChildren<UnitsHealth>().LoseHealth();
+                Agent.ResetPath();
+                UpdateListOfWaypoints();
             }
         }
     }
