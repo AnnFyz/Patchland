@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth: 100
   damageToUnitWithoutFood: 10
   healthPointsFromFood: 1
-  death_Particles: {fileID: 1370348035730281900, guid: 55de213987c9fcf429b9854405faf7c4,
+  death_Particles: {fileID: 1370348035730281900, guid: b1a44a0981c58e544a8c87c10e746bff,
     type: 3}
   chanceToBecomeZombi: 100
   damageToBlock: 1

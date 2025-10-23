@@ -13,7 +13,6 @@ using System.Linq;
 /// </summary>
 public class UnitsSpawner : MonoBehaviour
 {
-    private LevelState levelState;
     private LocalLevelState localLevelState;
 
     GridBuildingSystem localBuildingSystem;
@@ -35,7 +34,6 @@ public class UnitsSpawner : MonoBehaviour
 
     void SpawnUnits(Transform unitToSpawn, int placedObjId, PlacedObjectTypeSO.PlacedObjectName placedObjectName)
     {
-        levelState = localLevelState.GetCurrentLevelState();
         if (unitToSpawn == null)
         {
             float y = localBuildingSystem.GetOriginOfGrid().y;

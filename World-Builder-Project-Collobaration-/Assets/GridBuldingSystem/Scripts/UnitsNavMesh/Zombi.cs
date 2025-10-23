@@ -215,17 +215,18 @@ public class Zombi : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other == null) return;
+        //if (other == null) return;
 
-        var blockHealth = other.gameObject.GetComponentInParent<BlockHealth>();
+        var blockHealth = other.gameObject.GetComponent<BlockHealth>();
         if (blockHealth != null && targetBlockHealth == blockHealth && !isOnTargetBlock)
         {
             isOnTargetBlock = true;
 
-            var collector = other.gameObject.GetComponentInParent<ZombiCollector>();
+            var collector = other.gameObject.GetComponent<ZombiCollector>();
             if (collector != null)
             {
                 collector.CollectZombi(this);
+                Debug.Log($"[Zombie] Collected by ZombiCollector on block {other.gameObject.name} (parent: {other.transform.parent?.name})");
             }
             else
             {
