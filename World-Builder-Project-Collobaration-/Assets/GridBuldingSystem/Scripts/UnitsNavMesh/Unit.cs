@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour
     private bool isUnitDestroyed = false; // to track if the unit is destroyed
     private Zombi zombi; // to handle the zombi state of the unit
     private BlockPrefab targetBlock; // to handle the block that the unit is targeting
-  
+
     private void Awake()
     {
         selectedFigur = transform.GetChild(0).gameObject;
@@ -168,7 +168,7 @@ public class Unit : MonoBehaviour
         BlockPrefab block = other.GetComponentInParent<BlockPrefab>();
         if (block != null)
             targetBlock = block;
-    
+
     }
     void DestroyUnit()
     {
@@ -240,7 +240,7 @@ public class Unit : MonoBehaviour
     {
         // --- BASIC GUARDS ---
         // Stop immediately if the unit is dead or has become a zombie
-        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)return;
+        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi) return;
 
         // Stop if the unit is not in autopilot mode (e.g. being controlled by the player)
         if (CurrentMovementState != UnitsMovementState.Autopilot) return;
@@ -363,7 +363,7 @@ public class Unit : MonoBehaviour
     {
         if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0) return;
         waypointIndex = (waypointIndex + 1) % waypointsList.localOrder.Count;
-      
+
     }
     public void OnSelected() => selectedFigur.SetActive(true);
     public void OnDeselected() => selectedFigur.SetActive(false);
@@ -397,29 +397,28 @@ public class Unit : MonoBehaviour
         if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
             return;
 
-        if(other.gameObject.GetComponentInParent<PlacedObject_Done>() == null)
+        // Get the placed object once
+        var pod = other.GetComponentInParent<PlacedObject_Done>();
+        if (pod == null)
+            return; // no placed object in that hierarchy
+
+        var so = pod.placedObjectTypeSO;
+        if (so == null)
         {
+            Debug.LogWarning($"PlacedObject_Done on {pod.name} has no ScriptableObject assigned.");
             return;
         }
 
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
-        {
-            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId)
-            {
-                //Debug.Log($"{gameObject.name} entered trigger with {other.gameObject.name}");
+        if (so.placedObjId != PlacedObjTypeId)
+            return;
 
-                if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
-                {
-                    currentPlacedObject = other.gameObject.GetComponentInParent<PlacedObject_Done>();
-                    currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
-                    GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
-                    StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-                }
+        currentPlacedObject = pod;
+        currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
+        GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
+        StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
 
-            }
-        }
 
-        if (other.gameObject.tag == "Gem" && CurrentUnitsState != UnitsState.Zombi)
+        if (other.gameObject.tag == "Gem")
         {
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
@@ -430,26 +429,30 @@ public class Unit : MonoBehaviour
         if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
             return;
 
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() == null)
+
+        // Get the placed object once
+        var pod = other.GetComponentInParent<PlacedObject_Done>();
+        if (pod == null)
+            return; // no placed object in that hierarchy
+
+        var so = pod.placedObjectTypeSO;
+        if (so == null)
         {
+            Debug.LogWarning($"PlacedObject_Done on {pod.name} has no ScriptableObject assigned.");
             return;
         }
 
-        if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
+        if (so.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>()?.IsFoodAround == true)
         {
-            Debug.Log($"{gameObject.name} exited trigger with {other.gameObject.name}");
-
-            if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId && GetComponentInChildren<UnitsHealth>().IsFoodAround)
-            {
-                if (currentPlacedObject != null)
-                    currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
-                currentPlacedObject = null;
-                GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
-                GetComponentInChildren<UnitsHealth>().LoseHealth();
-                Agent.ResetPath();
-                UpdateListOfWaypoints();
-            }
+            if (currentPlacedObject != null)
+                currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
+            currentPlacedObject = null;
+            GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
+            GetComponentInChildren<UnitsHealth>().LoseHealth();
+            Agent.ResetPath();
+            UpdateListOfWaypoints();
         }
+
     }
 
     void OnDestroyedPlacedObject()
