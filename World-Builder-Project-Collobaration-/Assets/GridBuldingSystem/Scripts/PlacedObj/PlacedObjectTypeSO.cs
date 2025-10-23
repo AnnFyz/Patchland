@@ -39,7 +39,7 @@ public class PlacedObjectTypeSO : ScriptableObject {
 
     }
 
-    [Header("General")] 
+    [Header("⚙️ General")] 
     public PlacedObjectName placedObjectName;
     public int placedObjId;
     public Transform placedObjectPrefab;
@@ -47,10 +47,10 @@ public class PlacedObjectTypeSO : ScriptableObject {
     public Transform deadVersionOfplacedObject;
     [Range(1, 10)]
     public int maxAmountOfPlacedObjects; // maximum amount of placed objects of this type that can be created in the scene
-    [Header("Grid Size")] 
+    [Header("🧩 Grid Size")] 
     public int width;
     public int height;
-    [Header("Unit Creation")]
+    [Header("🪖 Unit Creation")]
     [SerializeField] bool canCreateUnit = true;
     [ShowIf(EConditionOperator.Or, "canCreateUnit")]
     public Transform unitToCreate;

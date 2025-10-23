@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class UnitsTypeSO : ScriptableObject
 {
     [Header("Health Settings")]
-    public int unitId;
     public float maxHealth = 100f;
     public float damageToUnitWithoutFood = 1f;
     public float healthPointsFromFood = 1f;
@@ -16,7 +15,6 @@ public class UnitsTypeSO : ScriptableObject
     public float chanceToBecomeZombi;
     public float damageToBlock = 1f;
     public float attackDelay = 0.1f;
-    public Sprite UIHealthSp; // currently not in use
     [Header("NavMeshAgent Configs")]
     public float AIUpdateInterval = 0.1f;
     public float acceleration = 18f;

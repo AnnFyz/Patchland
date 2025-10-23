@@ -10,29 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
-  m_Name: Fox_Units_SO
+  m_Name: BasicUnit
   m_EditorClassIdentifier: 
-  unitId: 0
   maxHealth: 100
   damageToUnitWithoutFood: 10
   healthPointsFromFood: 1
-  death_Particles: {fileID: 1370348035730281900, guid: 55de213987c9fcf429b9854405faf7c4,
-    type: 3}
-  chanceToBecomeZombi: 100
+  death_Particles: {fileID: 0}
+  chanceToBecomeZombi: 68.6
   damageToBlock: 1
   attackDelay: 0.1
-  UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
-  acceleration: 25
-  angularSpeed: 175
+  acceleration: 18
+  angularSpeed: 120
   areaMask: -1
   avoidancePriority: 50
-  baseOffset: 0
-  height: 9
-  obstacleAvoidanceType: 1
-  radius: 1.15
-  speed: 15
-  stoppingDistance: 1
+  baseOffset: 0.5
+  height: 1
+  obstacleAvoidanceType: 3
+  radius: 1.05
+  speed: 13
+  stoppingDistance: 1.5
   triggerRadius: 0.15
   minMovingToPointTimer: 3
   maxMovingToPointTimer: 5

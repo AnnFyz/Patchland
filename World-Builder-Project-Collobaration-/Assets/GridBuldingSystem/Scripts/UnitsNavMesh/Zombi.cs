@@ -334,7 +334,6 @@ public class Zombi : MonoBehaviour
         {
             return;
         }
-        UnitsManager.Instance.SetAmountOfUnits(unit.placedObjectName, -1);
         ParticleSystem particles = Instantiate(unit.UnitScriptableObject.death_Particles, transform.position, Quaternion.identity);
         var audio = particles.gameObject.AddComponent<AudioSource>();
         audio.clip = unit.GlassBreaking;

@@ -2,17 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
+/// <summary>
+/// Handles creation, positioning, and destruction of a placed object.
+/// </summary>
 public class PlacedObject_Done : MonoBehaviour
 {
-
-    [SerializeField] MeshRenderer[] materials;
-    [SerializeField] Material deadMaterial;
     public Action onDestroyedPlacedObject;
     static int index;
     public PlacedObjectTypeSO placedObjectTypeSO { get; private set; }
-    private Vector2Int origin;
+    public Vector2Int origin { get; private set; }
     private PlacedObjectTypeSO.Dir dir;
+    public bool isDead = false;
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO)
     {
         Transform placedObjectTransform = Instantiate(placedObjectTypeSO.placedObjectPrefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
@@ -37,22 +38,26 @@ public class PlacedObject_Done : MonoBehaviour
 
     public void DestroySelf()
     {
+        if(isDead) return;
         onDestroyedPlacedObject?.Invoke();
         Destroy(gameObject);
+        isDead = true;
     }
 
     // when block is dead the dead version of the placed object is created
     public void CreateDeadCopyOfAnPlacedObject()
     {
+        if (isDead) return;
         Transform deadCopy = Instantiate(placedObjectTypeSO.deadVersionOfplacedObject, transform.position, transform.rotation);
+        Debug.Log("Created dead copy of placed object at position: " + transform.position);
         DestroySelf();
     }
 
-    //private void FixedUpdate()
-    //{
-    //    if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectTypeSO.placedObjectName].Contains(this.gameObject.transform))
-    //    {
-    //        DestroySelf();
-    //    }
-    //}
+    void OnDrawGizmos()
+    {
+        // Example: draw a red sphere at this object's position
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.2f);
+    }
+
 }

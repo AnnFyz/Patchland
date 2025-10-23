@@ -8266,14 +8266,6 @@ MonoBehaviour:
     m_Bits: 4294967295
   waypointsForPlacedObjects:
     _serializedList: []
-  unitsPrefabs:
-  - {fileID: 2675644380505310733, guid: 2439f2e2e949026439f50ea44f4a4cdc, type: 3}
-  - {fileID: 2675644380505310733, guid: d9d3c3e08b669c942a830f5086d71ddc, type: 3}
-  - {fileID: 2675644380505310733, guid: 83bc91a7ffa94904188e25d90439e0fe, type: 3}
-  - {fileID: 2675644380505310733, guid: d980f9603d10d2840b9cac2aae3a30c1, type: 3}
-  - {fileID: 2675644380505310733, guid: 1cfc6e54b4b4194409610c1b83ea8fbb, type: 3}
-  - {fileID: 2675644380505310733, guid: 91c22208e2dc9774bbfaf188537c9a50, type: 3}
-  - {fileID: 2675644380505310733, guid: 0788915d9d3af2d40a5f6b68ddf3fd11, type: 3}
   amountOfUnitsForPlacedObject:
     _serializedList: []
   amountOfUnits: 
@@ -8930,9 +8922,7 @@ GameObject:
   - component: {fileID: 2056276494}
   - component: {fileID: 2056276498}
   - component: {fileID: 2056276497}
-  - component: {fileID: 2056276496}
   - component: {fileID: 2056276499}
-  - component: {fileID: 2056276500}
   m_Layer: 6
   m_Name: GridOfPrefabs
   m_TagString: Untagged
@@ -8979,38 +8969,6 @@ MonoBehaviour:
   amountScale: 10
   xScale: 0.25
   horizontalSurfaces: []
---- !u!114 &2056276496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056276492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_AgentTypeID: -1372625422
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
 --- !u!114 &2056276497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9033,7 +8991,7 @@ MonoBehaviour:
     m_Bits: 64
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -9065,7 +9023,7 @@ MonoBehaviour:
     m_Bits: 64
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -9097,7 +9055,7 @@ MonoBehaviour:
     m_Bits: 64
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -9106,38 +9064,6 @@ MonoBehaviour:
   m_VoxelSize: 0.5
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
---- !u!114 &2056276500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056276492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_AgentTypeID: -902729914
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: c666dec6b9692044cbe91ee8796f1a1d, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2106086886
 GameObject:
@@ -9565,7 +9491,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b3b98fd14d81c39418926cf439a59fbf, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b3b98fd14d81c39418926cf439a59fbf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.05

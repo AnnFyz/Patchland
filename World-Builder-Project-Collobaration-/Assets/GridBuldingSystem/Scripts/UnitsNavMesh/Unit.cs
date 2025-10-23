@@ -378,7 +378,7 @@ public class Unit : MonoBehaviour
         Agent.acceleration = unitScriptableObject.acceleration;
         Agent.angularSpeed = unitScriptableObject.angularSpeed;
         Agent.areaMask = unitScriptableObject.areaMask;
-        Agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority / 4, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
+        Agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority / 5, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
         Agent.baseOffset = unitScriptableObject.baseOffset;
         Agent.height = unitScriptableObject.height;
         Agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
@@ -392,6 +392,16 @@ public class Unit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckBlock(other);
+
+        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
+            return;
+
+        if(other.gameObject.GetComponentInParent<PlacedObject_Done>() == null)
+        {
+            return;
+        }
+
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
             if (other.gameObject.GetComponentInParent<PlacedObject_Done>().placedObjectTypeSO.placedObjId == PlacedObjTypeId)
@@ -413,12 +423,18 @@ public class Unit : MonoBehaviour
         {
             other.gameObject.GetComponent<Gem>().CollectGem();
         }
-
-        CheckBlock(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
+            return;
+
+        if (other.gameObject.GetComponentInParent<PlacedObject_Done>() == null)
+        {
+            return;
+        }
+
         if (other.gameObject.GetComponentInParent<PlacedObject_Done>())
         {
             Debug.Log($"{gameObject.name} exited trigger with {other.gameObject.name}");
@@ -439,6 +455,7 @@ public class Unit : MonoBehaviour
     void OnDestroyedPlacedObject()
     {
         currentPlacedObject = null;
+        target = null;
         if (GetComponentInChildren<UnitsHealth>().IsFoodAround)
         {
             GetComponentInChildren<UnitsHealth>().IsFoodAround = false;

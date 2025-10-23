@@ -70,14 +70,10 @@ public class UnitsManager : MonoBehaviour
 
     public void SetAmountOfUnits(PlacedObjectName placedObjectName, int a)
     {
-        //OLD
-        //amountOfUnits[placedObjId] += a;
-        //NEW
         amountOfUnitsForPlacedObject[placedObjectName] += a;
     }
     public int GetAmountOfUnits(PlacedObjectName placedObjectName)
     {
-        //return amountOfUnits[placedObjId];
         return amountOfUnitsForPlacedObject[placedObjectName];
     }
     public int GetMaxUnits()

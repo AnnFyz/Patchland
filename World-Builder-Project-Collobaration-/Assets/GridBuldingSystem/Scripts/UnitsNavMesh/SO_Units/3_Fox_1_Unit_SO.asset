@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c37195a39b9ebf40b028ff1f08cd6de, type: 3}
-  m_Name: GiantMushroom_Unit_SO
+  m_Name: 3_Fox_1_Unit_SO
   m_EditorClassIdentifier: 
-  unitId: 1
   maxHealth: 100
   damageToUnitWithoutFood: 10
   healthPointsFromFood: 1
@@ -21,18 +20,17 @@ MonoBehaviour:
   chanceToBecomeZombi: 100
   damageToBlock: 1
   attackDelay: 0.1
-  UIHealthSp: {fileID: 0}
   AIUpdateInterval: 0.1
-  acceleration: 20
-  angularSpeed: 130
+  acceleration: 25
+  angularSpeed: 175
   areaMask: -1
   avoidancePriority: 50
   baseOffset: 0
   height: 9
-  obstacleAvoidanceType: 1
-  radius: 2
-  speed: 7
-  stoppingDistance: 1.5
+  obstacleAvoidanceType: 3
+  radius: 1.25
+  speed: 15
+  stoppingDistance: 1
   triggerRadius: 0.15
-  minMovingToPointTimer: 3
+  minMovingToPointTimer: 2
   maxMovingToPointTimer: 5

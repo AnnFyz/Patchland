@@ -126,7 +126,7 @@ public class GridBuildingSystem : MonoBehaviour
                 if (placedObj == null) { continue; }
  
                 placedObj.CreateDeadCopyOfAnPlacedObject();
-
+                Debug.Log($"Placed object removed at {x}, {z}");
 
                 // Remove waypoints linked to this placed object
                 int placedObjectId = placedObj.placedObjectTypeSO.placedObjId;
