@@ -10472,7 +10472,7 @@ GameObject:
   - component: {fileID: 8004646403549274946}
   - component: {fileID: 726027282905428560}
   m_Layer: 7
-  m_Name: Fox_2_old
+  m_Name: Fox_2_NotInUse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
