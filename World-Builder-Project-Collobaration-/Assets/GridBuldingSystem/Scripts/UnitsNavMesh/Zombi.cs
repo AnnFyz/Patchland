@@ -334,14 +334,12 @@ public class Zombi : MonoBehaviour
         {
             return;
         }
-        Transform particlesPrefab = Instantiate(unit.UnitScriptableObject.death_Particles_Prefab, transform.position, Quaternion.identity);
-        var audio = particlesPrefab.gameObject.AddComponent<AudioSource>();
-        audio.clip = unit.GlassBreaking;
-        audio.volume = 0.01f;
-        audio.loop = false;
-        audio.Play();
 
-        particlesPrefab.GetComponent<ParticleSystem>().Play();
+        // Play glass breaking particles and sound
+        DeathParticles deathParticles = DeathParticles.Create(transform.position, unit.TargetBlock.transform, unit.UnitScriptableObject.death_Particles_Prefab, Quaternion.identity);
+        deathParticles.Play(unit.GlassBreaking, 0.01f);
+
+
         Destroy(gameObject);
     }
 

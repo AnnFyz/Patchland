@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3588024286772598959}
   - component: {fileID: 1370348035730281900}
   - component: {fileID: 607572358584531253}
+  - component: {fileID: -9061843677934161085}
   m_Layer: 7
   m_Name: WhenDestroyed_P
   m_TagString: Untagged
@@ -41,14 +42,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075774370640668891}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 3
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -4892,3 +4893,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-9061843677934161085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075774370640668891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f668f57238d87428c7d9b62256ed8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

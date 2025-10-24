@@ -77,7 +77,7 @@ public class Unit : MonoBehaviour
     // Zombi related
     private bool isUnitDestroyed = false; // to track if the unit is destroyed
     private Zombi zombi; // to handle the zombi state of the unit
-    private BlockPrefab targetBlock; // to handle the block that the unit is targeting
+    public BlockPrefab TargetBlock { get; private set; } // to handle the block that the unit is targeting
 
     private void Awake()
     {
@@ -150,9 +150,9 @@ public class Unit : MonoBehaviour
                 PlaySound(zombieSound);
             }
             CurrentUnitsState = UnitsState.Zombi;
-            targetBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
+            TargetBlock.GetComponent<ZombiCollector>().CollectZombi(zombi);
             selectedFigur.SetActive(false);
-            zombi.SetInitialTargetBlock(targetBlock);
+            zombi.SetInitialTargetBlock(TargetBlock);
             zombi.HandleZombiTransformation();
             StartCoroutine(zombi.AttackBlock());
 
@@ -167,19 +167,16 @@ public class Unit : MonoBehaviour
     {
         BlockPrefab block = other.GetComponentInParent<BlockPrefab>();
         if (block != null)
-            targetBlock = block;
+            TargetBlock = block;
 
     }
     void DestroyUnit()
     {
         if (isUnitDestroyed) { return; }
         isUnitDestroyed = true;
-        ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles_Prefab, transform.position, Quaternion.identity);
-        particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
-        particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
-        particles.gameObject.GetComponent<AudioSource>().loop = false;
-        particles.gameObject.GetComponent<AudioSource>().Play();
-        particles.Play();
+        // Play glass breaking particles and sound
+        DeathParticles deathParticles = DeathParticles.Create(transform.position, TargetBlock.transform, unitScriptableObject.death_Particles_Prefab, Quaternion.identity);
+        deathParticles.Play(glassBreaking, 0.01f);
         Destroy(gameObject);
     }
     public void UpdateListOfWaypoints()
