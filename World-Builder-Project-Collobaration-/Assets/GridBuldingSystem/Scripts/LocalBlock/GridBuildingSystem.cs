@@ -208,7 +208,7 @@ public class GridBuildingSystem : MonoBehaviour
 
                 if (!UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Contains(placedObject.transform))
                 {
-                    UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Add(placedObject.transform);
+                    UnitsManager.Instance.waypointsForPlacedObjects[placedObjectName].Add(placedObject.GetWaypointCenterWorldPosition());
                     Debug.Log($"Waypoint added for {placedObjectName}: {placedObject.transform.position}");
                 }
 

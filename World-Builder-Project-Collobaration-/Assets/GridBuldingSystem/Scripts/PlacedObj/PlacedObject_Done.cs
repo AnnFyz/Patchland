@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlacedObject_Done : MonoBehaviour
 {
+    [SerializeField] private Transform waypointCenter;
     public Action onDestroyedPlacedObject;
     static int index;
     public PlacedObjectTypeSO placedObjectTypeSO { get; private set; }
@@ -36,6 +37,11 @@ public class PlacedObject_Done : MonoBehaviour
         return placedObjectTypeSO.GetGridPositionList(origin, dir);
     }
 
+    public Transform GetWaypointCenterWorldPosition()
+    {
+        return waypointCenter;
+    }
+
     public void DestroySelf()
     {
         if(isDead) return;
@@ -55,9 +61,8 @@ public class PlacedObject_Done : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Example: draw a red sphere at this object's position
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 0.2f);
+        Gizmos.DrawSphere(waypointCenter.position, 0.2f);
     }
 
 }

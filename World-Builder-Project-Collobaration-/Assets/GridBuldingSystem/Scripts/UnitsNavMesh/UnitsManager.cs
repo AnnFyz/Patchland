@@ -42,7 +42,6 @@ public class UnitsManager : MonoBehaviour
     private void Start()
     {
         var placedObjectTypeSOList = BuildingManager.Instance.GetPlacedObjectTypeSOList(); // Assuming GetPlacedObjectTypeSOList() returns a list of PlacedObjectTypeSO objects.  
-        //NEW
         if (placedObjectTypeSOList != null)
         {
             foreach (var placedObjectTypeSO in placedObjectTypeSOList)
@@ -54,13 +53,6 @@ public class UnitsManager : MonoBehaviour
         else
         {
             Debug.LogError("PlacedObjectTypeSO list is null in BuildingManager.");
-        }
-
-        //OLD
-        for (int i = 0; i < BuildingManager.Instance.GetNumberOfPlacedObjTypes(); i++) // to make a list for each type of placedObj  
-        {
-           // waypoints.Insert(i, new List<Transform>());
-           // amountOfUnits.Insert(i, 0);
         }
     }
     void Update()
