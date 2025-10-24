@@ -339,8 +339,7 @@ public class Unit : MonoBehaviour
         // --- ARRIVAL CHECK ---
         // Use agent metrics rather than raw Vector3 distance.
         if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance + 0.5f)
-        {
-            //Debug.Log($"Waypoint approached: {next.name}");
+        { 
             IterateWaypointIndex();
 
             // Immediately set the next destination (don’t wait for the next timer tick)
@@ -368,7 +367,15 @@ public class Unit : MonoBehaviour
 
     public void SetupUnitFromConfiguration()
     {
-        movingToPointTimer = UnityEngine.Random.Range(unitScriptableObject.minMovingToPointTimer, unitScriptableObject.maxMovingToPointTimer);
+        float min = unitScriptableObject.minMovingToPointTimer;
+        float max = unitScriptableObject.maxMovingToPointTimer;
+        float t = UnityEngine.Random.value;         // uniform 0–1
+        t = Mathf.Abs(Mathf.Pow(t * 2f - 1f, 3f));  // cubic power makes middle very unlikely
+        movingToPointTimer = Mathf.Lerp(
+            min,
+            max,
+            t
+        );
     }
     public void SetupAgentFromConfiguration()
     {

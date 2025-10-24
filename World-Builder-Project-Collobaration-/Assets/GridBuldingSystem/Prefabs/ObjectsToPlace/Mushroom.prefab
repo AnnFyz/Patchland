@@ -88,6 +88,7 @@ Transform:
   m_LocalScale: {x: 0.7, y: 0.19999999, z: 0.32999998}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6724737843295515313}
   - {fileID: 2198121692650169674}
   - {fileID: 98499248675715192}
   m_Father: {fileID: 8376177762748348957}
@@ -281,6 +282,37 @@ Transform:
   - {fileID: 411754148691409073}
   m_Father: {fileID: 3335869451411644703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7687865563504773508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6724737843295515313}
+  m_Layer: 2
+  m_Name: WaypointCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6724737843295515313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687865563504773508}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.8}
+  m_LocalScale: {x: 0.7142857, y: 2.5000002, z: 1.5151516}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3335869451411644703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8519390558105600890
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,14 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 168056730950889005}
-  - {fileID: 1781694290928893921}
-  - {fileID: 6966845564139018468}
-  - {fileID: 1199835012078505054}
-  - {fileID: 3195819008894621572}
-  - {fileID: 8004446532245492758}
-  - {fileID: 7973130486255461713}
+  waypointCenter: {fileID: 6724737843295515313}
+  isDead: 0
 --- !u!114 &8519390558105600891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,48 +497,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef33216dad10cd84e962c95f44409526, type: 3}
---- !u!23 &168056730950889005 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8403578190096663568, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1199835012078505054 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7380314519955465827, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1781694290928893921 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7958800515116439004, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &3195819008894621572 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6526660439315889593, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6966845564139018468 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1613900837453394649, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7973130486255461713 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1759975674661457772, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8004446532245492758 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1864225074895650347, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8062346713731571655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1813185918914033146, guid: ef33216dad10cd84e962c95f44409526,

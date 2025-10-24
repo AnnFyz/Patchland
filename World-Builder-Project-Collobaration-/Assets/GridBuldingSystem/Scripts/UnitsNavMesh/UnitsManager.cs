@@ -41,7 +41,7 @@ public class UnitsManager : MonoBehaviour
     }
     private void Start()
     {
-        var placedObjectTypeSOList = BuildingManager.Instance.GetPlacedObjectTypeSOList(); // Assuming GetPlacedObjectTypeSOList() returns a list of PlacedObjectTypeSO objects.  
+        var placedObjectTypeSOList = BuildingManager.Instance.GetPlacedObjectTypeSOList();
         if (placedObjectTypeSOList != null)
         {
             foreach (var placedObjectTypeSO in placedObjectTypeSOList)

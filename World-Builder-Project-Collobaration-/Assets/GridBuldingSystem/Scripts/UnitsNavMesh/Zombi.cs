@@ -219,11 +219,6 @@ public class Zombi : MonoBehaviour
         if (collector != null)
         {
             collector.CollectZombi(this);
-            Debug.Log($"[Zombie] Collected by ZombiCollector on block {other.gameObject.name} (parent: {other.transform.parent?.name})");
-        }
-        else
-        {
-            Debug.LogWarning($"[Zombie] No ZombiCollector found for collider {other.gameObject.name} (parent: {other.transform.parent?.name})");
         }
 
 
@@ -231,7 +226,6 @@ public class Zombi : MonoBehaviour
         if (blockHealth != null && TargetBlockHealth == blockHealth && !IsOnTargetBlock)
         {
             IsOnTargetBlock = true;
-            Debug.Log($"[Zombie] Reached target block {other.gameObject.name} (parent: {other.transform.parent?.name})");
             if (currentState == ZombiState.FindAnotherBlock)
             {
                 currentState = ZombiState.AttackBlock;
