@@ -10,7 +10,7 @@ public class UnitsTypeSO : ScriptableObject
     public float maxHealth = 100f;
     public float damageToUnitWithoutFood = 1f;
     public float healthPointsFromFood = 1f;
-    public ParticleSystem death_Particles;
+    public Transform death_Particles_Prefab;
     [Range(0.0f, 100.0f)]
     public float chanceToBecomeZombi;
     public float damageToBlock = 1f;

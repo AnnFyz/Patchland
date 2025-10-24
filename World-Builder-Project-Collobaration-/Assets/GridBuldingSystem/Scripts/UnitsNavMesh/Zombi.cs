@@ -32,9 +32,9 @@ public class Zombi : MonoBehaviour
 
 
     Unit unit;
-    public BlockHealth targetBlockHealth { get; private set; }
-    public BlockPrefab targetBlock { get; private set; }
-    public bool isOnTargetBlock { get; private set; } = false; // if zombi is on the target block, it can attack it -> the Attack Coroutine will be started
+    public BlockHealth TargetBlockHealth { get; private set; }
+    public BlockPrefab TargetBlock { get; private set; }
+    public bool IsOnTargetBlock { get; private set; } = false; // if zombi is on the target block, it can attack it -> the Attack Coroutine will be started
 
     private int waypointIndex = 0;
     public Transform target;
@@ -89,7 +89,7 @@ public class Zombi : MonoBehaviour
     public void HandleZombiMovement()
     {
         // If no target block or it's dead → find another
-        if (targetBlockHealth == null || targetBlockHealth.IsBlockDead)
+        if (TargetBlockHealth == null || TargetBlockHealth.IsBlockDead)
         {
             MoveToNextNeighbourAliveBlock();
             return; // Either reassigned target, or zombie destroyed
@@ -153,8 +153,8 @@ public class Zombi : MonoBehaviour
     {
         validWaypoints.Clear();
 
-        if (targetBlockHealth == null) return;
-        var src = targetBlockHealth.generatedWaypoints;
+        if (TargetBlockHealth == null) return;
+        var src = TargetBlockHealth.generatedWaypoints;
         if (src == null || src.Length == 0) return;
 
         foreach (var t in src)
@@ -166,15 +166,15 @@ public class Zombi : MonoBehaviour
         }
 
         // If you want, sort / reorder validWaypoints here
-        Debug.Log($"[Zombie] Validated {validWaypoints.Count} waypoint(s) for block {targetBlockHealth.name}");
+        Debug.Log($"[Zombie] Validated {validWaypoints.Count} waypoint(s) for block {TargetBlockHealth.name}");
     }
 
     public void SetInitialTargetBlock(BlockPrefab blockPrefab)
     {
         if (currentState != ZombiState.None) return;
 
-        targetBlockHealth = blockPrefab.GetComponentInParent<BlockHealth>();
-        targetBlock = blockPrefab;
+        TargetBlockHealth = blockPrefab.GetComponentInParent<BlockHealth>();
+        TargetBlock = blockPrefab;
     }
 
     public void SetOccupiedBlock(Collider block)
@@ -184,8 +184,8 @@ public class Zombi : MonoBehaviour
         var bh = block.GetComponentInParent<BlockHealth>();
         if (bh == null) return;
 
-        targetBlockHealth = bh;
-        targetBlock = bh.GetComponent<BlockPrefab>();
+        TargetBlockHealth = bh;
+        TargetBlock = bh.GetComponent<BlockPrefab>();
         waypointIndex = 0;
         ValidateWaypoints();
     }
@@ -215,24 +215,23 @@ public class Zombi : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        //if (other == null) return;
-
-        var blockHealth = other.gameObject.GetComponent<BlockHealth>();
-        if (blockHealth != null && targetBlockHealth == blockHealth && !isOnTargetBlock)
+        var collector = other.gameObject.GetComponentInParent<ZombiCollector>();
+        if (collector != null)
         {
-            isOnTargetBlock = true;
+            collector.CollectZombi(this);
+            Debug.Log($"[Zombie] Collected by ZombiCollector on block {other.gameObject.name} (parent: {other.transform.parent?.name})");
+        }
+        else
+        {
+            Debug.LogWarning($"[Zombie] No ZombiCollector found for collider {other.gameObject.name} (parent: {other.transform.parent?.name})");
+        }
 
-            var collector = other.gameObject.GetComponent<ZombiCollector>();
-            if (collector != null)
-            {
-                collector.CollectZombi(this);
-                Debug.Log($"[Zombie] Collected by ZombiCollector on block {other.gameObject.name} (parent: {other.transform.parent?.name})");
-            }
-            else
-            {
-                Debug.LogWarning($"[Zombie] No ZombiCollector found for collider {other.gameObject.name} (parent: {other.transform.parent?.name})");
-            }
 
+        var blockHealth = other.gameObject.GetComponentInParent<BlockHealth>();
+        if (blockHealth != null && TargetBlockHealth == blockHealth && !IsOnTargetBlock)
+        {
+            IsOnTargetBlock = true;
+            Debug.Log($"[Zombie] Reached target block {other.gameObject.name} (parent: {other.transform.parent?.name})");
             if (currentState == ZombiState.FindAnotherBlock)
             {
                 currentState = ZombiState.AttackBlock;
@@ -242,18 +241,18 @@ public class Zombi : MonoBehaviour
     }
     public IEnumerator AttackBlock()
     {
-        while (currentState == ZombiState.AttackBlock && targetBlockHealth != null)
+        while (currentState == ZombiState.AttackBlock && TargetBlockHealth != null)
         {
-            if (targetBlockHealth.currentHealth > 0)
+            if (TargetBlockHealth.currentHealth > 0)
             {
                 isAttacking = true;
-                targetBlockHealth.Damage(damageToBlock);
+                TargetBlockHealth.Damage(damageToBlock);
                 yield return new WaitForSeconds(attackDelay);
             }
             else
             {
                 isAttacking = false;
-                targetBlockHealth.IsBeingDamaged = false;
+                TargetBlockHealth.IsBeingDamaged = false;
                 waypointIndex = 0;
                 MoveToNextNeighbourAliveBlock();
                 yield break;
@@ -263,8 +262,8 @@ public class Zombi : MonoBehaviour
     void MoveToNextNeighbourAliveBlock()
     {
         // Clear current target
-        targetBlock = null;
-        targetBlockHealth = null;
+        TargetBlock = null;
+        TargetBlockHealth = null;
         validWaypoints.Clear();
         waypointIndex = 0;
 
@@ -310,8 +309,8 @@ public class Zombi : MonoBehaviour
         // Did we find a valid block?
         if (bestBlock != null && bestWaypoints != null && bestWaypoints.Count > 0)
         {
-            targetBlockHealth = bestBlock;
-            targetBlock = bestBlock.GetComponent<BlockPrefab>();
+            TargetBlockHealth = bestBlock;
+            TargetBlock = bestBlock.GetComponent<BlockPrefab>();
             validWaypoints = bestWaypoints;
             waypointIndex = 0;
             target = validWaypoints[waypointIndex];
@@ -320,7 +319,7 @@ public class Zombi : MonoBehaviour
             agent.ResetPath();
             agent.SetDestination(target.position);
 
-            Debug.Log($"[Zombie] Found new target block {targetBlock.name} with {validWaypoints.Count} reachable waypoints.");
+            Debug.Log($"[Zombie] Found new target block {TargetBlock.name} with {validWaypoints.Count} reachable waypoints.");
         }
         else
         {
@@ -335,14 +334,14 @@ public class Zombi : MonoBehaviour
         {
             return;
         }
-        ParticleSystem particles = Instantiate(unit.UnitScriptableObject.death_Particles, transform.position, Quaternion.identity);
-        var audio = particles.gameObject.AddComponent<AudioSource>();
+        Transform particlesPrefab = Instantiate(unit.UnitScriptableObject.death_Particles_Prefab, transform.position, Quaternion.identity);
+        var audio = particlesPrefab.gameObject.AddComponent<AudioSource>();
         audio.clip = unit.GlassBreaking;
         audio.volume = 0.01f;
         audio.loop = false;
         audio.Play();
 
-        particles.Play();
+        particlesPrefab.GetComponent<ParticleSystem>().Play();
         Destroy(gameObject);
     }
 

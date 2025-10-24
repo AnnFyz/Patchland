@@ -174,7 +174,7 @@ public class Unit : MonoBehaviour
     {
         if (isUnitDestroyed) { return; }
         isUnitDestroyed = true;
-        ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles, transform.position, Quaternion.identity);
+        ParticleSystem particles = Instantiate(unitScriptableObject.death_Particles_Prefab, transform.position, Quaternion.identity);
         particles.gameObject.AddComponent<AudioSource>().clip = glassBreaking;
         particles.gameObject.GetComponent<AudioSource>().volume = 0.01f;
         particles.gameObject.GetComponent<AudioSource>().loop = false;
