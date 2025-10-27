@@ -62,9 +62,10 @@ public class Unit : MonoBehaviour
     public Transform StartPoint { get; set; }
     [SerializeField] private Transform target; // the target to which the unit is moving
     [SerializeField] private int waypointIndex = 0;
+    [SerializeField] private int currentWaypointIndex = 0;
     [SerializeField] private WaypointsList waypointsList = new WaypointsList();
     [SerializeField] private float movingToPointTimer;
-    private float elapsed = 0.0f;
+    [SerializeField] private float elapsed = 0.0f;
 
     [Header("🏗️ Related Placed Object")]
     public PlacedObjectName placedObjectName; // to get the type of the placed object, so that we can get the waypoints for it
@@ -181,7 +182,6 @@ public class Unit : MonoBehaviour
     }
     public void UpdateListOfWaypoints()
     {
-        Debug.Log($"UpdateListOfWaypoints fired at {Time.frameCount}");
 
         if (CurrentUnitsState != UnitsState.Dead && CurrentUnitsState != UnitsState.Zombi)
         {
@@ -230,7 +230,7 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        // Keep the inspector target in sync with the current index
+        // Keep the target in sync with the current index
         target = waypointsList.localOrder[waypointIndex];
     }
     private void MoveAutomaticallyToWayPoint()
@@ -245,7 +245,7 @@ public class Unit : MonoBehaviour
         // Stop if there are no waypoints defined
         if (waypointsList.localOrder == null || waypointsList.localOrder.Count == 0) return;
 
-        // Before using 'next'
+        // Before using 'target'
         while (waypointsList.localOrder.Count > 0 && waypointsList.localOrder[waypointIndex] == null)
         {
             waypointsList.localOrder.RemoveAt(waypointIndex);
@@ -257,8 +257,8 @@ public class Unit : MonoBehaviour
 
 
 
-        // --- MOVEMENT TIMER ---
-        // Throttle ONLY when patrolling (2+ waypoints). With 1 waypoint, never delay.
+        // ---MOVEMENT TIMER-- -
+        //Throttle ONLY when patrolling(2 + waypoints).With 1 waypoint, never delay.
         if (waypointsList.localOrder.Count > 1)
         {
             elapsed += Time.deltaTime;
@@ -269,17 +269,16 @@ public class Unit : MonoBehaviour
 
         // --- SELECT NEXT WAYPOINT ---
         // Get the current target waypoint by index
-        var next = waypointsList.localOrder[waypointIndex];
+
+        target = waypointsList.localOrder[waypointIndex];
 
         // If the waypoint is missing, skip to the next one
-        if (next == null)
+        if (target == null)
         {
+            Debug.Log($"Waypoint at index {waypointIndex} is null.");
             IterateWaypointIndex();
             return;
         }
-
-        // Optional: keep track of the current target in Inspector (debug only)
-        target = next;
 
 
         // --- HEALING / STALE TRIGGER SAFETY ---
@@ -290,8 +289,6 @@ public class Unit : MonoBehaviour
             if (distFromFood > Agent.stoppingDistance + 2f) // clearly away from it
             {
                 currentPlacedObject = null;
-                //var uh = GetComponentInChildren<UnitsHealth>();
-                //if (uh != null) uh.IsFoodAround = false;
             }
         }
 
@@ -314,42 +311,43 @@ public class Unit : MonoBehaviour
         // If we lost our path (manual drag/teleport or nav change), recompute immediately.
         if (!Agent.hasPath && !Agent.pathPending)
         {
-            if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+            if (!Agent.CalculatePath(target.position, path) || path.status != NavMeshPathStatus.PathComplete)
             {
-                Debug.LogWarning($"Path is not complete to {next.name}");
+                Debug.Log($"Path is not complete to {target.name}");
                 IterateWaypointIndex();
                 return;
             }
-            Agent.SetDestination(next.position);
+            Agent.SetDestination(target.position);
             // do not early-return; allow arrival check below to run this frame too
         }
         else
         {
             // Normal case: validate and set destination as usual
-            if (!Agent.CalculatePath(next.position, path) || path.status != NavMeshPathStatus.PathComplete)
+            if (!Agent.CalculatePath(target.position, path) || path.status != NavMeshPathStatus.PathComplete)
             {
-                Debug.LogWarning($"Path is not complete to {next.name}");
+                Debug.Log($"Path is not complete to {target.name}");
                 IterateWaypointIndex();
                 return;
             }
-            Agent.SetDestination(next.position);
+            Agent.SetDestination(target.position);
         }
 
 
         // --- ARRIVAL CHECK ---
         // Use agent metrics rather than raw Vector3 distance.
         if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance + 0.5f)
-        { 
-            IterateWaypointIndex();
+        {
 
+            IterateWaypointIndex();
             // Immediately set the next destination (don’t wait for the next timer tick)
             if (waypointsList.localOrder != null && waypointsList.localOrder.Count > 0)
             {
 
-                if (next != null)
+                if (target != null)
                 {
-                    if (Agent.CalculatePath(next.position, path) && path.status == NavMeshPathStatus.PathComplete)
-                        Agent.SetDestination(next.position);
+                    Debug.Log("Setting new destination to: " + target.name);
+                    if (Agent.CalculatePath(target.position, path) && path.status == NavMeshPathStatus.PathComplete)
+                        Agent.SetDestination(target.position);
                 }
             }
         }
@@ -452,9 +450,7 @@ public class Unit : MonoBehaviour
                 currentPlacedObject.onDestroyedPlacedObject -= OnDestroyedPlacedObject;
             currentPlacedObject = null;
             GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
-            GetComponentInChildren<UnitsHealth>().LoseHealth();
-            Agent.ResetPath();
-            UpdateListOfWaypoints();
+            GetComponentInChildren<UnitsHealth>().LoseHealth(unitScriptableObject.delayBeforeHealthLoss);
         }
 
     }
@@ -466,7 +462,7 @@ public class Unit : MonoBehaviour
         if (GetComponentInChildren<UnitsHealth>().IsFoodAround)
         {
             GetComponentInChildren<UnitsHealth>().IsFoodAround = false;
-            GetComponentInChildren<UnitsHealth>().LoseHealth();
+            GetComponentInChildren<UnitsHealth>().LoseHealth(5);
             Agent.ResetPath();
             UpdateListOfWaypoints();
         }

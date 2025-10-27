@@ -145,13 +145,14 @@ public class UnitsHealth : MonoBehaviour
     }
 
     /// <summary>Begins gradual health loss coroutine when no food is nearby.</summary>
-    public void LoseHealth()
+    public void LoseHealth(float delayBeforeLosingHealth)
     {
-        StartCoroutine(SubtractHealthGradually());
+        StartCoroutine(SubtractHealthGradually(delayBeforeLosingHealth));
     }
 
-    IEnumerator SubtractHealthGradually()
+    IEnumerator SubtractHealthGradually(float delayBeforeLosingHealth)
     {
+        yield return new WaitForSeconds(delayBeforeLosingHealth);
         while (currentHealth > 0 && !IsFoodAround)
         {
             currentHealth -= damageToUnit;

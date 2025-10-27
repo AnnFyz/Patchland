@@ -28,9 +28,9 @@ MonoBehaviour:
   baseOffset: 0
   height: 7
   obstacleAvoidanceType: 3
-  radius: 1.25
+  radius: 2
   speed: 7
-  stoppingDistance: 2.5
+  stoppingDistance: 4.5
   triggerRadius: 0.15
   minMovingToPointTimer: 3
   maxMovingToPointTimer: 5
