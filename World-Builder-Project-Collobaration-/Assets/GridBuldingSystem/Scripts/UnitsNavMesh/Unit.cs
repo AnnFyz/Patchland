@@ -345,7 +345,6 @@ public class Unit : MonoBehaviour
 
                 if (target != null)
                 {
-                    Debug.Log("Setting new destination to: " + target.name);
                     if (Agent.CalculatePath(target.position, path) && path.status == NavMeshPathStatus.PathComplete)
                         Agent.SetDestination(target.position);
                 }

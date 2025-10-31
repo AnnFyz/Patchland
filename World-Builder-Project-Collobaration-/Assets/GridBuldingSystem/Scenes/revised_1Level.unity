@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ca5ed36ef40e9a0429f8b47bdb131597, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c72f95bdbe585584882ed562b5b6ea68, type: 2}
   m_HaloStrength: 0.517
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -8796,6 +8796,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929301201}
   m_CullTransparentMesh: 1
+--- !u!1 &1978391945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978391947}
+  - component: {fileID: 1978391946}
+  m_Layer: 0
+  m_Name: DayNightHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1978391946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978391945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71858b216a3b970428227e4d6367795b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyboxOnRunTime: {fileID: 2100000, guid: 42697114e173e1145ad0197d43732d08, type: 2}
+  topColor: {r: 0, g: 0, b: 0, a: 0}
+  bottomColor: {r: 0, g: 0, b: 0, a: 0}
+  backUpMaterial: {fileID: 0}
+  oldTopColor: {r: 0, g: 0, b: 0, a: 0}
+  oldBottomColor: {r: 0, g: 0, b: 0, a: 0}
+  H_1: 0
+  S_1: 0
+  V_1: 0
+  H_2: 0
+  S_2: 0
+  V_2: 0
+  isSunrise: 0
+  isSunset: 0
+  timeOfDay: 20
+  timeOfNight: 0
+--- !u!4 &1978391947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978391945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.365907, y: -7.180692, z: 2.1491807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2012715345
 GameObject:
   m_ObjectHideFlags: 0
@@ -15730,3 +15790,4 @@ SceneRoots:
   - {fileID: 2110376075}
   - {fileID: 2056276493}
   - {fileID: 660079252}
+  - {fileID: 1978391947}
