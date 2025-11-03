@@ -27,7 +27,7 @@ public class BlockPrefab : MonoBehaviour
 
     [Tooltip("Grid coordinates of this block (row, column)")]
     public Vector2 blockId = Vector2.zero; // array of rows and columns to store the block ID
-    public static readonly Vector3 Offset = new Vector3(5f, -5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
+    public static readonly Vector3 Offset = new Vector3(5f, -2.5f, 5f); // to habe a local grid in the center -> offeset = cellSize in MyGridBuildingSystem
     public CornerBlock cornerBlock;
 
 
