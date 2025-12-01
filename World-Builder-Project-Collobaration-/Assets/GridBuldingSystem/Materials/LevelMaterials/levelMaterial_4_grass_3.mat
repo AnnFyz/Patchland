@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: desert_toon_basic 3
+  m_Name: levelMaterial_4_grass_3
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -122,14 +122,14 @@ Material:
     - _GlossyReflections: 1
     - _GradientAngle: 0
     - _GradientCenterX: 0
-    - _GradientCenterY: 0.02
+    - _GradientCenterY: 2.53
     - _GradientEnabled: 1
     - _GradientEnd: 0.55
-    - _GradientSize: 8.16
+    - _GradientSize: 12
     - _GradientSpace: 0
     - _GradientStart: 1.17
-    - _LightContribution: 0.5
-    - _LightFalloffSize: 0.0001
+    - _LightContribution: 0.8
+    - _LightFalloffSize: 0
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
@@ -148,9 +148,9 @@ Material:
     - _RimEnabled: 0
     - _SecondaryColor: 1
     - _SecondaryColorEnabled: 1
-    - _SelfShadingSize: 0.344
+    - _SelfShadingSize: 0.124
     - _SelfShadingSizeExtra: 0.354
-    - _ShadowEdgeSize: 0
+    - _ShadowEdgeSize: 0.2521
     - _ShadowEdgeSizeExtra: 0
     - _ShadowEdgeSmoothness: 0.071
     - _ShadowFalloff: 0.01
@@ -170,21 +170,21 @@ Material:
     - _VertexExtrusionSmoothNormals: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9150943, g: 0.81325334, b: 0.31510323, a: 1}
+    - _BaseColor: {r: 0.4523407, g: 0.8962264, b: 0.51331407, a: 1}
     - _Color: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
     - _ColorCelShadow: {r: 0.49056602, g: 0.34478462, b: 0.4476891, a: 1}
-    - _ColorDim: {r: 0.8018868, g: 0.55160886, b: 0.26855645, a: 0.85}
+    - _ColorDim: {r: 0.36058205, g: 0.5810223, b: 0.6886792, a: 0.85}
     - _ColorDimCurve: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
     - _ColorDimExtra: {r: 0, g: 0, b: 0, a: 1}
     - _ColorDimSteps: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
-    - _ColorGradient: {r: 0.2830189, g: 0.11758586, b: 0.0040049767, a: 1}
+    - _ColorGradient: {r: 0.2830189, g: 0.124622054, b: 0.030704886, a: 1}
     - _ColorSecondary: {r: 1, g: 0.55879205, b: 0, a: 1}
     - _ColorShadow: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ColorShadows: {r: 0.5471698, g: 0.37346402, b: 0.26584196, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 4.9245777, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.06274509, g: 0.3764706, b: 0.36200908, a: 1}
-    - _FlatSpecularColor: {r: 1, g: 0.715303, b: 0.4666667, a: 1}
+    - _FlatSpecularColor: {r: 0.99983686, g: 1, b: 0.4669811, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - _UnityShadowColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
