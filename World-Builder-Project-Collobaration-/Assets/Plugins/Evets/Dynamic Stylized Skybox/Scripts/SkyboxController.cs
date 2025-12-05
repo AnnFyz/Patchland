@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System;
 
 namespace Evets
 {
@@ -40,7 +41,16 @@ namespace Evets
                  "Set both angles to 90 to disable sunset transition.")]
         [SerializeField] private float sunsetThresholdAngle = 70;
         [SerializeField] private float sunsetLeewayAngle = 30;
-        
+
+        [Header("🌙 Night Cycle Events")]
+
+        [SerializeField, Range(150f, 175f)]
+        private float darkestAngleThreshold = 165f;
+
+        private bool darkestTimeTriggeredThisNight = false;
+        public Action <bool> OnDarkestTimeReached;
+        private float currentAngle = 0f;
+
         private float intensityMultiplier;
         // shader values
         private static readonly int SunDir = Shader.PropertyToID("_SunDir");
@@ -86,7 +96,9 @@ namespace Evets
             float t = (currentSunAngle - sunsetThresholdAngle) / sunsetLeewayAngle;
 
             // switch to moon as main light when sun is down
-            directionalLight.intensity = Mathf.Lerp(0.01f, 1, t);
+            //directionalLight.intensity = Mathf.Lerp(0.01f, 1, t);
+            directionalLight.intensity = Mathf.Lerp(0.01f, 1f, Mathf.Clamp01(t));
+
             var targetRotation = sun.rotation;
             
             var isMoonAbove = Vector3.Dot(moon.forward, Vector3.down) > 0;
@@ -95,24 +107,45 @@ namespace Evets
             
             if (Vector3.Dot(sun.forward, Vector3.down) < 0)
             {
-                if (isMoonAbove) targetRotation = moon.rotation;
+                // nicht cycle
+                if (isMoonAbove) { 
+                    targetRotation = moon.rotation;
+                    float sunDownAngle = Vector3.Angle(sun.forward, Vector3.down);
+                    Debug.Log("sunDownAngle: " + sunDownAngle);
+                    bool isDarkestNow = sunDownAngle >= darkestAngleThreshold;
+                    Debug.Log("isDarkestNow: " + isDarkestNow);
+
+                    // Fire event once per night
+                    if (isDarkestNow && !darkestTimeTriggeredThisNight)
+                    {
+                        darkestTimeTriggeredThisNight = true;
+                        OnDarkestTimeReached?.Invoke(true);
+                        Debug.Log("Darkest time reached – event fired.");
+                    }
+                }
+
                 else if (isMoon1Above) targetRotation = moon1.rotation;
                 else if (isMoon2Above) targetRotation = moon2.rotation;
             }
-    
+
+            else
+            {
+                Debug.Log("Sun is above");
+                OnDarkestTimeReached?.Invoke(false);
+                darkestTimeTriggeredThisNight = false;
+            }
             directionalLight.transform.rotation = Quaternion.Lerp(directionalLight.transform.rotation, targetRotation,
                 directionalLightMatchingSpeed * Time.deltaTime);
             
             if (!skyboxSettings) return;
             // reduce intensity of directional light based on cloudiness
-            directionalLight.intensity *= Mathf.Lerp(1, .7f, skyboxSettings.cloudiness);
+            //directionalLight.intensity *= Mathf.Lerp(1, .7f, skyboxSettings.cloudiness);
         }
         
         private void RotateSun(float degree, float duration)
         {
-            //sun rotation
             float sunRotateSpeed = degree / duration;
-            sun.localRotation *= Quaternion.AngleAxis(sunRotateSpeed * Time.deltaTime, Vector3.right);
+            sun.localRotation *= Quaternion.AngleAxis(sunRotateSpeed * Time.deltaTime, Vector3.right);  
         }
     }
 }

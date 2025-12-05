@@ -4,13 +4,19 @@ using UnityEngine;
 using Unity.AI.Navigation;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using Evets;
+using Unity.VisualScripting;
 
 public class GemManager : MonoBehaviour //make spawn in waves with particles
 {
+    [SerializeField]
+    private SkyboxController skyboxController;
+    [SerializeField]
+    private ParticleSystem rainObj;
     public static GemManager Instance { get; private set; }
+
     public List<GemsSO> gems = new List<GemsSO>();
     NavMeshTriangulation triangulation;
-    GameObject rainObj;
     public List<Transform> createdGems = new List<Transform>();
     public List<Transform> createdSpecialGems = new List<Transform>();
     AudioSource thunder;
@@ -20,18 +26,25 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
         Instance = this;
         thunder = GetComponent<AudioSource>();
     }
+
     private void Start()
     {
-        rainObj = transform.GetChild(0).gameObject;
-        rainObj.SetActive(false);
+        rainObj.Stop();
         //StartCoroutine(SpawnGemsInWaves());
     }
 
     void OnEnable()
     {
-        DayAndNightController.Instance.isTimeToSpawnGems += StartSpawning;
+        skyboxController.OnDarkestTimeReached += StartRain;
+        //DayAndNightController.Instance.isTimeToSpawnGems += StartSpawning;
     }
 
+    void StartRain(bool isDarkestTime)
+    {
+        if(isDarkestTime)
+        rainObj.Play();
+        //else rainObj.Stop();
+    }
     void StartSpawning()
     { 
         if (DayAndNightController.Instance.timeOfNight >= 0)
@@ -50,7 +63,7 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
 
         while (createdGems.Count <= 30)
         {
-            rainObj.SetActive(true);
+            //rainObj.SetActive(true);
             yield return new WaitForSeconds(2f);
             thunder.Play();
             yield return new WaitForSeconds(2f);
@@ -59,7 +72,7 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
                 SpawnRandomGems(1);
                 yield return new WaitForSeconds(1f);
             }
-            rainObj.SetActive(false);
+            //rainObj.SetActive(false);
             yield return null;
 
         }

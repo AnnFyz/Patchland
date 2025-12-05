@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_SPECULAR_ON
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
@@ -125,8 +124,8 @@ Material:
     - _GradientSize: 9.51
     - _GradientSpace: 0
     - _GradientStart: 1.17
-    - _LightContribution: 0.5
-    - _LightFalloffSize: 0.0001
+    - _LightContribution: 0.8
+    - _LightFalloffSize: 0
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
@@ -152,7 +151,7 @@ Material:
     - _ShadowEdgeSmoothness: 0.071
     - _ShadowFalloff: 0.01
     - _SmoothnessTextureChannel: 0
-    - _SpecularEnabled: 1
+    - _SpecularEnabled: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
