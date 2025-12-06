@@ -107,6 +107,7 @@ namespace Evets
             
             if (Vector3.Dot(sun.forward, Vector3.down) < 0)
             {
+                Debug.Log("Sun is below");
                 // nicht cycle
                 if (isMoonAbove) { 
                     targetRotation = moon.rotation;
