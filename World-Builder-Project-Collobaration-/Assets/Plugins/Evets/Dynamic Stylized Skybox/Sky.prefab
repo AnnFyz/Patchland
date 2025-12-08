@@ -55,11 +55,14 @@ MonoBehaviour:
   moon: {fileID: 6954085123384147585}
   moon1: {fileID: 1304572720993741072}
   moon2: {fileID: 1199800916870041662}
+  isMatchingDirectionalLightWithSun: 1
   directionalLight: {fileID: 5984115629042558608}
   directionalLightMatchingSpeed: 10
-  dayTime: 16
+  isRotatingSun: 1
+  dayTime: 0.1
   sunsetThresholdAngle: 70
   sunsetLeewayAngle: 30
+  darkestAngleThreshold: 5
 --- !u!1 &1143536616011507450
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658532036081225491}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.16500552, y: -0.30873257, z: 0.9354621, w: 0.048662603}
+  m_LocalRotation: {x: -0.16500546, y: -0.30873266, z: 0.93546206, w: 0.048662618}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -225,9 +228,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658532036081225491}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -277,8 +279,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &2603605012490896905
 MonoBehaviour:
   m_ObjectHideFlags: 0

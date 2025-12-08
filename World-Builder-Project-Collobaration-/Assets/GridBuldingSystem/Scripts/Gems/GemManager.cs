@@ -42,8 +42,14 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     void StartRain(bool isDarkestTime)
     {
         if(isDarkestTime)
+            StartCoroutine(StartRaining());
+    }
+
+    IEnumerator StartRaining()
+    {
         rainObj.Play();
-        //else rainObj.Stop();
+        yield return new WaitForSeconds(10f);
+        rainObj.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     void StartSpawning()
     { 

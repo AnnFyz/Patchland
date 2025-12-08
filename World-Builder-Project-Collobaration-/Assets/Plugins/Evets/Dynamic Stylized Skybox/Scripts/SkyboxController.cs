@@ -44,7 +44,7 @@ namespace Evets
 
         [Header("🌙 Night Cycle Events")]
 
-        [SerializeField, Range(150f, 175f)]
+        [SerializeField, Range(100f, 175f)]
         private float darkestAngleThreshold = 165f;
 
         private bool darkestTimeTriggeredThisNight = false;
