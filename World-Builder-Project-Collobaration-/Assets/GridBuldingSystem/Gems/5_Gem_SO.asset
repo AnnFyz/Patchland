@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bfef0d912bd6b44cbda368aea50d531, type: 3}
-  m_Name: Blue_G 1
+  m_Name: 5_Gem_SO
   m_EditorClassIdentifier: 
-  weight: 40
-  gemPrefab: {fileID: 2722725533726140122, guid: e249ed55df3d34b4ea2396ed04f51cd9,
+  weight: 50
+  gemPrefab: {fileID: 585524292228250662, guid: 7f6e933bf7c6b014c822ff4ea4f9a93c,
     type: 3}

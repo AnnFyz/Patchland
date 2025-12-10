@@ -14,10 +14,6 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _CLOUDBACKON_ON
-  - _CLOUDON_ON
-  - _MOONON1_ON
-  - _MOONON2_ON
-  - _MOONON_ON
   - _SUNCOLORCUSTOMIZE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -83,35 +79,35 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CloudAlpha: 0.6
+    - _CloudAlpha: 0.383
     - _CloudBackOn: 0
     - _CloudBackSpeed: 0.0002
-    - _CloudOn: 1
+    - _CloudOn: 0
     - _CloudOpacity: 1
-    - _CloudSpeed: 0.001
-    - _Cloudiness: 0
+    - _CloudSpeed: 0.00101
+    - _Cloudiness: 0.184
     - _MoonDarkside: 0
     - _MoonDarkside1: 0
     - _MoonDarkside2: 0
     - _MoonEdgeStrength: 0.4
     - _MoonEdgeStrength1: 0.4
     - _MoonEdgeStrength2: 0.4
-    - _MoonExposure: 0
+    - _MoonExposure: -1.43
     - _MoonExposure1: 0
     - _MoonExposure2: 0
-    - _MoonOn: 1
-    - _MoonOn1: 1
-    - _MoonOn2: 1
+    - _MoonOn: 0
+    - _MoonOn1: 0
+    - _MoonOn2: 0
     - _MoonRadius: 0.2
     - _MoonRadius1: 0.1
     - _MoonRadius2: 0.3
-    - _StarExposure: 0
-    - _StarLatitude: -8
-    - _StarPower: 1.8
-    - _StarSpeed: 0.0005
+    - _StarExposure: 1
+    - _StarLatitude: 26
+    - _StarPower: 3.53
+    - _StarSpeed: 0.00337
     - _SunColorCustomize: 1
-    - _SunIntensity: 4
-    - _SunRadius: 0.12
+    - _SunIntensity: 2
+    - _SunRadius: 0.049
     - _SunTexture: 0
     - _SunTextureOn: 0
     - _SunTextureStrength: 0.8

@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: -1168312444509737983}
   - component: {fileID: 7226352770260261235}
   m_Layer: 0
-  m_Name: Blue_Gem_2
+  m_Name: 3_Gem_prefab
   m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
