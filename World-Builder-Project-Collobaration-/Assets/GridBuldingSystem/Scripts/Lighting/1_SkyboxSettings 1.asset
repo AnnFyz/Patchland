@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd482329fc4123459201cbca573c521, type: 3}
-  m_Name: SkyboxSettings
+  m_Name: 1_SkyboxSettings 1
   m_EditorClassIdentifier: 
   nightDayGradient:
     serializedVersion: 2
@@ -106,16 +106,16 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
     key1: {r: 0, g: 0, b: 0, a: 1}
-    key2: {r: 0.99215686, g: 0.36862746, b: 0.07450981, a: 0}
-    key3: {r: 0.98039216, g: 0.6431373, b: 0.6431373, a: 0}
+    key2: {r: 0.99215686, g: 0.36891446, b: 0.0745098, a: 0}
+    key3: {r: 0.9811321, g: 0.64328945, b: 0.64328945, a: 0}
     key4: {r: 1, g: 1, b: 1, a: 0}
     key5: {r: 0, g: 0.38778615, b: 1, a: 0}
     key6: {r: 1, g: 0.11372548, b: 0.9058901, a: 0}
     key7: {r: 1, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 11403
-    ctime2: 29294
-    ctime3: 42794
+    ctime2: 29298
+    ctime3: 42791
     ctime4: 65535
     ctime5: 45875
     ctime6: 58789
@@ -162,21 +162,21 @@ MonoBehaviour:
     m_ColorSpace: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  sunRadius: 0.049
-  sunIntensity: 2
+  sunRadius: 0.12
+  sunIntensity: 4
   customizeSunColors: 1
-  sunTexture: 0
+  sunTexture: 1
   sunCubeMap: {fileID: 8900000, guid: 017cba7961620c047b2611812fb159cf, type: 3}
-  sunTextureStrength: 0.8
+  sunTextureStrength: 0
   synthwaveSun: 0
-  synthSunBottom: 0.352
+  synthSunBottom: 0.5
   synthSunLines: 64
-  moonCount: 0
+  moonCount: 1
   moonTexture: {fileID: 8900000, guid: 2c994b41ee22a30418ad058f51c49aeb, type: 3}
-  moonTurnOn: 0
-  moonRadius: 0.243
-  moonEdgeStrength: 0.32
-  moonExposure: -0.1
+  moonTurnOn: 1
+  moonRadius: 0.068
+  moonEdgeStrength: 0.01
+  moonExposure: -16
   moonDarkside: 0
   moonTexture1: {fileID: 8900000, guid: 8b6763a3e47f58849bc7a9e22444d6d5, type: 3}
   moonTurnOn1: 0
@@ -191,13 +191,13 @@ MonoBehaviour:
   moonExposure2: 0
   moonDarkside2: 0
   starCubeMap: {fileID: 8900000, guid: 36906fe4a6110d8489f2f5372b308de6, type: 3}
-  starSpeed: 0.0337
-  starExposure: 1
-  starPower: 3.53
-  starLatitude: 26
+  starSpeed: 0.005
+  starExposure: 0
+  starPower: 1.8
+  starLatitude: -8
   cloudTurnOn: 0
-  cloudAlpha: 0.406
+  cloudAlpha: 0.6
   cloudCubeMap: {fileID: 8900000, guid: 8c1dd5fe02c248940ad7c289fc9200dc, type: 3}
   cloudBackCubeMap: {fileID: 8900000, guid: a50e307f0f596bd448c671b8393672cd, type: 3}
-  cloudSpeed: 0.0101
-  cloudiness: 0.184
+  cloudSpeed: 0.01
+  cloudiness: 0
