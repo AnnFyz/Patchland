@@ -7,7 +7,7 @@ using System;
 
 namespace Evets
 {
-    [ExecuteAlways] // this script runs in edit mode to see changes to skybox live
+    // [ExecuteAlways] // this script runs in edit mode to see changes to skybox live
     public class SkyboxController : MonoBehaviour
     {
         [Header("Settings")]
@@ -107,14 +107,11 @@ namespace Evets
             
             if (Vector3.Dot(sun.forward, Vector3.down) < 0)
             {
-                Debug.Log("Sun is below");
-                // nicht cycle
+                // night cycle
                 if (isMoonAbove) { 
                     targetRotation = moon.rotation;
                     float sunDownAngle = Vector3.Angle(sun.forward, Vector3.down);
-                    Debug.Log("sunDownAngle: " + sunDownAngle);
                     bool isDarkestNow = sunDownAngle >= darkestAngleThreshold;
-                    Debug.Log("isDarkestNow: " + isDarkestNow);
 
                     // Fire event once per night
                     if (isDarkestNow && !darkestTimeTriggeredThisNight)

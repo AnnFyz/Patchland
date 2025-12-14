@@ -89,7 +89,7 @@ public class GridOfPrefabs : MonoBehaviour
                 float amount = amountScale * Mathf.PerlinNoise(UnityEngine.Random.Range(0.1f, 10) * xScale, 0.0f);
                 for (int i = 0; i < Mathf.RoundToInt(amount); i++)
                 {
-                    blockPrefab.ChangeBlockHeight(1);
+                    blockPrefab.InitializeBlockHeight(1);
                 }
             }
         }

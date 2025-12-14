@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3454038393730831341}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7038267560697293231}
   - component: {fileID: 1205936266995049241}
   - component: {fileID: 5094306291065904380}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlueCrystal09 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 340178680219511624}
   - component: {fileID: 8279568865183092606}
   - component: {fileID: 5625740572222699743}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlueCrystal09 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 2456728566954072651}
   - component: {fileID: 4054311936337384056}
   - component: {fileID: 6058069102819067211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlueCrystal09 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 7965943872590595625}
   - component: {fileID: 7965943872589595881}
   - component: {fileID: 7965943872596797929}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlueCrystal09 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: -8638869174540318828}
   - component: {fileID: -8560464980001334022}
   - component: {fileID: -3611591674971626195}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: 4_Gem_prefab
   m_TagString: Gem
   m_Icon: {fileID: 0}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using ChristinaCreatesGames.Animations;
 
 
 public enum CornerBlock
@@ -36,7 +37,7 @@ public class BlockPrefab : MonoBehaviour
     public bool isHighlighted = false;
     public bool isSelected = false;
     public Material defaultMaterial;
-
+    SquashAndStretch squashAndStretch;
 
     [Header("📦 Block State")]
 
@@ -54,6 +55,11 @@ public class BlockPrefab : MonoBehaviour
     [Tooltip("Additional stacked block prefabs")]
     [SerializeField] Transform[] blockStack;
 
+
+    void Awake()
+    {
+        squashAndStretch = GetComponent<SquashAndStretch>();
+    }
 
     // Factory method to create and initialize a BlockPrefab instance
     public static BlockPrefab Create(Vector3 worldPosition, GameObject prefab, Quaternion rotation)
@@ -73,6 +79,23 @@ public class BlockPrefab : MonoBehaviour
     }
     public void DestroySelf() => Destroy(gameObject);
 
+
+    // Change the height of the block stack at the start of the game
+    public void InitializeBlockHeight(int delta)
+    {
+        int newAmount = Mathf.Clamp(currentBlocksAmount + delta, minAmount, maxAmount);
+        if (newAmount == currentBlocksAmount) return; // No valid change
+        bool isAdded = delta > 0;
+        SetFirstBlockPos(isAdded);
+        ToggleNextBlock(isAdded);
+
+        currentBlocksAmount = newAmount;
+
+        UIManager.Instance.LocalSetupUIIcons();
+        OnBlockHeightChanged?.Invoke(currentBlocksAmount);
+    }
+
+
     public void ChangeBlockHeight(int delta)
     {
         int newAmount = Mathf.Clamp(currentBlocksAmount + delta, minAmount, maxAmount);
@@ -83,6 +106,7 @@ public class BlockPrefab : MonoBehaviour
 
         currentBlocksAmount = newAmount;
 
+        squashAndStretch.PlaySquashAndStretch();
         UIManager.Instance.LocalSetupUIIcons();
         OnBlockHeightChanged?.Invoke(currentBlocksAmount);
     }

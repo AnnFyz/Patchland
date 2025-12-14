@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fcb6eb2dd3d3c4196c3930c76df5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skyboxSettings: {fileID: 11400000, guid: 7aa6c50f63a0c1a4c990818ae71e2501, type: 2}
+  skyboxSettings: {fileID: 11400000, guid: f8fede7e49dbfe04fa4df140300134d8, type: 2}
   sun: {fileID: 8649865111141265968}
   moon: {fileID: 6954085123384147585}
   moon1: {fileID: 1304572720993741072}
@@ -59,10 +59,10 @@ MonoBehaviour:
   directionalLight: {fileID: 5984115629042558608}
   directionalLightMatchingSpeed: 10
   isRotatingSun: 1
-  dayTime: 0.1
+  dayTime: 1
   sunsetThresholdAngle: 70
   sunsetLeewayAngle: 30
-  darkestAngleThreshold: 5
+  darkestAngleThreshold: 150
 --- !u!1 &1143536616011507450
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,13 +118,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604051923463547154}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4378499, y: 0.27723387, z: 0.8469779, w: -0.11856373}
+  m_LocalRotation: {x: 0.001749709, y: 0.1922523, z: 0.95345736, w: -0.23228224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4675442462359392328}
-  m_LocalEulerAnglesHint: {x: -34.991, y: 415.599, z: 537.066}
+  m_LocalEulerAnglesHint: {x: -21.557, y: 354.696, z: 568.394}
 --- !u!1 &1831556631206370232
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658532036081225491}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.16500546, y: -0.30873266, z: 0.93546206, w: 0.048662618}
+  m_LocalRotation: {x: -0.16500546, y: -0.3087327, z: 0.93546206, w: 0.048662595}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

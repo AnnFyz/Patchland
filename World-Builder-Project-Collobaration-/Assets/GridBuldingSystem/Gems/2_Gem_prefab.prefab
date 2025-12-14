@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1853291435831772884}
   - component: {fileID: 6921029931723429553}
   - component: {fileID: 8120832946054492893}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: 2_Gem_prefab
   m_TagString: Gem
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5456901979368061923}
   - component: {fileID: 8714711601619065862}
   - component: {fileID: 7720960822843483794}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GemStone04 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 4383334512598430036}
   - component: {fileID: 4383334512599430036}
   - component: {fileID: 4383334512604552852}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GemStone04 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 4383334512631533747}
   - component: {fileID: 4383334512630534771}
   - component: {fileID: 4383334512642129779}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GemStone04 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

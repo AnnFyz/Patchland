@@ -3,8 +3,12 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+
 namespace ChristinaCreatesGames.Animations
 {
+    /// <summary>   
+    /// the author of the script: https://www.youtube.com/@ChristinaCreatesGames/videos
+    /// </summary>
     public class SquashAndStretch : MonoBehaviour
     {
         [Header("Notes")]
