@@ -86,6 +86,13 @@ namespace ChristinaCreatesGames.Animations
             _squashAndStretchAllObjectsLikeThis += PlaySquashAndStretch;
         }
 
+        public void SetAnimation(float duration, bool looping, float maximumScale)
+        {
+            animationDuration = duration;
+            this.looping = looping;
+            this.maximumScale = maximumScale;
+        }
+
         private void OnDisable()
         {
             if (_squashAndStretchCoroutine != null)

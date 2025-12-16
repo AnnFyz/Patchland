@@ -358,8 +358,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -883.33325
-    y: -635.3333
+    x: 1677.6666
+    y: 24
     width: 882.3334
     height: 1267.3334
   m_SerializedDataModeController:
@@ -481,7 +481,7 @@ MonoBehaviour:
       height: 861
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1948.9999, y: 1323}
+  m_LastWindowPixelSize: {x: 1299.3333, y: 882}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -510,8 +510,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -2560
-    y: -635.3333
+    x: 0
+    y: 24
     width: 374.33334
     height: 882
   m_SerializedDataModeController:
@@ -528,23 +528,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 66c90000
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 1620ffff3cf3ffffccfafffff4c60000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: BlockModel_main_2
-        m_OriginalName: BlockModel_main_2
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -57346
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 10}
@@ -577,8 +577,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -2184.6667
-    y: -635.3333
+    x: 376.33334
+    y: 24
     width: 1299.3333
     height: 882
   m_SerializedDataModeController:
@@ -1171,11 +1171,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.23007965, y: 0.76153654, z: -0.35852328, w: -0.48873574}
     speed: 2
-    m_Value: {x: -0.2305363, y: 0.7610726, z: -0.35923523, w: -0.48843813}
+    m_Value: {x: -0.2300479, y: 0.76143146, z: -0.3584738, w: -0.48866826}
   m_Size:
     m_Target: 42.485077
     speed: 2
-    m_Value: 40.655575
+    m_Value: 42.485077
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2915,8 +2915,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -2560
-    y: 272.6667
+    x: 0
+    y: 24
     width: 985
     height: 359.33337
   m_SerializedDataModeController:
@@ -2960,7 +2960,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 95}
     m_SelectedIDs: 42dc0000
     m_LastClickedID: 56386
-    m_ExpandedIDs: 000000003edc000040dc000042dc000044dc000046dc0000
+    m_ExpandedIDs: 0000000040dc000042dc000044dc000046dc000048dc0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2989,7 +2989,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003edc000040dc000042dc000044dc000046dc0000
+    m_ExpandedIDs: 0000000040dc000042dc000044dc000046dc000048dc0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3106,8 +3106,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -1574
-    y: 272.6667
+    x: 987
+    y: 24
     width: 688.6666
     height: 359.33337
   m_SerializedDataModeController:
@@ -3151,7 +3151,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 95}
     m_SelectedIDs: 42dc0000
     m_LastClickedID: 56386
-    m_ExpandedIDs: 000000003edc000040dc000042dc000044dc000046dc0000
+    m_ExpandedIDs: 0000000040dc000042dc000044dc000046dc000048dc0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3180,7 +3180,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003edc000040dc000042dc000044dc000046dc0000
+    m_ExpandedIDs: 0000000040dc000042dc000044dc000046dc000048dc0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

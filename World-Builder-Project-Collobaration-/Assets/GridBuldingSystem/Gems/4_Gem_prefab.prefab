@@ -482,8 +482,8 @@ GameObject:
   - component: {fileID: 1818185446325515146}
   - component: {fileID: 8669688956094842500}
   - component: {fileID: -8638869174540318828}
-  - component: {fileID: -8560464980001334022}
   - component: {fileID: -3611591674971626195}
+  - component: {fileID: -2828818122094319597}
   m_Layer: 2
   m_Name: 4_Gem_prefab
   m_TagString: Gem
@@ -557,28 +557,6 @@ CapsuleCollider:
   m_Height: 2.64
   m_Direction: 1
   m_Center: {x: -0.07999992, y: 0.6163063, z: 0}
---- !u!195 &-8560464980001334022
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782586219572347034}
-  m_Enabled: 1
-  m_AgentTypeID: -1372625422
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &-3611591674971626195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,3 +570,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsThisGemSpecial: 0
+--- !u!114 &-2828818122094319597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782586219572347034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c67b59169851f418e8c51b075cdc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notes: 
+  transformToAffect: {fileID: 1818185446325515146}
+  axisToAffect: 2
+  animationDuration: 0.5
+  canBeOverwritten: 0
+  playOnStart: 0
+  playsEveryTime: 1
+  chanceToPlay: 100
+  initialScale: 1
+  maximumScale: 1.5
+  resetToInitialScaleAfterAnimation: 1
+  reverseAnimationCurveAfterPlaying: 0
+  squashAndStretchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  looping: 0
+  loopingDelay: 0.5

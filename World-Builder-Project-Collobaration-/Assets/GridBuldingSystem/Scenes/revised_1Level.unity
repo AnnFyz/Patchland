@@ -4950,7 +4950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf1c3f91bec3f248bbdce3029cd392f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   virtualCamera: {fileID: 0}
   transposer: {fileID: 0}
   composer: {fileID: 0}
@@ -5828,7 +5827,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1023
 --- !u!114 &1205011653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6562,10 +6561,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5189458599630811578, guid: eec04ca48f8f2c44393a8aa6f48cf3be,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.88
+      objectReference: {fileID: 0}
     - target: {fileID: 7534218309535587551, guid: eec04ca48f8f2c44393a8aa6f48cf3be,
         type: 3}
       propertyPath: m_Name
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213817934359870354, guid: eec04ca48f8f2c44393a8aa6f48cf3be,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14239,6 +14248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyboxController: {fileID: 1944734240}
   rainObj: {fileID: 1443236234}
+  maxGemsOnField: 10
   gems:
   - {fileID: 11400000, guid: fc19360f0c68ec14da7f011433a17d52, type: 2}
   - {fileID: 11400000, guid: 73b7aee6029ee9047a308266379ec304, type: 2}
@@ -14246,6 +14256,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2eeab9ec439a2d645a582193cc64dde9, type: 2}
   createdGems: []
   createdSpecialGems: []
+  centerOfGrid: {x: 0, y: 0, z: 0}
+  range: 20
 --- !u!4 &260688965015798476
 Transform:
   m_ObjectHideFlags: 0
@@ -17310,7 +17322,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1023
 --- !u!114 &3000186343061409144
 MonoBehaviour:
   m_ObjectHideFlags: 0

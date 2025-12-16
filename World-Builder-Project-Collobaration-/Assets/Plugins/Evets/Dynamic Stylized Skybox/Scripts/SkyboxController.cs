@@ -128,7 +128,7 @@ namespace Evets
 
             else
             {
-                Debug.Log("Sun is above");
+                //sun is above
                 OnDarkestTimeReached?.Invoke(false);
                 darkestTimeTriggeredThisNight = false;
             }

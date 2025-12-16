@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4839080896797439120}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38205335, y: -0, z: -0, w: 0.9241403}
-  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalPosition: {x: 0, y: 2.3575416, z: 0}
   m_LocalScale: {x: 62.375, y: 62.375, z: 62.375}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 4859883585148482324}
   serializedVersion: 2
   m_LocalRotation: {x: -0.35858467, y: -0.44906226, z: -0.63951755, w: 0.51066375}
-  m_LocalPosition: {x: -0.012565613, y: 0.70245934, z: 0.020809174}
+  m_LocalPosition: {x: -0.012565613, y: 2.34, z: 0.020809174}
   m_LocalScale: {x: 150.47, y: 150.47, z: 150.47}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 7537285894175979874}
   - component: {fileID: 3830402103770238583}
   - component: {fileID: 6958398169517058013}
-  - component: {fileID: 7820014516334489556}
   - component: {fileID: 5902523194754009213}
   - component: {fileID: 4349017905318432334}
   m_Layer: 2
@@ -218,7 +217,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.32, y: 7.6986313, z: 6.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8385866305846723768}
@@ -276,28 +275,6 @@ CapsuleCollider:
   m_Height: 2.77
   m_Direction: 1
   m_Center: {x: -0.12, y: 0.53, z: 0}
---- !u!195 &7820014516334489556
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699585387274412874}
-  m_Enabled: 1
-  m_AgentTypeID: -1372625422
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &5902523194754009213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,13 +303,13 @@ MonoBehaviour:
   notes: 
   transformToAffect: {fileID: 7537285894175979874}
   axisToAffect: 2
-  animationDuration: 0.25
+  animationDuration: 0.5
   canBeOverwritten: 1
   playOnStart: 1
   playsEveryTime: 1
   chanceToPlay: 100
   initialScale: 1
-  maximumScale: 1.2
+  maximumScale: 1.5
   resetToInitialScaleAfterAnimation: 0
   reverseAnimationCurveAfterPlaying: 0
   squashAndStretchCurve:
@@ -368,7 +345,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  looping: 1
+  looping: 0
   loopingDelay: 0.1
 --- !u!1 &6985861568784039539
 GameObject:
@@ -397,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 6985861568784039539}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38205335, y: -0, z: -0, w: 0.9241403}
-  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalPosition: {x: 0, y: 2.3575416, z: 0}
   m_LocalScale: {x: 62.374996, y: 62.374996, z: 62.374996}
   m_ConstrainProportionsScale: 1
   m_Children: []

@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CameraSetup : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    private Transform centerOfGrid;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
     [SerializeField] CinemachineFramingTransposer transposer;
     [SerializeField] CinemachineComposer composer;
@@ -27,10 +27,7 @@ public class CameraSetup : MonoBehaviour
         transposer.m_CameraDistance = newDist;
         rotator = GameObject.FindGameObjectWithTag("Rotator").transform;
         transform.localRotation = rotator.localRotation;
-    }
-    private void FixedUpdate()
-    {
-        Setup();
+        StartCoroutine(StartCameraSetup());
     }
 
     private void Update()
@@ -44,17 +41,32 @@ public class CameraSetup : MonoBehaviour
 
         //transform.localRotation = rotator.localRotation;
         newRotation = rotator.localRotation.eulerAngles;
-        transform.localRotation = Quaternion.Euler(-newRotation.x,-newRotation.y, 0);
+        transform.localRotation = Quaternion.Euler(-newRotation.x, -newRotation.y, 0);
 
     }
 
     void Setup()
     {
-        if (target == null)
+        centerOfGrid = GridOfPrefabs.Instance.GetCenterObjInGrid();
+        virtualCamera.Follow = centerOfGrid;
+        //virtualCamera.LookAt = target;
+    }
+
+    IEnumerator StartCameraSetup()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Setup();
+    }
+
+    IEnumerator SmoothZoom(float targetDistance, float duration)
+    {
+        float startDistance = transposer.m_CameraDistance;
+        float elapsed = 0f;
+        while (elapsed < duration)
         {
-            target = GridOfPrefabs.Instance.GetCenterObjInGrid();
-            virtualCamera.Follow = target;
-            //virtualCamera.LookAt = target;
+            elapsed += Time.deltaTime;
+            transposer.m_CameraDistance = Mathf.Lerp(startDistance, targetDistance, elapsed / duration);
+            yield return null;
         }
     }
 }
