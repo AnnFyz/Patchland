@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -25,61 +25,20 @@ public class RotateLoopCoroutine : MonoBehaviour
     private bool rotateY => (axes & AnimationAxis.Y) != 0;
     private bool rotateZ => (axes & AnimationAxis.Z) != 0;
 
-    private void Start()
+    private void Update()
     {
-        rotateCoroutine = StartCoroutine(RotateLoop());
-    }
+        if (axes == AnimationAxis.None) return;
 
-    private void OnDisable()
-    {
-        if (rotateCoroutine != null)
-            StopCoroutine(rotateCoroutine);
-    }
+        float dur = Mathf.Max(0.0001f, duration);
+        float deltaDegrees = (360f / dur) * Time.deltaTime;
 
-    private IEnumerator RotateLoop()
-    {
-        //while (true)
-        //{
-        //    float elapsed = 0f;
-        //    Quaternion startRot = transform.localRotation;
-        //    Quaternion endRot = startRot * Quaternion.Euler(Vector3.up * 90f);
+        Quaternion delta = Quaternion.identity;
 
-        //    while (elapsed < duration)
-        //    {
-        //        elapsed += Time.deltaTime;
-        //        Debug.Log($"Rotating... t={elapsed / duration:F2}", this);
-        //        float t = elapsed / duration;
-        //        transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
-        //        yield return null;
-        //    }
+        if (rotateX) delta = Quaternion.AngleAxis(deltaDegrees, Vector3.right) * delta;
+        if (rotateY) delta = Quaternion.AngleAxis(deltaDegrees, Vector3.up) * delta;
+        if (rotateZ) delta = Quaternion.AngleAxis(deltaDegrees, Vector3.forward) * delta;
 
-        //   // transform.localRotation = endRot;
-        //}
-
-
-        while (true)
-        {
-            float elapsed = 0f;
-
-            Quaternion startRotation = transform.localRotation;
-
-            Vector3 rotationEuler = new Vector3(
-                rotateX ? 90f : 0f,
-                rotateY ? 90f : 0f,
-                rotateZ ? 90f : 0f
-            );
-
-            Quaternion endRotation = startRotation * Quaternion.Euler(rotationEuler);
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float t = elapsed / duration;
-                transform.localRotation = Quaternion.Slerp(startRotation, endRotation, t);
-                yield return null;
-            }
-
-            transform.localRotation = endRotation;
-        }
+        // ✅ world-space application
+        transform.rotation = delta * transform.rotation;
     }
 }

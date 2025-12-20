@@ -45,6 +45,7 @@ public class Gem : MonoBehaviour
     void StartLoopAnimation()
     {
         squashAndStretch.SetAnimation(.5f, true, 1.2f);
+        squashAndStretch.PlaySquashAndStretch();
     }
     public void CollectGem()
     {
