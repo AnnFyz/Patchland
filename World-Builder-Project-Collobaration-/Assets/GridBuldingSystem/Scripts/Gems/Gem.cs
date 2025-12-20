@@ -22,14 +22,12 @@ public class Gem : MonoBehaviour
 
     private void Awake()
     {
-        squashAndStretch = GetComponent<SquashAndStretch>();
+        squashAndStretch = GetComponentInChildren<SquashAndStretch>();
     }
 
     public void SquashAndStretch()
     {
-        squashAndStretch = GetComponent<SquashAndStretch>();
         StartCoroutine(PlayAnimation());
-
     }
 
     IEnumerator PlayAnimation()
