@@ -6,5 +6,5 @@ using UnityEngine;
 public class GemsSO : ScriptableObject
 {
     public int weight;
-    public GameObject gemPrefab;
+    public Gem gemPrefab;
 }

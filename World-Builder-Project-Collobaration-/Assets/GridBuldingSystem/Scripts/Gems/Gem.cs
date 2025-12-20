@@ -2,11 +2,23 @@ using ChristinaCreatesGames.Animations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+
 
 public class Gem : MonoBehaviour
 {
+    private IObjectPool<Gem> gemOPool;    
+    public IObjectPool<Gem> GemPool
+    {
+        set { gemOPool = value; }
+    }
     public bool IsThisGemSpecial = false;
-    SquashAndStretch squashAndStretch;
+    private SquashAndStretch squashAndStretch;
+
+    private void OnEnable()
+    {
+       // Debug.Log($"[Gem] OnEnable {name} pos={transform.position}", this);
+    }
 
     private void Awake()
     {
@@ -40,11 +52,11 @@ public class Gem : MonoBehaviour
         if (IsThisGemSpecial)
         {
             UIManager.Instance.CollectSpecialGem();
-            GemManager.Instance.createdSpecialGems.Remove(this.gameObject.transform);
+            // TO ADD AN EVENT ON SPECIAL GEM COLLECTION
         }
 
-        GemManager.Instance.createdGems.Remove(gameObject);
-        Destroy(gameObject);
+        GemManager.Instance.createdGems.Remove(this);
+        gemOPool.Release(this);
     }
 
 

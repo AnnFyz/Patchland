@@ -4159,7 +4159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c4b05252f68e4c54c894e9b175a495db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e59ca146ad35d71468e850d312854d1b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4887,7 +4887,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d28b9552762cc514abb7f6985a6cff8a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4e03e66ee75f0443845002b0aa503ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6023,7 +6023,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b757468e9863b2e4393f4761e10bdde3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 232a546b31e4943429c571331903aa87, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7422,7 +7422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a6da4ee671d94c499588728dac9ae54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66c67e7f6d86ded4ba29912d4142f3fe, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7657,7 +7657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce3683cef5dab944cb4f0245e54ce0ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 218d4a0140fcd0a418f41cc7133745c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7876,7 +7876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b757468e9863b2e4393f4761e10bdde3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2f19853ad064684fa7cc44cdd81d2c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8088,6 +8088,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -679.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800540930134880059, guid: 036545facce72c1409578f24faec4033,
+        type: 3}
+      propertyPath: dayTime
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8527907699279268194, guid: 036545facce72c1409578f24faec4033,
         type: 3}
@@ -14254,8 +14259,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73b7aee6029ee9047a308266379ec304, type: 2}
   - {fileID: 11400000, guid: 70f5b338a409445408bdcc5cc418f38e, type: 2}
   - {fileID: 11400000, guid: 2eeab9ec439a2d645a582193cc64dde9, type: 2}
+  poolCapacityPerGem: 10
   createdGems: []
-  createdSpecialGems: []
   centerOfGrid: {x: 0, y: 0, z: 0}
   range: 20
 --- !u!4 &260688965015798476
