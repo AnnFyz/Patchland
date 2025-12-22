@@ -29,7 +29,7 @@ public class GemPool
         weight = gemSO.weight;
         gemPool = new ObjectPool<Gem>(() =>
         {
-            Gem obj = GameObject.Instantiate(gemSO.gemPrefab, parentTransform);
+            Gem obj = GameObject.Instantiate(gemSO.gemPrefab, parentTransform);        
             obj.GemPool = gemPool;
             obj.gameObject.SetActive(false);
             return obj;
@@ -37,6 +37,7 @@ public class GemPool
         actionOnGet: (obj) =>
         {
             obj.gameObject.SetActive(true);
+            obj.Setup(gemSO);
         },
         actionOnRelease: (obj) =>
         {

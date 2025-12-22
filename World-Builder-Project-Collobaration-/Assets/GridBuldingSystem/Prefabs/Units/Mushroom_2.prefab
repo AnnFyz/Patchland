@@ -5252,9 +5252,11 @@ MonoBehaviour:
   animator: {fileID: 2667640163126942527}
   target: {fileID: 0}
   waypointIndex: 0
+  currentWaypointIndex: 0
   waypointsList:
     localOrder: []
   movingToPointTimer: 1
+  elapsed: 0
   placedObjectName: 5
   currentPlacedObject: {fileID: 0}
 --- !u!114 &8004646403549274946
@@ -5441,7 +5443,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &2675644380505310730
 BoxCollider:
   m_ObjectHideFlags: 0

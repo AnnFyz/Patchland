@@ -5252,9 +5252,11 @@ MonoBehaviour:
   animator: {fileID: 329126477367683308}
   target: {fileID: 0}
   waypointIndex: 0
+  currentWaypointIndex: 0
   waypointsList:
     localOrder: []
   movingToPointTimer: 1
+  elapsed: 0
   placedObjectName: 2
   currentPlacedObject: {fileID: 0}
 --- !u!114 &8004646403549274946
@@ -5407,7 +5409,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 50
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -5441,7 +5443,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &2675644380505310730
 BoxCollider:
   m_ObjectHideFlags: 0

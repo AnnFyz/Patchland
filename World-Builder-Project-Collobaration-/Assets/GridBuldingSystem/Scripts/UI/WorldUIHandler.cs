@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class WorldUIHandler : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float maxDistance = 25f;
+    [SerializeField] private float fadeDuration = 0.25f;
 
     [Header("Debug")]
     [SerializeField] private bool isVisible;
@@ -13,12 +15,20 @@ public class WorldUIHandler : MonoBehaviour
     private Camera cam;
     private float maxDistanceSqr;
 
-    [SerializeField] TextMeshProUGUI UITextMeshPro;
+    TextMeshProUGUI UIText;
+
+    private Coroutine fadeCoroutine;
+    private bool isFadedIn;
+    private bool isLifeTimeExpired;
     private void Awake()
     {
-        UITextMeshPro= GetComponentInChildren<TextMeshProUGUI>();
+        UIText= GetComponentInChildren<TextMeshProUGUI>();
         cam = Camera.main;
         maxDistanceSqr = maxDistance * maxDistance;
+
+        // start hidden
+        UIText.alpha = 0f;
+        isFadedIn = false;
     }
 
     private void Update()
@@ -43,18 +53,65 @@ public class WorldUIHandler : MonoBehaviour
             viewportPos.x >= 0f && viewportPos.x <= 1f &&
             viewportPos.y >= 0f && viewportPos.y <= 1f;
 
-        // --- Example usage ---
-        if (isCloseEnough && isVisible)
+        bool shouldBeVisible = isCloseEnough && !isLifeTimeExpired; // && isVisible;
+
+        if (shouldBeVisible && !isFadedIn)
         {
-            // Object is close AND visible
-            Debug.DrawLine(camPos, transform.position, Color.green);
-            UITextMeshPro.alpha = 1f;
+            StartFade(FadeIn());
         }
-        else
+        else if (!shouldBeVisible && isFadedIn)
         {
-            Debug.DrawLine(camPos, transform.position, Color.red);
-            UITextMeshPro.alpha = 0f;
+            StartFade(FadeOut());
         }
     }
+
+    public void SetText(string text, bool isLifeTimeExpired)
+    {
+        UIText.text = text;
+        this.isLifeTimeExpired = isLifeTimeExpired;
+    }
+
+    private void StartFade(IEnumerator fadeRoutine)
+    {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+
+        fadeCoroutine = StartCoroutine(fadeRoutine);
+    }
+
+    private IEnumerator FadeIn()
+    {
+        isFadedIn = true;
+
+        float startAlpha = UIText.alpha;
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            UIText.alpha = Mathf.Lerp(startAlpha, 1f, t / fadeDuration);
+            yield return null;
+        }
+
+        UIText.alpha = 1f;
+    }
+
+    private IEnumerator FadeOut()
+    {
+        isFadedIn = false;
+
+        float startAlpha = UIText.alpha;
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            UIText.alpha = Mathf.Lerp(startAlpha, 0f, t / fadeDuration);
+            yield return null;
+        }
+
+        UIText.alpha = 0f;
+    }
 }
+
 

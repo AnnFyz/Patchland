@@ -5252,9 +5252,11 @@ MonoBehaviour:
   animator: {fileID: 9026659771766509867}
   target: {fileID: 0}
   waypointIndex: 0
+  currentWaypointIndex: 0
   waypointsList:
     localOrder: []
   movingToPointTimer: 1
+  elapsed: 0
   placedObjectName: 1
   currentPlacedObject: {fileID: 0}
 --- !u!114 &8004646403549274946

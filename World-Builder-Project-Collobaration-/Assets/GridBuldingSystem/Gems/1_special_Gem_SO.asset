@@ -15,3 +15,5 @@ MonoBehaviour:
   weight: 10
   gemPrefab: {fileID: 5902523194754009213, guid: 913a5aef2de4b97408f27cf289e3e18e,
     type: 3}
+  isSpecialGem: 1
+  lifeTime: 5
