@@ -1,12 +1,13 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using UnityEngine.UIElements;
 
 public class CameraSetup : MonoBehaviour
 {
     private Transform centerOfGrid;
-    [SerializeField] CinemachineVirtualCamera virtualCamera;
+     CinemachineVirtualCamera virtualCamera;
     [SerializeField] CinemachineFramingTransposer transposer;
     [SerializeField] CinemachineComposer composer;
     [SerializeField] float sensitivityZooming = 100f;
@@ -24,6 +25,8 @@ public class CameraSetup : MonoBehaviour
         composer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
         newDist = (minDist + maxDist) / 2;
         transposer.m_CameraDistance = newDist;
+        //rotator = GameObject.FindGameObjectWithTag("Rotator").transform;
+        //transform.localRotation = rotator.localRotation;
         StartCoroutine(StartCameraSetup());
     }
 
@@ -36,6 +39,8 @@ public class CameraSetup : MonoBehaviour
             transposer.m_CameraDistance = newDist;
         }
 
+        //transform.localRotation = rotator.localRotation;
+        //newRotation = rotator.localRotation.eulerAngles;
         transform.localRotation = Quaternion.Euler(-newRotation.x, -newRotation.y, 0);
 
     }
@@ -63,5 +68,16 @@ public class CameraSetup : MonoBehaviour
             transposer.m_CameraDistance = Mathf.Lerp(startDistance, targetDistance, elapsed / duration);
             yield return null;
         }
+    }
+
+    public void Dragging()
+    {
+        offsetX = Input.GetAxis("Mouse X");
+        offsetY = Input.GetAxis("Mouse Y");
+        offsetX = Mathf.Clamp(offsetX, -70f, 70f);
+        //rotator.transform.Rotate(Vector3.down, offsetX);
+        //rotator.transform.Rotate(Vector3.right, offsetY);
+        //rotator.transform.eulerAngles += sensitivityRotation * new Vector3(-offsetY, offsetX, 0);
+
     }
 }
