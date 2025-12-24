@@ -15,6 +15,7 @@ public class UnitsManager : MonoBehaviour
     //List<GameObject> units = new List<GameObject>();
     public LayerMask unitMask;
     public LayerMask groundMask;
+    public LayerMask gemMask;
     //NEW to make them for each type of building and unit
     [SerializedDictionary("PlacedObjects", "Waypoints")]
     public AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, List<Transform>> waypointsForPlacedObjects = new AYellowpaper.SerializedCollections.SerializedDictionary<PlacedObjectName, List<Transform>>();
@@ -57,7 +58,7 @@ public class UnitsManager : MonoBehaviour
     }
     void Update()
     {
-        ToControlUnitsManually();
+        ControlUnitManually();
     }
 
     public void SetAmountOfUnits(PlacedObjectName placedObjectName, int a)
@@ -78,7 +79,7 @@ public class UnitsManager : MonoBehaviour
         return BuildingManager.Instance.currentObjectTypeSO.maxAmountOfUnits;
 
     }
-    void ToControlUnitsManually()
+    void ControlUnitManually()
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -117,19 +118,32 @@ public class UnitsManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, groundMask))
+            // Combine masks so the ray can hit either ground or gems
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Combine masks so the ray can hit either ground or gems
+            LayerMask combinedMask = groundMask | gemMask;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, combinedMask))
             {
+                // Default destination: hit point
+                Vector3 destination = hit.point;
+
+                // If we hit a gem layer, use the gem object's transform position instead
+                if (((1 << hit.collider.gameObject.layer) & gemMask) != 0)
+                {
+                    destination = hit.collider.transform.position; // or hit.collider.GetComponentInParent<Gem>().transform.position
+                    Debug.Log("Gem clicked, setting destination to gem position.");
+                }
+
                 foreach (Unit unit in selectedUnits)
                 {
-                    if (unit != null)
-                    {
-                        if (unit.CurrentUnitsState != UnitsState.Dead && unit.CurrentUnitsState != UnitsState.Zombi)
-                        {
-                            Debug.Log("Moving unit to: " + hit.point);
-                            unit.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(hit.point);
-                        }
+                    if (unit == null) continue;
+                    if (unit.CurrentUnitsState == UnitsState.Dead || unit.CurrentUnitsState == UnitsState.Zombi) continue;
 
-                    }
+
+                    var agent = unit.GetComponent<UnityEngine.AI.NavMeshAgent>();
+                    if (agent != null)
+                        agent.SetDestination(destination);
 
                 }
             }

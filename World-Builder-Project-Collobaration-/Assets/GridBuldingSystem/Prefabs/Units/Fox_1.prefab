@@ -483,7 +483,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574639843892404959}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 91e4778cdfb185d4d9bfe81556dc4333, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 4c6a9c70e9a3bd84d9f82d5c791caae7, type: 3}
   m_Controller: {fileID: 9100000, guid: b28275198edae5b4fb7cf554909ad359, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -5509,7 +5509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2675644380420434941}
   - component: {fileID: 2675644380420434942}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: SelectedFigure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5602,7 +5602,7 @@ GameObject:
   - component: {fileID: 726027282905428560}
   - component: {fileID: 2675644380505310729}
   - component: {fileID: 3460686141523518379}
-  - component: {fileID: 2675644380505310730}
+  - component: {fileID: 4603413088413653217}
   m_Layer: 7
   m_Name: Fox_1
   m_TagString: Untagged
@@ -5817,10 +5817,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 9
+  m_Height: 8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 3
 --- !u!54 &3460686141523518379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5848,8 +5848,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2675644380505310730
-BoxCollider:
+--- !u!136 &4603413088413653217
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5866,9 +5866,11 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.4201331, y: 4.2760916, z: 2.1092536}
-  m_Center: {x: 0.06256628, y: 1.6519762, z: 0.44422233}
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.67, z: 0}
 --- !u!1 &2909201250027484335
 GameObject:
   m_ObjectHideFlags: 0

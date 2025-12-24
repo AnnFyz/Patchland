@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781607067121581049}
   - component: {fileID: 781607067121581048}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293868127486649932}
   - component: {fileID: 5677117830502271194}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2608708882569115102}
   - component: {fileID: 2608708882569115103}
   - component: {fileID: 2608708882569115096}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: WaterLily
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2237452263831861341}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8443000084484449099}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2577166448916187124}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: WaypointCenter
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -280,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6173390992084290882}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -365,15 +365,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SNature_LiliPad
       objectReference: {fileID: 0}
+    - target: {fileID: 4324721849032225575, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4865822975704067297, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
         type: 3}
       propertyPath: m_Name
       value: SNature_LiliBlossom
       objectReference: {fileID: 0}
+    - target: {fileID: 4865822975704067297, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8415746742563006839, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
         type: 3}
       propertyPath: m_Name
       value: Lili
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415746742563006839, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

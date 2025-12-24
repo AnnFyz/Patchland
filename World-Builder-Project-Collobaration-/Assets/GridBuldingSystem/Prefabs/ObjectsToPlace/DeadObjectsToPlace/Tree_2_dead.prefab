@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200208481529359789}
   - component: {fileID: 8742136582350245448}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3335869451411644703}
   - component: {fileID: 2501671164328966989}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411754148691409073}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1506266197193640787}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8376177762748348957}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 98499248675715192}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2198121692650169674}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 8519390558105600893}
   - component: {fileID: 8519390558105600892}
   - component: {fileID: 8519390558105600891}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_2_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,10 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 1088220716610281618}
-  - {fileID: 5754733207774746433}
-  deadMaterial: {fileID: 0}
+  waypointCenter: {fileID: 0}
+  isDead: 0
 --- !u!114 &8519390558105600891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5245773850286032889}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +461,7 @@ PrefabInstance:
     - target: {fileID: 5671604732152165036, guid: a734ec5fa48d40b41a9447535605fce5,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9069737885886226962, guid: a734ec5fa48d40b41a9447535605fce5,
         type: 3}
@@ -475,12 +473,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a734ec5fa48d40b41a9447535605fce5, type: 3}
---- !u!23 &5754733207774746433 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 9069737885886226962, guid: a734ec5fa48d40b41a9447535605fce5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3603660155111634259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8884298022357515615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5280919351103014924, guid: a734ec5fa48d40b41a9447535605fce5,
@@ -550,6 +542,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_2_1
       objectReference: {fileID: 0}
+    - target: {fileID: 5671604732152165036, guid: a734ec5fa48d40b41a9447535605fce5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 9069737885886226962, guid: a734ec5fa48d40b41a9447535605fce5,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -560,12 +557,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a734ec5fa48d40b41a9447535605fce5, type: 3}
---- !u!23 &1088220716610281618 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 9069737885886226962, guid: a734ec5fa48d40b41a9447535605fce5,
-    type: 3}
-  m_PrefabInstance: {fileID: 8269748509673013888}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4291249159003638412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5280919351103014924, guid: a734ec5fa48d40b41a9447535605fce5,

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781607067121581049}
   - component: {fileID: 781607067121581048}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293868127486649932}
   - component: {fileID: 5677117830502271194}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2608708882569115102}
   - component: {fileID: 2608708882569115103}
   - component: {fileID: 2608708882569115096}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: WaterLily_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,10 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 8014760091776146659}
-  - {fileID: 3732488352240204015}
-  deadMaterial: {fileID: 0}
+  waypointCenter: {fileID: 0}
+  isDead: 0
 --- !u!114 &2608708882569115096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2237452263831861341}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8443000084484449099}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6173390992084290882}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -340,10 +338,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: SNature_LiliPad
       objectReference: {fileID: 0}
+    - target: {fileID: 4324721849032225575, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4865822975704067297, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
         type: 3}
       propertyPath: m_Name
       value: SNature_LiliBlossom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865822975704067297, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6220533814801020861, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
         type: 3}
@@ -355,26 +363,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lili
       objectReference: {fileID: 0}
+    - target: {fileID: 8415746742563006839, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0769fc2f6f870474eadb6e5bce2b8ca3, type: 3}
---- !u!23 &3732488352240204015 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 767183398165877681, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4137087721804819294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4561272147519707158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 442768405674980168, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4137087721804819294}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8014760091776146659 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6220533814801020861, guid: 0769fc2f6f870474eadb6e5bce2b8ca3,
     type: 3}
   m_PrefabInstance: {fileID: 4137087721804819294}
   m_PrefabAsset: {fileID: 0}

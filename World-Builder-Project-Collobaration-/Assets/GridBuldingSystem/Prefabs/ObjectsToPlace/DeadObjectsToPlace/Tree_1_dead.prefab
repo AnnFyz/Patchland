@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8678172865394150023}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_4
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1681683100289439920}
   - component: {fileID: 4576946929946432021}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3101149416240442245}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6714924342046861411}
   - component: {fileID: 1355979844632613798}
   - component: {fileID: 459971550808305851}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 761376900239864124}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7763875587024260768}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 817050047413490791}
   - component: {fileID: 232717164918768195}
   - component: {fileID: 2974597513347844058}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185772453616657229}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6047480186042526920}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_3
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578363470520387346}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 5399603557572569664}
   - component: {fileID: 7112439885569301624}
   - component: {fileID: 7035560140293900087}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7178161503223851192}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 1232971782606376066}
   - component: {fileID: 8776529333666640079}
   - component: {fileID: 7826892914697387628}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123592311792678382}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 4579195227576754061}
   - component: {fileID: 3095346987414672620}
   - component: {fileID: 7030344895059722597}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4024313164162837405}
   - component: {fileID: 1650701414526988523}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 8000281925568123889}
   - component: {fileID: 8000281925568123888}
   - component: {fileID: 8000281925568123895}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,14 +867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2974597513347844058}
-  - {fileID: 459971550808305851}
-  - {fileID: 7826892914697387628}
-  - {fileID: 7030344895059722597}
-  - {fileID: 7035560140293900087}
-  - {fileID: 8940327930295789361}
-  deadMaterial: {fileID: 0}
+  waypointCenter: {fileID: 0}
+  isDead: 0
 --- !u!114 &8000281925568123895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6728008888098403485}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1579697909248779895}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -991,7 +985,7 @@ GameObject:
   - component: {fileID: 2039886379548394201}
   - component: {fileID: 7573835761545556504}
   - component: {fileID: 8940327930295789361}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_1_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

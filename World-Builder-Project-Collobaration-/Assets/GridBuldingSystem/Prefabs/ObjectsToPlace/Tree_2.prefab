@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200208481529359789}
   - component: {fileID: 8742136582350245448}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3335869451411644703}
   - component: {fileID: 2501671164328966989}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411754148691409073}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1506266197193640787}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8376177762748348957}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 98499248675715192}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2198121692650169674}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4170144650654210793}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: WaypointCenter
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 8519390558105600893}
   - component: {fileID: 8519390558105600892}
   - component: {fileID: 8519390558105600891}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5245773850286032889}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 5671604732152165036, guid: a734ec5fa48d40b41a9447535605fce5,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -568,6 +568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree_2_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671604732152165036, guid: a734ec5fa48d40b41a9447535605fce5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

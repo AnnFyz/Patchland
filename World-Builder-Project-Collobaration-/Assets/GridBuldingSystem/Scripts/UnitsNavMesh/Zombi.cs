@@ -329,6 +329,7 @@ public class Zombi : MonoBehaviour
             return;
         }
 
+        Debug.Log("[Zombie] Destroying zombie...");
         // Play glass breaking particles and sound
         DeathParticles deathParticles = DeathParticles.Create(transform.position, unit.TargetBlock.transform, unit.UnitScriptableObject.death_Particles_Prefab, Quaternion.identity);
         deathParticles.Play(unit.GlassBreaking, 0.01f);

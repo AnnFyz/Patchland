@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2577899808591477957}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1766778406051813899}
   - component: {fileID: 3085573513091001195}
   - component: {fileID: 3176002281159094293}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2645612500552051161}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trees_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593122301719405931}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Areas_visible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7979509404824896397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 2823091262366317580}
   - component: {fileID: 2902009274720369071}
   - component: {fileID: 1759623834576045456}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 7222511743805992477}
   - component: {fileID: 6227765184690954109}
   - component: {fileID: 5813076796919858179}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5930813321850338921}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree_2_Visual 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3645390261540409127}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 4103093756382765374}
   - component: {fileID: 1785266369028417251}
   - component: {fileID: 8886341869525825052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

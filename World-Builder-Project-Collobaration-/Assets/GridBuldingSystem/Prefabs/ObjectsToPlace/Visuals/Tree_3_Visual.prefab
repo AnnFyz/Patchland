@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 284312670277836369}
   - component: {fileID: 284312670277836368}
   - component: {fileID: 284312670277836371}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_visible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596457177620258293}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree_3_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 2812264908522824181}
   - component: {fileID: 3891346657293403128}
   - component: {fileID: 7514674785665727705}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8935502826834167523}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6667172174383360234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781607067121581049}
   - component: {fileID: 961673440771563650}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293868127486649932}
   - component: {fileID: 5677117830502271194}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2608708882569115102}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Bush_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2237452263831861341}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8443000084484449099}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6173390992084290882}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -239,6 +239,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 293868127486649932}
     m_Modifications:
+    - target: {fileID: 677248611297232526, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054435217071642717, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2737093362461287104, guid: 08c5d177453701c49aa8b7401e129c89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -289,6 +299,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3573713613874902986, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4300359807496028966, guid: 08c5d177453701c49aa8b7401e129c89,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -308,6 +323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bush
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012775622251890454, guid: 08c5d177453701c49aa8b7401e129c89,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

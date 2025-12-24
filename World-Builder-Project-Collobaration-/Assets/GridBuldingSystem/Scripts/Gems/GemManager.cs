@@ -64,6 +64,8 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     int maxGemsOnField = 10;
     public static GemManager Instance { get; private set; }
 
+
+    [SerializeField, Tooltip("The area of the biggest unit, to make sure each unit can collect gems")] string  navMeshArea;
     [SerializeField]
     GemsSO[] gems = new GemsSO[4];
     [SerializeField]
@@ -202,7 +204,11 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
         {
             Vector3 randomPoint = centerOfGrid + UnityEngine.Random.insideUnitSphere * range;
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPoint, out hit, 2, NavMesh.AllAreas))
+            // Find nearest point on area.
+            int areaMask = 1 << NavMesh.GetAreaFromName(navMeshArea);
+            Debug.Log("Area Mask: " + areaMask);
+            Debug.Log("NavMesh.GetAreaFromName(navMeshArea): " + NavMesh.GetAreaFromName(navMeshArea));
+            if (NavMesh.SamplePosition(randomPoint, out hit, 2, areaMask))
             {
                 Gem gem = gemPool.gemPool.Get();
                 createdGems.Add(gem);

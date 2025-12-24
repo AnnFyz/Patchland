@@ -5105,7 +5105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2675644380420434941}
   - component: {fileID: 2675644380420434942}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: SelectedFigure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5198,7 +5198,7 @@ GameObject:
   - component: {fileID: 5374270308236697826}
   - component: {fileID: 2675644380505310729}
   - component: {fileID: 3460686141523518379}
-  - component: {fileID: 2675644380505310730}
+  - component: {fileID: 8071333347876470788}
   m_Layer: 7
   m_Name: Bird
   m_TagString: Untagged
@@ -5444,8 +5444,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2675644380505310730
-BoxCollider:
+--- !u!136 &8071333347876470788
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5462,9 +5462,11 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.9295216, y: 9.66786, z: 4.1106744}
-  m_Center: {x: -0.0068325996, y: 4.106427, z: -0.29799008}
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 16
+  m_Direction: 1
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!1 &3308732486218552299
 GameObject:
   m_ObjectHideFlags: 0

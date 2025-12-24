@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 200208481529359789}
   - component: {fileID: 3848487616510747144}
   - component: {fileID: 8742136582350245448}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3335869451411644703}
   - component: {fileID: 2501671164328966989}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411754148691409073}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1506266197193640787}
   - component: {fileID: 9033417881389615566}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8376177762748348957}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: VisualOrganicForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 98499248675715192}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2198121692650169674}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 8519390558105600893}
   - component: {fileID: 8519390558105600892}
   - component: {fileID: 8519390558105600891}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Mushroom_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,15 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29007807c35615c418883b54b6a23802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 168056730950889005}
-  - {fileID: 1781694290928893921}
-  - {fileID: 6966845564139018468}
-  - {fileID: 1199835012078505054}
-  - {fileID: 3195819008894621572}
-  - {fileID: 8004446532245492758}
-  - {fileID: 7973130486255461713}
-  deadMaterial: {fileID: 0}
+  waypointCenter: {fileID: 0}
+  isDead: 0
 --- !u!114 &8519390558105600891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5245773850286032889}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,11 +470,41 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
+    - target: {fileID: 3210393739028711350, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523280288886149943, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983371601358155993, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557277867641022509, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6526660439315889593, guid: ef33216dad10cd84e962c95f44409526,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
+    - target: {fileID: 6757561198451997783, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894868749953378388, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7380314519955465827, guid: ef33216dad10cd84e962c95f44409526,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -492,6 +515,11 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5304c8ecd03156249a166ae4213b24ef, type: 2}
+    - target: {fileID: 8351456910303620172, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8403578190096663568, guid: ef33216dad10cd84e962c95f44409526,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -502,53 +530,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushrooms
       objectReference: {fileID: 0}
+    - target: {fileID: 9158946050383203890, guid: ef33216dad10cd84e962c95f44409526,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef33216dad10cd84e962c95f44409526, type: 3}
---- !u!23 &168056730950889005 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8403578190096663568, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1199835012078505054 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7380314519955465827, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1781694290928893921 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7958800515116439004, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &3195819008894621572 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6526660439315889593, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6966845564139018468 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1613900837453394649, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7973130486255461713 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1759975674661457772, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8004446532245492758 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1864225074895650347, guid: ef33216dad10cd84e962c95f44409526,
-    type: 3}
-  m_PrefabInstance: {fileID: 8559811693522086461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8062346713731571655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1813185918914033146, guid: ef33216dad10cd84e962c95f44409526,

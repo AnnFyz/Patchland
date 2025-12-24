@@ -7,8 +7,6 @@ using static UnityEngine.ParticleSystem;
 
 public class DeathParticles : MonoBehaviour
 {
-    int oldBlockAmount = 0;
-    int currentBlockAmount = 0;
     // Factory method to create and initialize a DeathParticles instance
     public static DeathParticles Create(Vector3 worldPosition, Transform parent, GameObject prefab, Quaternion rotation)
     {

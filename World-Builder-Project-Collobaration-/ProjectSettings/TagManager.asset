@@ -19,9 +19,9 @@ TagManager:
   - Unit
   - Ground
   - StackOfBlocks
-  - 
-  - 
-  - 
+  - Gem
+  - PlacedObject
+  - Overlay Sprites
   - 
   - 
   - 

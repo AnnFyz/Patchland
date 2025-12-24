@@ -16,7 +16,6 @@ public class CameraSetup : MonoBehaviour
     [SerializeField] float newDist;
     [SerializeField] float offsetX;
     [SerializeField] float offsetY;
-    [SerializeField] Transform rotator;
     Vector3 newRotation;
     private void Start()
     {
@@ -25,8 +24,6 @@ public class CameraSetup : MonoBehaviour
         composer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
         newDist = (minDist + maxDist) / 2;
         transposer.m_CameraDistance = newDist;
-        rotator = GameObject.FindGameObjectWithTag("Rotator").transform;
-        transform.localRotation = rotator.localRotation;
         StartCoroutine(StartCameraSetup());
     }
 
@@ -39,8 +36,6 @@ public class CameraSetup : MonoBehaviour
             transposer.m_CameraDistance = newDist;
         }
 
-        //transform.localRotation = rotator.localRotation;
-        newRotation = rotator.localRotation.eulerAngles;
         transform.localRotation = Quaternion.Euler(-newRotation.x, -newRotation.y, 0);
 
     }

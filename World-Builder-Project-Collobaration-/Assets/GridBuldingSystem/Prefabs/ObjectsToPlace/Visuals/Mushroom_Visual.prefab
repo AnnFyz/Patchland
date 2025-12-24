@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2577899808591477957}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 75112364674766458}
   - component: {fileID: 963007507469330928}
   - component: {fileID: 8964277523567030785}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1546398270939434183}
   - component: {fileID: 8052756423169615210}
   - component: {fileID: 7968037394736730226}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 4482975698065726272}
   - component: {fileID: 2408659519122315712}
   - component: {fileID: 4654748439775930843}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593122301719405931}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Areas_visible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 7492776002038630342}
   - component: {fileID: 5314404145467868467}
   - component: {fileID: 895684572383815355}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 5681414823303886038}
   - component: {fileID: 7950987791209217762}
   - component: {fileID: 8392722866920440254}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 4892474370760918949}
   - component: {fileID: 6466510386710946187}
   - component: {fileID: 173131921044740878}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7979509404824896397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 2823091262366317580}
   - component: {fileID: 2902009274720369071}
   - component: {fileID: 1759623834576045456}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5930813321850338921}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mushroom_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225774684690260376}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Mushrooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3645390261540409127}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor_2
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 369560531813112846}
   - component: {fileID: 2169067271248068365}
   - component: {fileID: 276031061138778697}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: SNature_Mushroom_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 4103093756382765374}
   - component: {fileID: 1785266369028417251}
   - component: {fileID: 8886341869525825052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

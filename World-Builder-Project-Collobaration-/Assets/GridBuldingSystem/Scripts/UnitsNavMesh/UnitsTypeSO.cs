@@ -17,18 +17,8 @@ public class UnitsTypeSO : ScriptableObject
     public float damageToBlock = 1f;
     public float attackDelay = 0.1f;
     [Header("NavMeshAgent Configs")]
-    public float AIUpdateInterval = 0.1f;
-    public float acceleration = 18f;
-    public float angularSpeed = 120f;
-    public int areaMask = -1; // -1 means everything
     public int avoidancePriority = 50;
-    public float baseOffset = 0.5f;
-    public float height = 1f;
     public ObstacleAvoidanceType obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
-    public float radius = 1.05f;
-    public float speed = 13f;
-    public float stoppingDistance = 0.5f;
-    public float triggerRadius = 0.15f;  // currently not in use
     [Header("Unit Settings")]
     public float minMovingToPointTimer = 2f;
     public float maxMovingToPointTimer = 5f;

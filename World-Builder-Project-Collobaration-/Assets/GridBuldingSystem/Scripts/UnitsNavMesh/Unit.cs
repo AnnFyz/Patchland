@@ -376,27 +376,23 @@ public class Unit : MonoBehaviour
     }
     public void SetupAgentFromConfiguration()
     {
-        Agent.acceleration = unitScriptableObject.acceleration;
-        Agent.angularSpeed = unitScriptableObject.angularSpeed;
-        Agent.areaMask = unitScriptableObject.areaMask;
         Agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority / 5, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
-        Agent.baseOffset = unitScriptableObject.baseOffset;
-        Agent.height = unitScriptableObject.height;
         Agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
-        Agent.radius = unitScriptableObject.radius;
-        Agent.speed = unitScriptableObject.speed;
-        Agent.stoppingDistance = unitScriptableObject.stoppingDistance;
-
-        Agent.autoRepath = true;
-        Agent.autoBraking = true;       // smoother arrivals
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        CheckBlock(other);
-
         if (CurrentUnitsState == UnitsState.Dead || CurrentUnitsState == UnitsState.Zombi)
             return;
+
+        CheckBlock(other);
+
+        if (other.gameObject.tag == "Gem")
+        {
+            other.gameObject.GetComponent<Gem>().CollectGem();
+        }
+
+        
 
         // Get the placed object once
         var pod = other.GetComponentInParent<PlacedObject_Done>();
@@ -416,14 +412,9 @@ public class Unit : MonoBehaviour
         currentPlacedObject = pod;
         currentPlacedObject.onDestroyedPlacedObject += OnDestroyedPlacedObject;
         GetComponentInChildren<UnitsHealth>().IsFoodAround = true;
-        StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());
-
-
-        if (other.gameObject.tag == "Gem")
-        {
-            other.gameObject.GetComponent<Gem>().CollectGem();
-        }
+        StartCoroutine(GetComponentInChildren<UnitsHealth>().FillHealthGradually());    
     }
+
 
     private void OnTriggerExit(Collider other)
     {

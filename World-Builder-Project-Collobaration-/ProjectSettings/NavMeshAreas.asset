@@ -13,7 +13,7 @@ NavMeshProjectSettings:
     cost: 2
   - name: Gem
     cost: 1
-  - name: 
+  - name: GiantMushroom
     cost: 1
   - name: 
     cost: 1
@@ -109,10 +109,10 @@ NavMeshProjectSettings:
       m_Flags: 0
   - serializedVersion: 3
     agentTypeID: -334000983
-    agentRadius: 2
+    agentRadius: 1.75
     agentHeight: 7
     agentSlope: 45
-    agentClimb: 2
+    agentClimb: 5
     ledgeDropHeight: 6.5
     maxJumpAcrossDistance: 7.5
     minRegionArea: 2
@@ -130,7 +130,7 @@ NavMeshProjectSettings:
     agentRadius: 1
     agentHeight: 20
     agentSlope: 60
-    agentClimb: 19
+    agentClimb: 15
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -145,10 +145,10 @@ NavMeshProjectSettings:
       m_Flags: 0
   - serializedVersion: 3
     agentTypeID: -1923039037
-    agentRadius: 1.5
-    agentHeight: 9
+    agentRadius: 1.25
+    agentHeight: 8
     agentSlope: 45
-    agentClimb: 8.5
+    agentClimb: 7
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2

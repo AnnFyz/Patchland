@@ -16,4 +16,4 @@ MonoBehaviour:
   gemPrefab: {fileID: 8120832946054492893, guid: e249ed55df3d34b4ea2396ed04f51cd9,
     type: 3}
   isSpecialGem: 0
-  lifeTime: 5
+  lifeTime: 120

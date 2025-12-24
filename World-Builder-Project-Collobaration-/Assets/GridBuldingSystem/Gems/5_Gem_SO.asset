@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 5_Gem_SO
   m_EditorClassIdentifier: 
   weight: 50
-  gemPrefab: {fileID: 585524292228250662, guid: 7f6e933bf7c6b014c822ff4ea4f9a93c,
-    type: 3}
+  gemPrefab: {fileID: 0}
   isSpecialGem: 0
-  lifeTime: 5
+  lifeTime: 120

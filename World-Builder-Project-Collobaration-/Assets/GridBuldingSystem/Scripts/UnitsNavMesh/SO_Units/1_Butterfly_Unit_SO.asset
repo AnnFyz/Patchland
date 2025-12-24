@@ -15,22 +15,13 @@ MonoBehaviour:
   maxHealth: 100
   damageToUnitWithoutFood: 5
   healthPointsFromFood: 1
+  delayBeforeHealthLoss: 1.5
   death_Particles_Prefab: {fileID: 1075774370640668891, guid: b1a44a0981c58e544a8c87c10e746bff,
     type: 3}
   chanceToBecomeZombi: 100
   damageToBlock: 1
   attackDelay: 0.1
-  AIUpdateInterval: 0.1
-  acceleration: 20
-  angularSpeed: 130
-  areaMask: -1
-  avoidancePriority: 50
-  baseOffset: 0
-  height: 20
+  avoidancePriority: 40
   obstacleAvoidanceType: 3
-  radius: 0.75
-  speed: 11
-  stoppingDistance: 1.5
-  triggerRadius: 0.15
   minMovingToPointTimer: 3
   maxMovingToPointTimer: 5

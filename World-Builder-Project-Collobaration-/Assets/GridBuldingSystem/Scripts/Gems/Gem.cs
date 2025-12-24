@@ -9,7 +9,7 @@ using UnityEngine.Pool;
 public class Gem : MonoBehaviour
 {
     [SerializeField]
-    GameObject gemModel, particleObject;
+    GameObject gemModel, onPickUp_VFX, onTimeExpired_VFX, UIText;
     private IObjectPool<Gem> gemOPool;
     public IObjectPool<Gem> GemPool
     {
@@ -22,24 +22,38 @@ public class Gem : MonoBehaviour
     [ReadOnly] private float currentLifetime;
     private Coroutine lifetimeRoutine;
     private WorldUIHandler worldUIHandler;
+    public bool IsCollected { get; private set; } = false;
     private void Awake()
     {
         squashAndStretch = GetComponentInChildren<SquashAndStretch>();
         worldUIHandler = GetComponent<WorldUIHandler>();
-        particleObject.SetActive(false);
+        onPickUp_VFX.SetActive(false);
     }
 
     public void Setup(GemsSO gemSO)
     {
         StopAllCoroutines();
         gemModel.SetActive(true);
-        particleObject.SetActive(false);
+        onPickUp_VFX.SetActive(false);
+        onTimeExpired_VFX.SetActive(false);
+        UIText.SetActive(true);
         IsThisGemSpecial = gemSO.isSpecialGem;
         lifeTime = gemSO.lifeTime;
         currentLifetime = lifeTime;
         worldUIHandler.SetText(currentLifetime.ToString(), false);
         lifetimeRoutine = StartCoroutine(StartLifeTimeCountdown(lifeTime));
     }
+
+    //private void UpdatePosition(int newHeight)
+    //{  
+    //    transform.position = new Vector3(
+    //           transform.position.x,
+    //           transform.parent.position.y - BlockPrefab.Offset.y,
+    //           transform.position.z
+    //       );
+
+    //}
+
     public void SquashAndStretch()
     {
         StartCoroutine(PlayAnimation());
@@ -62,6 +76,8 @@ public class Gem : MonoBehaviour
     }
     public void CollectGem()
     {
+        if(IsCollected) return;
+        IsCollected = true;
         StopAllCoroutines();
         StartCoroutine(CollectGemRoutine());
     }
@@ -72,29 +88,30 @@ public class Gem : MonoBehaviour
 
     }
 
-    void ToggleParticles(bool toPlay)
+    void ToggleParticles(bool toPlay, bool onCollected)
     {
-        particleObject.SetActive(true);
+        GameObject particlesToPlay = onCollected ? onPickUp_VFX : onTimeExpired_VFX;
+        particlesToPlay.SetActive(true);
         if (toPlay)
         {
-            particleObject.GetComponent<ParticleSystem>().Play();
+            particlesToPlay.GetComponent<ParticleSystem>().Play();
         }
         else
         {
-            particleObject.GetComponent<ParticleSystem>().Stop();
-            particleObject.GetComponent<ParticleSystem>().Clear();
-            particleObject.SetActive(false);
+            particlesToPlay.GetComponent<ParticleSystem>().Stop();
+            particlesToPlay.GetComponent<ParticleSystem>().Clear();
+            particlesToPlay.SetActive(false);
 
         }
     }
 
-    IEnumerator HandleLifeTimeExpired()
+    IEnumerator HandleLifeTimeExpired(bool onCollected)
     {
         ToggleGemVisibility(false);
-        ToggleParticles(true);
+        UIText.SetActive(false);
+        ToggleParticles(true, onCollected);
         yield return new WaitForSeconds(5f);
-        ToggleParticles(false);
-
+        ToggleParticles(false, onCollected);
         GemManager.Instance.createdGems.Remove(this);
         gemOPool.Release(this);
     }
@@ -109,8 +126,9 @@ public class Gem : MonoBehaviour
             UIManager.Instance.CollectSpecialGem();
         }
 
-        yield return StartCoroutine(PlayAnimation());
-        StartCoroutine(HandleLifeTimeExpired());
+        //yield return StartCoroutine(PlayAnimation());
+        yield return new WaitForSeconds(0f);
+        StartCoroutine(HandleLifeTimeExpired(true));
     }
 
 
@@ -127,7 +145,7 @@ public class Gem : MonoBehaviour
         currentLifetime = 0f;
         worldUIHandler.SetText(Mathf.CeilToInt(currentLifetime).ToString(), true);
         yield return StartCoroutine(PlayAnimation());
-        StartCoroutine(HandleLifeTimeExpired());
+        StartCoroutine(HandleLifeTimeExpired(false));
     }
 
 

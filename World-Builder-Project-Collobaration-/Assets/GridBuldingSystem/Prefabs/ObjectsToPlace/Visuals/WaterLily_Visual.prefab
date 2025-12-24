@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 284312670277836369}
   - component: {fileID: 284312670277836368}
   - component: {fileID: 284312670277836371}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Area_visible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3264477887805697580}
   - component: {fileID: 1507627708974217816}
   - component: {fileID: 283550057995756270}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SNature_LiliBlossom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596457177620258293}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WaterLily_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6024020015510988315}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lili
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8935502826834167523}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Form
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 2809336333834412310}
   - component: {fileID: 7526191046009278570}
   - component: {fileID: 6852522537770075874}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SNature_LiliPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6667172174383360234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}

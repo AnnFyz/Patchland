@@ -155,7 +155,7 @@ public class GridBuildingSystem : MonoBehaviour
         if (BuildingManager.Instance.currentObjectTypeSO != null && blockPrefab.isHighlighted)
         {
 
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+            //if (EventSystem.current.IsPointerOverGameObject()) return;
             
             Grid.GetXZ(mousePosition, out int x, out int z);
 
