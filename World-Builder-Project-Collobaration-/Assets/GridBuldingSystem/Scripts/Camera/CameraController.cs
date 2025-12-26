@@ -1,80 +1,56 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
-    [SerializeField] private float normalSpeed =1f;
-    [SerializeField] private float fastSpeed = 2f;
-    [SerializeField] private float rotationSpeed = 1f;
-    [SerializeField] private float zoomSpeed = 1f;
-    [SerializeField] private Vector3 zoomAmount = new Vector3(0,-10,10);
-    private float movementSpeed = 1f;
-    private float movementTime = 1f;
-    private float rotationTime = 1f;
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private float moveSpeed = 10f;
+    Vector2 moveInput;
+    Vector2 lookInput;
+    Vector2 scrollInput;
 
-
-    Vector3 newPosition;
-    Quaternion newRotation;
-    Vector3 newZoom;
-    void Start()
+    #region Input
+    void OnMove(InputValue value)
     {
-        newPosition = transform.position;
-        newRotation = transform.rotation;
-        newZoom = cameraTransform.localPosition;
+        moveInput = value.Get<Vector2>();
     }
 
-    // Update is called once per frame
+    void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
+    }
+
+    void OnScrollWheel(InputValue value)
+    {
+        scrollInput = value.Get<Vector2>();
+    }
+    #endregion
+
+    #region Unity Methods
     void Update()
     {
-        HandleMovementInput();
+       float deltaTime = Time.unscaledDeltaTime;
+      UpdateMovement(deltaTime);
     }
+    #endregion
 
-    void HandleMovementInput()
+    #region Control Methods
+
+    void UpdateMovement(float deltaTime)
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            movementSpeed = fastSpeed;
-        }
-        else
-        {
-            movementSpeed = normalSpeed;
-        }
+        // Forward movement
+        Vector3 forward = Camera.main.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
 
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            newPosition += (transform.forward * movementSpeed);
-        }
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            newPosition += (transform.forward * -movementSpeed);
-        }
-        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            newPosition += (transform.right * movementSpeed);
-        }
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            newPosition += (transform.right * -movementSpeed);
-        }
-        if(Input.GetKey(KeyCode.Q))
-        {
-            newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
-        }
-        if(Input.GetKey(KeyCode.E))
-        {
-            newRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed);
-        }
-        if (Input.GetKey(KeyCode.I)) 
-        { 
-            newZoom += zoomAmount;
-        }
-        if(Input.GetKey(KeyCode.O)) 
-        { 
-            newZoom -= zoomAmount;
-        }
+        Vector3 right = Camera.main.transform.right;
+        right.y = 0;
+        right.Normalize();
 
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotationTime);
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * zoomSpeed);
+        Vector3 targetVelocity = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
+
+        Vector3 motion =  targetVelocity * deltaTime;
+        cameraTarget.position += forward * motion.z + right * motion.x;
     }
+    #endregion
 }
