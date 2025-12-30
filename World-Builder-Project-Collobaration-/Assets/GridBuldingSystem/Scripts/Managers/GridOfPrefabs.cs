@@ -11,19 +11,21 @@ public class GridOfPrefabs : MonoBehaviour
 {
     [SerializeField] GameObject blockPrefabMain;
     [SerializeField] GameObject blockPrefabForCorners;
-    GameObject prefabToCreate;
-    Quaternion prefabRotation;
-    public int width = 3;
-    public int height = 5;
-    [SerializeField] Color colorOfHighlightedOblock = new Color();
-    //[SerializeField] Color materialOfSelectedOblock = new Color();
-    [SerializeField] Material materialOfSelectedOblock;
+    private GameObject prefabToCreate;
+    private Quaternion prefabRotation;
+    [SerializeField] int width = 3;
+    [SerializeField] int height = 5;
+    public int Width => width;
+    public int Height => height;
+
     [SerializeField] float amountScale = 40.0f;
     [SerializeField] float xScale = 16.0f;
     public static GridOfPrefabs Instance { get; private set; }
     public static bool IsValidGridPos = false;
-    public GridXZ<PrefabGridObject> globalGrid;
-    public NavMeshSurface[] horizontalSurfaces; //TO ADD SURFACES FOR ANOTHER NAVMESHAGENTS
+    GridXZ<PrefabGridObject> globalGrid;
+    private NavMeshSurface[] navMeshSurfaces;
+    public static event Action OnGridReady;
+    Vector3 p1, p2, p3, p4;
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of GridOfPrefabs exists
@@ -32,7 +34,7 @@ public class GridOfPrefabs : MonoBehaviour
         else
             Instance = this;
 
-        horizontalSurfaces = GetComponents<NavMeshSurface>();
+        navMeshSurfaces = GetComponents<NavMeshSurface>();
     }
     private void OnEnable()
     {
@@ -40,6 +42,22 @@ public class GridOfPrefabs : MonoBehaviour
     }
 
     private void Start()
+    {
+        BuildGrid();
+        RebuildNavMesh();
+    }
+
+
+    private void RebuildNavMesh()
+    {
+        for (int i = 0; i < navMeshSurfaces.Length; i++)
+        {
+            navMeshSurfaces[i].BuildNavMesh();
+        }
+
+    }
+
+    void BuildGrid()
     {
         globalGrid = new GridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (GridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
 
@@ -52,24 +70,28 @@ public class GridOfPrefabs : MonoBehaviour
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomLeft;
+                    p1 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == 0 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, -90, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopLeft;
+                    p2 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == width - 1 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopRight;
+                    p3 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == width - 1 && y == 0)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 90, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomRight;
+                    p4 = globalGrid.GetWorldPosition(x, y);
                 }
                 else
                 {
@@ -93,18 +115,14 @@ public class GridOfPrefabs : MonoBehaviour
                 }
             }
         }
-
-        RebuildNavMesh();
+        CalculateBoundsFromPoints(p1, p2, p3, p4);
+        OnGridReady?.Invoke();
     }
-
-
-    private void RebuildNavMesh()
+    public Vector3 GetCenterOnGridSurface()
     {
-        for (int i = 0; i < horizontalSurfaces.Length; i++)
-        {
-            horizontalSurfaces[i].BuildNavMesh();
-        }
-
+        Vector3 centerOfGrid = new Vector3(GetCenterObjInGrid().position.x, GetCenterObjInGrid().position.y + (BlockPrefab.Offset.y * -1) + 0.25f, GetCenterObjInGrid().position.z);
+        Debug.Log("Center of Grid on Surface: " + centerOfGrid);
+        return centerOfGrid;
     }
     public Transform GetCenterObjInGrid()
     {
@@ -113,13 +131,15 @@ public class GridOfPrefabs : MonoBehaviour
         return globalGrid.GetGridObject(halfWidth, halfHeight).GetPlacedObject().transform;
     }
 
-    public Color GetColorOfHighlightedBlocks()
+    private Bounds CalculateBoundsFromPoints(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4)
     {
-        return colorOfHighlightedOblock;
-    }
-    public Material GetMaterialOfSelectedBlocks()
-    {
-        return materialOfSelectedOblock;
+        Bounds bounds = new Bounds(p1, Vector3.zero);
+
+        bounds.Encapsulate(p2);
+        bounds.Encapsulate(p3);
+        bounds.Encapsulate(p4);
+
+        return bounds;
     }
 
     private void Update()
@@ -163,10 +183,6 @@ public class GridOfPrefabs : MonoBehaviour
                 }
             }
         }
-
-
-
-
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -222,7 +238,6 @@ public class GridOfPrefabs : MonoBehaviour
         public override string ToString()
         {
             return x + ", " + y + "\n" + blockPrefab;
-            //return value.ToString();
         }
 
         public void SetPlacedObject(BlockPrefab blockPrefab)

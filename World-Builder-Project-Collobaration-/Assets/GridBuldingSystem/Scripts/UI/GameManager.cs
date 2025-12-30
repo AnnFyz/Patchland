@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.OnNextLevel += CheckIfEnoughSpecialGemsCollected;
         gameOverPanel.SetActive(false);
         nextLevelPanel.SetActive(false);
-        amountOfAllBlocks = GridOfPrefabs.Instance.height * GridOfPrefabs.Instance.width;
+        amountOfAllBlocks = GridOfPrefabs.Instance.Height * GridOfPrefabs.Instance.Width;
     }
 
     public void CheckIfAllBlocksAreDead()

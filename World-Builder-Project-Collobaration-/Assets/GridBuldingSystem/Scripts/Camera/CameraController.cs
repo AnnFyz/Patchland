@@ -76,6 +76,16 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region Unity Methods
+
+    private void OnEnable()
+    {
+       GridOfPrefabs.OnGridReady += SetCameraTarget;
+    }
+    private void OnDisable()
+    {
+        GridOfPrefabs.OnGridReady -= SetCameraTarget;
+    }
+
     void LateUpdate()
     {
         float deltaTime = Time.unscaledDeltaTime;
@@ -85,7 +95,6 @@ public class CameraController : MonoBehaviour
             UpdateEdgeScrollInput();
 
         }
-        Debug.Log(ZoomLevel);
         UpdateOrbit(deltaTime);
         UpdateMovement(deltaTime);
         UpdateZoom(deltaTime);
@@ -207,6 +216,11 @@ public class CameraController : MonoBehaviour
         }
     }
 
+
+    void SetCameraTarget()
+    {
+        cameraTarget.position = GridOfPrefabs.Instance.GetCenterOnGridSurface();
+    }
 
     #endregion
 }

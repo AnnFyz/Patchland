@@ -101,7 +101,7 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            centerOfGrid = new Vector3(GridOfPrefabs.Instance.GetCenterObjInGrid().position.x, GridOfPrefabs.Instance.GetCenterObjInGrid().position.y + (BlockPrefab.Offset.y * -1 ) + 0.25f, GridOfPrefabs.Instance.GetCenterObjInGrid().position.z);
+            centerOfGrid = GridOfPrefabs.Instance.GetCenterOnGridSurface();
             SpawnGem(GetRandomGemPool());
         }
     }
@@ -118,24 +118,16 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
     {
         rainObj.Play();
         yield return new WaitForSeconds(UnityEngine.Random.Range(5, 7));
-        //for (int i = 0; i < 10; i++)
-        //{
-
-        //    SpawnGem(GetRandomGemPool());
-        //    yield return new WaitForSeconds(0.5f);
-        //}
-        //yield return new WaitForSeconds(3.5f);
         StartCoroutine(StrartSpawningGems());
         StartCoroutine(FadeOutParticleSystem(rainObj, 1.5f));
-        //rainObj.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     IEnumerator StrartSpawningGems()
     {
         int amountToSpawn = maxGemsOnField - createdGems.Count;
         for (int i = 0; i < amountToSpawn; i++)
-        {
-            centerOfGrid = new Vector3(GridOfPrefabs.Instance.GetCenterObjInGrid().position.x, GridOfPrefabs.Instance.GetCenterObjInGrid().position.y + (BlockPrefab.Offset.y * -1), GridOfPrefabs.Instance.GetCenterObjInGrid().position.z);
+        {           
+            centerOfGrid = GridOfPrefabs.Instance.GetCenterOnGridSurface();
             SpawnGem(GetRandomGemPool());
             yield return new WaitForSeconds(0.5f);
         }
@@ -206,8 +198,6 @@ public class GemManager : MonoBehaviour //make spawn in waves with particles
             NavMeshHit hit;
             // Find nearest point on area.
             int areaMask = 1 << NavMesh.GetAreaFromName(navMeshArea);
-            Debug.Log("Area Mask: " + areaMask);
-            Debug.Log("NavMesh.GetAreaFromName(navMeshArea): " + NavMesh.GetAreaFromName(navMeshArea));
             if (NavMesh.SamplePosition(randomPoint, out hit, 2, areaMask))
             {
                 Gem gem = gemPool.gemPool.Get();
