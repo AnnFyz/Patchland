@@ -36,9 +36,8 @@ public class CameraController : MonoBehaviour
     float decelerationFactor = 1f;
     bool sprintInput = false;
     bool middleClickInput = false;
-
     float currentZoomSpeed = 0f;
-
+    private Bounds movementBounds;
     public float ZoomLevel //value between 0 (zoom in) and 1 (zoom out)
     {
         get
@@ -80,7 +79,9 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
        GridOfPrefabs.OnGridReady += SetCameraTarget;
+        GridOfPrefabs.OnGridReady += SetBounds;
     }
+
     private void OnDisable()
     {
         GridOfPrefabs.OnGridReady -= SetCameraTarget;
@@ -139,9 +140,28 @@ public class CameraController : MonoBehaviour
         }
 
         Vector3 motion = velocity * deltaTime;
-        cameraTarget.position += forward * motion.z + right * motion.x;
+        Vector3 desiredPosition =
+        cameraTarget.position +
+        forward * motion.z +
+        right * motion.x;
 
-        if(velocity.sqrMagnitude < 0.01f)
+        // Clamp to bounds (XZ only)
+        desiredPosition.x = Mathf.Clamp(
+            desiredPosition.x,
+            movementBounds.min.x,
+            movementBounds.max.x
+        );
+
+        desiredPosition.z = Mathf.Clamp(
+            desiredPosition.z,
+            movementBounds.min.z,
+            movementBounds.max.z
+        );
+
+        cameraTarget.position = desiredPosition;
+
+
+        if (velocity.sqrMagnitude < 0.01f)
         {
             decelerationFactor = 1f;
         }
@@ -220,6 +240,11 @@ public class CameraController : MonoBehaviour
     void SetCameraTarget()
     {
         cameraTarget.position = GridOfPrefabs.Instance.GetCenterOnGridSurface();
+    }
+
+    void SetBounds()
+    {
+        movementBounds = GridOfPrefabs.Bounds;
     }
 
     #endregion

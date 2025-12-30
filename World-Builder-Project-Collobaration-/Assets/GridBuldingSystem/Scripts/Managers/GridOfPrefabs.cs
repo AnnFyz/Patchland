@@ -13,6 +13,7 @@ public class GridOfPrefabs : MonoBehaviour
     [SerializeField] GameObject blockPrefabForCorners;
     private GameObject prefabToCreate;
     private Quaternion prefabRotation;
+    [SerializeField] float cellSize = 15f;
     [SerializeField] int width = 3;
     [SerializeField] int height = 5;
     public int Width => width;
@@ -25,6 +26,8 @@ public class GridOfPrefabs : MonoBehaviour
     GridXZ<PrefabGridObject> globalGrid;
     private NavMeshSurface[] navMeshSurfaces;
     public static event Action OnGridReady;
+    public static Bounds Bounds;
+    public GameObject[] points = new GameObject[4];
     Vector3 p1, p2, p3, p4;
     private void Awake()
     {
@@ -59,7 +62,7 @@ public class GridOfPrefabs : MonoBehaviour
 
     void BuildGrid()
     {
-        globalGrid = new GridXZ<PrefabGridObject>(width, height, 15f, Vector3.zero, (GridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
+        globalGrid = new GridXZ<PrefabGridObject>(width, height, cellSize, Vector3.zero, (GridXZ<PrefabGridObject> g, int x, int y) => new PrefabGridObject(g, x, y), false, CornerBlock.None);
 
         for (int x = 0; x < width; x++)
         {
@@ -70,28 +73,24 @@ public class GridOfPrefabs : MonoBehaviour
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomLeft;
-                    p1 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == 0 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, -90, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopLeft;
-                    p2 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == width - 1 && y == height - 1)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.TopRight;
-                    p3 = globalGrid.GetWorldPosition(x, y);
                 }
                 else if (x == width - 1 && y == 0)
                 {
                     prefabToCreate = blockPrefabForCorners;
                     prefabRotation = Quaternion.Euler(new Vector3(0, 90, 0));
                     prefabToCreate.GetComponent<BlockPrefab>().cornerBlock = CornerBlock.BottomRight;
-                    p4 = globalGrid.GetWorldPosition(x, y);
                 }
                 else
                 {
@@ -115,6 +114,27 @@ public class GridOfPrefabs : MonoBehaviour
                 }
             }
         }
+
+        Vector3 offset = BlockPrefab.Offset / 2f;
+
+        // bottom-left corner of the grid
+        p1 = globalGrid.GetWorldPosition(0, 0) - offset;
+
+        // top-left outer corner
+        p2 = globalGrid.GetWorldPosition(0, 0) + new Vector3(0f, 0f, height * cellSize) - offset;
+
+
+        // top-right outer corner
+        p3 = globalGrid.GetWorldPosition(0, 0) + new Vector3(width * cellSize, 0f, height * cellSize) - offset;
+
+        // bottom-right outer corner
+        p4 = globalGrid.GetWorldPosition(width - 1, 0) - offset;
+
+        points[0].transform.position = p1;
+        points[1].transform.position = p2;
+        points[2].transform.position = p3;
+        points[3].transform.position = p4;
+
         CalculateBoundsFromPoints(p1, p2, p3, p4);
         OnGridReady?.Invoke();
     }
@@ -133,13 +153,17 @@ public class GridOfPrefabs : MonoBehaviour
 
     private Bounds CalculateBoundsFromPoints(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4)
     {
-        Bounds bounds = new Bounds(p1, Vector3.zero);
+        Bounds = new Bounds(p1, Vector3.zero);
+        Bounds.Encapsulate(p2);
+        Bounds.Encapsulate(p3);
+        Bounds.Encapsulate(p4);
+        return Bounds;
+    }
 
-        bounds.Encapsulate(p2);
-        bounds.Encapsulate(p3);
-        bounds.Encapsulate(p4);
-
-        return bounds;
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(Bounds.center, Bounds.size);
     }
 
     private void Update()
