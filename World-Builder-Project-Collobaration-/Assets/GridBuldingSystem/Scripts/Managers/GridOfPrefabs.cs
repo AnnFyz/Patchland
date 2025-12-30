@@ -144,13 +144,13 @@ public class GridOfPrefabs : MonoBehaviour
                         {
                             globalGrid.GetGridObject(x, z).GetPlacedObject().isSelected = false;
                             UIManager.Instance.HidePanels();
-                            placedObject.GetComponent<Raycast>().SetOutline(false);
+                            placedObject.GetComponent<RaycastHandler>().SetOutline(false);
                         }
                     }
                     if (!placedObject.GetComponent<BlockHealth>().IsBlockDead)
                     {
                         placedObject.isSelected = true;
-                        placedObject.GetComponent<Raycast>().SetOutline(true);
+                        placedObject.GetComponent<RaycastHandler>().SetOutline(true);
                         UIManager.Instance.ShowPanels();
                         UIManager.Instance.prefabsState = placedObject.GetComponent<LocalLevelState>();
                         UIManager.Instance.LocalSetupUIIcons();

@@ -16,6 +16,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "ScrollWheel",
+                    "type": "PassThrough",
+                    "id": "41dfd01e-e64b-4bb7-b070-7e4296c8a08e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "MiddleClick",
                     "type": "PassThrough",
                     "id": "18a4c9a6-275c-48b7-adb9-915c8da5938c",
@@ -38,6 +47,15 @@
                     "type": "Button",
                     "id": "774c6926-d073-4ae5-a0ab-d3e2f9826919",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "769944a2-4bbe-480d-b4c5-176eb3082657",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -178,6 +196,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1b867ab3-99bb-451e-871d-98786722fde9",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "df30971f-dd15-4415-81fd-838d0e563782",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
@@ -272,6 +301,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79b13051-73ec-4a02-aab4-399331fc869c",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

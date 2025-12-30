@@ -546,7 +546,6 @@ GameObject:
   - component: {fileID: 8184906876452459675}
   - component: {fileID: 6098206249180768249}
   - component: {fileID: 7324295037445743268}
-  - component: {fileID: 4328790335130294475}
   - component: {fileID: 3855566688393667695}
   - component: {fileID: 2211044260347307412}
   - component: {fileID: 8095457313609203249}
@@ -554,6 +553,7 @@ GameObject:
   - component: {fileID: 6123430626304202518}
   - component: {fileID: 5631865040396593832}
   - component: {fileID: 795375526562489047}
+  - component: {fileID: 7536036100967348845}
   m_Layer: 6
   m_Name: BlockPrefab_onCorner
   m_TagString: Untagged
@@ -638,18 +638,6 @@ MonoBehaviour:
   gridHeight: 2
   cellSize: 5
   isGridOnCorner: 1
---- !u!114 &4328790335130294475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541634431918291856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8228bf4414f33544b9a9070af1f42430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3855566688393667695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 3.5
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -805,6 +793,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   looping: 0
   loopingDelay: 0.5
+--- !u!114 &7536036100967348845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541634431918291856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf91ce8e0e81c14cab4e993c6a12b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineWidth: 1
 --- !u!1 &6638292260408872654
 GameObject:
   m_ObjectHideFlags: 0

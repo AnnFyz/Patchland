@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Handles local raycasting interactions for each BlockPrefab
 /// </summary>
-public class Raycast : MonoBehaviour
+public class RaycastHandler : MonoBehaviour
 {
-
+    [SerializeField] float outlineWidth = 1f;
     private BlockPrefab blockPrefab;    // The block this script is attached to
     private GridBuildingSystem gridSystem;  // Local grid reference
     private Outline outline;    // Cached outline component
@@ -107,7 +107,7 @@ public class Raycast : MonoBehaviour
         {
             outline.enabled = true;
             outline.OutlineColor = Color.white;
-            outline.OutlineWidth = 3.5f;
+            outline.OutlineWidth = outlineWidth;
         }
         else if (!blockPrefab.isSelected)
         {
