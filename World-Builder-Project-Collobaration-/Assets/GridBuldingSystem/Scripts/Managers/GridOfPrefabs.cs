@@ -27,7 +27,6 @@ public class GridOfPrefabs : MonoBehaviour
     private NavMeshSurface[] navMeshSurfaces;
     public static event Action OnGridReady;
     public static Bounds Bounds;
-    public GameObject[] points = new GameObject[4];
     Vector3 p1, p2, p3, p4;
     private void Awake()
     {
@@ -130,10 +129,6 @@ public class GridOfPrefabs : MonoBehaviour
         // bottom-right outer corner
         p4 = globalGrid.GetWorldPosition(width - 1, 0) - offset;
 
-        points[0].transform.position = p1;
-        points[1].transform.position = p2;
-        points[2].transform.position = p3;
-        points[3].transform.position = p4;
 
         CalculateBoundsFromPoints(p1, p2, p3, p4);
         OnGridReady?.Invoke();
@@ -141,7 +136,6 @@ public class GridOfPrefabs : MonoBehaviour
     public Vector3 GetCenterOnGridSurface()
     {
         Vector3 centerOfGrid = new Vector3(GetCenterObjInGrid().position.x, GetCenterObjInGrid().position.y + (BlockPrefab.Offset.y * -1) + 0.25f, GetCenterObjInGrid().position.z);
-        Debug.Log("Center of Grid on Surface: " + centerOfGrid);
         return centerOfGrid;
     }
     public Transform GetCenterObjInGrid()
@@ -157,6 +151,7 @@ public class GridOfPrefabs : MonoBehaviour
         Bounds.Encapsulate(p2);
         Bounds.Encapsulate(p3);
         Bounds.Encapsulate(p4);
+        Bounds.size *= 0.5f;
         return Bounds;
     }
 

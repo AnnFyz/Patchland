@@ -22,6 +22,6 @@ MonoBehaviour:
   damageToBlock: 1
   attackDelay: 0.1
   avoidancePriority: 40
-  obstacleAvoidanceType: 3
+  obstacleAvoidanceType: 4
   minMovingToPointTimer: 3
   maxMovingToPointTimer: 5

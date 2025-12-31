@@ -1,6 +1,7 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Cinemachine;
+using static Unity.Cinemachine.AxisState;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float orbitSmoothing = 10f;
 
     [Header("Movement")]
+    [SerializeField] private float recenterSpeed = 5f;
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] AnimationCurve moveSpeedCurve = AnimationCurve.Linear(0, 0.5f, 1, 1);
     [SerializeField] private float acceleration = 10f;
@@ -36,6 +38,8 @@ public class CameraController : MonoBehaviour
     float decelerationFactor = 1f;
     bool sprintInput = false;
     bool middleClickInput = false;
+    bool rightClickInput = false;
+    bool isRecentering = false;
     float currentZoomSpeed = 0f;
     private Bounds movementBounds;
     public float ZoomLevel //value between 0 (zoom in) and 1 (zoom out)
@@ -68,6 +72,11 @@ public class CameraController : MonoBehaviour
         middleClickInput = value.isPressed;
     }
 
+    void OnRightClick(InputValue value)
+    {
+        rightClickInput = value.isPressed;
+    }
+
     void OnSprint(InputValue value)
     {
         sprintInput = value.isPressed;
@@ -78,13 +87,13 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-       GridOfPrefabs.OnGridReady += SetCameraTarget;
+        GridOfPrefabs.OnGridReady += CenterCameraTarget;
         GridOfPrefabs.OnGridReady += SetBounds;
     }
 
     private void OnDisable()
     {
-        GridOfPrefabs.OnGridReady -= SetCameraTarget;
+        GridOfPrefabs.OnGridReady -= CenterCameraTarget;
     }
 
     void LateUpdate()
@@ -99,6 +108,7 @@ public class CameraController : MonoBehaviour
         UpdateOrbit(deltaTime);
         UpdateMovement(deltaTime);
         UpdateZoom(deltaTime);
+        CenterCameraTarget(deltaTime);
     }
     #endregion
 
@@ -169,7 +179,7 @@ public class CameraController : MonoBehaviour
 
     void UpdateOrbit(float deltaTime)
     {
-        Vector2 orbitInput = lookInput * (middleClickInput ? 1f : 0f);
+        Vector2 orbitInput = lookInput * (rightClickInput ? 1f : 0f);
         orbitInput *= orbitSensitivity;
 
         InputAxis horizontalAxis = orbitalFollow.HorizontalAxis;
@@ -194,7 +204,7 @@ public class CameraController : MonoBehaviour
         InputAxis axis = orbitalFollow.RadialAxis;
         float targetZoomSpeed = 0;
 
-        if(Mathf.Abs(scrollInput.y) >= 0.01f)
+        if (Mathf.Abs(scrollInput.y) >= 0.01f)
         {
             targetZoomSpeed = scrollInput.y * zoomSpeed;
         }
@@ -202,7 +212,7 @@ public class CameraController : MonoBehaviour
         currentZoomSpeed = Mathf.Lerp(currentZoomSpeed, targetZoomSpeed, zoomSmoothing * deltaTime);
         axis.Value -= currentZoomSpeed;
         axis.Value = Mathf.Clamp(axis.Value, axis.Range.x, axis.Range.y);
-        orbitalFollow.RadialAxis = axis;    
+        orbitalFollow.RadialAxis = axis;
     }
 
     void UpdateEdgeScrollInput()
@@ -214,7 +224,7 @@ public class CameraController : MonoBehaviour
         {
             edgeScrollInput.x = -1;
         }
-       else if(mousePosition.x >= Screen.width - edgeScrollingMargin)
+        else if (mousePosition.x >= Screen.width - edgeScrollingMargin)
         {
             edgeScrollInput.x = 1;
         }
@@ -222,11 +232,11 @@ public class CameraController : MonoBehaviour
         {
             edgeScrollInput.x = 0;
         }
-        if(mousePosition.y <= edgeScrollingMargin)
+        if (mousePosition.y <= edgeScrollingMargin)
         {
             edgeScrollInput.y = -1;
         }
-        else if(mousePosition.y >= Screen.height - edgeScrollingMargin)
+        else if (mousePosition.y >= Screen.height - edgeScrollingMargin)
         {
             edgeScrollInput.y = 1;
         }
@@ -237,9 +247,33 @@ public class CameraController : MonoBehaviour
     }
 
 
-    void SetCameraTarget()
+    void CenterCameraTarget()
     {
         cameraTarget.position = GridOfPrefabs.Instance.GetCenterOnGridSurface();
+    }
+
+    void CenterCameraTarget(float deltaTime)
+    {
+        if (middleClickInput)
+            isRecentering = true;
+
+        if (!isRecentering) return;
+
+
+        Vector3 targetPos = GridOfPrefabs.Instance.GetCenterOnGridSurface();
+
+        cameraTarget.position = Vector3.Lerp(
+        cameraTarget.position,
+        targetPos,
+        deltaTime * recenterSpeed);
+
+
+        // Stop when close enough
+        if ((cameraTarget.position - targetPos).sqrMagnitude < 1)
+        {
+            cameraTarget.position = targetPos;
+            isRecentering = false;
+        }
     }
 
     void SetBounds()
