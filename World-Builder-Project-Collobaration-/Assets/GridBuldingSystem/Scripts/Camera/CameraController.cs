@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float orbitSmoothing = 10f;
 
     [Header("Movement")]
+    [SerializeField] private float boundSize = 0.75f;
     [SerializeField] private float recenterSpeed = 5f;
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] AnimationCurve moveSpeedCurve = AnimationCurve.Linear(0, 0.5f, 1, 1);
@@ -279,6 +280,7 @@ public class CameraController : MonoBehaviour
     void SetBounds()
     {
         movementBounds = GridOfPrefabs.Bounds;
+        movementBounds.size *= boundSize;
     }
 
     #endregion

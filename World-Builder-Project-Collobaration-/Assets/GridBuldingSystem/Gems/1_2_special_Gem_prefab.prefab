@@ -101,8 +101,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 90
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f1084d43701af7f4db14562dd840b149, type: 2}
+  m_sharedMaterial: {fileID: 906546460410005724, guid: f1084d43701af7f4db14562dd840b149,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -550,10 +551,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.31
   m_Height: 13
   m_Direction: 1
-  m_Center: {x: 0.01, y: 6, z: -0.08}
+  m_Center: {x: 0.19, y: 5, z: -0.33}
 --- !u!114 &5902523194754009213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +658,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 0
   m_Acceleration: 0
-  avoidancePriority: 50
+  avoidancePriority: 99
   m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0

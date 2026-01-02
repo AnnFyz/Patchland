@@ -40,7 +40,7 @@ public class GridOfPrefabs : MonoBehaviour
     }
     private void OnEnable()
     {
-        UIManager.Instance.OnChangedGrid += RebuildNavMesh;
+        UIManager.Instance.OnChangedGrid += UpdateNavMesh;
     }
 
     private void Start()
@@ -56,7 +56,14 @@ public class GridOfPrefabs : MonoBehaviour
         {
             navMeshSurfaces[i].BuildNavMesh();
         }
+    }
 
+    private void UpdateNavMesh()
+    {
+        for (int i = 0; i < navMeshSurfaces.Length; i++)
+        {
+            navMeshSurfaces[i].UpdateNavMesh(navMeshSurfaces[i].navMeshData);
+        }
     }
 
     void BuildGrid()
@@ -151,7 +158,6 @@ public class GridOfPrefabs : MonoBehaviour
         Bounds.Encapsulate(p2);
         Bounds.Encapsulate(p3);
         Bounds.Encapsulate(p4);
-        Bounds.size *= 0.5f;
         return Bounds;
     }
 

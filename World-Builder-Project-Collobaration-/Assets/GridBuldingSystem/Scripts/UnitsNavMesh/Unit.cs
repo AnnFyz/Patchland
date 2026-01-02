@@ -376,7 +376,13 @@ public class Unit : MonoBehaviour
     }
     public void SetupAgentFromConfiguration()
     {
-        Agent.avoidancePriority = UnityEngine.Random.Range(unitScriptableObject.avoidancePriority / 5, unitScriptableObject.avoidancePriority); // Randomize avoidance priority for each unit
+        int variation = 40; // tweak for more/less diversity
+
+        Agent.avoidancePriority = Mathf.Clamp(
+            unitScriptableObject.avoidancePriority + UnityEngine.Random.Range(-variation, variation + 1),
+            0,
+            99
+        );
         Agent.obstacleAvoidanceType = unitScriptableObject.obstacleAvoidanceType;
     }
 

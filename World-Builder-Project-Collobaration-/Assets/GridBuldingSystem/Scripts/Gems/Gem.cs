@@ -17,12 +17,12 @@ public class Gem : MonoBehaviour
     }
 
     private SquashAndStretch squashAndStretch;
-    private bool IsThisGemSpecial;
+    private bool isSpecialGem;
     [ReadOnly] private float lifeTime;
     [ReadOnly] private float currentLifetime;
     private Coroutine lifetimeRoutine;
     private WorldUIHandler worldUIHandler;
-    public bool IsCollected { get; private set; } = false;
+    [SerializeField] bool isCollected = false;
     private void Awake()
     {
         squashAndStretch = GetComponentInChildren<SquashAndStretch>();
@@ -37,22 +37,12 @@ public class Gem : MonoBehaviour
         onPickUp_VFX.SetActive(false);
         onTimeExpired_VFX.SetActive(false);
         UIText.SetActive(true);
-        IsThisGemSpecial = gemSO.isSpecialGem;
+        isSpecialGem = gemSO.isSpecialGem;
         lifeTime = gemSO.lifeTime;
         currentLifetime = lifeTime;
         worldUIHandler.SetText(currentLifetime.ToString(), false);
         lifetimeRoutine = StartCoroutine(StartLifeTimeCountdown(lifeTime));
     }
-
-    //private void UpdatePosition(int newHeight)
-    //{  
-    //    transform.position = new Vector3(
-    //           transform.position.x,
-    //           transform.parent.position.y - BlockPrefab.Offset.y,
-    //           transform.position.z
-    //       );
-
-    //}
 
     public void SquashAndStretch()
     {
@@ -63,7 +53,7 @@ public class Gem : MonoBehaviour
     {
         squashAndStretch.PlaySquashAndStretch();
         yield return new WaitForSeconds(0.75f);
-        if (IsThisGemSpecial)
+        if (isSpecialGem)
         {
             StartLoopAnimation();
         }
@@ -76,8 +66,9 @@ public class Gem : MonoBehaviour
     }
     public void CollectGem()
     {
-        if(IsCollected) return;
-        IsCollected = true;
+        if(isCollected) return;
+        Debug.Log("Gem Collected");
+        isCollected = true;
         StopAllCoroutines();
         StartCoroutine(CollectGemRoutine());
     }
@@ -121,12 +112,15 @@ public class Gem : MonoBehaviour
 
         UIManager.Instance.CollectGem();
 
-        if (IsThisGemSpecial)
+        if (isSpecialGem)
         {
             UIManager.Instance.CollectSpecialGem();
         }
+        else
+        {
+            UIManager.Instance.CollectGem();
+        }
 
-        //yield return StartCoroutine(PlayAnimation());
         yield return new WaitForSeconds(0f);
         StartCoroutine(HandleLifeTimeExpired(true));
     }
